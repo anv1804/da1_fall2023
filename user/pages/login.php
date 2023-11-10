@@ -1,4 +1,3 @@
-
 <!-- Bg img start -->
 <div class="bg-img overview-bgi">
     <div class="container">
@@ -14,12 +13,19 @@
                         <!-- Name -->
                         <h3>Sign into your account</h3>
                         <!-- Form start -->
-                        <form action="https://storage.googleapis.com/theme-vessel-items/checking-sites-2/trek-html/HTML/main/index.html" method="GET">
-                            <div class="form-group">
+                        <form action="index.php?page=login" method="post">
+                            <div class="form-group" id="inputEmail">
                                 <input type="email" class="form-control" name="email" placeholder="Email Address">
                             </div>
-                            <div class="form-group2">
-                                <input type="Password" class="form-control" name="password" placeholder="Password">
+                            <div class="form-group2" style="display: flex;position: relative;">
+                                <input id="inputPass" type="Password" class="form-control" name="password"
+                                    placeholder="Password">
+                                <label id="showpass"
+                                    style="position: absolute;right: 5%;top: 50%; transform: translateY(-50%);">
+                                    <input type="checkbox" style="display: none;">
+                                    <span id="icon-hide" style="cursor: pointer" class="fa fa-eye" onclick="showPassword()"></span>
+                                    <span id="icon-show" style="display:none;cursor: pointer;" class="fa fa-eye-slash"onclick="showPassword()"></span>
+                                </label>
                             </div>
                             <div class="checkboxs form-group">
                                 <div class="form-check checkbox-theme float-left">
@@ -28,7 +34,8 @@
                                         Remember me
                                     </label>
                                 </div>
-                                <a href="index.php?page=forgot-password" class="link-not-important pull-right">Forgot Password</a>
+                                <a href="index.php?page=forgot-password" class="link-not-important pull-right">Forgot
+                                    Password</a>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="form-group mb-0">

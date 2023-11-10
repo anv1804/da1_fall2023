@@ -32,8 +32,6 @@ if (isset($_GET['page'])) {
         case 'forgot-password':
             include('./user/pages/forgot-password.php');
             break;
-
-
         default:
             include('./user/pages/home.php');
             break;

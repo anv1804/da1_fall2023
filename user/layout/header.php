@@ -1,3 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google Tag Manager -->
+    <!-- End Google Tag Manager -->
+    <title>Hotel, Travel & Tour Booking Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <!-- External CSS libraries -->
+    <link type="text/css" rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/magnific-popup.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/jquery.selectBox.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/dropzone.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/slick.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/rangeslider.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/animate.min.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/daterangepicker.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/leaflet.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/map.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/jquery.mCustomScrollbar.css">
+    <link type="text/css" rel="stylesheet" href="assets/fonts/font-awesome/css/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="assets/fonts/flaticon/font/flaticon.css">
+    <link rel="stylesheet" type="text/css" href="assets/fonts/linearicons/style.css">
+
+    <!-- Favicon icon -->
+    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
+
+    <!-- Google fonts -->
+    <link rel="stylesheet" type="text/css"
+        href="../../../../../../fonts.googleapis.com/cssf93d.css?family=Raleway:300,400,500,600,300,700">
+
+    <!-- Custom Stylesheet -->
+    <link type="text/css" rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" id="style_sheet" href="assets/css/skins/default.css">
+
+</head>
+<style>
+    @media (max-width: 1440px) {
+        #bar{
+            padding-left: 10%;
+            margin: auto;
+        }
+    }
+</style>
+
+<body id="top">
+    <!-- main header start -->
 <header class="main-header sticky-header header-with-top" id="main-header-2">
     <div class="container">
         <div class="row">
@@ -73,7 +121,7 @@
                                             <li><a class="dropdown-item" href="listings.html">Listings</a></li>
                                             <li><a class="dropdown-item" href="reviews.html">Reviews</a></li>
                                             <li><a class="dropdown-item" href="bookmarks.html">Bookmarks</a></li>
-                                            <li><a class="dropdown-item" href="add-listing.html" style="color: red;font-weight: bold;">Logout</a></li>
+                                            <li><a class="dropdown-item" href="add-listing.html" style="color: red;font-weight: bold;">Logout <span class="fa fa-sign-in"></span></a></li>
                                         </ul>
                                     </li>
                                         ';
@@ -81,7 +129,7 @@
                                     $user = '
                                     <li class="nav-item dropdown">
                                     <a href="index.php?page=login" class="nav-link">
-                                        Sign In/Sign Up
+                                        Sign In <span class="fa fa-sign-in"></span>
                                     </a>
                                 </li>
                                     ';
