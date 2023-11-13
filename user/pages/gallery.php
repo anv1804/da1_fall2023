@@ -1,4 +1,3 @@
-
 <!-- Sub banner start -->
 <div class="sub-banner overview-bgi">
     <div class="container">
@@ -6,7 +5,7 @@
             <h1>Gallery</h1>
             <ul class="breadcrumbs">
                 <li><a href="index.php">Home</a></li>
-                <li class="active">Gallery</li>
+                <li class="aactive">Gallery</li>
             </ul>
         </div>
     </div>
