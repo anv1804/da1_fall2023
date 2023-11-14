@@ -1,4 +1,3 @@
-
 <!-- Bg img start -->
 <div class="bg-img overview-bgi">
     <div class="container">
@@ -14,18 +13,26 @@
                         <!-- Name -->
                         <h3>Create an account</h3>
                         <!-- Form start -->
-                        <form action="https://storage.googleapis.com/theme-vessel-items/checking-sites-2/trek-html/HTML/main/index.html" method="GET">
+                        <form action="index.php?page=register" method="POST" id="form-register">
                             <div class="form-group">
-                                <input type="text" name="fullname" class="form-control" placeholder="Full Name">
+                                <input rules="required" type="text" name="fullname" class="form-control"
+                                    placeholder="Full Name">
+                                <span class="form-message"></span>
                             </div>
                             <div class="form-group">
-                                <input type="email" class="form-control" name="email" placeholder="Email Address">
+                                <input rules="required|email" type="email" class="form-control" name="email"
+                                    placeholder="Email Address">
+                                <span class="form-message"></span>
                             </div>
                             <div class="form-group">
-                                <input type="Password" class="form-control" name="password" placeholder="Password">
+                                <input rules="required|password|min:8" type="Password" class="form-control password"
+                                    name="password" placeholder="Password">
+                                <span class="form-message"></span>
                             </div>
                             <div class="form-group">
-                                <input type="password" name="confirm_Password" class="form-control" placeholder="Confirm Password">
+                                <input rules="required|comfirm-password" type="password" name="confirm_Password"
+                                    class="form-control" placeholder="Confirm Password">
+                                <span class="form-message"></span>
                             </div>
                             <div class="form-group mb-0">
                                 <button type="submit" class="btn btn-color btn-md btn-block">Signup</button>
@@ -43,3 +50,7 @@
     </div>
 </div>
 <!-- Bg img end -->
+<script src="./assets/js/validate-js/validator2_0.js"></script>
+<script>
+    new Validator('#form-register');
+</script>

@@ -14,9 +14,10 @@
                         <!-- Name -->
                         <h3>Recover your password</h3>
                         <!-- Form start -->
-                        <form action="https://storage.googleapis.com/theme-vessel-items/checking-sites-2/trek-html/HTML/main/index.html" method="GET">
+                        <form action="index.php?page=forgot-password" method="GET" id="form-forgot-password">
                             <div class="form-group">
-                                <input type="email" class="form-control" name="email" placeholder="Email Address">
+                                <input rules="required|email" type="email" class="form-control" name="email" placeholder="Email Address">
+                                <span class="form-message"></span>
                             </div>
                             <div class="form-group mb-0">
                                 <button type="submit" class="btn btn-color btn-md btn-block">Send Me Email</button>
@@ -34,3 +35,7 @@
     </div>
 </div>
 <!-- Bg img end -->
+<script src="./assets/js/validate-js/validator2_0.js"></script>
+<script>
+    new Validator('#form-forgot-password');
+</script>

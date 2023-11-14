@@ -33,6 +33,7 @@
     <!-- Custom Stylesheet -->
     <link type="text/css" rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" type="text/css" id="style_sheet" href="assets/css/skins/default.css">
+    <link rel="stylesheet" href="./assets/css/new-css/new-css.css">
 
 </head>
 <style>

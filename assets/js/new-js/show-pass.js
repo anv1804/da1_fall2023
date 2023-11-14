@@ -6,12 +6,12 @@ function showPassword() {
 
     if (x.type === "password") {
       x.type = "text";
-      show.style.display = "block";
+      show.style.display = "flex";
       hide.style.display = "none";
     } else {
       x.type = "password";
       show.style.display = "none";
-      hide.style.display = "block";
+      hide.style.display = "flex";
 
     }
   }
