@@ -13,22 +13,24 @@
                         <!-- Name -->
                         <h3>Sign into your account</h3>
                         <!-- Form start -->
-                        <form action="index.php?page=login" method="post">
+                        <form action="index.php?page=login" method="post" id="form-login">
                             <div class="form-group" id="inputEmail">
-                                <input type="email" class="form-control" name="email" placeholder="Email Address">
+                                <input rules="required|email" type="email" class="form-control" name="email" placeholder="Email Address">
+                                <span class="form-message"></span>
                             </div>
-                            <div class="form-group2" style="display: flex;position: relative;">
-                                <input id="inputPass" type="Password" class="form-control" name="password"
+                            <div class="form-group" style="display: flex;position: relative;">
+                                <input rules="required|password" id="inputPass" type="Password" class="form-control" name="password"
                                     placeholder="Password">
                                 <label id="showpass"
-                                    style="position: absolute;right: 5%;top: 50%; transform: translateY(-50%);">
+                                    style="position: absolute;right: 1%;top: 3%;">
                                     <input type="checkbox" style="display: none;">
                                     <span id="icon-hide" style="cursor: pointer" class="fa fa-eye" onclick="showPassword()"></span>
                                     <span id="icon-show" style="display:none;cursor: pointer;" class="fa fa-eye-slash"onclick="showPassword()"></span>
                                 </label>
+                                <span class="form-message" style="min-height:39px"></span>
                             </div>
-                            <div class="checkboxs form-group">
-                                <div class="form-check checkbox-theme float-left">
+                            <div class="checkboxs" style="margin:4px 0 20px">
+                                <div class="form-check checkbox-theme float-left" style="margin-left:20px">
                                     <input class="form-check-input" type="checkbox" value="" id="instant-book">
                                     <label class="form-check-label" for="instant-book">
                                         Remember me
@@ -54,3 +56,7 @@
     </div>
 </div>
 <!-- Bg img end -->
+<script src="./assets/js/validate-js/validator2_0.js"></script>
+<script>
+    new Validator('#form-login');
+</script>

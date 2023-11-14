@@ -123,43 +123,43 @@ function Validator(formSelector) {
     let validatorRules = {
 
         required : function (value) {
-            return value.trim() ? undefined : 'Vui lòng nhập trường này!';
+            return value.trim() ? undefined : 'Please enter this field!';
         },
 
         email: function(value) {
             const regexEmail = /^\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b$/i;
-            return regexEmail.test(value) ? undefined : 'Vui lòng nhập email!';
+            return regexEmail.test(value) ? undefined : 'Please enter email!';
         },
 
         password: function(value) {
             const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*]).{0,}$/;
-            return regexPassword.test(value) ? undefined : 'Mật khẩu bao gồm chữ in hoa , số  , ký tự!';
+            return regexPassword.test(value) ? undefined : 'Password includes capital letters, numbers, and characters!';
         },
 
         min: function(min) {
             return function(value) {
-                return value.length >= min ? undefined : `Vui lòng nhập ít nhất ${min} ký tự!`;
+                return value.length >= min ? undefined : `Please enter at least ${min} characters!`;
             }
         },
 
         max: function(max) {
             return function(value) {
-                return value.length <= max ? undefined : `Vui lòng nhập tối đa ${max} ký tự!`;
+                return value.length <= max ? undefined : `Please enter a maximum of ${max} characters!`;
             }
         },
 
         comfirm: function(comfirm) {
             return function (value) {
-                return value === formElement.querySelector(comfirm).value ? undefined : 'Vui lòng nhập đúng dữ liệu!';
+                return value === formElement.querySelector(comfirm).value ? undefined : 'Please enter correct data!';
             }
         },
 
         isFile: function (file) {
             if (!file) {
-                return 'Vui lòng chọn một tệp hình ảnh!';
+                return 'Please select an image file!';
             }
             const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
-            return allowedTypes.includes(file.type) ? undefined : 'Chỉ chấp nhận tệp hình ảnh có định dạng JPEG, PNG hoặc GIF!';
+            return allowedTypes.includes(file.type) ? undefined : 'Only JPEG, PNG or GIF image files are accepted!';
         }
     };
 

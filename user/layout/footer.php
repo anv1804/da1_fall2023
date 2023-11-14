@@ -201,6 +201,7 @@
 <script src="assets/js/ie-emulation-modes-warning.js"></script>
 <!-- Custom JS Script -->
 <script src="assets/js/app.js"></script>
+<script src="./assets/js/validate-js/validator2_0.js"></script>
 
 </body>
 

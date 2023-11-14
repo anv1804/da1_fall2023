@@ -71,7 +71,7 @@ if (isset($data)) {
                     </p>
                 </div>
             </div>
-            <form class="row inline-search-area search-area" method="GET">
+            <form class="row inline-search-area search-area" method="POST">
                 <div class="col-lg-4 search-col">
                     <input type="text" name="hotel" class="form-control first-input" placeholder="Hotel, City.....">
                     <i class="flaticon-localization icon-append"></i>
