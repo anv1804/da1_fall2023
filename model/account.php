@@ -1,11 +1,21 @@
 <?php
+    session_start();
 // LOGIN
-function login($email, $password)
+function login($email, $password , $checkRemember = "no")
 {
-    $sql = "SELECT * FROM user WHERE email=$email and password =$password";
+    $sql = "SELECT * FROM users WHERE `user_email`='$email' and  `user_password`='$password'";
     $account = pdo_query_one($sql);
-
-
+    
+    if ($account) {
+        $user = [$email , $password , $account["user_role"]];
+        if ($checkRemember === 'yes') {
+            setcookie("user" , $email , time() + (86400*7) ,"/");
+        }else {
+            $_SESSION["user"] = $user;
+        }
+        return true;
+    }
+    return false;
 }
 // LOGOUT
 function logout()

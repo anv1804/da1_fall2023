@@ -108,24 +108,50 @@
                                 </li>
                                 <?php
                                 $user = "";
-                                if (isset($_SESSION['role'])) {
-                                    $user = '
+                                if (isset($_SESSION['user']) || isset($_COOKIE['user'])) {
+                                    if (isset($_SESSION['user'])) {
+                                        $user = $_SESSION['user'];
+                                    }else {
+                                        $user = $_COOKIE['user'];
+                                    }
+
+                                    // print_r($user);
+                                    if ($user[2] == '0') {
+                                        $user = '
                                         <li class="nav-item dropdown">
-                                        <a href="dashboard.html" class="nav-link">
-                                            <img style="width: 36px;" src="./assets/images/user.png" alt="">
-                                        </a>
-                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="position: absolute;left:-110%;text-align: center;" >
-                                            <li><a class="dropdown-item" href="dashboard.html">Dashboard</a></li>
-                                            <li><a class="dropdown-item" href="my-profile.html">My Profile</a></li>
-                                            <li><a class="dropdown-item" href="messages.html">Messages</a></li>
-                                            <li><a class="dropdown-item" href="bookings.html">Bookings</a></li>
-                                            <li><a class="dropdown-item" href="listings.html">Listings</a></li>
-                                            <li><a class="dropdown-item" href="reviews.html">Reviews</a></li>
-                                            <li><a class="dropdown-item" href="bookmarks.html">Bookmarks</a></li>
-                                            <li><a class="dropdown-item" href="add-listing.html" style="color: red;font-weight: bold;">Logout <span class="fa fa-sign-in"></span></a></li>
-                                        </ul>
-                                    </li>
-                                        ';
+                                            <a href="dashboard.html" class="nav-link">
+                                                <img style="width: 36px;" src="./assets/images/user.png" alt="">
+                                            </a>
+                                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="position: absolute;left:-110%;text-align: center;" >
+                                                <li><a class="dropdown-item" href="my-profile.html">My Profile</a></li>
+                                                <li><a class="dropdown-item" href="messages.html">Messages</a></li>
+                                                <li><a class="dropdown-item" href="bookings.html">Bookings</a></li>
+                                                <li><a class="dropdown-item" href="listings.html">Listings</a></li>
+                                                <li><a class="dropdown-item" href="reviews.html">Reviews</a></li>
+                                                <li><a class="dropdown-item" href="bookmarks.html">Bookmarks</a></li>
+                                                <li><a class="dropdown-item" href="./user/pages/logout.php" style="color: red;font-weight: bold;">Logout <span class="fa fa-sign-in"></span></a></li>
+                                            </ul>
+                                        </li>
+                                            ';
+                                    } else {
+                                        $user = '
+                                            <li class="nav-item dropdown">
+                                                <a href="dashboard.html" class="nav-link">
+                                                    <img style="width: 36px;" src="./assets/images/user.png" alt="">
+                                                </a>
+                                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="position: absolute;left:-110%;text-align: center;" >
+                                                    <li><a class="dropdown-item" href="dashboard.html">Dashboard</a></li>
+                                                    <li><a class="dropdown-item" href="my-profile.html">My Profile</a></li>
+                                                    <li><a class="dropdown-item" href="messages.html">Messages</a></li>
+                                                    <li><a class="dropdown-item" href="bookings.html">Bookings</a></li>
+                                                    <li><a class="dropdown-item" href="listings.html">Listings</a></li>
+                                                    <li><a class="dropdown-item" href="reviews.html">Reviews</a></li>
+                                                    <li><a class="dropdown-item" href="bookmarks.html">Bookmarks</a></li>
+                                                    <li><a class="dropdown-item" href="./user/pages/logout.php" style="color: red;font-weight: bold;">Logout <span class="fa fa-sign-in"></span></a></li>
+                                                </ul>
+                                            </li>
+                                                ';
+                                    }
                                 }else{
                                     $user = '
                                     <li class="nav-item dropdown">

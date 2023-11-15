@@ -1,3 +1,23 @@
+<?php 
+    $error_message = "";
+    if (isset($_POST["submit"]) && ($_POST["submit"])) {
+        $email = $_POST["email"];
+        $password = $_POST["password"];
+        $checkRemember = '';
+        if (isset($_POST['remember'])) {
+            $checkRemember = $_POST['remember'];
+        }
+        $checkLogin = login($email, $password, $checkRemember);
+        if ($checkLogin) {
+            echo '<script type="text/javascript">window.location.href = "./index.php?page=home";</script>';
+        }else {
+            $error_message = "Account or password is incorrect!";
+        }
+    }
+
+?>
+
+
 <!-- Bg img start -->
 <div class="bg-img overview-bgi">
     <div class="container">
@@ -31,7 +51,7 @@
                             </div>
                             <div class="checkboxs" style="margin:4px 0 20px">
                                 <div class="form-check checkbox-theme float-left" style="margin-left:20px">
-                                    <input class="form-check-input" type="checkbox" value="" id="instant-book">
+                                    <input class="form-check-input" name="remember" type="checkbox" value="yes" id="instant-book">
                                     <label class="form-check-label" for="instant-book">
                                         Remember me
                                     </label>
@@ -41,7 +61,8 @@
                                 <div class="clearfix"></div>
                             </div>
                             <div class="form-group mb-0">
-                                <button type="submit" class="btn btn-color btn-md btn-block">login</button>
+                                <button type="submit" name="submit" value="submit" class="btn btn-color btn-md btn-block">login</button>
+                                <span class="form-message" style="color:red;"><?=$error_message?></span>
                             </div>
                         </form>
                         <!-- Form end -->
