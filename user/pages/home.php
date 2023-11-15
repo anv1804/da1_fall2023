@@ -105,7 +105,7 @@ if (isset($data)) {
 <div class="featured-item content-area-2">
     <div class="container">
         <div class="main-title">
-            <h1>Popular Tours</h1>
+            <h1>TOP Hotels</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
         </div>
         <div class="slick-slider-area">
