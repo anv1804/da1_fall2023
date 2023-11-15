@@ -1,5 +1,13 @@
 <?php
-    
+if (isset($_GET['hotelID'])) {
+    $hotelID = $_GET['hotelID'];
+    echo $hotelID;
+    $dataHotel = detailsHotels($hotelID);
+    $nameHotel = "";
+    if (isset($dataHotel)) {
+        $nameHotel = $dataHotel['hotel_name'];
+    }
+}
 ?>
 <!-- Sub banner start -->
 <div class="sub-banner overview-bgi">
@@ -24,7 +32,9 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="title">
-                                    <h3>Beautiful Restaurant</h3>
+                                    <h3>
+                                        <?= $nameHotel ?>
+                                    </h3>
                                     <div class="dd">
                                         <span><i class="fa fa-map-marker"></i> 20/F Green Road, Dhanmondi</span>
                                         <span class="ratings">

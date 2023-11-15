@@ -1,5 +1,5 @@
 <?php
-$allHotels = allHotels();
+$allHotels = allHotes();
 
 if (isset($allHotels)) {
     $hotelItem = "";
@@ -9,7 +9,7 @@ if (isset($allHotels)) {
     <div class="row">
         <div class="col-xl-5 col-lg-6 col-md-5 col-pad">
             <div class="item-thumbnail">
-                <a href="hotel-details.php?id=' . $value['hotel_id'] . '" class="item-img">
+                <a href="index.php?page=details&hotelID=' . $value['hotel_id'] . '" class="item-img">
                     <div class="tag">Historic</div>
                     <div class="price-ratings-box">
                         <p class="price">
@@ -35,7 +35,7 @@ if (isset($allHotels)) {
             <div class="detail">
                 <!-- title -->
                 <h1 class="title">
-                    <a href="tours-details.html">' . $value['hotel_name'] . '</a>
+                    <a href="index.php?page=details&hotelID=' . $value['hotel_id'] . '">' . $value['hotel_name'] . '</a>
                 </h1>
                 <!-- Location -->
                 <div class="location">

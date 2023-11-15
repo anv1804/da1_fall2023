@@ -33,6 +33,12 @@ if (isset($_GET['page'])) {
         case 'forgot-password':
             include('./user/pages/forgot-password.php');
             break;
+        case 'details':
+            include('./user/pages/details.php');
+            break;
+        case 'profile':
+            include('./user/pages/profile.php');
+            break;
         default:
             include('./user/pages/home.php');
             break;
