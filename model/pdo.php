@@ -48,18 +48,17 @@ function pdo_query_one($sql)
     }
 }
 // PDO EXECUTE
-function pdo_execute($sql){
-    $sql_args=array_slice(func_get_args(),1);
-    try{
-        $conn=pdo_connection();
-        $stmt=$conn->prepare($sql);
+function pdo_execute($sql)
+{
+    $sql_args = array_slice(func_get_args(), 1);
+    try {
+        $conn = pdo_connection();
+        $stmt = $conn->prepare($sql);
         $stmt->execute($sql_args);
 
-    }
-    catch(PDOException $e){
+    } catch (PDOException $e) {
         throw $e;
-    }
-    finally{
+    } finally {
         unset($conn);
     }
 }

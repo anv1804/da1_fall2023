@@ -4,8 +4,6 @@ function login($email, $password)
 {
     $sql = "SELECT * FROM user WHERE email=$email and password =$password";
     $account = pdo_query_one($sql);
-
-
 }
 // LOGOUT
 function logout()
@@ -23,13 +21,6 @@ function register($name, $email, $password)
 // FORGOT PASSWORD
 function forgotPassword($name, $email, $password)
 {
-    pdo_query_one($email);
-    if (isset($data)) {
-
-    } else {
-
-    }
-    ;
     require 'PHPMailer-master/src/PHPMailer.php';
     require "PHPMailer-master/src/SMTP.php";
     require 'PHPMailer-master/src/Exception.php';
