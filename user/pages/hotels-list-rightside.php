@@ -1,4 +1,67 @@
+<?php
+$allHotels = allHotels();
 
+if (isset($allHotels)) {
+    $hotelItem = "";
+    foreach ($allHotels as $value) {
+        $hotelItem .= '
+<div class="item-box-3">
+    <div class="row">
+        <div class="col-xl-5 col-lg-6 col-md-5 col-pad">
+            <div class="item-thumbnail">
+                <a href="hotel-details.php?id=' . $value['hotel_id'] . '" class="item-img">
+                    <div class="tag">Historic</div>
+                    <div class="price-ratings-box">
+                        <p class="price">
+                            From <span></span> Per Person
+                        </p>
+                        <div class="ratings">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+                            <span>( 7 Reviews )</span>
+                        </div>
+                    </div>
+                    <div class="love">
+                        <i class="flaticon-heart"></i>
+                    </div>
+                    <img src="assets/img/' . $value['hotel_image'] . '" alt="tours-list" class="img-fluid">
+                </a>
+            </div>
+        </div>
+        <div class="col-xl-7 col-lg-6 col-md-7 col-pad">
+            <div class="detail">
+                <!-- title -->
+                <h1 class="title">
+                    <a href="tours-details.html">' . $value['hotel_name'] . '</a>
+                </h1>
+                <!-- Location -->
+                <div class="location">
+                    <a href="tours-details.html">
+                        <i class="flaticon-localization"></i>
+                        ' . $value['hotel_location'] . '
+                    </a>
+                </div>
+                <!-- Paragraph -->
+                <p>' . $value['hotel_desc'] . '</p>
+            </div>
+            <div class="ftr">
+                <div class="pull-left">
+                    <i class="flaticon-user"></i> Jhon Doe
+                </div>
+                <div class="pull-right">
+                    <i class="flaticon-timetable"></i> 6 days
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+';
+    }
+}
+?>
 <!-- Sub banner start -->
 <div class="sub-banner overview-bgi">
     <div class="container">
@@ -31,8 +94,10 @@
                         </div>
                         <div class="col-xl-8 col-lg-7 col-md-7 col-sm-7">
                             <div class="sorting-options clearfix">
-                                <a href="tours-list-rightside.html" class="change-view-btn active-view-btn"><i class="fa fa-th-list"></i></a>
-                                <a href="tours-grid-rightside.html" class="change-view-btn"><i class="fa fa-th-large"></i></a>
+                                <a href="tours-list-rightside.html" class="change-view-btn active-view-btn"><i
+                                        class="fa fa-th-list"></i></a>
+                                <a href="tours-grid-rightside.html" class="change-view-btn"><i
+                                        class="fa fa-th-large"></i></a>
                             </div>
                             <div class="search-area">
                                 <select class="selectpicker search-fields" name="location">
@@ -46,274 +111,18 @@
                 <div class="subtitle">
                     20 Result Found
                 </div>
-                <div class="item-box-3">
-                    <div class="row">
-                        <div class="col-xl-5 col-lg-6 col-md-5 col-pad">
-                            <div class="item-thumbnail">
-                                <a href="tours-details.html" class="item-img">
-                                    <div class="tag">Historic</div>
-                                    <div class="price-ratings-box">
-                                        <p class="price">
-                                            From <span>$69</span> Per Person
-                                        </p>
-                                        <div class="ratings">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-o"></i>
-                                            <span>( 7 Reviews )</span>
-                                        </div>
-                                    </div>
-                                    <div class="love">
-                                        <i class="flaticon-heart"></i>
-                                    </div>
-                                    <img src="assets/img/property-13.jpg" alt="tours-list" class="img-fluid">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-xl-7 col-lg-6 col-md-7 col-pad">
-                            <div class="detail">
-                                <!-- title -->
-                                <h1 class="title">
-                                    <a href="tours-details.html">Sonargaon Dhaka Hotel</a>
-                                </h1>
-                                <!-- Location -->
-                                <div class="location">
-                                    <a href="tours-details.html">
-                                        <i class="flaticon-localization"></i>2726 Shinn Street, New York
-                                    </a>
-                                </div>
-                                <!-- Paragraph -->
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy</p>
-                            </div>
-                            <div class="ftr">
-                                <div class="pull-left">
-                                    <i class="flaticon-user"></i> Jhon Doe
-                                </div>
-                                <div class="pull-right">
-                                    <i class="flaticon-timetable"></i> 6 days
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item-box-3">
-                    <div class="row">
-                        <div class="col-xl-5 col-lg-6 col-md-5 col-pad">
-                            <div class="item-thumbnail">
-                                <a href="tours-details.html" class="item-img">
-                                    <div class="tag">Historic</div>
-                                    <div class="price-ratings-box">
-                                        <p class="price">
-                                            From <span>$69</span> Per Person
-                                        </p>
-                                        <div class="ratings">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-o"></i>
-                                            <span>( 7 Reviews )</span>
-                                        </div>
-                                    </div>
-                                    <div class="love">
-                                        <i class="flaticon-heart"></i>
-                                    </div>
-                                    <img src="assets/img/property-15.jpg" alt="tours-list" class="img-fluid">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-xl-7 col-lg-6 col-md-7 col-pad">
-                            <div class="detail">
-                                <!-- title -->
-                                <h1 class="title">
-                                    <a href="tours-details.html">Relaxing Hotel</a>
-                                </h1>
-                                <!-- Location -->
-                                <div class="location">
-                                    <a href="tours-details.html">
-                                        <i class="flaticon-localization"></i>2726 Shinn Street, New York
-                                    </a>
-                                </div>
-                                <!-- Paragraph -->
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy</p>
-                            </div>
-                            <div class="ftr">
-                                <div class="pull-left">
-                                    <i class="flaticon-user"></i> Jhon Doe
-                                </div>
-                                <div class="pull-right">
-                                    <i class="flaticon-timetable"></i> 6 days
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item-box-3">
-                    <div class="row">
-                        <div class="col-xl-5 col-lg-6 col-md-5 col-pad">
-                            <div class="item-thumbnail">
-                                <a href="tours-details.html" class="item-img">
-                                    <div class="tag">Historic</div>
-                                    <div class="price-ratings-box">
-                                        <p class="price">
-                                            From <span>$69</span> Per Person
-                                        </p>
-                                        <div class="ratings">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-o"></i>
-                                            <span>( 7 Reviews )</span>
-                                        </div>
-                                    </div>
-                                    <div class="love">
-                                        <i class="flaticon-heart"></i>
-                                    </div>
-                                    <img src="assets/img/property-14.jpg" alt="tours-list" class="img-fluid">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-xl-7 col-lg-6 col-md-7 col-pad">
-                            <div class="detail">
-                                <!-- title -->
-                                <h1 class="title">
-                                    <a href="tours-details.html">Radisson hotel</a>
-                                </h1>
-                                <!-- Location -->
-                                <div class="location">
-                                    <a href="tours-details.html">
-                                        <i class="flaticon-localization"></i>2726 Shinn Street, New York
-                                    </a>
-                                </div>
-                                <!-- Paragraph -->
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy</p>
-                            </div>
-                            <div class="ftr">
-                                <div class="pull-left">
-                                    <i class="flaticon-user"></i> Jhon Doe
-                                </div>
-                                <div class="pull-right">
-                                    <i class="flaticon-timetable"></i> 6 days
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item-box-3">
-                    <div class="row">
-                        <div class="col-xl-5 col-lg-6 col-md-5 col-pad">
-                            <div class="item-thumbnail">
-                                <a href="tours-details.html" class="item-img">
-                                    <div class="tag">Historic</div>
-                                    <div class="price-ratings-box">
-                                        <p class="price">
-                                            From <span>$69</span> Per Person
-                                        </p>
-                                        <div class="ratings">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-o"></i>
-                                            <span>( 7 Reviews )</span>
-                                        </div>
-                                    </div>
-                                    <div class="love">
-                                        <i class="flaticon-heart"></i>
-                                    </div>
-                                    <img src="assets/img/property-13.jpg" alt="tours-list" class="img-fluid">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-xl-7 col-lg-6 col-md-7 col-pad">
-                            <div class="detail">
-                                <!-- title -->
-                                <h1 class="title">
-                                    <a href="tours-details.html">Sonargaon Dhaka Hotel</a>
-                                </h1>
-                                <!-- Location -->
-                                <div class="location">
-                                    <a href="tours-details.html">
-                                        <i class="flaticon-localization"></i>2726 Shinn Street, New York
-                                    </a>
-                                </div>
-                                <!-- Paragraph -->
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy</p>
-                            </div>
-                            <div class="ftr">
-                                <div class="pull-left">
-                                    <i class="flaticon-user"></i> Jhon Doe
-                                </div>
-                                <div class="pull-right">
-                                    <i class="flaticon-timetable"></i> 6 days
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item-box-3">
-                    <div class="row">
-                        <div class="col-xl-5 col-lg-6 col-md-5 col-pad">
-                            <div class="item-thumbnail">
-                                <a href="tours-details.html" class="item-img">
-                                    <div class="tag">Historic</div>
-                                    <div class="price-ratings-box">
-                                        <p class="price">
-                                            From <span>$69</span> Per Person
-                                        </p>
-                                        <div class="ratings">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-o"></i>
-                                            <span>( 7 Reviews )</span>
-                                        </div>
-                                    </div>
-                                    <div class="love">
-                                        <i class="flaticon-heart"></i>
-                                    </div>
-                                    <img src="assets/img/property-15.jpg" alt="tours-list" class="img-fluid">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-xl-7 col-lg-6 col-md-7 col-pad">
-                            <div class="detail">
-                                <!-- title -->
-                                <h1 class="title">
-                                    <a href="tours-details.html">Relaxing Hotel</a>
-                                </h1>
-                                <!-- Location -->
-                                <div class="location">
-                                    <a href="tours-details.html">
-                                        <i class="flaticon-localization"></i>2726 Shinn Street, New York
-                                    </a>
-                                </div>
-                                <!-- Paragraph -->
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy</p>
-                            </div>
-                            <div class="ftr">
-                                <div class="pull-left">
-                                    <i class="flaticon-user"></i> Jhon Doe
-                                </div>
-                                <div class="pull-right">
-                                    <i class="flaticon-timetable"></i> 6 days
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <?= $hotelItem ?>
                 <div class="pagination-box">
                     <nav aria-label="Page navigation example">
                         <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="#"><span aria-hidden="true">«</span></a></li>
-                            <li class="page-item"><a class="page-link active" href="tours-list-rightside.html">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#"><span aria-hidden="true">«</span></a>
+                            </li>
+                            <li class="page-item"><a class="page-link active" href="tours-list-rightside.html">1</a>
+                            </li>
                             <li class="page-item"><a class="page-link" href="tours-list-leftside.html">2</a></li>
                             <li class="page-item"><a class="page-link" href="tours-list-fullwidth.html">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#"><span aria-hidden="true">»</span></a></li>
+                            <li class="page-item"><a class="page-link" href="#"><span aria-hidden="true">»</span></a>
+                            </li>
                         </ul>
                     </nav>
                 </div>
@@ -429,7 +238,8 @@
                                 <i class="flaticon-localization"></i>20/F Green Road, Dhanmondi
                             </li>
                             <li>
-                                <i class="flaticon-mail"></i><a href="mailto:info@themevessel.com">info@themevessel.com</a>
+                                <i class="flaticon-mail"></i><a
+                                    href="mailto:info@themevessel.com">info@themevessel.com</a>
                             </li>
                             <li>
                                 <i class="flaticon-phone"></i><a href="tel:+0477-85x6-552">+0477 85x6 552</a>

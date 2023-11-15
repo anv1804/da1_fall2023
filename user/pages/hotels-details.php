@@ -1,7 +1,5 @@
 <?php
-$sql = 'select * from hotels';
-$dataHotel = pdo_query($sql);
-return $dataHotel;
+    
 ?>
 <!-- Sub banner start -->
 <div class="sub-banner overview-bgi">
