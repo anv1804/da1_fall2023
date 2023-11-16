@@ -1,17 +1,21 @@
 <?php
-    $error_message = "";
-    if (isset($_POST["submit"]) && ($_POST["submit"])) {
-        $fullname = $_POST['fullname'];
-        $email = $_POST["email"];
-        $password = $_POST["password"];
+$error_message = "";
+if (isset($_POST["submit"]) && ($_POST["submit"])) {
+    $fullname = $_POST['fullname'];
+    $email = $_POST["email"];
+    $password = $_POST["password"];
 
-        $checkLogin = register($fullname , $email, $password);
+    $user = loadall_user( "", $email);
+    if (empty($user)) {
+        $checkLogin = register($fullname, $email, $password);
         if ($checkLogin) {
             echo '<script type="text/javascript">window.location.href = "./index.php?page=home";</script>';
-        } else {
-            $error_message = "Account or password is incorrect!";
+            exit;   
         }
+    } else {
+        $error_message = "User name or email already exists!";
     }
+}
 
 ?>
 
@@ -52,7 +56,11 @@
                                 <span class="form-message"></span>
                             </div>
                             <div class="form-group mb-0">
-                                <button type="submit" value="submit" name="submit" class="btn btn-color btn-md btn-block">Signup</button>
+                                <button type="submit" value="submit" name="submit"
+                                    class="btn btn-color btn-md btn-block">Signup</button>
+                                <span class="form-message" style="color:red;">
+                                    <?= $error_message ?>
+                                </span>
                             </div>
                         </form>
                         <!-- Form end -->
