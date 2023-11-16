@@ -27,8 +27,10 @@ function logout()
 // REGISTER
 function register($name, $email, $password)
 {
-    $sql = "INSERT INTO users (name, email, password) VALUES ('$name', '$email','$password')";
+    $sql = "INSERT INTO `users` ( `user_email`, `user_name`, `user_password`) VALUES ( '$email', '$name','$password'); ";
     pdo_execute($sql);
+
+    return login($email, $password);
 }
 // FORGOT PASSWORD
 function forgotPassword($name, $email, $password)
