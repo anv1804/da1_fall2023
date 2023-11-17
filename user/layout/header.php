@@ -37,7 +37,7 @@
 
 </head>
 <style>
-@media (max-width: 1440px) {
+@media (min-width: 756px) {
     #bar {
         padding-left: 10%;
         margin: auto;
