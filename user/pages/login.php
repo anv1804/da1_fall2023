@@ -9,6 +9,7 @@ if (isset($_POST["submit"]) && ($_POST["submit"])) {
     }
     $checkLogin = login($email, $password, $checkRemember);
     if ($checkLogin) {
+        $_SESSION['role'] = $email;
         echo '<script type="text/javascript">window.location.href = "./index.php?page=home";</script>';
     } else {
         $error_message = "Account or password is incorrect!";
@@ -62,7 +63,7 @@ if (isset($_POST["submit"]) && ($_POST["submit"])) {
                                 <a href="index.php?page=forgot-password" class="link-not-important pull-right">Forgot
                                     Password</a>
                                 <div class="clearfix"></div>
-                            </div>
+                            </div>  
                             <div class="form-group mb-0">
                                 <button type="submit" name="submit" value="submit"
                                     class="btn btn-color btn-md btn-block">login</button>
@@ -85,5 +86,5 @@ if (isset($_POST["submit"]) && ($_POST["submit"])) {
 <!-- Bg img end -->
 <script src="./assets/js/validate-js/validator2_0.js"></script>
 <script>
-new Validator('#form-login');
+    new Validator('#form-login');
 </script>
