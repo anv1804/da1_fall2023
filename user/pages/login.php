@@ -62,7 +62,7 @@ if (isset($_POST["submit"]) && ($_POST["submit"])) {
                                 <a href="index.php?page=forgot-password" class="link-not-important pull-right">Forgot
                                     Password</a>
                                 <div class="clearfix"></div>
-                            </div>
+                            </div>  
                             <div class="form-group mb-0">
                                 <button type="submit" name="submit" value="submit"
                                     class="btn btn-color btn-md btn-block">login</button>

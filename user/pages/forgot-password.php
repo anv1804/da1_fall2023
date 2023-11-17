@@ -11,7 +11,8 @@
                     </a>
                     <!-- details -->
                     <div class="details">
-                        <!-- Name -->
+                        <!-- Name --> 
+                        
                         <h3>Recover your password</h3>
                         <!-- Form start -->
                         <form action="index.php?page=forgot-password" method="GET" id="form-forgot-password">
