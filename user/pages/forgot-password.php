@@ -1,3 +1,21 @@
+<?php
+$error_message = "";
+$message_true = '';
+$message_false = '';
+
+if (isset($_POST["submit"]) && ($_POST["submit"])) {
+    $email = $_POST["email"];
+
+    $message = forgotPassword($email);
+    if ($message) {
+        $message_true = "Email sent successfully!";
+    } else {
+        $message_false = "Email does not exist!";
+    }
+}
+
+?>
+
 
 <!-- Bg img start -->
 <div class="bg-img overview-bgi">
@@ -14,12 +32,19 @@
                         <!-- Name -->
                         <h3>Recover your password</h3>
                         <!-- Form start -->
-                        <form action="https://storage.googleapis.com/theme-vessel-items/checking-sites-2/trek-html/HTML/main/index.html" method="GET">
+                        <form action="index.php?page=forgot-password" method="post" id="form-forgot-password">
                             <div class="form-group">
-                                <input type="email" class="form-control" name="email" placeholder="Email Address">
+                                <input rules="required|email" type="email" class="form-control" name="email"
+                                    placeholder="Email Address">
+                                <span class="form-message"></span>
                             </div>
                             <div class="form-group mb-0">
-                                <button type="submit" class="btn btn-color btn-md btn-block">Send Me Email</button>
+                                <button type="submit" name="submit" value="submit"
+                                    class="btn btn-color btn-md btn-block">Send Me Email</button>
+                                <span class="form-message <?= $message_true != '' ? 'text-success' : 'text-danger'; ?>">
+                                    <?= $message_true; ?>
+                                    <?= $message_false; ?>
+                                </span>
                             </div>
                         </form>
                         <!-- Form end -->
@@ -34,3 +59,7 @@
     </div>
 </div>
 <!-- Bg img end -->
+<script src="./assets/js/validate-js/validator2_0.js"></script>
+<script>
+    new Validator('#form-forgot-password');
+</script>

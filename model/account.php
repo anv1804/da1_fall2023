@@ -1,11 +1,21 @@
 <?php
+session_start();
 // LOGIN
-function login($email, $password)
+function login($email, $password, $checkRemember = "no")
 {
-    $sql = "SELECT * FROM user WHERE email=$email and password =$password";
+    $sql = "SELECT * FROM users WHERE `user_email`='$email' and `user_password`='$password'";
     $account = pdo_query_one($sql);
 
-
+    if ($account) {
+        $user = [$email, $password, $account["user_role"]];
+        if ($checkRemember === 'yes') {
+            setcookie("user", json_encode($user), time() + (86400), "/");
+        } else {
+            $_SESSION["user"] = $user;
+        }
+        return true;
+    }
+    return false;
 }
 // LOGOUT
 function logout()
@@ -17,17 +27,21 @@ function logout()
 // REGISTER
 function register($name, $email, $password)
 {
-    $sql = "INSERT INTO users (name, email, password) VALUES ('$name', '$email','$password')";
+    $sql = "INSERT INTO `users` ( `user_email`, `user_name`, `user_password`) VALUES ( '$email', '$name','$password'); ";
     pdo_execute($sql);
+    return login($email, $password);
 }
 // FORGOT PASSWORD
-function forgotPassword($name, $email, $password)
+function forgotPassword($email)
 {
-    pdo_query_one($email);
-    if (isset($data)) {
-
+    $user = loadall_user("", $email);
+    $newPassword = "";
+    if ($user) {
+        $bytes = random_bytes(3);
+        $newPassword = bin2hex($bytes);
+        pdo_execute("UPDATE `users` SET `user_password`='$newPassword' WHERE `user_email`='$email'");
     } else {
-
+        return false;
     }
     ;
     require 'PHPMailer-master/src/PHPMailer.php';
@@ -42,14 +56,15 @@ function forgotPassword($name, $email, $password)
         $mail->SMTPAuth = true; // Enable authentication
         $mail->Username = 'annvph41556@fpt.edu.vn'; // SMTP username
         $mail->Password = 'ikxezdanaqzaboka'; // SMTP password
-        $mail->SMTPSecure = 'ssl'; // encryption TLS/SSL 
-        $mail->Port = 465; // port to connect to                
+        $mail->SMTPSecure = 'ssl'; // encryption TLS/SSL
+        $mail->Port = 465; // port to connect to
         $mail->setFrom('annguyen04@hotmail.com', 'Admin POLY TRAVEL');
         $mail->addAddress($email);
         $mail->isHTML(true); // Set email format to HTML
         $mail->Subject = 'Thư gửi lại mật khẩu mới';
-        $noidungthu = "<p>Bạn nhận được thư do bạn hoặc ai đó yêu cầu cấp lại mật khẩu mới. <p>
-            <p>Mật khẩu của bạn là: <strong style='color:red'>" . $newPassword . "</strong> </p> ";
+        $noidungthu = "<p>Bạn nhận được thư do bạn hoặc ai đó yêu cầu cấp lại mật khẩu mới.
+<p>
+<p>Mật khẩu của bạn là: <strong style='color:red'>" . $newPassword . "</strong> </p> ";
         $mail->Body = $noidungthu;
         $mail->smtpConnect(
             array(
@@ -61,10 +76,27 @@ function forgotPassword($name, $email, $password)
             )
         );
         $mail->send();
-        echo 'Đã gửi mail xong';
+        // echo 'Đã gửi mail xong';
     } catch (Exception $e) {
-        echo 'Error: ', $mail->ErrorInfo;
+        // echo 'Error: ', $mail->ErrorInfo;
     }
+    return true;
+}
 
+function loadall_user($user_name = '', $user_email = '', $user_role = false)
+{
+    $sql = "select * from users where 1";
+    if ($user_name != '') {
+        $sql .= " and user_name like '%" . $user_name . "%'";
+    }
+    if ($user_email != '') {
+        $sql .= " and user_email = '" . $user_email . "'";
+    }
+    if ($user_role) {
+        $sql .= " and user_role = 0";
+    }
+    $sql .= " order by user_id asc";
+    $listUsers = pdo_query($sql);
+    return $listUsers;
 }
 ?>
