@@ -1,21 +1,3 @@
-<?php
-$error_message = "";
-$message_true = '';
-$message_false = '';
-
-if (isset($_POST["submit"]) && ($_POST["submit"])) {
-    $email = $_POST["email"];
-
-    $message = forgotPassword($email);
-    if ($message) {
-        $message_true = "Email sent successfully!";
-    }else {
-        $message_false = "Email does not exist!";
-    }
-}
-
-?>
-
 
 <!-- Bg img start -->
 <div class="bg-img overview-bgi">
@@ -32,14 +14,13 @@ if (isset($_POST["submit"]) && ($_POST["submit"])) {
                         <!-- Name -->
                         <h3>Recover your password</h3>
                         <!-- Form start -->
-                        <form action="index.php?page=forgot-password" method="post" id="form-forgot-password">
+                        <form action="index.php?page=forgot-password" method="GET" id="form-forgot-password">
                             <div class="form-group">
                                 <input rules="required|email" type="email" class="form-control" name="email" placeholder="Email Address">
                                 <span class="form-message"></span>
                             </div>
                             <div class="form-group mb-0">
-                                <button type="submit" name="submit" value="submit" class="btn btn-color btn-md btn-block">Send Me Email</button>
-                                <span class="form-message <?=$message_true != '' ? 'text-success' : 'text-danger';?>"><?=$message_true;?><?=$message_false;?></span>
+                                <button type="submit" class="btn btn-color btn-md btn-block">Send Me Email</button>
                             </div>
                         </form>
                         <!-- Form end -->

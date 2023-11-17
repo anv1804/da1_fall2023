@@ -1,12 +1,18 @@
 <?php
 if (isset($_GET['hotelID'])) {
     $hotelID = $_GET['hotelID'];
-    echo $hotelID;
-    $dataHotel = detailsHotels($hotelID);
+    $sql = "SELECT * FROM hotels WHERE hotel_id=$hotelID";
+    $result = pdo_query($sql);
     $nameHotel = "";
-    if (isset($dataHotel)) {
-        $nameHotel = $dataHotel['hotel_name'];
-    }
+    $locationHotel = "";
+    $descHotel = "";
+    $imageHotel = "";
+    if ($result) {
+        $nameHotel = $result[0]['hotel_name'];
+        $locationHotel = $result[0]['hotel_location'];
+        $descHotel = $result[0]['hotel_desc'];
+        $imageHotel = $result[0]['hotel_image'];
+    }; 
 }
 ?>
 <!-- Sub banner start -->
@@ -36,7 +42,11 @@ if (isset($_GET['hotelID'])) {
                                         <?= $nameHotel ?>
                                     </h3>
                                     <div class="dd">
-                                        <span><i class="fa fa-map-marker"></i> 20/F Green Road, Dhanmondi</span>
+                                        <span>
+                                            <i class="fa fa-map-marker">
+                                                <?= $locationHotel ?>
+                                            </i>
+                                        </span>
                                         <span class="ratings">
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
@@ -141,20 +151,13 @@ if (isset($_GET['hotelID'])) {
                 <!-- description start -->
                 <div class="description mb-40">
                     <h3 class="heading">Description</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus tincidunt aliquam.
-                        Aliquam gravida massa at sem vulputate interdum et vel eros. Maecenas eros enim, tincidunt
-                        vel turpis vel,dapibus tempus nulla. Donec vel nulla dui. Pellentesque sed ante sed ligula
-                        hendrerit condimentum. Suspendisse rhoncus fringilla ipsum quis porta. Morbi tincidunt
-                        viverra pharetra.Vestibulum vel mauris et odio lobortis laoreet eget eu magna. Proin mauris
-                        erat, luctus at nulla ut, lobortis mattis magna. Morbi a arcu lacus. Maecenas tristique
-                        velit vitae nisi consectetur,
-                        in mattis diam sodales. Mauris sagittis sem mattis justo bibendum, a eleifend dolor
-                        facilisis. Mauris nec pharetra tortor, ac aliquam felis. Nunc pretium erat sed quam
-                        consectetur fringilla.</p>
+                    <p>
+                        <?= $descHotel ?>
+                    </p>
                 </div>
                 <!-- Amenities start -->
                 <div class="amenities af mb-40">
-                    <h3 class="heading">Amenities</h3>
+                    <h3 class="heading">Services</h3>
                     <div class="row">
                         <div class="col-md-4 col-sm-6">
                             <ul>
@@ -239,7 +242,9 @@ if (isset($_GET['hotelID'])) {
                 <div class="location mb-40">
                     <h3 class="heading">Location</h3>
                     <div class="map">
-                        <div id="contactMap" class="contact-map"></div>
+                        <div id="contactMap" class="contact-map">
+                            <iframe src="" frameborder="0"></iframe>
+                        </div>
                     </div>
                 </div>
                 <!-- Comments section start -->

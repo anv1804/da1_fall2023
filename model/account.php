@@ -9,7 +9,7 @@ function login($email, $password , $checkRemember = "no")
     if ($account) {
         $user = [$email , $password , $account["user_role"]];
         if ($checkRemember === 'yes') {
-            setcookie("user" , json_encode($user) , time() + (86400) ,"/");
+            setcookie("user" , $email , time() + (86400*7) ,"/");
         }else {
             $_SESSION["user"] = $user;
         }
@@ -27,22 +27,17 @@ function logout()
 // REGISTER
 function register($name, $email, $password)
 {
-    $sql = "INSERT INTO `users` ( `user_email`, `user_name`, `user_password`) VALUES ( '$email', '$name','$password'); ";
+    $sql = "INSERT INTO users (name, email, password) VALUES ('$name', '$email','$password')";
     pdo_execute($sql);
-
-    return login($email, $password);
 }
 // FORGOT PASSWORD
-function forgotPassword($email)
+function forgotPassword($name, $email, $password)
 {
-    $user = loadall_user("" , $email);
-    $newPassword = "";
-    if ($user) {
-        $bytes = random_bytes(3);
-        $newPassword = bin2hex($bytes);
-        pdo_execute("UPDATE `users` SET `user_password`='$newPassword'  WHERE `user_email`='$email'");
+    pdo_query_one($email);
+    if (isset($data)) {
+
     } else {
-        return false;
+
     }
     ;
     require 'PHPMailer-master/src/PHPMailer.php';
@@ -76,27 +71,10 @@ function forgotPassword($email)
             )
         );
         $mail->send();
-        // echo 'Đã gửi mail xong';
+        echo 'Đã gửi mail xong';
     } catch (Exception $e) {
-        // echo 'Error: ', $mail->ErrorInfo;
+        echo 'Error: ', $mail->ErrorInfo;
     }
-    return true;
-}
 
-function loadall_user($user_name = '',$user_email='' ,  $user_role = false)
-{
-    $sql = "select * from users where 1";
-    if ($user_name != '') {
-        $sql .= " and user_name like '%" . $user_name . "%'";
-    }
-    if ($user_email != '') {
-        $sql .= " and user_email = '" . $user_email . "'";
-    }
-    if ($user_role) {
-        $sql .= " and user_role = 0";
-    }
-    $sql .= " order by user_id asc";
-    $listUsers = pdo_query($sql);
-    return $listUsers;
 }
 ?>

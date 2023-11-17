@@ -6,7 +6,7 @@ if (isset($data)) {
         <div class="slick-slide-item col-lg-4 col-sm-4">
         <div class="item-box">
             <div class="item-thumbnail">
-                <a href="tours-details.php?id='.$value['tour-id'].'" class="item-img">
+                <a href="tours-details.php?id=' . $value['tour-id'] . '" class="item-img">
                     <div class="tag">Historic</div>
                     <div class="price-ratings-box">
                         <p class="price">From <span>$69</span> Per Person</p>
@@ -105,7 +105,7 @@ if (isset($data)) {
 <div class="featured-item content-area-2">
     <div class="container">
         <div class="main-title">
-            <h1>TOP Hotels</h1>
+            <h1>Popular Tours</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
         </div>
         <div class="slick-slider-area">

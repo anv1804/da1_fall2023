@@ -37,12 +37,12 @@
 
 </head>
 <style>
-    @media (min-width: 765px) {
-        #bar {
-            padding-left: 10%;
-            margin: auto;
-        }
+@media (max-width: 1440px) {
+    #bar {
+        padding-left: 10%;
+        margin: auto;
     }
+}
 </style>
 
 <body id="top">
@@ -74,11 +74,6 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="index.php?page=tours" id="navbarDropdownMenuLink2">
-                                            Tours
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
                                         <a class="nav-link" href="index.php?page=hotels" id="navbarDropdownMenuLink4">
                                             Hotels
                                         </a>
@@ -107,17 +102,17 @@
                                         </a>
                                     </li>
                                     <?php
-                                    $user = "";
-                                    if (isset($_SESSION['user']) || isset($_COOKIE['user'])) {
-                                        if (isset($_SESSION['user'])) {
-                                            $user = $_SESSION['user'];
-                                        } else {
-                                            $user = $_COOKIE['user'];
-                                        }
+                                $user = "";
+                                if (isset($_SESSION['user']) || isset($_COOKIE['user'])) {
+                                    if (isset($_SESSION['user'])) {
+                                        $user = $_SESSION['user'];
+                                    }else {
+                                        $user = $_COOKIE['user'];
+                                    }
 
-                                        // print_r($user);
-                                        if ($user[2] == '0') {
-                                            $user = '
+                                    // print_r($user);
+                                    if ($user[2] == '0') {
+                                        $user = '
                                         <li class="nav-item dropdown">
                                             <a href="dashboard.html" class="nav-link">
                                                 <img style="width: 36px;" src="./assets/images/user.png" alt="">
@@ -133,8 +128,8 @@
                                             </ul>
                                         </li>
                                             ';
-                                        } else {
-                                            $user = '
+                                    } else {
+                                        $user = '
                                             <li class="nav-item dropdown">
                                                 <a href="dashboard.html" class="nav-link">
                                                     <img style="width: 36px;" src="./assets/images/user.png" alt="">
@@ -151,17 +146,17 @@
                                                 </ul>
                                             </li>
                                                 ';
-                                        }
-                                    } else {
-                                        $user = '
+                                    }
+                                }else{
+                                    $user = '
                                     <li class="nav-item dropdown">
                                     <a href="index.php?page=login" class="nav-link">
                                         Sign In <span class="fa fa-sign-in"></span>
                                     </a>
                                 </li>
                                     ';
-                                    }
-                                    ?>
+                                }
+                                ?>
                                     <?= $user ?>
 
                                 </div>
@@ -184,5 +179,5 @@
         </div>
     </header>
     <?php
-    include './control/control-header.php';
-    ?>
+include './control/control-header.php';
+?>

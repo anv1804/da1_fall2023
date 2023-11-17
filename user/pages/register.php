@@ -1,23 +1,4 @@
-<?php
-$error_message = "";
-if (isset($_POST["submit"]) && ($_POST["submit"])) {
-    $fullname = $_POST['fullname'];
-    $email = $_POST["email"];
-    $password = $_POST["password"];
 
-    $user = loadall_user( "", $email);
-    if (empty($user)) {
-        $checkLogin = register($fullname, $email, $password);
-        if ($checkLogin) {
-            echo '<script type="text/javascript">window.location.href = "./index.php?page=home";</script>';
-            exit;   
-        }
-    } else {
-        $error_message = "User name or email already exists!";
-    }
-}
-
-?>
 
 <!-- Bg img start -->
 <div class="bg-img overview-bgi">
@@ -56,11 +37,7 @@ if (isset($_POST["submit"]) && ($_POST["submit"])) {
                                 <span class="form-message"></span>
                             </div>
                             <div class="form-group mb-0">
-                                <button type="submit" value="submit" name="submit"
-                                    class="btn btn-color btn-md btn-block">Signup</button>
-                                <span class="form-message" style="color:red;">
-                                    <?= $error_message ?>
-                                </span>
+                                <button type="submit" class="btn btn-color btn-md btn-block">Signup</button>
                             </div>
                         </form>
                         <!-- Form end -->

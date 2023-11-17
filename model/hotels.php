@@ -1,14 +1,9 @@
 <?php
-function allHotes()
+function allHotels()
 {
     $sql = "SELECT * FROM hotels WHERE 1";
-    $listHotels = pdo_query($sql);
-    return $listHotels;
+    $result = pdo_query($sql);
+    return $result;
 }
-function detailsHotels($hotelID)
-{
-    $sql = "SELECT * FROM hotels WHERE hotel_id = $hotelID";
-    $data = pdo_query_one($sql);
-    return $data;
-}
+
 ?>

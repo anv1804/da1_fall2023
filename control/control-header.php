@@ -1,5 +1,4 @@
 <?php
-
 if (isset($_GET['page'])) {
     $page = $_GET['page'];
     switch ($page) {
@@ -9,11 +8,11 @@ if (isset($_GET['page'])) {
         case 'about':
             include('./user/pages/about.php');
             break;
-        case 'tours':
-            include('./user/pages/tours-list-rightside.php');
-            break;
         case 'hotels':
-            include('./user/pages/hotels-list-rightside.php');
+            include('./user/pages/hotels.php');
+            break;
+        case 'hotels-details':
+            include('./user/pages/hotels-details.php');
             break;
         case 'blog':
             include('./user/pages/blog.php');
@@ -32,12 +31,6 @@ if (isset($_GET['page'])) {
             break;
         case 'forgot-password':
             include('./user/pages/forgot-password.php');
-            break;
-        case 'details':
-            include('./user/pages/details.php');
-            break;
-        case 'profile':
-            include('./user/pages/profile.php');
             break;
         default:
             include('./user/pages/home.php');
