@@ -1,5 +1,6 @@
 <?php
     session_start();
+    ob_start();
 // LOGIN
 function login($email, $password , $checkRemember = "no")
 {
@@ -7,7 +8,7 @@ function login($email, $password , $checkRemember = "no")
     $account = pdo_query_one($sql);
     
     if ($account) {
-        $user = [$email , $password , $account["user_role"]];
+        $user = [ "user_email" => $email ,"user_password" => $password ,"user_role" => $account["user_role"]];
         if ($checkRemember === 'yes') {
             setcookie("user" , json_encode($user) , time() + (86400) ,"/");
         }else {
@@ -22,6 +23,8 @@ function logout()
 {
     if (isset($_SESSION['user'])) {
         unset($_SESSION['user']);
+    }else {
+        setcookie("user" , "" , time() - (86400) , "/");
     }
 }
 // REGISTER
@@ -32,14 +35,48 @@ function register($name, $email, $password)
 
     return login($email, $password);
 }
+
+//CREATE RAMDOM PASSWORD 
+function generateRandomString($length = 8) {
+    $lowercaseChars = 'abcdefghijklmnopqrstuvwxyz';
+    $uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $numericChars = '0123456789';
+    $specialChars = '!@#$%^&*()-_=+';
+
+    // Kết hợp tất cả các ký tự để có được các ký tự sẽ xuất hiện trong chuỗi ngẫu nhiên
+    $allChars = $lowercaseChars . $uppercaseChars . $numericChars . $specialChars;
+
+    // Sinh ra chuỗi ngẫu nhiên
+    $randomBytes = random_bytes($length);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $allChars[ord($randomBytes[$i]) % strlen($allChars)];
+    }
+
+    // Đảm bảo có ít nhất một chữ cái in hoa và một ký tự
+    $randomString = str_replace([
+        substr($lowercaseChars, -1),
+        substr($uppercaseChars, -1),
+        substr($numericChars, -1),
+        substr($specialChars, -1)
+    ], [
+        substr($lowercaseChars, -2, 1),
+        substr($uppercaseChars, -2, 1),
+        substr($numericChars, -2, 1),
+        substr($specialChars, -2, 1)
+    ], $randomString);
+
+    return $randomString;
+}
+
+
 // FORGOT PASSWORD
 function forgotPassword($email)
 {
     $user = loadall_user("" , $email);
     $newPassword = "";
     if ($user) {
-        $bytes = random_bytes(3);
-        $newPassword = bin2hex($bytes);
+        $newPassword = generateRandomString();
         pdo_execute("UPDATE `users` SET `user_password`='$newPassword'  WHERE `user_email`='$email'");
     } else {
         return false;
