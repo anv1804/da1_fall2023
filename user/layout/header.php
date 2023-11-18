@@ -104,14 +104,15 @@
                                     <?php
                                 $user = "";
                                 if (isset($_SESSION['user']) || isset($_COOKIE['user'])) {
+                                    
                                     if (isset($_SESSION['user'])) {
                                         $user = $_SESSION['user'];
                                     }else {
-                                        $user = $_COOKIE['user'];
+                                        $user = json_decode($_COOKIE['user'] , true);
                                     }
-
                                     // print_r($user);
-                                    if ($user[2] == '0') {
+                                    // var_dump($user);
+                                    if ($user["user_role"] == '0') {
                                         $user = '
                                         <li class="nav-item dropdown">
                                             <a href="dashboard.html" class="nav-link">
