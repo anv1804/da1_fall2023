@@ -50,6 +50,15 @@ if (isset($data)) {
     }
 }
 ?>
+
+<!-- Form search -->
+<?php 
+    // if (isset($_GET['submit']) && ($_GET['submit'])) {
+    //     var_dump($_GET['dates']);
+    // }
+?>
+
+
 <!-- Banner start -->
 <div class="banner" id="banner">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -71,8 +80,8 @@ if (isset($data)) {
                     </p>
                 </div>
             </div>
-            <form class="row inline-search-area search-area" method="POST">
-                <div class="col-lg-4 search-col">
+            <form class="row inline-search-area search-area" method="GET" id="form-search">
+                <div class="col-lg-3 search-col">
                     <input type="text" name="hotel" class="form-control first-input" placeholder="Hotel, City.....">
                     <i class="flaticon-localization icon-append"></i>
                 </div>
@@ -80,20 +89,65 @@ if (isset($data)) {
                     <input type="text" name="dates" placeholder="When..." class="datetimes form-control" />
                     <i class="flaticon-timetable icon-append"></i>
                 </div>
-                <div class="col-lg-3 search-col">
-                    <!-- <select class="selectpicker search-fields btn-block form-control bdr" name="guest">
-                        <option>Guests</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                    </select> -->
-                    <input type="number" name="guest" placeholder="Guest" class="form-control last-input" />
-                    <!-- <i class="flaticon-down icon-append"></i> -->
+                <div class="col-lg-4 search-col">
+                    <input type="text" name="guest" placeholder="Guest" class="form-control last-input" hidden/>
+
+                    <div class="form-guest">
+                        <img src="./assets/images/icon-guests.svg" alt="icon guest">
+                        <div class="form-content">2 adults, 0 children, 1 room</div>
+                        <i class="flaticon-down icon-append icon-search3"></i>
+                    </div>
+                    <div class="overlay"></div>
+                    <div class="form-guest-inner">
+                        <div class="form-guest-body">
+                            <div class="form-guest-choose">
+                                <div class="form-guest-info">
+                                    <img src="./assets/images/icon-guest-choose.svg" alt="">
+                                    <div class="form-guest-text">Adults</div>
+                                </div>
+
+                                <div class="form-guest-btns">
+                                    <div class="form-guest-btn btn-pver active">-</div>
+                                    <div class="form-guest-btn-quantity">2</div>
+                                    <div class="form-guest-btn btn-next active">+</div>
+                                </div>
+                            </div>
+
+                            <div class="form-guest-choose">
+                                <div class="form-guest-info">
+                                    <img src="./assets/images/icon-guest-choose-children.svg" alt="">
+                                    <div class="form-guest-text">Children</div>
+                                </div>
+
+                                <div class="form-guest-btns">
+                                    <div class="form-guest-btn btn-pver">-</div>
+                                    <div class="form-guest-btn-quantity">0</div>
+                                    <div class="form-guest-btn btn-next active">+</div>
+                                </div>
+                            </div>
+
+                            <div class="form-guest-choose">
+                                <div class="form-guest-info">
+                                    <img src="./assets/images/icon-guest-choose-room.svg" alt="">
+                                    <div class="form-guest-text">Room</div>
+                                </div>
+
+                                <div class="form-guest-btns">
+                                    <div class="form-guest-btn btn-pver">-</div>
+                                    <div class="form-guest-btn-quantity">1</div>
+                                    <div class="form-guest-btn btn-next active">+</div>
+                                </div>
+                            </div>
+
+                            <div class="form-guest-close">
+                                <div class="form-guest-btn-clear">Clear</div>
+                                <div class="form-guest-btn-apply">Apply</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-lg-2 search-col">
-                    <button type="submit" class="btn-theme btn-md btn-block">Search</button>
+                    <button type="submit" value="submit" name="submit" class="btn-theme btn-md btn-block">Search</button>
                 </div>
             </form>
         </div>
@@ -610,3 +664,4 @@ if (isset($data)) {
     </div>
 </div>
 <!-- intro section end -->
+<script src="./assets/js/new-js/search-guest.js"></script>
