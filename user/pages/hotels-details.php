@@ -1,20 +1,20 @@
 <?php
 if (isset($_GET['hotelID'])) {
     $hotelID = $_GET['hotelID'];
-    $sql = "SELECT * FROM hotels WHERE hotel_id=$hotelID";
-    $result = pdo_query($sql);
+    // DATA HOTEL
+    $dataHotels = dataHotels($hotelID);
     $nameHotel = "";
     $locationHotel = "";
     $descHotel = "";
     $imageHotel = "";
-    if ($result) {
-        $nameHotel = $result[0]['hotel_name'];
-        $locationHotel = $result[0]['hotel_location'];
-        $descHotel = $result[0]['hotel_desc'];
-        $imageHotel = $result[0]['hotel_image'];
+    if ($dataHotels) {
+        $nameHotel = $dataHotels[0]['hotel_name'];
+        $locationHotel = $dataHotels[0]['hotel_location'];
+        $descHotel = $dataHotels[0]['hotel_desc'];
+        $imageHotel = $dataHotels[0]['hotel_image'];
     }
     ;
-
+    // ALL ROOM OF HOTEL
     $sqlR = "SELECT * FROM rooms INNER JOIN hotels ON rooms.room_id = hotels.room_id";
     $listRoom = pdo_query($sqlR);
     $dataRoom = "";
@@ -22,7 +22,6 @@ if (isset($_GET['hotelID'])) {
     $imageRoom = "";
     $typeBed = "";
     if ($listRoom) {
-        // print_r($listRoom);
         foreach ($listRoom as $value) {
             $dataRoom .= '
                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6" >
@@ -62,8 +61,30 @@ if (isset($_GET['hotelID'])) {
 ';
         }
     }
+    // TOP HOTELS
+    $topHotels = topHotels();
+    $dataTopHotels = "";
+    if ($topHotels) {
+        $dataTopHotels = '
+            <div class="media mb-4">
+                <a class="pr-3" href="index.php?page=hotel-detail&hotelId=' . $topHotels[0]['hotel_id'] . '">
+                    <img src="assets/img/sub-tours/sub-tours.jpg" alt="sub-tours">
+                </a>
+                <div class="media-body align-self-center">
+                    <h5>
+                        <a href="tours-details.html">Sonargaon Dhaka Hotel</a>
+                    </h5>
+                    <div class="listing-post-meta">
+                        Oct 27, 2021 | <a href="#">Hotel</a>
+                    </div>
+                </div>
+            </div>
+        ';
+    }
 }
 ?>
+
+
 <!-- Sub banner start -->
 <div class="sub-banner overview-bgi">
     <div class="container">
@@ -402,92 +423,13 @@ if (isset($_GET['hotelID'])) {
             </div>
             <div class="col-lg-4 col-md-12">
                 <div class="sidebar ml-20">
-                    <!-- Search area2 start -->
-                    <!-- <div class="widget search-area2 d-none d-xl-block d-lg-block">
-                        <h5 class="sidebar-title">Book This Hotel</h5>
-                        <form class="inline-search-area" method="GET">
-                            <div class="form-group search-col">
-                                <input type="text" class="form-control" placeholder="Hotel, City.....">
-                                <i class="flaticon-localization icon-append"></i>
-                            </div>
-                            <div class="form-group search-col">
-                                <input type="text" name="dates" placeholder="When..."
-                                    class="datetimes-left form-control" />
-                                <i class="flaticon-timetable icon-append"></i>
-                            </div>
-                            <div class="form-group search-col">
-                                <select class="selectpicker search-fields btn-block form-control bdr" name="guest">
-                                    <option>Guests</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                                <i class="flaticon-down icon-append"></i>
-                            </div>
-                            <div class="form-group">
-                                <p>Radius around selected destination</p>
-                                <div class="range-slider">
-                                    <div data-min="0" data-max="100" data-unit="Km" data-min-name="min_price"
-                                        data-max-name="max_price" class="range-slider-ui ui-slider"
-                                        aria-disabled="false"></div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                            <div class="form-group search-col">
-                                <a href="cart-1.html" class="btn-theme btn-md btn-block">Purchase</a>
-                            </div>
-                            <div class="form-group search-col mb-0">
-                                <a href="wishlist.html" class="btn btn-md-outline btn-block">Add to wishlist</a>
-                            </div>
-                        </form>
-                    </div> -->
                     <div class="widget recent-posts">
-                        <h4 class="sidebar-title">Recent Posts</h4>
-                        <div class="media mb-4">
-                            <a class="pr-3" href="tours-details.html">
-                                <img src="assets/img/sub-tours/sub-tours.jpg" alt="sub-tours">
-                            </a>
-                            <div class="media-body align-self-center">
-                                <h5>
-                                    <a href="tours-details.html">Sonargaon Dhaka Hotel</a>
-                                </h5>
-                                <div class="listing-post-meta">
-                                    Oct 27, 2021 | <a href="#">Hotel</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="media mb-4">
-                            <a class="pr-3" href="tours-details.html">
-                                <img src="assets/img/sub-tours/sub-tours-2.jpg" alt="sub-tours">
-                            </a>
-                            <div class="media-body align-self-center">
-                                <h5>
-                                    <a href="tours-details.html">Paris Temple Tour</a>
-                                </h5>
-                                <div class="listing-post-meta">
-                                    Nov 23, 2021 | <a href="#">Travel</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <a class="pr-3" href="tours-details.html">
-                                <img src="assets/img/sub-tours/sub-tours-3.jpg" alt="sub-tours">
-                            </a>
-                            <div class="media-body align-self-center">
-                                <h5>
-                                    <a href="tours-details.html">Tour travel Tick</a>
-                                </h5>
-                                <div class="listing-post-meta">
-                                    Jun 17, 2021 | <a href="#">Travel</a>
-                                </div>
-                            </div>
-                        </div>
+                        <h4 class="sidebar-title">TOP Hotels</h4>
+                        <?= $dataTopHotels ?>
                     </div>
                     <!-- Recent posts start -->
                     <div class="widget recent-posts">
-                        <h4 class="sidebar-title">TOP Hotels</h4>
+                        <h4 class="sidebar-title">Recent Post</h4>
                         <div class="media mb-4">
                             <a class="pr-3" href="tours-details.html">
                                 <img src="assets/img/sub-tours/sub-tours.jpg" alt="sub-tours">

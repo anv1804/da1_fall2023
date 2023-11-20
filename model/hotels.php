@@ -11,5 +11,10 @@ function topHotels()
     $result = pdo_query($sql);
     return $result;
 }
-
+function dataHotels($hotelID)
+{
+    $sql = "SELECT * FROM hotels WHERE hotel_id=$hotelID";
+    $result = pdo_query($sql);
+    return $result;
+}
 ?>

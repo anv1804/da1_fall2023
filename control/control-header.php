@@ -11,8 +11,14 @@ if (isset($_GET['page'])) {
         case 'hotels':
             include('./user/pages/hotels.php');
             break;
+        case 'hotels2':
+            include('./user/pages/hotels2.php');
+            break;
         case 'hotels-details':
             include('./user/pages/hotels-details.php');
+            break;
+        case 'rooms-details':
+            include('./user/pages/rooms-details.php');
             break;
         case 'blog':
             include('./user/pages/blog.php');
