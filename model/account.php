@@ -136,4 +136,8 @@ function loadall_user($user_name = '',$user_email='' ,  $user_role = false)
     $listUsers = pdo_query($sql);
     return $listUsers;
 }
+function changePassword($newPassword,$email){
+    $sql = "UPDATE `users` SET `user_password`='$newPassword'  WHERE `user_email`='$email'";
+   return pdo_execute($sql);
+}
 ?>

@@ -1,34 +1,4 @@
 
-<!-- Dashboard start -->
-<div class="dashboard">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="dashboard-sidebar col-lg-3 col-md-12 col-sm-12 col-pad">
-                <div class="dashboard-nav d-none d-xl-block d-lg-block">
-                    <div class="dashboard-nav-inner-2">
-                        <h4>Main</h4>
-                        <ul>
-                            <li><a href="dashboard.html"><i class="flaticon-dashboard"></i> Dashboard</a></li>
-                            <li><a href="messages.html"><i class="flaticon-mail"></i> Messages <span class="nav-tag">2</span></a></li>
-                            <li><a href="bookings.html"><i class="flaticon-timetable"></i> Bookings</a></li>
-                        </ul>
-
-                        <h4>Listings</h4>
-                        <ul>
-                            <li><a href="listings.html"><i class="flaticon-bullet"></i>My Listing</a></li>
-                            <li><a href="reviews.html"><i class="flaticon-star"></i>Reviews</a></li>
-                            <li><a href="bookmarks.html"><i class="flaticon-heart"></i>Bookmarks</a></li>
-                            <li class="active"><a href="add-listing.html"><i class="flaticon-plus"></i>Add Listing</a></li>
-                        </ul>
-
-                        <h4>Account</h4>
-                        <ul>
-                            <li><a href="my-profile.html"><i class="flaticon-user"></i>My Profile</a></li>
-                            <li><a href="index.html"><i class="flaticon-logout"></i>Logout</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
             <div class="col-lg-9 offset-lg-3 col-md-12 col-sm-12 col-pad">
                 <div class="content-area5">
                     <div class="dashboard-content">
@@ -39,10 +9,10 @@
                                     <div class="breadcrumb-nav">
                                         <ul>
                                             <li>
-                                                <a href="index.html">Index</a>
+                                                <a href="index.php">Index</a>
                                             </li>
                                             <li>
-                                                <a href="dashboard.html">Dashboard</a>
+                                                <a href="dashboard.php">Dashboard</a>
                                             </li>
                                             <li class="active">Add Listing</li>
                                         </ul>
