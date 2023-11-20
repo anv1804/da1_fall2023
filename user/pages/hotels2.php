@@ -4,16 +4,13 @@ $dataHotels = "";
 if ($allHotels) {
     foreach ($allHotels as $value) {
         $dataHotels .= '
-        <div class="item-box-3">
-            <div class="row">
-                <div class="col-xl-5 col-lg-6 col-md-5 col-pad">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="item-box">
                     <div class="item-thumbnail">
-                        <a href="index.php?page=hotels-details&hotelID=' . $value['hotel_id'] . '" class="item-img">
+                        <a href="index.php?page=hotels-details&HotelID=' . $value['hotel_id'] . '" class="item-img">
                             <div class="tag">Historic</div>
                             <div class="price-ratings-box">
-                                <p class="price">
-                                    From <span>$69</span> Per Person
-                                </p>
+                                <p class="price">From <span>$69</span> Per Person</p>
                                 <div class="ratings">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
@@ -26,29 +23,21 @@ if ($allHotels) {
                             <div class="love">
                                 <i class="flaticon-heart"></i>
                             </div>
-                            <img src="assets/img/' . $value['hotel_image'] . '" alt="hotel-list" class="img-fluid">
+                            <img src="assets/img/' . $value['hotel_image'] . '" alt="hotel" class="img-fluid">
                         </a>
                     </div>
-                </div>
-            <div class="col-xl-7 col-lg-6 col-md-7 col-pad">
-            <div class="detail">
-                <!-- title -->
-                    <h1 class="title">
-                        <a href="index.php?page=hotels-details&hotelID=' . $value['hotel_id'] . '">' . $value['hotel_name'] . '</a>
-                    </h1>
-                    <!-- Location -->
-                    <div class="location">
-                        <a href="index.php?page=hotels-details&hotelID=' . $value['hotel_id'] . '">
-                            <i class="flaticon-localization"></i>
-                            ' . $value['hotel_location'] . '
-                        </a>
+                    <div class="detail">
+                        <h1 class="title">
+                            <a href="tours-details.html">' . $value['hotel_name'] . '</a>
+                        </h1>
+                        <div class="location">
+                            <a href="tours-details.html">
+                                <i class="flaticon-localization"></i>' . $value['hotel_location'] . '
+                            </a>
+                        </div>
+                        <p>' . $value['hotel_desc'] . '</p>
                     </div>
-                    <!-- Paragraph -->
-                    <p>
-                    ' . $value['hotel_desc'] . '
-                    </p>
-                    </div>
-                    <div class="ftr">
+                    <div class="footer clearfix">
                         <div class="pull-left">
                             <i class="flaticon-user"></i> Jhon Doe
                         </div>
@@ -58,7 +47,6 @@ if ($allHotels) {
                     </div>
                 </div>
             </div>
-        </div>
         ';
     }
 }
@@ -67,18 +55,18 @@ if ($allHotels) {
 <div class="sub-banner overview-bgi">
     <div class="container">
         <div class="breadcrumb-area">
-            <h1>Hotels Listing</h1>
+            <h1>Hotels Grid</h1>
             <ul class="breadcrumbs">
                 <li><a href="index.php">Home</a></li>
-                <li class="active">Hotels Listing</li>
+                <li class="active">Hotels</li>
             </ul>
         </div>
     </div>
 </div>
 <!-- Sub banner end -->
 
-<!-- Hotels list rightside start -->
-<div class="hotels-list-rightside content-area-2">
+<!-- Hotels grid rightside start -->
+<div class="hotels-grid-rightside content-area-2">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-12">
@@ -88,16 +76,16 @@ if ($allHotels) {
                             <h4>
                                 <span class="heading-icon">
                                     <i class="fa fa-caret-right icon-design"></i>
-                                    <i class="fa fa-th-list"></i>
+                                    <i class="fa fa-th-large"></i>
                                 </span>
-                                <span class="heading">Hotels List</span>
+                                <span class="heading">Hotels</span>
                             </h4>
                         </div>
                         <div class="col-xl-8 col-lg-7 col-md-7 col-sm-7">
                             <div class="sorting-options clearfix">
-                                <a href="index.php?page=hotels" class="change-view-btn active-view-btn"><i
+                                <a href="index.php?page=hotels" class="change-view-btn"><i
                                         class="fa fa-th-list"></i></a>
-                                <a href="index.php?page=hotels2" class="change-view-btn"><i
+                                <a href="index.php?page=hotes2" class="change-view-btn active-view-btn"><i
                                         class="fa fa-th-large"></i></a>
                             </div>
                             <div class="search-area">
@@ -112,20 +100,26 @@ if ($allHotels) {
                 <div class="subtitle">
                     20 Result Found
                 </div>
-                <?= $dataHotels ?>
-                <div class="pagination-box">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="#"><span aria-hidden="true">«</span></a>
-                            </li>
-                            <li class="page-item"><a class="page-link active" href="tours-list-rightside.html">1</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="tours-list-leftside.html">2</a></li>
-                            <li class="page-item"><a class="page-link" href="tours-list-fullwidth.html">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#"><span aria-hidden="true">»</span></a>
-                            </li>
-                        </ul>
-                    </nav>
+                <div class="row">
+                    <?= $dataHotels ?>
+                    <div class="col-lg-12">
+                        <div class="pagination-box">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination">
+                                    <li class="page-item"><a class="page-link" href="#"><span
+                                                aria-hidden="true">«</span></a></li>
+                                    <li class="page-item"><a class="page-link" href="tours-grid-rightside.html">1</a>
+                                    </li>
+                                    <li class="page-item"><a class="page-link active"
+                                            href="tours-grid-leftside.html">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="tours-grid-fullwidth.html">3</a>
+                                    </li>
+                                    <li class="page-item"><a class="page-link" href="#"><span
+                                                aria-hidden="true">»</span></a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-lg-4 col-md-12">
@@ -133,7 +127,7 @@ if ($allHotels) {
                     <!-- Tour search start -->
                     <div class="widget search-box">
                         <h5 class="sidebar-title">Search Hotel</h5>
-                        <form class="form-search" method="post">
+                        <form class="form-search" method="GET">
                             <input type="text" class="form-control" placeholder="Search">
                             <button type="submit" class="btn"><i class="fa fa-search"></i></button>
                         </form>
@@ -262,4 +256,4 @@ if ($allHotels) {
         </div>
     </div>
 </div>
-<!-- Hotels list rightside end -->
+<!-- Hotels grid rightside end -->

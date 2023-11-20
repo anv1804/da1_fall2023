@@ -579,6 +579,8 @@ input[type=checkbox]:checked+label:before {
     cursor: pointer;
     background: #fff;
     box-shadow: 0 0 35px rgba(0, 0, 0, 0.1);
+    display: none !important;
+
 }
 
 /** OPTION PANEL**/
@@ -6116,6 +6118,7 @@ button:focus {
         height: 40px;
         line-height: 40px;
         left: -40px;
+        display: none !important;
     }
 
     .submit-property .contact-2 .form-control {
@@ -6140,9 +6143,7 @@ button:focus {
         height: 265px;
     }
 
-    .item-b
-
-    ox-3 .detail .location {
+    .item-b ox-3 .detail .location {
         margin: 0 0 15px;
     }
 
@@ -6766,6 +6767,8 @@ button:focus {
         line-height: 35px;
         left: -35px;
         color: #fff;
+        display: none !important;
+
     }
 
     .blog-grid-box .detail .post-meta {

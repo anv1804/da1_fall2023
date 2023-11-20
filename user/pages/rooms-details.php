@@ -1,57 +1,19 @@
 <?php
-if (isset($_GET['hotelID'])) {
-    $hotelID = $_GET['hotelID'];
-    $sql = "SELECT * FROM hotels WHERE hotel_id=$hotelID";
+if (isset($_GET['roomID'])) {
+    $roomID = $_GET['roomID'];
+    $sql = "SELECT * FROM rooms WHERE room_id=$roomID";
     $result = pdo_query($sql);
-    $nameHotel = "";
-    $locationHotel = "";
-    $descHotel = "";
-    $imageHotel = "";
+    $numberRoom = "";
+    $guestRoom = "";
+    $descRoom = "";
+    $imageRoom = "";
     if ($result) {
-        $nameHotel = $result[0]['hotel_name'];
-        $locationHotel = $result[0]['hotel_location'];
-        $descHotel = $result[0]['hotel_desc'];
-        $imageHotel = $result[0]['hotel_image'];
+        $numberRoom = $result[0]['room_number'];
+        $guestRoom = $result[0]['room_guest'];
+        $descRoom = $result[0]['room_desc'];
+        $imageRoom = $result[0]['room_image'];
     }
     ;
-
-    $sqlR = "SELECT * FROM rooms INNER JOIN hotels ON rooms.room_id = hotels.room_id";
-    $listRoom = pdo_query($sqlR);
-    $dataRoom = "";
-    $numberRoom = "";
-    $imageRoom = "";
-    $typeBed = "";
-    if ($listRoom) {
-        // print_r($listRoom);
-        foreach ($listRoom as $value) {
-            $dataRoom .= '
-                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6" >
-                    <div class="agent-2" style="border-radius:10px">
-                        <div class="agent-photo">
-                            <a href="index.php?page=rooms-details&roomID=' . $value["room_id"] . '">
-                                <img style="border-radius:10px 10px 0 0" src="assets/images/rooms/' . $value['room_image'] . '" alt="room"
-                                    class="img-fluid">
-                            </a>
-                        </div>
-                        <div class="agent-details">
-                            <h5><a href="#" style="font-weight:bold">Room ' . $value['room_number'] . '</a></h5>
-                            <p class="price" style="font-weight:500" >
-                              Price: <strong style="font-weight:700">$</strong><span style="color:red;font-weight:700">' .
-                $value['room_price'] . '</span>/1 day
-                            </p>
-                            <ul class="social-list clearfix">
-                                <li><i class="fa fa-wifi"></i></li>
-                                <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
-                                </li>
-                                <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
-                            </ul>
-                        /div>
-                    </div>
-                </div>
-';
-        }
-    }
 }
 ?>
 <!-- Sub banner start -->
@@ -78,12 +40,14 @@ if (isset($_GET['hotelID'])) {
                             <div class="col-md-12">
                                 <div class="title">
                                     <h3>
-                                        <?= $nameHotel ?>
+                                        ROOM NUMBER
+                                        <?= $numberRoom ?>
                                     </h3>
                                     <div class="dd">
                                         <span>
-                                            <i class="fa fa-map-marker">
-                                                <?= $locationHotel ?>
+                                            <i class="lnr lnr-users">
+                                                Room for
+                                                <?= $guestRoom ?> Person
                                             </i>
                                         </span>
                                         <span class="ratings">
@@ -191,23 +155,8 @@ if (isset($_GET['hotelID'])) {
                 <div class="description mb-40">
                     <h3 class="heading">Description</h3>
                     <p>
-                        <?= $descHotel ?>
+                        <?= $descRoom ?>
                     </p>
-                </div>
-                <!-- Location start -->
-                <div class="location mb-40">
-                    <h3 class="heading">Room</h3>
-                    <div class="agent content-area-4">
-                        <div class="container">
-                            <div class="main-title">
-                                <h1><span>Our </span>Room</h1>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            </div>
-                            <div class="row">
-                                <?= $dataRoom ?>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <!-- Amenities start -->
                 <div class="amenities af mb-40">
@@ -390,12 +339,8 @@ if (isset($_GET['hotelID'])) {
                 <div class="sidebar ml-20">
                     <!-- Search area2 start -->
                     <div class="widget search-area2 d-none d-xl-block d-lg-block">
-                        <h5 class="sidebar-title">Book This Hotel</h5>
-                        <form class="inline-search-area" method="GET">
-                            <div class="form-group search-col">
-                                <input type="text" class="form-control" placeholder="Hotel, City.....">
-                                <i class="flaticon-localization icon-append"></i>
-                            </div>
+                        <h5 class="sidebar-title">Book This Room</h5>
+                        <form class="inline-search-area" method="post">
                             <div class="form-group search-col">
                                 <input type="text" name="dates" placeholder="When..."
                                     class="datetimes-left form-control" />
@@ -403,7 +348,7 @@ if (isset($_GET['hotelID'])) {
                             </div>
                             <div class="form-group search-col">
                                 <select class="selectpicker search-fields btn-block form-control bdr" name="guest">
-                                    <option>Guests</option>
+                                    <option>Type</option>
                                     <option>1</option>
                                     <option>2</option>
                                     <option>3</option>

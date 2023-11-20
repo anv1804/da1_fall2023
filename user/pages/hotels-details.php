@@ -1,21 +1,20 @@
 <?php
 if (isset($_GET['hotelID'])) {
     $hotelID = $_GET['hotelID'];
-    // Lấy giữ liệu của khách sạn
-    $sql = "SELECT * FROM hotels WHERE hotel_id=$hotelID";
-    $result = pdo_query($sql);
+    // DATA HOTEL
+    $dataHotels = dataHotels($hotelID);
     $nameHotel = "";
     $locationHotel = "";
     $descHotel = "";
     $imageHotel = "";
-    if ($result) {
-        $nameHotel = $result[0]['hotel_name'];
-        $locationHotel = $result[0]['hotel_location'];
-        $descHotel = $result[0]['hotel_desc'];
-        $imageHotel = $result[0]['hotel_image'];
+    if ($dataHotels) {
+        $nameHotel = $dataHotels[0]['hotel_name'];
+        $locationHotel = $dataHotels[0]['hotel_location'];
+        $descHotel = $dataHotels[0]['hotel_desc'];
+        $imageHotel = $dataHotels[0]['hotel_image'];
     }
     ;
-    // Lấy giữ liệu các phòng của khách sạn
+    // ALL ROOM OF HOTEL
     $sqlR = "SELECT * FROM rooms INNER JOIN hotels ON rooms.room_id = hotels.room_id";
     $listRoom = pdo_query($sqlR);
     $dataRoom = "";
@@ -62,13 +61,13 @@ if (isset($_GET['hotelID'])) {
 ';
         }
     }
-    // Lấy giữ liệu các khách sạn có lượt xem cao nhất 
+    // TOP HOTELS
     $topHotels = topHotels();
     $dataTopHotels = "";
     if ($topHotels) {
         $dataTopHotels = '
             <div class="media mb-4">
-                <a class="pr-3" href="index.php?page=hotel-detail&hotelId='.$topHotels[0]['hotel_id'].'">
+                <a class="pr-3" href="index.php?page=hotel-detail&hotelId=' . $topHotels[0]['hotel_id'] . '">
                     <img src="assets/img/sub-tours/sub-tours.jpg" alt="sub-tours">
                 </a>
                 <div class="media-body align-self-center">
@@ -84,6 +83,8 @@ if (isset($_GET['hotelID'])) {
     }
 }
 ?>
+
+
 <!-- Sub banner start -->
 <div class="sub-banner overview-bgi">
     <div class="container">
