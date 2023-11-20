@@ -14,6 +14,9 @@ if (isset($_GET['page'])) {
         case 'hotels-details':
             include('./user/pages/hotels-details.php');
             break;
+        case 'rooms-details':
+            include('./user/pages/rooms-details.php');
+            break;
         case 'blog':
             include('./user/pages/blog.php');
             break;
