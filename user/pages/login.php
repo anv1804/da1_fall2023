@@ -9,7 +9,6 @@ if (isset($_POST["submit"]) && ($_POST["submit"])) {
     }
     $checkLogin = login($email, $password, $checkRemember);
     if ($checkLogin) {
-        $_SESSION['role'] = $email;
         echo '<script type="text/javascript">window.location.href = "./index.php?page=home";</script>';
     } else {
         $error_message = "Account or password is incorrect!";
