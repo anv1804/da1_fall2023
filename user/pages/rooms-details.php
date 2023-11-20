@@ -34,29 +34,19 @@ if (isset($_GET['hotelID'])) {
                             </a>
                         </div>
                         <div class="agent-details">
-                            <h5><a href="index.php?page=rooms-details&roomID=' . $value["room_id"] . '" style="font-weight:bold">Room ' . $value['room_number'] . '</a></h5>
+                            <h5><a href="#" style="font-weight:bold">Room ' . $value['room_number'] . '</a></h5>
                             <p class="price" style="font-weight:500" >
                               Price: <strong style="font-weight:700">$</strong><span style="color:red;font-weight:700">' .
                 $value['room_price'] . '</span>/1 day
                             </p>
-                            <ul class="social-list clearfix" style="font-size:13px">
-                                <li><a href="#"><i class="fa fa-wifi"></i></a></li>
-                                <li><a href="#"><i class="fa fa-s15"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shower"></i></a></li>
-                                <li><a href="#"><i class="fa fa-tv"></i></a></li>
-                            </ul>
-                            <ul class="social-list clearfix" style="font-size:15px;padding-top: 10px;color:#ffc107" >
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star-half-o"></i></li>
-                                <li><i class="fa fa-star-o"></i></li>
-                                <br>
-                                <li>
-                                    <span style="font-size:10px;color:gray">(6 Review)</span>
+                            <ul class="social-list clearfix">
+                                <li><i class="fa fa-wifi"></i></li>
+                                <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
                                 </li>
+                                <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
                             </ul>
-                        </div>
+                        /div>
                     </div>
                 </div>
 ';
@@ -68,17 +58,15 @@ if (isset($_GET['hotelID'])) {
 <div class="sub-banner overview-bgi">
     <div class="container">
         <div class="breadcrumb-area">
-            <h1>Hotels Detail</h1>
+            <h1>Room Detail</h1>
             <ul class="breadcrumbs">
                 <li><a href="index.php">Home</a></li>
-                <li class="active">Hotels Detail</li>
+                <li class="active"> Room Detail</li>
             </ul>
         </div>
     </div>
 </div>
 <!-- Sub banner end -->
-
-
 <!-- Item details page start -->
 <div class="item-details-page content-area-2">
     <div class="container">
@@ -389,9 +377,7 @@ if (isset($_GET['hotelID'])) {
                                         <div class="send-btn mb-30">
                                             <button type="submit" name="submit"
                                                 class="btn btn-color btn-md btn-message">Send
-                                                Message
-                                                <i class="fa fa-send"></i>
-                                            </button>
+                                                Message</button>
                                         </div>
                                     </div>
                                 </div>
@@ -403,7 +389,7 @@ if (isset($_GET['hotelID'])) {
             <div class="col-lg-4 col-md-12">
                 <div class="sidebar ml-20">
                     <!-- Search area2 start -->
-                    <!-- <div class="widget search-area2 d-none d-xl-block d-lg-block">
+                    <div class="widget search-area2 d-none d-xl-block d-lg-block">
                         <h5 class="sidebar-title">Book This Hotel</h5>
                         <form class="inline-search-area" method="GET">
                             <div class="form-group search-col">
@@ -442,52 +428,10 @@ if (isset($_GET['hotelID'])) {
                                 <a href="wishlist.html" class="btn btn-md-outline btn-block">Add to wishlist</a>
                             </div>
                         </form>
-                    </div> -->
-                    <div class="widget recent-posts">
-                        <h4 class="sidebar-title">Recent Posts</h4>
-                        <div class="media mb-4">
-                            <a class="pr-3" href="tours-details.html">
-                                <img src="assets/img/sub-tours/sub-tours.jpg" alt="sub-tours">
-                            </a>
-                            <div class="media-body align-self-center">
-                                <h5>
-                                    <a href="tours-details.html">Sonargaon Dhaka Hotel</a>
-                                </h5>
-                                <div class="listing-post-meta">
-                                    Oct 27, 2021 | <a href="#">Hotel</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="media mb-4">
-                            <a class="pr-3" href="tours-details.html">
-                                <img src="assets/img/sub-tours/sub-tours-2.jpg" alt="sub-tours">
-                            </a>
-                            <div class="media-body align-self-center">
-                                <h5>
-                                    <a href="tours-details.html">Paris Temple Tour</a>
-                                </h5>
-                                <div class="listing-post-meta">
-                                    Nov 23, 2021 | <a href="#">Travel</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <a class="pr-3" href="tours-details.html">
-                                <img src="assets/img/sub-tours/sub-tours-3.jpg" alt="sub-tours">
-                            </a>
-                            <div class="media-body align-self-center">
-                                <h5>
-                                    <a href="tours-details.html">Tour travel Tick</a>
-                                </h5>
-                                <div class="listing-post-meta">
-                                    Jun 17, 2021 | <a href="#">Travel</a>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <!-- Recent posts start -->
                     <div class="widget recent-posts">
-                        <h4 class="sidebar-title">TOP Hotels</h4>
+                        <h4 class="sidebar-title">Recent Posts</h4>
                         <div class="media mb-4">
                             <a class="pr-3" href="tours-details.html">
                                 <img src="assets/img/sub-tours/sub-tours.jpg" alt="sub-tours">
