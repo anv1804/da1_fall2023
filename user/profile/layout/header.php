@@ -35,19 +35,13 @@
 
 </head>
 <body id="top">
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="../../../../../../www.googletagmanager.com/ns189f.html?id=GTM-PDTWJ3Z"
-                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-<div class="page_loader"></div>
-
 <!-- main header start -->
 <header class="main-header header-2 fixed-header" id="main-header-2">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
                 <nav class="navbar navbar-expand-lg navbar-light rounded">
-                    <a class="navbar-brand logo pad-0" href="index.html">
+                    <a class="navbar-brand logo pad-0" href="index.php">
                         <img src="assets/img/logos/black-logo.png" alt="logo">
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,31 +50,31 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto d-lg-none d-xl-none">
                             <li class="nav-item dropdown active">
-                                <a href="dashboard.html" class="nav-link">Dashboard</a>
+                                <a href="dashboard.php" class="nav-link">Dashboard</a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a href="messages.html" class="nav-link">Messages</a>
+                                <a href="messages.php" class="nav-link">Messages</a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a href="bookings.html" class="nav-link">Bookings</a>
+                                <a href="bookings.php" class="nav-link">Bookings</a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a href="listings.html" class="nav-link">My Listings</a>
+                                <a href="listings.php" class="nav-link">My Listings</a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a href="reviews.html" class="nav-link">Reviews</a>
+                                <a href="reviews.php" class="nav-link">Reviews</a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a href="bookmarks.html" class="nav-link">Bookmarks</a>
+                                <a href="bookmarks.php" class="nav-link">Bookmarks</a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a href="add-listing.html" class="nav-link">Add Listing</a>
+                                <a href="add-listing.php" class="nav-link">Add Listing</a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a href="my-profile.html" class="nav-link">My Profile</a>
+                                <a href="my-profile.php" class="nav-link">My Profile</a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a href="index.html" class="nav-link">Logout</a>
+                                <a href="index.php" class="nav-link">Logout</a>
                             </li>
                         </ul>
                         <div class="navbar-buttons ml-auto d-none d-xl-block d-lg-block">
@@ -92,16 +86,16 @@
                                             My Account
                                         </a>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="dashboard.html">Dashboard</a>
-                                            <a class="dropdown-item" href="messages.html">Messages</a>
-                                            <a class="dropdown-item" href="bookings.html">Bookings</a>
-                                            <a class="dropdown-item" href="my-profile.html">My profile</a>
-                                            <a class="dropdown-item" href="index.html">Logout</a>
+                                            <a class="dropdown-item" href="dashboard.php">Dashboard</a>
+                                            <a class="dropdown-item" href="messages.php">Messages</a>
+                                            <a class="dropdown-item" href="bookings.php">Bookings</a>
+                                            <a class="dropdown-item" href="my-profile.php">My profile</a>
+                                            <a class="dropdown-item" href="index.php">Logout</a>
                                         </div>
                                     </div>
                                 </li>
                                 <li>
-                                    <a class="btn btn-md bomd btn-round" href="add-listing.html">Add Listing</a>
+                                    <a class="btn btn-md bomd btn-round" href="add-listing.php">Add Listing</a>
                                 </li>
                             </ul>
                         </div>
@@ -112,3 +106,37 @@
     </div>
 </header>
 <!-- main header end -->
+
+<!-- Dashboard start -->
+<div class="dashboard">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="dashboard-sidebar col-lg-3 col-md-12 col-sm-12 col-pad">
+                <div class="dashboard-nav d-none d-xl-block d-lg-block">
+                    <div class="dashboard-nav-inner-2">
+                        <h4>Main</h4>
+                        <ul>
+                            <li class="active"><a href="profile.php?page=dashboard"><i class="flaticon-dashboard"></i> Dashboard</a></li>
+                            <li><a href="profile.php?page=messages"><i class="flaticon-mail"></i> Messages <span class="nav-tag">2</span></a></li>
+                            <li><a href="profile.php?page=bookings"><i class="flaticon-timetable"></i> Bookings</a></li>
+                        </ul>
+                        <h4>Listings</h4>
+                        <ul>
+                            <li><a href="profile.php?page=listings"><i class="flaticon-bullet"></i>My Listing</a></li>
+                            <li><a href="profile.php?page=reviews"><i class="flaticon-star"></i>Reviews</a></li>
+                            <li><a href="profile.php?page=bookmarks"><i class="flaticon-heart"></i>Bookmarks</a></li>
+                            <li><a href="profile.php?page=add-listing"><i class="flaticon-plus"></i>Add Listing</a></li>
+                        </ul>
+                        <h4>Account</h4>
+                        <ul>
+                            <li><a href="profile.php?page=profile"><i class="flaticon-user"></i>My Profile</a></li>
+                            <li><a href="./user/pages/logout.php"><i class="flaticon-logout"></i>Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+<?php
+    include 'control/control-profile.php';
+    
+?>
+

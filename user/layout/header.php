@@ -115,7 +115,7 @@
                                     if ($user["user_role"] == '0') {
                                         $user = '
                                         <li class="nav-item dropdown">
-                                            <a href="dashboard.html" class="nav-link">
+                                            <a href="profile.php" class="nav-link">
                                                 <img style="width: 36px;" src="./assets/images/user.png" alt="">
                                             </a>
                                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="position: absolute;left:-110%;text-align: center;" >
