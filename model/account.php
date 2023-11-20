@@ -6,8 +6,6 @@ function login($email, $password , $checkRemember = "no")
 {
     $sql = "SELECT * FROM users WHERE `user_email`='$email' and  `user_password`='$password'";
     $account = pdo_query_one($sql);
-<<<<<<< HEAD
-=======
     
     if ($account) {
         $user = [ "user_email" => $email ,"user_password" => $password ,"user_role" => $account["user_role"]];
@@ -19,7 +17,6 @@ function login($email, $password , $checkRemember = "no")
         return true;
     }
     return false;
->>>>>>> d68d04204b8886ab2e7e8d58b890df66b2a8fa29
 }
 // LOGOUT
 function logout()
@@ -76,8 +73,6 @@ function generateRandomString($length = 8) {
 // FORGOT PASSWORD
 function forgotPassword($email)
 {
-<<<<<<< HEAD
-=======
     $user = loadall_user("" , $email);
     $newPassword = "";
     if ($user) {
@@ -87,7 +82,6 @@ function forgotPassword($email)
         return false;
     }
     ;
->>>>>>> d68d04204b8886ab2e7e8d58b890df66b2a8fa29
     require 'PHPMailer-master/src/PHPMailer.php';
     require "PHPMailer-master/src/SMTP.php";
     require 'PHPMailer-master/src/Exception.php';
