@@ -21,4 +21,166 @@ form#form-login #showpass span {
     display: flex;
     align-items: center;
     justify-content: center;
+    /* align-items: center; */
 }
+
+/* Home page form search */
+
+form#form-search .form-guest {
+    background-color: #ffffff;
+    width: 100%;
+    height: 52px;
+    display: flex;
+    align-items: center;
+}
+
+form#form-search .form-guest img {
+    position: relative;
+    animation: none;
+    width: 22px;
+    height: 22px;
+    margin: 0 6px 0 4px;
+}
+
+form#form-search .form-guest .form-content {
+    position: relative;
+    font-size: 15px;
+}
+
+form#form-search .overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: none;
+    z-index: 9;
+}
+
+form#form-search .form-guest-inner {
+    position: absolute;
+    top: 53px;
+    left: 0;
+    /* right: 0; */
+    width: 100%;
+    display: none;
+    z-index: 10;
+}
+
+@keyframes toBottom {
+    0% {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+    75% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes toTop {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-100%);
+        display: none;
+    }
+}
+
+form#form-search .form-guest-body {
+    background-color: #ffffff;
+    margin-top: 4px;
+    padding: 12px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px #666;
+}
+
+form#form-search .form-guest-body .form-guest-choose {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+form#form-search .form-guest-body .form-guest-info {
+    display: flex;
+}
+
+form#form-search .form-guest-body .form-guest-info img {
+    animation: none;
+    margin-right: 12px;
+}
+
+form#form-search .form-guest-body .form-guest-btns {
+    display: flex;
+    align-items: center;
+}
+
+form#form-search .form-guest-btns .form-guest-btn {
+    width: 35px;
+    height: 35px;
+    background-color: #f2f3f3;
+    color: #d7d9da;
+    font-size: 24px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+form#form-search .form-guest-btns .form-guest-btn.active {
+    background-color: #f7f9fa;
+    color: #20a0f3;
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+form#form-search .form-guest-btns .form-guest-btn-quantity {
+    width: 35px;
+    height: 35px;
+    margin: 0 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    border: 1px solid #000;
+    font-size: 16px;
+    color: #000;
+}
+
+form#form-search .form-guest-close {
+    margin-top: 24px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+form#form-search .form-guest-close .form-guest-btn-clear,
+form#form-search .form-guest-close .form-guest-btn-apply {
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+form#form-search .form-guest-close .form-guest-btn-clear {
+    color: #000;
+    background-color: #f0f0f0;
+    margin-right: 4px;
+}
+
+form#form-search .form-guest-close .form-guest-btn-apply {
+    color: #ffffff;
+    background-color: #ff214f;
+}
+

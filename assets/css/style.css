@@ -5466,12 +5466,22 @@ body.off-canvas-sidebar-open {
     position: relative;
 }
 
-.inline-search-area .icon-append {
+.inline-search-area .icon-append:not(.icon-search3) {
+    color: #949494;
+    font-size: 16px;
+    left: 12px;
+    position: absolute;
+    top: 13px;
+}
+
+.inline-search-area .icon-append.icon-search3 {
     color: #949494;
     font-size: 15px;
     right: 15px;
     position: absolute;
-    top: 17px;
+    top: 15px;
+    cursor: pointer;
+    transition: .3s ease-in;
 }
 
 .selectBox-dropdown-menu {
@@ -5485,7 +5495,7 @@ body.off-canvas-sidebar-open {
 
 .inline-search-area .form-control {
     width: 100%;
-    padding: 12px 15px;
+    padding: 12px 15px 12px 34px;
     font-size: 15px;
     border: none;
     border-right: solid 1px #e0e0e0;
@@ -5665,6 +5675,8 @@ button:focus {
 }
 
 @media (max-width: 992px) {
+
+
     .open-offcanvas {
         padding: 18px 15px 15px;
     }
@@ -6237,6 +6249,8 @@ button:focus {
 }
 
 @media (max-width: 768px) {
+
+
     .content-area {
         padding-bottom: 30px;
     }
