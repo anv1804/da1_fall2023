@@ -18,6 +18,7 @@
     <link type="text/css" rel="stylesheet" href="assets/css/daterangepicker.css">
     <link type="text/css" rel="stylesheet" href="assets/css/leaflet.css">
     <link type="text/css" rel="stylesheet" href="assets/css/map.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/new-css/rating.css">
     <link type="text/css" rel="stylesheet" href="assets/css/jquery.mCustomScrollbar.css">
     <link type="text/css" rel="stylesheet" href="assets/fonts/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="assets/fonts/flaticon/font/flaticon.css">
@@ -39,9 +40,11 @@
 <style>
 @media (min-width: 756px) {
     #bar {
+        display: flex;
         padding-left: 10%;
         margin: auto;
     }
+
 }
 </style>
 
@@ -62,7 +65,7 @@
                         <div class="navbar-collapse collapse w-100" id="navbar">
                             <ul class="navbar-nav"
                                 style="align-items: center;display: flex; flex:1;justify-content: space-between ;">
-                                <div id="bar" class="" style="display: flex;">
+                                <div id="bar" class="">
                                     <li class="nav-item">
                                         <a class="nav-link" href="index.php?page=home" id="navbarDropdownMenuLink">
                                             Home
@@ -102,18 +105,18 @@
                                         </a>
                                     </li>
                                     <?php
-                                $user = "";
-                                if (isset($_SESSION['user']) || isset($_COOKIE['user'])) {
-                                    
-                                    if (isset($_SESSION['user'])) {
-                                        $user = $_SESSION['user'];
-                                    }else {
-                                        $user = json_decode($_COOKIE['user'] , true);
-                                    }
-                                    // print_r($user);
-                                    // var_dump($user);
-                                    if ($user["user_role"] == '0') {
-                                        $user = '
+                                    $user = "";
+                                    if (isset($_SESSION['user']) || isset($_COOKIE['user'])) {
+
+                                        if (isset($_SESSION['user'])) {
+                                            $user = $_SESSION['user'];
+                                        } else {
+                                            $user = json_decode($_COOKIE['user'], true);
+                                        }
+                                        // print_r($user);
+                                        // var_dump($user);
+                                        if ($user["user_role"] == '0') {
+                                            $user = '
                                         <li class="nav-item dropdown">
                                             <a href="dashboard.html" class="nav-link">
                                                 <img style="width: 36px;" src="./assets/images/user.png" alt="">
@@ -129,8 +132,8 @@
                                             </ul>
                                         </li>
                                             ';
-                                    } else {
-                                        $user = '
+                                        } else {
+                                            $user = '
                                             <li class="nav-item dropdown">
                                                 <a href="dashboard.html" class="nav-link">
                                                     <img style="width: 36px;" src="./assets/images/user.png" alt="">
@@ -147,17 +150,17 @@
                                                 </ul>
                                             </li>
                                                 ';
-                                    }
-                                }else{
-                                    $user = '
+                                        }
+                                    } else {
+                                        $user = '
                                     <li class="nav-item dropdown">
                                     <a href="index.php?page=login" class="nav-link">
                                         Sign In <span class="fa fa-sign-in"></span>
                                     </a>
                                 </li>
                                     ';
-                                }
-                                ?>
+                                    }
+                                    ?>
                                     <?= $user ?>
 
                                 </div>
@@ -180,5 +183,5 @@
         </div>
     </header>
     <?php
-include './control/control-header.php';
-?>
+    include './control/control-header.php';
+    ?>
