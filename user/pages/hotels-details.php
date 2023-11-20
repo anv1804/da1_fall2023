@@ -81,10 +81,23 @@ if (isset($_GET['hotelID'])) {
             </div>
         ';
     }
+    // comment
+    if (isset($_POST['submit'])) {
+        $userEmail = $_SESSION['user']['user_email'];
+        $userID = getID($userEmail);
+        $rating = $_POST['rating'];
+        $content = $_POST['content'];
+        if (isset($_SESSION['user'])) {
+            comment($content, $hotelID, $userID, $rating);
+            echo "oce";
+        } else {
+            header('location: index.php?page=login');
+        }
+
+    }
+
 }
 ?>
-
-
 <!-- Sub banner start -->
 <div class="sub-banner overview-bgi">
     <div class="container">
@@ -98,7 +111,6 @@ if (isset($_GET['hotelID'])) {
     </div>
 </div>
 <!-- Sub banner end -->
-
 
 <!-- Item details page start -->
 <div class="item-details-page content-area-2">
@@ -383,7 +395,8 @@ if (isset($_GET['hotelID'])) {
                     <h2>Leave a Comment</h2>
                     <div class="container">
                         <div class="row">
-                            <form action="#" method="GET" enctype="multipart/form-data">
+                            <form action="index.php?page=hotels-details&hotelID=<?= $hotelID ?>" method="post"
+                                enctype="multipart/form-data">
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <div class="rating">
@@ -402,13 +415,13 @@ if (isset($_GET['hotelID'])) {
 
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <div class="form-group message">
-                                            <textarea class="form-control" name="message"
+                                            <textarea class="form-control" name="content"
                                                 placeholder="Write message"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                                         <div class="send-btn mb-30">
-                                            <button type="submit" name="submit"
+                                            <button type="submit" name="submit" value="submit"
                                                 class="btn btn-color btn-md btn-message">Send
                                                 Message
                                                 <i class="fa fa-send"></i>

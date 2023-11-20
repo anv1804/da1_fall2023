@@ -5,5 +5,4 @@ function allRooms()
     $result = pdo_query($sql);
     return $result;
 }
-
 ?>
