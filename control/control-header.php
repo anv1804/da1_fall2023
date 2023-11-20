@@ -8,11 +8,11 @@ if (isset($_GET['page'])) {
         case 'about':
             include('./user/pages/about.php');
             break;
-        case 'tours':
-            include('./user/pages/tours-list-rightside.php');
-            break;
         case 'hotels':
-            include('./user/pages/hotels-list-rightside.php');
+            include('./user/pages/hotels.php');
+            break;
+        case 'hotels-details':
+            include('./user/pages/hotels-details.php');
             break;
         case 'blog':
             include('./user/pages/blog.php');

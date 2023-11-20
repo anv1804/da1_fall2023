@@ -1,0 +1,24 @@
+/* Validattor css*/
+
+form .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-bottom: 0!important;
+}
+
+form .form-group span.form-message {
+    font-size: 13px;
+    font-weight: 500;
+    min-height: 21px;
+    text-align: left;
+    margin-bottom: 4px;
+}
+
+form#form-login #showpass span {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
