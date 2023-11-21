@@ -1,4 +1,3 @@
-
 <!-- Sub banner start -->
 <div class="sub-banner overview-bgi">
     <div class="container">
@@ -34,8 +33,10 @@
                                             <strong><a href="#">Teseira</a></strong>
                                         </li>
                                         <li class="mr-0"><span>May 31, 2021</span></li>
-                                        <li class="float-right mr-0"><a href="#"><i class="flaticon-comment"></i></a>14k</li>
-                                        <li class="float-right"><a href="#"><i class="flaticon-timetable"></i></a>5k</li>
+                                        <li class="float-right mr-0"><a href="#"><i class="flaticon-comment"></i></a>14k
+                                        </li>
+                                        <li class="float-right"><a href="#"><i class="flaticon-timetable"></i></a>5k
+                                        </li>
                                     </ul>
                                 </div>
                                 <h3>
@@ -61,8 +62,10 @@
                                             <strong><a href="#">Antony</a></strong>
                                         </li>
                                         <li class="mr-0"><span>May 31, 2021</span></li>
-                                        <li class="float-right mr-0"><a href="#"><i class="flaticon-comment"></i></a>14k</li>
-                                        <li class="float-right"><a href="#"><i class="flaticon-timetable"></i></a>5k</li>
+                                        <li class="float-right mr-0"><a href="#"><i class="flaticon-comment"></i></a>14k
+                                        </li>
+                                        <li class="float-right"><a href="#"><i class="flaticon-timetable"></i></a>5k
+                                        </li>
                                     </ul>
                                 </div>
                                 <h3>
@@ -88,8 +91,10 @@
                                             <strong><a href="#">John Doe</a></strong>
                                         </li>
                                         <li class="mr-0"><span>May 31, 2021</span></li>
-                                        <li class="float-right mr-0"><a href="#"><i class="flaticon-comment"></i></a>14k</li>
-                                        <li class="float-right"><a href="#"><i class="flaticon-timetable"></i></a>5k</li>
+                                        <li class="float-right mr-0"><a href="#"><i class="flaticon-comment"></i></a>14k
+                                        </li>
+                                        <li class="float-right"><a href="#"><i class="flaticon-timetable"></i></a>5k
+                                        </li>
                                     </ul>
                                 </div>
                                 <h3>
@@ -115,8 +120,10 @@
                                             <strong><a href="#">Teseira</a></strong>
                                         </li>
                                         <li class="mr-0"><span>May 31, 2021</span></li>
-                                        <li class="float-right mr-0"><a href="#"><i class="flaticon-comment"></i></a>14k</li>
-                                        <li class="float-right"><a href="#"><i class="flaticon-timetable"></i></a>5k</li>
+                                        <li class="float-right mr-0"><a href="#"><i class="flaticon-comment"></i></a>14k
+                                        </li>
+                                        <li class="float-right"><a href="#"><i class="flaticon-timetable"></i></a>5k
+                                        </li>
                                     </ul>
                                 </div>
                                 <h3>
@@ -142,8 +149,10 @@
                                             <strong><a href="#">Antony</a></strong>
                                         </li>
                                         <li class="mr-0"><span>May 31, 2021</span></li>
-                                        <li class="float-right mr-0"><a href="#"><i class="flaticon-comment"></i></a>14k</li>
-                                        <li class="float-right"><a href="#"><i class="flaticon-timetable"></i></a>5k</li>
+                                        <li class="float-right mr-0"><a href="#"><i class="flaticon-comment"></i></a>14k
+                                        </li>
+                                        <li class="float-right"><a href="#"><i class="flaticon-timetable"></i></a>5k
+                                        </li>
                                     </ul>
                                 </div>
                                 <h3>
@@ -169,8 +178,10 @@
                                             <strong><a href="#">John Doe</a></strong>
                                         </li>
                                         <li class="mr-0"><span>May 31, 2021</span></li>
-                                        <li class="float-right mr-0"><a href="#"><i class="flaticon-comment"></i></a>14k</li>
-                                        <li class="float-right"><a href="#"><i class="flaticon-timetable"></i></a>5k</li>
+                                        <li class="float-right mr-0"><a href="#"><i class="flaticon-comment"></i></a>14k
+                                        </li>
+                                        <li class="float-right"><a href="#"><i class="flaticon-timetable"></i></a>5k
+                                        </li>
                                     </ul>
                                 </div>
                                 <h3>
@@ -196,8 +207,10 @@
                                             <strong><a href="#">John Doe</a></strong>
                                         </li>
                                         <li class="mr-0"><span>May 31, 2021</span></li>
-                                        <li class="float-right mr-0"><a href="#"><i class="flaticon-comment"></i></a>14k</li>
-                                        <li class="float-right"><a href="#"><i class="flaticon-timetable"></i></a>5k</li>
+                                        <li class="float-right mr-0"><a href="#"><i class="flaticon-comment"></i></a>14k
+                                        </li>
+                                        <li class="float-right"><a href="#"><i class="flaticon-timetable"></i></a>5k
+                                        </li>
                                     </ul>
                                 </div>
                                 <h3>
@@ -223,8 +236,10 @@
                                             <strong><a href="#">Teseira</a></strong>
                                         </li>
                                         <li class="mr-0"><span>May 31, 2021</span></li>
-                                        <li class="float-right mr-0"><a href="#"><i class="flaticon-comment"></i></a>14k</li>
-                                        <li class="float-right"><a href="#"><i class="flaticon-timetable"></i></a>5k</li>
+                                        <li class="float-right mr-0"><a href="#"><i class="flaticon-comment"></i></a>14k
+                                        </li>
+                                        <li class="float-right"><a href="#"><i class="flaticon-timetable"></i></a>5k
+                                        </li>
                                     </ul>
                                 </div>
                                 <h3>
@@ -239,11 +254,13 @@
                         <div class="pagination-box">
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination">
-                                    <li class="page-item"><a class="page-link" href="#"><span aria-hidden="true">«</span></a></li>
+                                    <li class="page-item"><a class="page-link" href="#"><span
+                                                aria-hidden="true">«</span></a></li>
                                     <li class="page-item"><a class="page-link active" href="#">1</a></li>
                                     <li class="page-item"><a class="page-link" href="#">2</a></li>
                                     <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#"><span aria-hidden="true">»</span></a></li>
+                                    <li class="page-item"><a class="page-link" href="#"><span
+                                                aria-hidden="true">»</span></a></li>
                                 </ul>
                             </nav>
                         </div>

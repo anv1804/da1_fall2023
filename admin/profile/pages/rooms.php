@@ -1,5 +1,5 @@
 
-            <div class="col-lg-9 offset-lg-3 col-md-12 col-sm-12 col-pad">
+<div class="col-lg-9 offset-lg-3 col-md-12 col-sm-12 col-pad">
                 <div class="content-area5">
                     <div class="dashboard-content">
                         <div class="dashboard-header clearfix">
