@@ -11,6 +11,7 @@ function login($email, $password , $checkRemember = "no")
         $user = [ "user_email" => $email ,"user_password" => $password ,"user_role" => $account["user_role"]];
         if ($checkRemember === 'yes') {
             setcookie("user" , json_encode($user) , time() + (86400) ,"/");
+            $_SESSION["user"] = $user;
         }else {
             $_SESSION["user"] = $user;
         }

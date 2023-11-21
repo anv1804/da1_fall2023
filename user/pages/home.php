@@ -94,7 +94,7 @@ if (isset($data)) {
 
                     <div class="form-guest">
                         <img src="./assets/images/icon-guests.svg" alt="icon guest">
-                        <div class="form-content">2 adults, 0 children, 1 room</div>
+                        <div class="form-content"><span>2</span> adults, <span>0</span> children, <span>1</span> room</div>
                         <i class="flaticon-down icon-append icon-search3"></i>
                     </div>
                     <div class="overlay"></div>
