@@ -1,4 +1,16 @@
 <?php
+// $starRate0 = "";
+// $starRate1 = '';
+// $star = 5;
+// $starRating = 3;
+// for ($i = 0; $i < $starRating; $i++) {
+//     $starRate1 .= '<i class="fa fa-star"></i>';
+// }
+// for ($i = 0; $i < $star - $starRating; $i++) {
+//     $starRate0 .= '<i class="fa fa-star-o"></i>';
+// }
+// echo $starRate = (string) $starRate1 . (string) $starRate0;
+
 if (isset($_GET['hotelID'])) {
     $hotelID = $_GET['hotelID'];
     // DATA HOTEL
@@ -81,21 +93,57 @@ if (isset($_GET['hotelID'])) {
             </div>
         ';
     }
-    // comment
+    // TOTAL RATING HOTEL 
+    $total = loadComments($hotel);
+    foreach ($total as $key => $value) {
+        # code...
+    }
+    // LOAD COMMENT
+    $loadComments = loadComments($hotelID);
+    $allComments = "";
+    if ($loadComments) {
+        foreach ($loadComments as $value) {
+            $starRate = $value['comment_rate'];
+            $rateCmt = ratingCmt($starRate);
+            $allComments .= '
+                <div class="media dashboard-message">
+                    <div class="pr-4">
+                        <img src="./assets/img/avatar/' . $value['user_image'] . '" alt="blog">
+                    </div>
+                    <div class="media-body dashboard-message-text">
+                        <h5> ' . $value['user_name'] . '
+                            <span class="pull-right new">Reply</span>
+                            <span style="color:#ffc107" class="ratings">
+                                ' . $rateCmt . '
+                            </span>  
+                            <span>( ' . $value['comment_date'] . ')</span>  
+                        </h5>
+                        <p> ' . $value['comment_content'] . '</p>
+                        <span class="reply-mail clearfix">Reply : 
+                            <a href="mailto:info@themevessel.com"> ' . $value['user_email'] . '</a>
+                        </span>
+                    </div>
+                </div>
+            ';
+        }
+    }
+    // INSERT COMMENT
     if (isset($_POST['submit'])) {
-        $userEmail = $_SESSION['user']['user_email'];
-        $userID = getID($userEmail);
         $rating = $_POST['rating'];
         $content = $_POST['content'];
         if (isset($_SESSION['user'])) {
+            $userEmail = $_SESSION["user"]['user_email'];
+            $userID = (int) getID($userEmail);
             comment($content, $hotelID, $userID, $rating);
-            echo "oce";
+            header('location: index.php?page=hotels-details&hotelID=' . $hotelID . '');
         } else {
             header('location: index.php?page=login');
         }
+    }
+    // LIMIT COMMENT
+    if (isset($comment)) {
 
     }
-
 }
 ?>
 <!-- Sub banner start -->
@@ -343,19 +391,7 @@ if (isset($_GET['hotelID'])) {
                     <h2 class="comments-title">Comments Section</h2>
                     <ul class="comments">
                         <li>
-                            <div class="media dashboard-message">
-                                <div class="pr-4">
-                                    <img src="assets/img/avatar/avatar.jpg" alt="blog">
-                                </div>
-                                <div class="media-body dashboard-message-text">
-                                    <h5>John Antony - <span>12 March 2022</span> <span
-                                            class="pull-right new">Reply</span></h5>
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                        Lorem Ipsum has been the industry's standard dummy text ever since</p>
-                                    <span class="reply-mail clearfix">Reply : <a
-                                            href="mailto:info@themevessel.com">info@themevessel.com</a></span>
-                                </div>
-                            </div>
+                            <?= $allComments ?>
                             <div class="media dashboard-message">
                                 <div class="pr-4">
                                     <img src="assets/img/avatar/avatar-2.jpg" alt="blog">
@@ -415,13 +451,14 @@ if (isset($_GET['hotelID'])) {
 
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <div class="form-group message">
-                                            <textarea class="form-control" name="content"
-                                                placeholder="Write message"></textarea>
+
+                                            <textarea class=" form-control" name="content" placeholder="Write message"
+                                                id="" cols=" 30" rows="10"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                                         <div class="send-btn mb-30">
-                                            <button type="submit" name="submit" value="submit"
+                                            <button type="submit" name="submit"
                                                 class="btn btn-color btn-md btn-message">Send
                                                 Message
                                                 <i class="fa fa-send"></i>
