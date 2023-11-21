@@ -78,19 +78,79 @@ const initState = [2, 0, 1];
 function reducer(state = initState, action) {
     switch (action.type) {
         case "ADDITION":
-
-
             state[action.index] += 1;
+            if (action.index != 2) {
+                state = countRoom(state);
+            }
+            searchGuestRules(state);
             return state;
         case "SUBTRACTION":
             state[action.index] -= 1;
+            searchGuestRules(state);
             return state; 
+        case "CLEAR":
+            return [2 , 0  , 1];
         default:
             return state;
     }
 }
 
 const store = createStore(reducer);
+
+function countRoom(state) {
+    state[2] = Math.ceil( ( (state[0]*2) + state[1] ) / 4); 
+    return state
+}
+
+function searchGuestRules(state) {
+    if (state[0] <= 1 || state[2] >= state[0]) {
+        if (searchGuestBtnSubtraction[0].classList.contains('active')) {
+            searchGuestBtnSubtraction[0].classList.remove('active');
+        }
+    }else {
+        if (!searchGuestBtnSubtraction[0].classList.contains('active')) {
+            searchGuestBtnSubtraction[0].classList.add('active');
+        }
+    }
+
+    if (state[1] <= 0) {
+        if (searchGuestBtnSubtraction[1].classList.contains('active')) {
+            searchGuestBtnSubtraction[1].classList.remove('active');
+        }
+    }else {
+        if (!searchGuestBtnSubtraction[1].classList.contains('active')) {
+            searchGuestBtnSubtraction[1].classList.add('active');
+        }
+    }
+    if (state[1] >= 8 ) {
+        if (searchGuestBtnAddition[1].classList.contains('active')) {
+            searchGuestBtnAddition[1].classList.remove('active');
+        }
+    }else {
+        if (!searchGuestBtnAddition[1].classList.contains('active')) {
+            searchGuestBtnAddition[1].classList.add('active');
+        }
+    }
+
+    if (state[2] <= 1) {
+        if (searchGuestBtnSubtraction[2].classList.contains('active')) {
+            searchGuestBtnSubtraction[2].classList.remove('active');
+        }
+    }else {
+        if (!searchGuestBtnSubtraction[2].classList.contains('active')) {
+            searchGuestBtnSubtraction[2].classList.add('active');
+        }
+    }
+    if (state[2] >= 8  || state[2] >= state[0]) {
+        if (searchGuestBtnAddition[2].classList.contains('active')) {
+            searchGuestBtnAddition[2].classList.remove('active');
+        }
+    }else {
+        if (!searchGuestBtnAddition[2].classList.contains('active')) {
+            searchGuestBtnAddition[2].classList.add('active');
+        }
+    }
+}
 
 function addition(index) {
     return {
@@ -120,6 +180,11 @@ searchGuestBtnSubtraction.forEach((btn , index) => {
     }
 });
 
+const searchGuestBtnClear = document.querySelector('form#form-search .form-guest-btn-clear');
+searchGuestBtnClear.onclick = () => {
+    store.dispatch({type : 'CLEAR' , index:0});
+}
+
 function render() {
     const output = document.querySelectorAll('form#form-search .form-content span');
     const output2 = document.querySelectorAll('form#form-search .form-guest-btn-quantity');
@@ -138,11 +203,9 @@ store.subscribe(() => {
 
 //Event onmusedown and onmouseup btn addition , subtraction
 
-const searchGuestBtnAdditionActive = document.querySelectorAll('form#form-search .form-guest-btn.btn-next.active'); 
-const searchGuestBtnSubtractionActive = document.querySelectorAll('form#form-search .form-guest-btn.btn-pver.active');
 
-if (searchGuestBtnAdditionActive) {
-    searchGuestBtnAdditionActive.forEach(btn => {
+if (searchGuestBtnAddition) {
+    searchGuestBtnAddition.forEach(btn => {
         btn.onmousedown = () => {
             btn.style.backgroundColor = '#ffffff';
             btn.style.opacity = '0.25';
@@ -155,8 +218,8 @@ if (searchGuestBtnAdditionActive) {
     })
 }
 
-if (searchGuestBtnSubtractionActive) {
-    searchGuestBtnSubtractionActive.forEach(btn => {
+if (searchGuestBtnSubtraction) {
+    searchGuestBtnSubtraction.forEach(btn => {
         btn.onmousedown = () => {
             btn.style.backgroundColor = '#ffffff';
             btn.style.opacity = '0.25';

@@ -107,9 +107,9 @@ if (isset($data)) {
                                 </div>
 
                                 <div class="form-guest-btns">
-                                    <div class="form-guest-btn btn-pver active">-</div>
+                                    <div class="form-guest-btn btn-pver active"><i class="fa fa-minus"></i></div>
                                     <div class="form-guest-btn-quantity">2</div>
-                                    <div class="form-guest-btn btn-next active">+</div>
+                                    <div class="form-guest-btn btn-next active"><i class="fa fa-plus"></i></div>
                                 </div>
                             </div>
 
@@ -120,9 +120,9 @@ if (isset($data)) {
                                 </div>
 
                                 <div class="form-guest-btns">
-                                    <div class="form-guest-btn btn-pver">-</div>
+                                    <div class="form-guest-btn btn-pver"><i class="fa fa-minus"></i></div>
                                     <div class="form-guest-btn-quantity">0</div>
-                                    <div class="form-guest-btn btn-next active">+</div>
+                                    <div class="form-guest-btn btn-next active"><i class="fa fa-plus"></i></div>
                                 </div>
                             </div>
 
@@ -133,9 +133,9 @@ if (isset($data)) {
                                 </div>
 
                                 <div class="form-guest-btns">
-                                    <div class="form-guest-btn btn-pver">-</div>
+                                    <div class="form-guest-btn btn-pver"><i class="fa fa-minus"></i></div>
                                     <div class="form-guest-btn-quantity">1</div>
-                                    <div class="form-guest-btn btn-next active">+</div>
+                                    <div class="form-guest-btn btn-next active"><i class="fa fa-plus"></i></div>
                                 </div>
                             </div>
 
