@@ -1,17 +1,6 @@
 <?php
-// $starRate0 = "";
-// $starRate1 = '';
-// $star = 5;
-// $starRating = 3;
-// for ($i = 0; $i < $starRating; $i++) {
-//     $starRate1 .= '<i class="fa fa-star"></i>';
-// }
-// for ($i = 0; $i < $star - $starRating; $i++) {
-//     $starRate0 .= '<i class="fa fa-star-o"></i>';
-// }
-// echo $starRate = (string) $starRate1 . (string) $starRate0;
-
 if (isset($_GET['hotelID'])) {
+ 
     $hotelID = $_GET['hotelID'];
     // DATA HOTEL
     $dataHotels = dataHotels($hotelID);
@@ -27,7 +16,7 @@ if (isset($_GET['hotelID'])) {
     }
     ;
     // ALL ROOM OF HOTEL
-    $sqlR = "SELECT * FROM rooms INNER JOIN hotels ON rooms.room_id = hotels.room_id";
+    $sqlR = "SELECT * FROM rooms INNER JOIN hotels ON rooms.hotel_id = hotels.hotel_id";
     $listRoom = pdo_query($sqlR);
     $dataRoom = "";
     $numberRoom = "";
@@ -94,7 +83,7 @@ if (isset($_GET['hotelID'])) {
         ';
     }
     // TOTAL RATING HOTEL 
-    $total = loadComments($hotel);
+    $total = loadComments($hotelID);
     foreach ($total as $key => $value) {
         # code...
     }
@@ -141,9 +130,6 @@ if (isset($_GET['hotelID'])) {
         }
     }
     // LIMIT COMMENT
-    if (isset($comment)) {
-
-    }
 }
 ?>
 <!-- Sub banner start -->

@@ -5,7 +5,6 @@ include './model/hotels.php';
 include './model/rooms.php';
 include './model/users.php';
 
-
-include './user/layout/header.php';
-include './user/layout/footer.php';
+include './admin/profile/layout/header.php';
+include './admin/profile/layout/footer.php';
 ?>
