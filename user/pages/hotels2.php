@@ -1,5 +1,10 @@
 <?php
-$allHotels = allHotels();
+$hotel_name =''; 
+if (isset($_POST['search']) && ($_POST['search'])) {
+    $hotel_name = $_POST['hotel_name'];
+}       
+
+$allHotels = allHotels($hotel_name);
 $dataHotels = "";
 if ($allHotels) {
     foreach ($allHotels as $value) {
@@ -106,7 +111,7 @@ if ($allHotels) {
                         <div class="pagination-box">
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination">
-                                    <li class="page-item"><a class="page-link" href="#"><span
+                                    <!-- <li class="page-item"><a class="page-link" href="#"><span
                                                 aria-hidden="true">«</span></a></li>
                                     <li class="page-item"><a class="page-link" href="tours-grid-rightside.html">1</a>
                                     </li>
@@ -115,7 +120,7 @@ if ($allHotels) {
                                     <li class="page-item"><a class="page-link" href="tours-grid-fullwidth.html">3</a>
                                     </li>
                                     <li class="page-item"><a class="page-link" href="#"><span
-                                                aria-hidden="true">»</span></a></li>
+                                                aria-hidden="true">»</span></a></li> -->
                                 </ul>
                             </nav>
                         </div>
@@ -127,9 +132,9 @@ if ($allHotels) {
                     <!-- Tour search start -->
                     <div class="widget search-box">
                         <h5 class="sidebar-title">Search Hotel</h5>
-                        <form class="form-search" method="GET">
-                            <input type="text" class="form-control" placeholder="Search">
-                            <button type="submit" class="btn"><i class="fa fa-search"></i></button>
+                        <form class="form-search" action="index.php?page=hotels2" method="post">
+                            <input type="text" name="hotel_name" class="form-control" placeholder="Search">
+                            <button type="submit" name="search" value="search" class="btn"><i class="fa fa-search"></i></button>
                         </form>
                     </div>
                     <!-- Recent posts start -->
@@ -257,3 +262,4 @@ if ($allHotels) {
     </div>
 </div>
 <!-- Hotels grid rightside end -->
+<script src="./assets/js/new-js/pagination2.js"></script>
