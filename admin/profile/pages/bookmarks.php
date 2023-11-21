@@ -4,29 +4,29 @@
                     <div class="dashboard-content">
                         <div class="dashboard-header clearfix">
                             <div class="row">
-                                <div class="col-sm-12 col-md-6"><h4>My Listings</h4></div>
+                                <div class="col-sm-12 col-md-6"><h4>Bookmarks</h4></div>
                                 <div class="col-sm-12 col-md-6">
                                     <div class="breadcrumb-nav">
                                         <ul>
                                             <li>
-                                                <a href="index.html">Index</a>
+                                                <a href="index.php">Index</a>
                                             </li>
                                             <li>
-                                                <a href="dashboard.html">Dashboard</a>
+                                                <a href="dashboard.php">Dashboard</a>
                                             </li>
-                                            <li class="active">My Listings</li>
+                                            <li class="active">Bookmarks</li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="dashboard-list">
-                            <h3>My Listings</h3>
+                            <h3>Bookmarks List</h3>
                             <table class="manage-table">
                                 <tbody>
                                 <tr class="responsive-table">
                                     <td class="listing-photoo">
-                                        <img src="assets/img/property-5.jpg" alt="listing-photo" class="img-fluid">
+                                        <img src="assets/img/property-4.jpg" alt="listing-photo" class="img-fluid">
                                     </td>
                                     <td class="title-container">
                                         <h2><a href="#">Travel To England</a></h2>
@@ -98,3 +98,4 @@
         </div>
     </div>
 </div>
+<!-- Dashboard end -->
