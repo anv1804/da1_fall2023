@@ -94,7 +94,7 @@ if (isset($_GET['hotelID'])) {
         ';
     }
     // TOTAL RATING HOTEL 
-    $total = loadComments($hotel);
+    $total = loadComments($hotelID);
     foreach ($total as $key => $value) {
         # code...
     }
