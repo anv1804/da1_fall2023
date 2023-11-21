@@ -182,12 +182,15 @@ searchGuestBtnSubtraction.forEach((btn , index) => {
 
 const searchGuestBtnClear = document.querySelector('form#form-search .form-guest-btn-clear');
 searchGuestBtnClear.onclick = () => {
-    store.dispatch({type : 'CLEAR' , index:0});
+    store.dispatch({type : 'CLEAR'});
 }
 
 function render() {
     const output = document.querySelectorAll('form#form-search .form-content span');
     const output2 = document.querySelectorAll('form#form-search .form-guest-btn-quantity');
+    const input = document.querySelector('form#form-search input[name="guest"]');
+
+    input.value = store.getState();
     output.forEach((element , index) => {
         let count = store.getState()[index];
         element.innerText = count;

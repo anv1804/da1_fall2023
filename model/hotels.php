@@ -1,7 +1,10 @@
 <?php
-function allHotels()
+function allHotels($hotel_name = '')
 {
     $sql = "SELECT * FROM hotels WHERE 1";
+    if ($hotel_name != '') {
+        $sql .= " and hotel_name like '%" . $hotel_name . "%'";
+    }
     $result = pdo_query($sql);
     return $result;
 }

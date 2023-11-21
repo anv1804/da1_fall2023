@@ -53,9 +53,11 @@ if (isset($data)) {
 
 <!-- Form search -->
 <?php 
-    // if (isset($_GET['submit']) && ($_GET['submit'])) {
-    //     var_dump($_GET['dates']);
-    // }
+    if (isset($_POST['submit']) && ($_POST['submit'])) {
+        $hotel = $_POST['hotel'];
+        $dates = $_POST['dates'];
+        $guest = $_POST['guest'];
+    }
 ?>
 
 
@@ -80,7 +82,7 @@ if (isset($data)) {
                     </p>
                 </div>
             </div>
-            <form class="row inline-search-area search-area" method="GET" id="form-search">
+            <form class="row inline-search-area search-area" action="index.php?page=home" method="post" id="form-search">
                 <div class="col-lg-3 search-col">
                     <input type="text" name="hotel" class="form-control first-input" placeholder="Hotel, City.....">
                     <i class="flaticon-localization icon-append"></i>
