@@ -15,4 +15,14 @@ function countRooms()
     $count_category_id = pdo_query($sql);
     return $count_category_id;
 }
+
+function loadAllDate($room_id = 0) {
+    $sql = "SELECT * FROM completed WHERE 1";
+    if ($room_id != 0) {
+        $sql .= " and room_id = '" . $room_id ."'";
+    }
+
+    return pdo_query($sql);
+}
+
 ?>
