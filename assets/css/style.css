@@ -5559,7 +5559,7 @@ button:focus {
 }
 
 .search-area2 .inline-search-area .icon-append {
-    right: 15px;
+    /* right: 15px; */
     top: 13px;
 }
 
@@ -5678,6 +5678,17 @@ button:focus {
 
 @media (max-width: 992px) {
 
+    .inline-search-area .icon-append.icon-search3 {
+        right: 24px;
+    }
+
+    form#form-search .form-guest-body {
+        width: calc(100% - 30px);
+        margin: 0 auto;
+    }
+
+    
+
 
     .open-offcanvas {
         padding: 18px 15px 15px;
@@ -5688,6 +5699,7 @@ button:focus {
     }
 
     .inline-search-area .search-col {
+        margin-top: 8px;
         padding-right: 15px;
         padding-left: 15px;
     }
@@ -5698,7 +5710,8 @@ button:focus {
 
     .inline-search-area .icon-append {
         font-size: 13px;
-        right: 25px;
+        /* right: 25px; */
+        margin-left: 8px;
     }
 
     .banner .carousel-item .w-100 {
@@ -5759,7 +5772,11 @@ button:focus {
     }
 
     .banner-inner-2 .inline-search-area .icon-append {
-        top: 11px;
+        top: 10px;
+    }
+
+    .banner-inner-2 .inline-search-area .icon-append.icon-search3 {
+        top: 14px;
     }
 
     .banner-inner-2 .search-area .selectBox-dropdown .selectBox-label {
@@ -6250,6 +6267,10 @@ button:focus {
 
 @media (max-width: 768px) {
 
+    form#form-search .form-guest-body {
+        width: calc(100% - 30px);
+        margin: 0 auto;
+    }
 
     .content-area {
         padding-bottom: 30px;
