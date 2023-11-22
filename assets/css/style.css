@@ -5559,7 +5559,7 @@ button:focus {
 }
 
 .search-area2 .inline-search-area .icon-append {
-    right: 15px;
+    /* right: 15px; */
     top: 13px;
 }
 
@@ -5686,6 +5686,8 @@ button:focus {
         width: calc(100% - 30px);
         margin: 0 auto;
     }
+
+    
 
 
     .open-offcanvas {

@@ -342,7 +342,7 @@ if (isset($_GET['roomID'])) {
                         <h5 class="sidebar-title">Book This Room</h5>
                         <form class="inline-search-area" method="post">
                             <div class="form-group search-col">
-                                <input type="text" name="dates" placeholder="When..."
+                                <input type="text"  style="margin-bottom: 8px;" name="dates" placeholder="When..."
                                     class="datetimes-left form-control" />
                                 <i class="flaticon-timetable icon-append"></i>
                             </div>
@@ -350,7 +350,7 @@ if (isset($_GET['roomID'])) {
                                 <select class="selectpicker search-fields btn-block form-control bdr" name="guest">
                                     <option> Room for <?= $guestRoom ?> Persons</option>
                                 </select>
-                                <i class="fa fa-users"></i>
+                                <i class="fa fa-users icon-append"></i>
                             </div>
                             <div class="form-group">
                                 <p>Radius around selected destination</p>
@@ -362,7 +362,7 @@ if (isset($_GET['roomID'])) {
                                 </div>
                             </div>
                             <div class="form-group search-col">
-                                <a href="cart-1.html" class="btn-theme btn-md btn-block">Purchase</a>
+                                <a href="cart-1.html" style="margin-bottom: 8px;" class="btn-theme btn-md btn-block">Purchase</a>
                             </div>
                             <div class="form-group search-col mb-0">
                                 <a href="wishlist.html" class="btn btn-md-outline btn-block">Add to wishlist</a>
