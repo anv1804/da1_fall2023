@@ -7,12 +7,13 @@ if (isset($_GET['hotelID'])) {
     $nameHotel = "";
     $locationHotel = "";
     $descHotel = "";
-    $imageHotel = "";
+    $imageHotels = "";
     if ($dataHotels) {
         $nameHotel = $dataHotels[0]['hotel_name'];
         $locationHotel = $dataHotels[0]['hotel_location'];
         $descHotel = $dataHotels[0]['hotel_desc'];
-        $imageHotel = $dataHotels[0]['hotel_image'];
+        $imageHotels = explode(',',$dataHotels[0]['hotel_image']);
+        print_r($imageHotels);
     }
     ;
     // ALL ROOM OF HOTEL
@@ -181,19 +182,19 @@ if (isset($_GET['hotelID'])) {
                     <!-- main slider carousel items -->
                     <div class="carousel-inner">
                         <div class="active item carousel-item" data-slide-number="0">
-                            <img src="assets/img/property-11.jpg" class="img-fluid" alt="photo-4">
+                            <img src="assets/img/<?= $imageHotels[0] ?>" class="img-fluid" alt="photo-4">
                         </div>
                         <div class="item carousel-item" data-slide-number="1">
-                            <img src="assets/img/property-9.jpg" class="img-fluid" alt="photo-4">
+                            <img src="assets/img/<?= $imageHotels[1] ?>" class="img-fluid" alt="photo-4">
                         </div>
                         <div class="item carousel-item" data-slide-number="2">
-                            <img src="assets/img/property-10.jpg" class="img-fluid" alt="photo-4">
+                            <img src="assets/img/<?= $imageHotels[2] ?>" class="img-fluid" alt="photo-4">
                         </div>
                         <div class="item carousel-item" data-slide-number="4">
-                            <img src="assets/img/property-8.jpg" class="img-fluid" alt="photo-4">
+                            <img src="assets/img/<?= $imageHotels[3] ?>" class="img-fluid" alt="photo-4">
                         </div>
                         <div class="item carousel-item" data-slide-number="5">
-                            <img src="assets/img/property-12.jpg" class="img-fluid" alt="photo-4">
+                            <img src="assets/img/<?= $imageHotels[4] ?>" class="img-fluid" alt="photo-4">
                         </div>
                     </div>
                     <!-- main slider carousel nav controls -->
@@ -201,70 +202,30 @@ if (isset($_GET['hotelID'])) {
                         <li class="list-inline-item active">
                             <a id="carousel-selector-0" class="selected" data-slide-to="0"
                                 data-target="#itemDetailsSlider">
-                                <img src="assets/img/property-11.jpg" class="img-fluid" alt="photo-5">
+                                <img src="assets/img/<?= $imageHotels[0] ?>" class="img-fluid" alt="photo-5">
                             </a>
                         </li>
                         <li class="list-inline-item">
                             <a id="carousel-selector-1" data-slide-to="1" data-target="#itemDetailsSlider">
-                                <img src="assets/img/property-9.jpg" class="img-fluid" alt="photo-5">
+                                <img src="assets/img/<?= $imageHotels[1] ?>" class="img-fluid" alt="photo-5">
                             </a>
                         </li>
                         <li class="list-inline-item">
                             <a id="carousel-selector-2" data-slide-to="2" data-target="#itemDetailsSlider">
-                                <img src="assets/img/property-10.jpg" class="img-fluid" alt="photo-5">
+                                <img src="assets/img/<?= $imageHotels[2] ?>" class="img-fluid" alt="photo-5">
                             </a>
                         </li>
                         <li class="list-inline-item">
                             <a id="carousel-selector-3" data-slide-to="3" data-target="#itemDetailsSlider">
-                                <img src="assets/img/property-8.jpg" class="img-fluid" alt="photo-5">
+                                <img src="assets/img/<?= $imageHotels[3] ?>" class="img-fluid" alt="photo-5">
                             </a>
                         </li>
                         <li class="list-inline-item">
                             <a id="carousel-selector-4" data-slide-to="4" data-target="#itemDetailsSlider">
-                                <img src="assets/img/property-12.jpg" class="img-fluid" alt="photo-5">
+                                <img src="assets/img/<?= $imageHotels[4] ?>" class="img-fluid" alt="photo-5">
                             </a>
                         </li>
                     </ul>
-                </div>
-                <!-- Search area2 start -->
-                <div class="widget-2 search-area2 d-lg-none d-xl-none">
-                    <h5 class="sidebar-title">Book the tour</h5>
-                    <form class="inline-search-area" method="GET">
-                        <div class="form-group search-col">
-                            <input type="text" class="form-control" placeholder="Hotel, City.....">
-                            <i class="flaticon-localization icon-append"></i>
-                        </div>
-                        <div class="form-group search-col">
-                            <input type="text" name="dates" placeholder="When..." class="datetimes form-control" />
-                            <i class="flaticon-timetable icon-append"></i>
-                        </div>
-                        <div class="form-group search-col">
-                            <select class="selectpicker search-fields btn-block form-control bdr" name="guest">
-                                <option>Guests</option>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>
-                            <i class="flaticon-down icon-append"></i>
-                        </div>
-                        <div class="form-group">
-                            <p>Radius around selected destination</p>
-                            <div class="range-slider">
-                                <div data-min="0" data-max="100" data-unit="Km" data-min-name="min_price"
-                                    data-max-name="max_price" class="range-slider-ui ui-slider" aria-disabled="false">
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                        </div>
-                        <div class="form-group search-col">
-                            <a href="cart-1.html" class="btn-theme btn-md btn-block">Purchase</a>
-                        </div>
-                        <div class="form-group search-col mb-0">
-                            <a href="wishlist.html" class="btn btn-md-outline btn-block">Add to wishlist</a>
-                        </div>
-                    </form>
                 </div>
                 <!-- description start -->
                 <div class="description mb-40">
