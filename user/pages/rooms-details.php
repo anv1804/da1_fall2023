@@ -111,46 +111,6 @@ if (isset($_GET['roomID'])) {
                         </li>
                     </ul>
                 </div>
-                <!-- Search area2 start -->
-                <div class="widget-2 search-area2 d-lg-none d-xl-none">
-                    <h5 class="sidebar-title">Book the tour</h5>
-                    <form class="inline-search-area" method="GET">
-                        <div class="form-group search-col">
-                            <input type="text" class="form-control" placeholder="Hotel, City.....">
-                            <i class="flaticon-localization icon-append"></i>
-                        </div>
-                        <div class="form-group search-col">
-                            <input type="text" name="dates" placeholder="When..." class="datetimes form-control" />
-                            <i class="flaticon-timetable icon-append"></i>
-                        </div>
-                        <div class="form-group search-col">
-                            <select class="selectpicker search-fields btn-block form-control bdr" name="guest">
-                                <option>Guests</option>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>
-                            <i class="flaticon-down icon-append"></i>
-                        </div>
-                        <div class="form-group">
-                            <p>Radius around selected destination</p>
-                            <div class="range-slider">
-                                <div data-min="0" data-max="100" data-unit="Km" data-min-name="min_price"
-                                    data-max-name="max_price" class="range-slider-ui ui-slider" aria-disabled="false">
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                        </div>
-                        <div class="form-group search-col">
-                            <a href="cart-1.html" class="btn-theme btn-md btn-block">Purchase</a>
-                        </div>
-                        <div class="form-group search-col mb-0">
-                            <a href="wishlist.html" class="btn btn-md-outline btn-block">Add to wishlist</a>
-                        </div>
-                    </form>
-                </div>
                 <!-- description start -->
                 <div class="description mb-40">
                     <h3 class="heading">Description</h3>
@@ -237,102 +197,13 @@ if (isset($_GET['roomID'])) {
                     </div>
                 </div>
                 <!-- vedio start -->
-                <div class="video mb-40">
+                <div class="video mb-40" style="position: relative;">
                     <h3 class="heading">Vedio</h3>
-                    <iframe src="https://www.youtube.com/embed/m5_AKjDdqaU"></iframe>
-                </div>
-
-                <!-- Comments section start -->
-                <div class="comments-section-2 clearfix mb-40">
-                    <h2 class="comments-title">Comments Section</h2>
-                    <ul class="comments">
-                        <li>
-                            <div class="media dashboard-message">
-                                <div class="pr-4">
-                                    <img src="assets/img/avatar/avatar.jpg" alt="blog">
-                                </div>
-                                <div class="media-body dashboard-message-text">
-                                    <h5>John Antony - <span>12 March 2022</span> <span
-                                            class="pull-right new">Reply</span></h5>
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                        Lorem Ipsum has been the industry's standard dummy text ever since</p>
-                                    <span class="reply-mail clearfix">Reply : <a
-                                            href="mailto:info@themevessel.com">info@themevessel.com</a></span>
-                                </div>
-                            </div>
-                            <div class="media dashboard-message">
-                                <div class="pr-4">
-                                    <img src="assets/img/avatar/avatar-2.jpg" alt="blog">
-                                </div>
-                                <div class="media-body dashboard-message-text">
-                                    <h5>Karen Paran - <span>12 March 2022</span> <span
-                                            class="pull-right new">Reply</span></h5>
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                        Lorem Ipsum has been the industry's standard dummy text ever since</p>
-                                    <span class="reply-mail clearfix">Reply : <a
-                                            href="mailto:info@themevessel.com">info@themevessel.com</a></span>
-                                </div>
-                            </div>
-                            <ul>
-                                <li>
-                                    <div class="media dashboard-message">
-                                        <div class="pr-4">
-                                            <img src="assets/img/avatar/avatar-3.jpg" alt="blog">
-                                        </div>
-                                        <div class="media-body dashboard-message-text">
-                                            <h5>Daniel Deve - <span>12 March 2022</span> <span
-                                                    class="pull-right new">Reply</span></h5>
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting
-                                                industry. Lorem Ipsum has been the industry's standard dummy text
-                                                ever</p>
-                                            <span class="reply-mail clearfix">Reply : <a
-                                                    href="mailto:info@themevessel.com">info@themevessel.com</a></span>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-                <!-- Contact-1 start -->
-                <div class="contact-1 hedin-mb-20">
-                    <h2>Leave a Comment</h2>
-                    <div class="container">
-                        <div class="row">
-                            <form action="#" method="GET" enctype="multipart/form-data">
-                                <div class="row">
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                        <div class="rating">
-                                            <input type="radio" id="star5" name="rating" value="5">
-                                            <label for="star5"></label>
-                                            <input type="radio" id="star4" name="rating" value="4">
-                                            <label for="star4"></label>
-                                            <input type="radio" id="star3" name="rating" value="3">
-                                            <label for="star3"></label>
-                                            <input type="radio" id="star2" name="rating" value="2">
-                                            <label for="star2"></label>
-                                            <input type="radio" id="star1" name="rating" value="1">
-                                            <label for="star1"></label>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                        <div class="form-group message">
-                                            <textarea class="form-control" name="message"
-                                                placeholder="Write message"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                                        <div class="send-btn mb-30">
-                                            <button type="submit" name="submit"
-                                                class="btn btn-color btn-md btn-message">Send
-                                                Message</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
+                    <form class="inline-search-area" method="post">
+                        <div class="form-group search-col">
+                            <input type="text" name="dates" placeholder="When..." class="datetimes-left form-control" />
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
             <div class="col-lg-4 col-md-12">
@@ -348,7 +219,9 @@ if (isset($_GET['roomID'])) {
                             </div>
                             <div class="form-group search-col">
                                 <select class="selectpicker search-fields btn-block form-control bdr" name="guest">
-                                    <option> Room for <?= $guestRoom ?> Persons</option>
+                                    <option> Room for
+                                        <?= $guestRoom ?> Persons
+                                    </option>
                                 </select>
                                 <i class="fa fa-users"></i>
                             </div>

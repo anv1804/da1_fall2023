@@ -202,6 +202,7 @@
 <!-- Custom JS Script -->
 <script src="assets/js/app.js"></script>
 <script src="./assets/js/validate-js/validator2_0.js"></script>
+<script src="./assets/js/new-js/calendar.js"></script>
 
 </body>
 
