@@ -11,6 +11,12 @@ if (isset($_GET['page'])) {
         case 'rooms':
             include('./admin/profile/pages/rooms.php');
             break;
+        case 'comments':
+            include('./admin/profile/pages/comments.php');
+            break;
+        case 'add':
+            include('./admin/profile/pages/add.php');
+            break;
         default:
             include('./admin/profile/pages/dashboard.php');
             break;
