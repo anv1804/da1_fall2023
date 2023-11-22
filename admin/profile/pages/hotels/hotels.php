@@ -17,7 +17,7 @@ if ($loadHotels) {
                     </h5>
                     <h6 class="table-property-price">' . $value['hotel_desc'] . '</h6>
                 </td>
-                <td class="expire-date"><span style="color: red;font-size:">' . $countRooms[$key][1] . '</span>ROOMS</td>
+                <td class="expire-date"><span style="color: red;font-size:18px;font-weight:550"> ' . $countRooms[$key][1] . '</span> ROOMS</td>
                 <td class="action">
                     <a href="#"><i class="fa fa-pencil"></i> Edit</a>
                     <a href="#"><i class="fa  fa-eye-slash"></i> Hide</a>

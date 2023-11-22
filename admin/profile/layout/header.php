@@ -131,8 +131,9 @@
                             <ul>
                                 <li><a href="admin.php?page=hotels"><i class="lnr lnr-apartment"></i>Hotels</a></li>
                                 <li><a href="admin.php?page=rooms"><i class="lnr lnr-home"></i>Rooms</a></li>
-                                <li><a href="admin.php?page=reviews"><i class="flaticon-star"></i>Reviews</a></li>
-                                <li><a href="admin.php?page=add-listing"><i class="flaticon-plus"></i>Add Listing</a>
+                                <li><a href="admin.php?page=comments"><i class="fa fa-commenting-o"></i>Comments</a></li>
+                                <li><a href="admin.php?page=users"><i class="lnr lnr-user"></i>Users</a>
+                                <li><a href="admin.php?page=add"><i class="lnr lnr-user"></i>ADD</a>
                                 </li>
                             </ul>
                             <h4>Account</h4>
@@ -145,5 +146,4 @@
                 </div>
                 <?php
                 include 'control/control-admin.php';
-
                 ?>

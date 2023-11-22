@@ -348,14 +348,9 @@ if (isset($_GET['roomID'])) {
                             </div>
                             <div class="form-group search-col">
                                 <select class="selectpicker search-fields btn-block form-control bdr" name="guest">
-                                    <option>Type</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
+                                    <option> Room for <?= $guestRoom ?> Persons</option>
                                 </select>
-                                <i class="flaticon-down icon-append"></i>
+                                <i class="fa fa-users"></i>
                             </div>
                             <div class="form-group">
                                 <p>Radius around selected destination</p>
