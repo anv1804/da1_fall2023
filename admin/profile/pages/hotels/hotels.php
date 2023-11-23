@@ -47,7 +47,7 @@ if ($loadHotels) {
                                 </li>
                                 <li class="active">Hotels</li>
                                 <li>
-                                    <a class="btn btn-md bomd btn-round" href="add-listing.php">Add New Hotel</a>
+                                    <a class="btn btn-md bomd btn-round" href="admin.php?page=add-hotels">Add New Hotel</a>
                                 </li>
                             </ul>
                         </div>
