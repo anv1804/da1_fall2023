@@ -1,25 +1,25 @@
 <?php
-$loadHotels = allHotels();
-$dataHotels = "";
-$hotelID = 1;
+$loadHotels = fullHotels();
 $countRooms = countRooms();
+$dataHotels = "";
 if ($loadHotels) {
     foreach ($loadHotels as $key => $value) {
+        $hotelImages = explode(',',$value['hotel_image']);
         $dataHotels .= '
             <tr class="responsive-table">
                 <td class="listing-photoo">
-                    <img src="assets/img/' . $value['hotel_image'] . '" alt="listing-photo" class="img-fluid">
+                    <img src="./uploads/hotels/' . $hotelImages[0] . '" alt="listing-photo" class="img-fluid">
                 </td>
                 <td class="title-container">
                     <h2><a href="#">' . $value['hotel_name'] . '</a></h2>
                     <h5 class="d-none d-xl-block d-lg-block d-md-block"><i class="fa fa-map-marker"></i>
-                    ' . $value['hotel_location'] . '
+                    ' . $value['city_name'] . ' / ' . $value['hotel_location'] . '
                     </h5>
                     <h6 class="table-property-price">' . $value['hotel_desc'] . '</h6>
                 </td>
                 <td class="expire-date"><span style="color: red;font-size:18px;font-weight:550"> ' . $countRooms[$key][1] . '</span> ROOMS</td>
                 <td class="action">
-                    <a href="#"><i class="fa fa-pencil"></i> Edit</a>
+                    <a href="admin.php?page=edit-hotels"><i class="fa fa-pencil"></i> Edit</a>
                     <a href="#"><i class="fa  fa-eye-slash"></i> Hide</a>
                     <a href="#" class="delete"><i class="fa fa-remove"></i> Delete</a>
                 </td>

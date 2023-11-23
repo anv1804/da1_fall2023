@@ -30,7 +30,7 @@ if (isset($_GET['hotelID'])) {
                     <div class="agent-2" style="border-radius:10px">
                         <div class="agent-photo">
                             <a href="index.php?page=rooms-details&roomID=' . $value["room_id"] . '">
-                                <img style="border-radius:10px 10px 0 0" src="assets/images/rooms/' . $value['room_image'] . '" alt="room"
+                                <img style="border-radius:10px 10px 0 0" src="uploads/rooms/' . $value['room_image'] . '" alt="room"
                                     class="img-fluid">
                             </a>
                         </div>
@@ -104,9 +104,10 @@ if (isset($_GET['hotelID'])) {
                         <h5> ' . $value['user_name'] . '
                             <span class="pull-right new">Reply</span>
                             <span style="color:#ffc107" class="ratings">
-                                ' . $rateCmt . '
+                                
                             </span>  
                             <span>( ' . $value['comment_date'] . ')</span>  
+                            <p style="color:#ffc107">' . $rateCmt . '</p>
                         </h5>
                         <p> ' . $value['comment_content'] . '</p>
                         <span class="reply-mail clearfix">Reply : 
@@ -182,19 +183,19 @@ if (isset($_GET['hotelID'])) {
                     <!-- main slider carousel items -->
                     <div class="carousel-inner">
                         <div class="active item carousel-item" data-slide-number="0">
-                            <img src="assets/img/<?= $imageHotels[0] ?>" class="img-fluid" alt="photo-4">
+                            <img src="./uploads/hotels/<?= $imageHotels[0] ?>" class="img-fluid" alt="photo-4">
                         </div>
                         <div class="item carousel-item" data-slide-number="1">
-                            <img src="assets/img/<?= $imageHotels[1] ?>" class="img-fluid" alt="photo-4">
+                            <img src="./uploads/hotels/<?= $imageHotels[1] ?>" class="img-fluid" alt="photo-4">
                         </div>
                         <div class="item carousel-item" data-slide-number="2">
-                            <img src="assets/img/<?= $imageHotels[2] ?>" class="img-fluid" alt="photo-4">
+                            <img src="./uploads/hotels/<?= $imageHotels[2] ?>" class="img-fluid" alt="photo-4">
                         </div>
                         <div class="item carousel-item" data-slide-number="4">
-                            <img src="assets/img/<?= $imageHotels[3] ?>" class="img-fluid" alt="photo-4">
+                            <img src="./uploads/hotels/<?= $imageHotels[3] ?>" class="img-fluid" alt="photo-4">
                         </div>
                         <div class="item carousel-item" data-slide-number="5">
-                            <img src="assets/img/<?= $imageHotels[4] ?>" class="img-fluid" alt="photo-4">
+                            <img src="./uploads/hotels/<?= $imageHotels[4] ?>" class="img-fluid" alt="photo-4">
                         </div>
                     </div>
                     <!-- main slider carousel nav controls -->
@@ -202,27 +203,27 @@ if (isset($_GET['hotelID'])) {
                         <li class="list-inline-item active">
                             <a id="carousel-selector-0" class="selected" data-slide-to="0"
                                 data-target="#itemDetailsSlider">
-                                <img src="assets/img/<?= $imageHotels[0] ?>" class="img-fluid" alt="photo-5">
+                                <img src="./uploads/hotels/<?= $imageHotels[0] ?>" class="img-fluid" alt="photo-5">
                             </a>
                         </li>
                         <li class="list-inline-item">
                             <a id="carousel-selector-1" data-slide-to="1" data-target="#itemDetailsSlider">
-                                <img src="assets/img/<?= $imageHotels[1] ?>" class="img-fluid" alt="photo-5">
+                                <img src="./uploads/hotels/<?= $imageHotels[1] ?>" class="img-fluid" alt="photo-5">
                             </a>
                         </li>
                         <li class="list-inline-item">
                             <a id="carousel-selector-2" data-slide-to="2" data-target="#itemDetailsSlider">
-                                <img src="assets/img/<?= $imageHotels[2] ?>" class="img-fluid" alt="photo-5">
+                                <img src="./uploads/hotels/<?= $imageHotels[2] ?>" class="img-fluid" alt="photo-5">
                             </a>
                         </li>
                         <li class="list-inline-item">
                             <a id="carousel-selector-3" data-slide-to="3" data-target="#itemDetailsSlider">
-                                <img src="assets/img/<?= $imageHotels[3] ?>" class="img-fluid" alt="photo-5">
+                                <img src="./uploads/hotels/<?= $imageHotels[3] ?>" class="img-fluid" alt="photo-5">
                             </a>
                         </li>
                         <li class="list-inline-item">
                             <a id="carousel-selector-4" data-slide-to="4" data-target="#itemDetailsSlider">
-                                <img src="assets/img/<?= $imageHotels[4] ?>" class="img-fluid" alt="photo-5">
+                                <img src="./uploads/hotels/<?= $imageHotels[4] ?>" class="img-fluid" alt="photo-5">
                             </a>
                         </li>
                     </ul>
@@ -339,37 +340,6 @@ if (isset($_GET['hotelID'])) {
                     <ul class="comments">
                         <li>
                             <?= $allComments ?>
-                            <div class="media dashboard-message">
-                                <div class="pr-4">
-                                    <img src="assets/img/avatar/avatar-2.jpg" alt="blog">
-                                </div>
-                                <div class="media-body dashboard-message-text">
-                                    <h5>Karen Paran - <span>12 March 2022</span> <span
-                                            class="pull-right new">Reply</span></h5>
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                        Lorem Ipsum has been the industry's standard dummy text ever since</p>
-                                    <span class="reply-mail clearfix">Reply : <a
-                                            href="mailto:info@themevessel.com">info@themevessel.com</a></span>
-                                </div>
-                            </div>
-                            <ul>
-                                <li>
-                                    <div class="media dashboard-message">
-                                        <div class="pr-4">
-                                            <img src="assets/img/avatar/avatar-3.jpg" alt="blog">
-                                        </div>
-                                        <div class="media-body dashboard-message-text">
-                                            <h5>Daniel Deve - <span>12 March 2022</span> <span
-                                                    class="pull-right new">Reply</span></h5>
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting
-                                                industry. Lorem Ipsum has been the industry's standard dummy text
-                                                ever</p>
-                                            <span class="reply-mail clearfix">Reply : <a
-                                                    href="mailto:info@themevessel.com">info@themevessel.com</a></span>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
                         </li>
                     </ul>
                 </div>

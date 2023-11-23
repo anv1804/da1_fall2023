@@ -20,4 +20,24 @@ function dataHotels($hotelID)
     $result = pdo_query($sql);
     return $result;
 }
+function loadCity()
+{
+    $sql = "SELECT * FROM city";
+    $result = pdo_query($sql);
+    return $result;
+}
+function loadServices()
+{
+    $sql = "SELECT * FROM services";
+    $result = pdo_query($sql);
+    return $result;
+}
+function fullHotels()
+{
+    $sql = "SELECT * FROM hotels 
+    INNER JOIN city ON hotels.city_id = city.city_id ";
+    $result = pdo_query($sql);
+    return $result;
+}
+
 ?>

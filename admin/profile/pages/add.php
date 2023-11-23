@@ -1,6 +1,4 @@
-<?php 
-    echo round( 1.44, 1, PHP_ROUND_HALF_UP);
-?>
+
             <div class="col-lg-9 offset-lg-3 col-md-12 col-sm-12 col-pad">
                 <div class="content-area5">
                     <div class="dashboard-content">
