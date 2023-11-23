@@ -12,7 +12,7 @@ currMonth = date.getMonth();
 const months = ["January", "February", "March", "April", "May", "June", "July",
               "August", "September", "October", "November", "December"];
 
-const calendar = () => {
+const calendar = (currMonth , currYear , currDay = 0 , checkDay = false) => {
     let firstDayofMonth = new Date(currYear, currMonth, 1).getDay(), // getting first day of month
     lastDateofMonth = new Date(currYear, currMonth + 1, 0).getDate(), // getting last date of month
     lastDayofMonth = new Date(currYear, currMonth, lastDateofMonth).getDay(), // getting last day of month
@@ -26,6 +26,29 @@ const calendar = () => {
         index++;
     }
 
+
+    let dateAc = validateDay(lastDateofLastMonth);
+
+
+    for (let i = 1; i <= lastDateofMonth; i++) { // creating li of all days of current month
+        // adding active class to li if the current day, month, and year matched
+        let dateStartAc = dateAc[0].includes(i) ? "active" : "";
+        let dateEndAc = dateAc[2].includes(i) ? "active" : "";
+        let dateMiddleAc = dateAc[1].includes(i) ? 'enable' : '';
+        
+        liTag += `<li class="${dateStartAc} ${dateEndAc} ${dateMiddleAc}">${i}</li>`;
+        index++;
+    }
+
+    index = index + (6-lastDayofMonth) <= 35 ? 13 : 6;
+    for (let i = lastDayofMonth; i < index; i++) { // creating li of next month first days
+        liTag += `<li class="inactive">${i - lastDayofMonth + 1}</li>`
+    }
+
+    return liTag;
+}
+
+const validateDay = (lastDateofMonth) => {
     let dateStarts = [];
     let dateEnds = [];
     let dateMiddles = [];
@@ -37,7 +60,7 @@ const calendar = () => {
             //date Start
             for (let i = 1; i <= lastDateofMonth; i++) { 
                 if (i == dateStart[0] && currMonth === (dateStart[1]-1) && currYear == dateStart[2]) {
-                    dateStarts.push(i);    
+                    dateStarts.push(i);
                 }
             }
     
@@ -49,16 +72,14 @@ const calendar = () => {
             }
     
             //date Middle
-            if ((dateStart[1]-1) == currMonth && dateStart[2] == currYear) {
+            if ((dateStart[1]-1) == currMonth && dateStart[2] == currYear && (dateEnd[1]-1) == currMonth) {
                 for (let i = 1; i <= lastDateofMonth; i++) { 
-                    if (dateStart[0] - i < 0) {
+                    if (dateStart[0] - i < 0 && i < dateEnd[0]) {
                         dateMiddles.push(i);
                     }
                 }
-            }
-            if ((dateEnd[1]-1) == currMonth && dateEnd[2] == currYear) {
                 for (let i = 1; i <= lastDateofMonth; i++) { 
-                    if (dateEnd[0] - i > 0) {
+                    if (dateEnd[0] - i > 0 && i > dateStart[0]) {
                         dateMiddles.push(i);
                     }
                 }
@@ -85,22 +106,7 @@ const calendar = () => {
         
         })
     }
-
-    for (let i = 1; i <= lastDateofMonth; i++) { // creating li of all days of current month
-        // adding active class to li if the current day, month, and year matched
-        let dateStartAc = dateStarts.includes(i) ? "active" : "";
-        let dateEndAc = dateEnds.includes(i) ? "active" : "";
-        let dateMiddleAc = dateMiddles.includes(i) ? 'enable' : '';
-        
-        liTag += `<li class="${dateStartAc} ${dateEndAc} ${dateMiddleAc}">${i}</li>`;
-        index++;
-    }
-
-    index = index + (6-lastDayofMonth) <= 35 ? 13 : 6;
-    for (let i = lastDayofMonth; i < index; i++) { // creating li of next month first days
-        liTag += `<li class="inactive">${i - lastDayofMonth + 1}</li>`
-    }
-    return liTag;
+    return [dateStarts , dateMiddles , dateEnds];
 }
 
 const renderCalendar = (initRender) => {
@@ -116,7 +122,7 @@ const renderCalendar = (initRender) => {
         }
 
         item.innerText = `${months[currMonth]} ${currYear}`; // passing current mon and yr as currentDate text
-        let liTag = calendar();
+        let liTag = calendar(currMonth , currYear);
         daysTag[index].innerHTML = liTag;
     })
 }
@@ -153,4 +159,34 @@ if (listBtnDate) {
             renderCalendar();
         }
     })
+}
+
+//check day form purchase
+const formPurchase = document.querySelector('#form-purchase'),
+inputDates = formPurchase.querySelector('input[name="dates"]');
+
+formPurchase.onsubmit = function() {
+    let invalid = false;
+    let dates = inputDates.value.split(' - ');
+    dates.forEach(date => {
+
+        date = date.split('/').map(Number);
+        let lastDateofLastMonth =  new Date(date[2], date[0], 0).getDate();
+
+        currMonth = date[0]-1;
+        currYear = date[2];
+
+        let dateAc = validateDay(lastDateofLastMonth);
+
+        if (dateAc[0].includes(date[1]) || dateAc[1].includes(date[1]) || dateAc[2].includes(date[1])) {
+            invalid = true;
+        }
+        
+    })
+
+    if (invalid) {
+        return false;
+    }else {
+        return false;
+    }
 }
