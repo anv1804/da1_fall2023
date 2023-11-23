@@ -12,7 +12,7 @@ currMonth = date.getMonth();
 const months = ["January", "February", "March", "April", "May", "June", "July",
               "August", "September", "October", "November", "December"];
 
-const calendar = (dateStart = [] , dateEnd = []) => {
+const calendar = () => {
     let firstDayofMonth = new Date(currYear, currMonth, 1).getDay(), // getting first day of month
     lastDateofMonth = new Date(currYear, currMonth + 1, 0).getDate(), // getting last date of month
     lastDayofMonth = new Date(currYear, currMonth, lastDateofMonth).getDay(), // getting last day of month
@@ -26,39 +26,59 @@ const calendar = (dateStart = [] , dateEnd = []) => {
         index++;
     }
 
-
-
-    let dateMiddle = [];
-    if ((dateStart[1]-1) == currMonth && dateStart[2] == currYear) {
+    let dateStarts = [];
+    let dateEnds = [];
+    let dateMiddles = [];
+    listDate.forEach(date => {
+        let dateStart = date.date_start.split('/').map(Number);
+        let dateEnd = date.date_end.split('/').map(Number);
+        
+        //date Start
         for (let i = 1; i <= lastDateofMonth; i++) { 
-            if (dateStart[0] - i < 0) {
-                dateMiddle.push(i);
+            if (i == dateStart[0] && currMonth === (dateStart[1]-1) && currYear == dateStart[2]) {
+                dateStarts.push(i);    
             }
         }
-    }
-    if ((dateEnd[1]-1) == currMonth && dateEnd[2] == currYear) {
+
+        //date End
         for (let i = 1; i <= lastDateofMonth; i++) { 
-            if (dateEnd[0] - i > 0) {
-                dateMiddle.push(i);
+            if ( i == dateEnd[0] && currMonth === (dateEnd[1]-1) && currYear == dateEnd[2] ) {
+                dateEnds.push(i);    
             }
         }
-    }
-    if (dateEnd[1] - 1 > currMonth && dateStart[1] - 1 < currMonth && dateEnd[2] == currYear && dateStart[2] == currYear) {
-        if (dateEnd[1] - 1 > currMonth) {
+
+        //date Middle
+        if ((dateStart[1]-1) == currMonth && dateStart[2] == currYear) {
             for (let i = 1; i <= lastDateofMonth; i++) { 
-                dateMiddle.push(i);
+                if (dateStart[0] - i < 0) {
+                    dateMiddles.push(i);
+                }
             }
         }
-    }
+        if ((dateEnd[1]-1) == currMonth && dateEnd[2] == currYear) {
+            for (let i = 1; i <= lastDateofMonth; i++) { 
+                if (dateEnd[0] - i > 0) {
+                    dateMiddles.push(i);
+                }
+            }
+        }
+        if (dateEnd[1] - 1 > currMonth && dateStart[1] - 1 < currMonth && (dateEnd[2] == currYear || dateStart[2] == currYear)) {
+            if (dateEnd[1] - 1 > currMonth) {
+                for (let i = 1; i <= lastDateofMonth; i++) { 
+                    dateMiddles.push(i);
+                }
+            }
+        }
+    
+    })
+
 
 
     for (let i = 1; i <= lastDateofMonth; i++) { // creating li of all days of current month
         // adding active class to li if the current day, month, and year matched
-        let dateStartAc = i == dateStart[0] && currMonth === (dateStart[1]-1)
-                     && currYear == dateStart[2] ? "active" : "";
-        let dateEndAc = i == dateEnd[0] && currMonth === (dateEnd[1]-1)
-                     && currYear == dateEnd[2] ? "active" : "";
-        let dateMiddleAc = dateMiddle.includes(i) ? 'enable' : '';
+        let dateStartAc = dateStarts.includes(i) ? "active" : "";
+        let dateEndAc = dateEnds.includes(i) ? "active" : "";
+        let dateMiddleAc = dateMiddles.includes(i) ? 'enable' : '';
         
         liTag += `<li class="${dateStartAc} ${dateEndAc} ${dateMiddleAc}">${i}</li>`;
         index++;
@@ -82,14 +102,6 @@ const renderCalendar = (initRender) => {
         } else {
             date = new Date(); // pass the current date as date value
         }
-        
-        listDate.forEach(date => {
-            let dateStart = date.date_start.split('/').map(Number);
-            let dateEnd = date.date_end.split('/').map(Number);
-            if (dateStart[1]-1 == currMonth) {
-                
-            }
-        })
 
         item.innerText = `${months[currMonth]} ${currYear}`; // passing current mon and yr as currentDate text
         let liTag = calendar();
