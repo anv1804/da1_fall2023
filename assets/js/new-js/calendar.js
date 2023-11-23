@@ -29,50 +29,62 @@ const calendar = () => {
     let dateStarts = [];
     let dateEnds = [];
     let dateMiddles = [];
-    listDate.forEach(date => {
-        let dateStart = date.date_start.split('/').map(Number);
-        let dateEnd = date.date_end.split('/').map(Number);
-        
-        //date Start
-        for (let i = 1; i <= lastDateofMonth; i++) { 
-            if (i == dateStart[0] && currMonth === (dateStart[1]-1) && currYear == dateStart[2]) {
-                dateStarts.push(i);    
-            }
-        }
-
-        //date End
-        for (let i = 1; i <= lastDateofMonth; i++) { 
-            if ( i == dateEnd[0] && currMonth === (dateEnd[1]-1) && currYear == dateEnd[2] ) {
-                dateEnds.push(i);    
-            }
-        }
-
-        //date Middle
-        if ((dateStart[1]-1) == currMonth && dateStart[2] == currYear) {
+    if (listDate) {
+        listDate.forEach(date => {
+            let dateStart = date.date_start.split('/').map(Number);
+            let dateEnd = date.date_end.split('/').map(Number);
+            
+            //date Start
             for (let i = 1; i <= lastDateofMonth; i++) { 
-                if (dateStart[0] - i < 0) {
-                    dateMiddles.push(i);
+                if (i == dateStart[0] && currMonth === (dateStart[1]-1) && currYear == dateStart[2]) {
+                    dateStarts.push(i);    
                 }
             }
-        }
-        if ((dateEnd[1]-1) == currMonth && dateEnd[2] == currYear) {
-            for (let i = 1; i <= lastDateofMonth; i++) { 
-                if (dateEnd[0] - i > 0) {
-                    dateMiddles.push(i);
-                }
-            }
-        }
-        if (dateEnd[1] - 1 > currMonth && dateStart[1] - 1 < currMonth && (dateEnd[2] == currYear || dateStart[2] == currYear)) {
-            if (dateEnd[1] - 1 > currMonth) {
-                for (let i = 1; i <= lastDateofMonth; i++) { 
-                    dateMiddles.push(i);
-                }
-            }
-        }
     
-    })
-
-
+            //date End
+            for (let i = 1; i <= lastDateofMonth; i++) { 
+                if ( i == dateEnd[0] && currMonth === (dateEnd[1]-1) && currYear == dateEnd[2] ) {
+                    dateEnds.push(i);    
+                }
+            }
+    
+            //date Middle
+            if ((dateStart[1]-1) == currMonth && dateStart[2] == currYear) {
+                for (let i = 1; i <= lastDateofMonth; i++) { 
+                    if (dateStart[0] - i < 0) {
+                        dateMiddles.push(i);
+                    }
+                }
+            }
+            if ((dateEnd[1]-1) == currMonth && dateEnd[2] == currYear) {
+                for (let i = 1; i <= lastDateofMonth; i++) { 
+                    if (dateEnd[0] - i > 0) {
+                        dateMiddles.push(i);
+                    }
+                }
+            }
+            if (dateEnd[1]-1 > currMonth && dateStart[1]-1 < currMonth && dateEnd[2] == currYear  && dateStart[2] == currYear) {
+                if (dateEnd[1] - currMonth > 0) {
+                    for (let i = 1; i <= lastDateofMonth; i++) { 
+                        dateMiddles.push(i);
+                    }
+                }
+            }
+            if (dateEnd[2] - dateStart[2] > 0) {
+                if (dateEnd[1] - 1 > currMonth && dateEnd[2] == currYear) {
+                    for (let i = 1; i <= lastDateofMonth; i++) { 
+                        dateMiddles.push(i);
+                    }
+                }
+                if (dateStart[1] - 1 < currMonth && dateStart[2] == currYear) {
+                    for (let i = 1; i <= lastDateofMonth; i++) { 
+                        dateMiddles.push(i);
+                    }
+                }
+            }
+        
+        })
+    }
 
     for (let i = 1; i <= lastDateofMonth; i++) { // creating li of all days of current month
         // adding active class to li if the current day, month, and year matched
@@ -127,3 +139,18 @@ prevNextIcon.forEach(icon => { // getting prev and next icons
         renderCalendar(); // calling renderCalendar function
     });
 });
+
+const listBtnDate = document.querySelectorAll('#room-status .list-date li');
+
+if (listBtnDate) {
+    listBtnDate.forEach(btn => {
+        btn.onclick = () => {
+            let dateBtn = btn.innerHTML;
+            dateBtn = dateBtn.split(' - ');
+            let dateBtnStart = dateBtn[0].split('/').map(Number);
+            currMonth = dateBtnStart[1];
+            currYear = dateBtnStart[2];
+            renderCalendar();
+        }
+    })
+}

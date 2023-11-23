@@ -5639,6 +5639,12 @@ button:focus {
 
 /** MEDIA **/
 @media (max-width: 1200px) {
+
+    #room-status .wrapper {
+        display: flex;
+        width: 610px;
+    }
+
     .item-box-3 .detail .location {
         margin: 0 0 10px;
     }
@@ -5687,7 +5693,11 @@ button:focus {
         margin: 0 auto;
     }
 
-    
+    #room-status .wrapper {
+        display: flex;
+        flex-direction: column;
+        width: calc(720px/2);
+    }
 
 
     .open-offcanvas {
@@ -6270,6 +6280,12 @@ button:focus {
     form#form-search .form-guest-body {
         width: calc(100% - 30px);
         margin: 0 auto;
+    }
+
+    #room-status .wrapper {
+        display: flex;
+        flex-direction: column;
+        width: 400px;
     }
 
     .content-area {
@@ -6911,6 +6927,12 @@ button:focus {
 }
 
 @media (max-width: 500px) {
+    #room-status .wrapper {
+        display: flex;
+        flex-direction: column;
+        width: 360px;
+    }
+
     .banner .banner-slider-inner {
         padding: 10px 10px;
         top: 0%;
