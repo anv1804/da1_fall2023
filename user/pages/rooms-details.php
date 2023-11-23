@@ -200,6 +200,14 @@ if (isset($_GET['roomID'])) {
                 <?php 
                     $room_id = $_GET['roomID'];
                     $listDate = loadAllDate($room_id);
+                    $rowDate = '';
+                    if ($listDate) {
+                        foreach ($listDate as $date) {
+                            $rowDate .= '
+                                <li>'.$date['date_start'].' - '.$date['date_end'].'</li>
+                            ';
+                        }
+                    }
                     $listDateJson = json_encode($listDate);
                 ?>
                 <script>
@@ -207,7 +215,7 @@ if (isset($_GET['roomID'])) {
                     // console.log(listDate);
                 </script>
 
-                <div class="video mb-40" style="position: relative;">
+                <div class="video mb-40" id="room-status" style="position: relative;">
                     <h3 class="heading">Room status</h3>
                     <div class="wrapper">
                         <div>
@@ -253,6 +261,10 @@ if (isset($_GET['roomID'])) {
                         </div>
                         </div>
                     </div>
+
+                    <ul class="list-date">
+                        <?=$rowDate;?>
+                    </ul>
                 </div>
             </div>
             <div class="col-lg-4 col-md-12">

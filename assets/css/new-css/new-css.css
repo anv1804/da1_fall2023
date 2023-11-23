@@ -1,3 +1,6 @@
+html {
+    scrollbar-width: none;
+}
 /* Validattor css*/
 
 form .form-group {

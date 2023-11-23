@@ -110,3 +110,26 @@ header .current-date{
 .days li:not(.active):hover::before{
   background: #f2f2f2;
 }
+
+#room-status .list-date {
+  overflow-x: auto;
+  margin: 12px 0;
+  display: flex;
+}
+
+#room-status .list-date li {
+  display: inline;
+  min-width: 226px;
+  padding: 8px 16px;
+  margin-right: 8px;
+  background-color: #fff;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: 550;
+  color: #ff214f;
+  cursor: pointer;
+}
+
+#room-status .list-date li:hover {
+  background: #f2f2f2;
+}
