@@ -22,6 +22,7 @@
     <link type="text/css" rel="stylesheet" href="assets/fonts/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="assets/fonts/flaticon/font/flaticon.css">
     <link rel="stylesheet" type="text/css" href="assets/fonts/linearicons/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/new-css/popup.css">
 
     <!-- Favicon icon -->
     <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
@@ -37,6 +38,7 @@
 </head>
 
 <body id="top">
+
     <!-- main header start -->
     <header class="main-header header-2 fixed-header" id="main-header-2">
         <div class="container-fluid">
@@ -110,9 +112,13 @@
         </div>
     </header>
     <!-- main header end -->
-
     <!-- Dashboard start -->
     <div class="dashboard">
+        <?php 
+            if(isset($alert)){
+                echo $alert;
+            }
+        ?>
         <div class="container-fluid">
             <div class="row">
                 <div class="dashboard-sidebar col-lg-3 col-md-12 col-sm-12 col-pad">
@@ -131,7 +137,8 @@
                             <ul>
                                 <li><a href="admin.php?page=hotels"><i class="lnr lnr-apartment"></i>Hotels</a></li>
                                 <li><a href="admin.php?page=rooms"><i class="lnr lnr-home"></i>Rooms</a></li>
-                                <li><a href="admin.php?page=comments"><i class="fa fa-commenting-o"></i>Comments</a></li>
+                                <li><a href="admin.php?page=comments"><i class="fa fa-commenting-o"></i>Comments</a>
+                                </li>
                                 <li><a href="admin.php?page=users"><i class="lnr lnr-user"></i>Users</a>
                                 <li><a href="admin.php?page=add"><i class="lnr lnr-user"></i>ADD</a>
                                 </li>
@@ -146,4 +153,5 @@
                 </div>
                 <?php
                 include 'control/control-admin.php';
+                // include 'control/control-crud.php';
                 ?>

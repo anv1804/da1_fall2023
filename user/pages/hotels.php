@@ -10,7 +10,7 @@ if ($allHotels) {
     foreach ($allHotels as $value) {
         // print_r($value['hotel_image']);
         $hotelImages = explode(',',$value['hotel_image']);
-        // print_r($hotelImages);
+        print_r($hotelImages);
         $dataHotels .= '
         <div class="item-box-3">
             <div class="row">
@@ -34,7 +34,7 @@ if ($allHotels) {
                             <div class="love">
                                 <i class="flaticon-heart"></i>
                             </div>
-                            <img src="assets/img/' . $hotelImages[0] . '" alt="hotel-list" class="img-fluid">
+                            <img src="uploads/hotels/'.$hotelImages[0].'" alt="hotel-list" class="img-fluid">
                         </a>
                     </div>
                 </div>
