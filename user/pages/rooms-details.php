@@ -196,14 +196,63 @@ if (isset($_GET['roomID'])) {
                         </div>
                     </div>
                 </div>
-                <!-- vedio start -->
+                <!-- Room status -->
+                <?php 
+                    $room_id = $_GET['roomID'];
+                    $listDate = loadAllDate($room_id);
+                    $listDateJson = json_encode($listDate);
+                ?>
+                <script>
+                    const listDate = JSON.parse('<?php echo addslashes($listDateJson); ?>');
+                    // console.log(listDate);
+                </script>
+
                 <div class="video mb-40" style="position: relative;">
-                    <h3 class="heading">Vedio</h3>
-                    <form class="inline-search-area" method="post">
-                        <div class="form-group search-col">
-                            <input type="text" name="dates" placeholder="When..." class="datetimes-left form-control" />
+                    <h3 class="heading">Room status</h3>
+                    <div class="wrapper">
+                        <div>
+                            <header>
+                                <div class="icons">
+                                    <span id="prev" class="material-symbols-rounded">chevron_left</span>
+                                    <!-- <span id="next" class="material-symbols-rounded">chevron_right</span> -->
+                                </div>
+                                <p class="current-date"></p>
+                            </header>
+                            <div class="calendar">
+                                <ul class="weeks">
+                                    <li>Sun</li>
+                                    <li>Mon</li>
+                                    <li>Tue</li>
+                                    <li>Wed</li>
+                                    <li>Thu</li>
+                                    <li>Fri</li>
+                                    <li>Sat</li>
+                                </ul>
+                                <ul class="days"></ul>
+                            </div>
                         </div>
-                    </form>
+                        <div>
+                        <header>
+                            <p class="current-date"></p>
+                            <div class="icons">
+                                <!-- <span id="prev" class="material-symbols-rounded">chevron_left</span> -->
+                                <span id="next" class="material-symbols-rounded">chevron_right</span>
+                            </div>
+                        </header>
+                        <div class="calendar">
+                            <ul class="weeks">
+                                <li>Sun</li>
+                                <li>Mon</li>
+                                <li>Tue</li>
+                                <li>Wed</li>
+                                <li>Thu</li>
+                                <li>Fri</li>
+                                <li>Sat</li>
+                            </ul>
+                            <ul class="days"></ul>
+                        </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-lg-4 col-md-12">
@@ -213,7 +262,7 @@ if (isset($_GET['roomID'])) {
                         <h5 class="sidebar-title">Book This Room</h5>
                         <form class="inline-search-area" method="post">
                             <div class="form-group search-col">
-                                <input type="text"  style="margin-bottom: 8px;" name="dates" placeholder="When..."
+                                <input type="text" style="margin-bottom: 8px;" name="dates" placeholder="When..."
                                     class="datetimes-left form-control" />
                                 <i class="flaticon-timetable icon-append"></i>
                             </div>
@@ -235,7 +284,8 @@ if (isset($_GET['roomID'])) {
                                 </div>
                             </div>
                             <div class="form-group search-col">
-                                <a href="cart-1.html" style="margin-bottom: 8px;" class="btn-theme btn-md btn-block">Purchase</a>
+                                <a href="cart-1.html" style="margin-bottom: 8px;"
+                                    class="btn-theme btn-md btn-block">Purchase</a>
                             </div>
                             <div class="form-group search-col mb-0">
                                 <a href="wishlist.html" class="btn btn-md-outline btn-block">Add to wishlist</a>
@@ -346,3 +396,4 @@ if (isset($_GET['roomID'])) {
     </div>
 </div>
 <!-- Item details page start -->
+<script src="./assets/js/new-js/calendar.js"></script>

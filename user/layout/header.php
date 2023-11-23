@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <!-- External CSS libraries -->
+    <!-- Google Font Link for Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
     <link type="text/css" rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link type="text/css" rel="stylesheet" href="assets/css/magnific-popup.css">
     <link type="text/css" rel="stylesheet" href="assets/css/jquery.selectBox.css">
@@ -35,6 +37,7 @@
     <link type="text/css" rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" type="text/css" id="style_sheet" href="assets/css/skins/default.css">
     <link rel="stylesheet" href="./assets/css/new-css/new-css.css">
+    <link rel="stylesheet" href="./assets/css/new-css/calendar.css">
 
 </head>
 <style>
