@@ -1,7 +1,10 @@
 <?php
-function allRooms()
+function allRooms($room_id)
 {
     $sql = "SELECT * FROM rooms WHERE 1";
+    if ($room_id != 0) {
+        $sql .= " and room_id = '" . $room_id ."'";
+    }
     $result = pdo_query($sql);
     return $result;
 }

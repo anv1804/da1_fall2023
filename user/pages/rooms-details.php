@@ -1,8 +1,7 @@
 <?php
 if (isset($_GET['roomID'])) {
     $roomID = $_GET['roomID'];
-    $sql = "SELECT * FROM rooms WHERE room_id=$roomID";
-    $result = pdo_query($sql);
+    $result = allRooms($roomID);
     $numberRoom = "";
     $guestRoom = "";
     $descRoom = "";
@@ -272,11 +271,22 @@ if (isset($_GET['roomID'])) {
                     <!-- Search area2 start -->
                     <div class="widget search-area2 d-none d-xl-block d-lg-block">
                         <h5 class="sidebar-title">Book This Room</h5>
-                        <form class="inline-search-area" method="post">
+
+                        <?php 
+                            if (isset($_POST['purchase']) && ($_POST['purchase'])) {
+
+                            }
+                        
+                        ?>
+
+
+
+                        <form class="inline-search-area" method="post" action="index.php?page=rooms-details" id="form-purchase">
                             <div class="form-group search-col">
-                                <input type="text" style="margin-bottom: 8px;" name="dates" placeholder="When..."
+                                <input type="text" name="dates" placeholder="When..." required
                                     class="datetimes-left form-control" />
                                 <i class="flaticon-timetable icon-append"></i>
+                                <span class="form-message"></span>
                             </div>
                             <div class="form-group search-col">
                                 <select class="selectpicker search-fields btn-block form-control bdr" name="guest">
@@ -296,11 +306,10 @@ if (isset($_GET['roomID'])) {
                                 </div>
                             </div>
                             <div class="form-group search-col">
-                                <a href="cart-1.html" style="margin-bottom: 8px;"
-                                    class="btn-theme btn-md btn-block">Purchase</a>
+                                <button type="submit"  style="margin-bottom: 8px;" name="purchase" value="purchase" class="btn-theme btn-md btn-block">Purchase</button>
                             </div>
                             <div class="form-group search-col mb-0">
-                                <a href="wishlist.html" class="btn btn-md-outline btn-block">Add to wishlist</a>
+                                <a href="#" class="btn btn-md-outline btn-block">Add to wishlist</a>
                             </div>
                         </form>
                     </div>
