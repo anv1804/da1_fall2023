@@ -10,7 +10,7 @@ if ($allHotels) {
     foreach ($allHotels as $value) {
         // print_r($value['hotel_image']);
         $hotelImages = explode(',',$value['hotel_image']);
-        print_r($hotelImages);
+        // print_r($hotelImages);
         $dataHotels .= '
         <div class="item-box-3">
             <div class="row">
