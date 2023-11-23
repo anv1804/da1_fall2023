@@ -39,5 +39,22 @@ function fullHotels()
     $result = pdo_query($sql);
     return $result;
 }
-
+function updateHotels($hotelID, $nameHotel, $descHotel, $locationHotel, $img, $cityHotel)
+{
+    $sql = "UPDATE `hotels` 
+    SET `hotel_id`='$hotelID',
+    `hotel_name`='$nameHotel',
+    `hotel_desc`='$descHotel',
+    `hotel_location`='$locationHotel',
+    `hotel_image`='$img',
+    `hotel_rate`='0',
+    `hotel_views`='0',
+    `city_id`='$cityHotel' 
+    WHERE hotel_id = $hotelID";
+    pdo_execute($sql);
+}
+function deleteHotels($hotelID){
+    $sql ="DELETE FROM hotels WHERE hotel_id = $hotelID";
+    pdo_execute($sql);
+}
 ?>
