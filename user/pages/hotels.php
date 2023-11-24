@@ -2,9 +2,18 @@
 $hotel_name =''; 
 if (isset($_POST['search']) && ($_POST['search'])) {
     $hotel_name = $_POST['hotel_name'];
-}       
+}
 
-$allHotels = allHotels($hotel_name);
+if (isset($_GET['listHotels']) && ($_GET['listHotels'] != '[]')) {
+    $listHotel_id = $_GET['listHotels'];
+    $listHotel_id = json_decode($listHotel_id , true);
+    $allHotels = allHotels('' , '' ,'' ,'' ,  $listHotel_id);
+}else if(isset($_GET['listHotels']) && ($_GET['listHotels'] == '[]')) {
+    $allHotels = allHotels('' , '' ,0 );
+} else {
+    $allHotels = allHotels($hotel_name);
+}
+
 $dataHotels = "";
 if ($allHotels) {
     foreach ($allHotels as $value) {

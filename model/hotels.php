@@ -1,5 +1,5 @@
 <?php
-function allHotels($hotel_name = '', $city= '', $hotelID= '',$top5='')
+function allHotels($hotel_name = '', $city= '', $hotelID= '',$top5='' ,$listHotel_id = [])
 {
     $sql = "SELECT * FROM hotels ";
     if ($hotel_name != '') {
@@ -8,12 +8,21 @@ function allHotels($hotel_name = '', $city= '', $hotelID= '',$top5='')
     if ($hotelID != '') {
         $sql .= "WHERE hotel_id=$hotelID";
     }
+    if ($listHotel_id) {
+        $sql .= 'WHERE hotel_id='.$listHotel_id[0];
+        foreach($listHotel_id as $key => $hotel_id) {
+            if ($key != 0) {
+                $sql .= ' or hotel_id='.$hotel_id;
+            }
+        }
+    }
     if ($city != '') {
         $sql .= "INNER JOIN city ON hotels.city_id = city.city_id";
     }
     if ($top5 != '') {
         $sql .= "WHERE 1 ORDER BY hotel_views DESC LIMIT 0,5 ";
     }
+
     $result = pdo_query($sql);
     return $result;
 }
