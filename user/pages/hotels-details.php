@@ -15,8 +15,7 @@ if (isset($_GET['hotelID'])) {
     }
     ;
     // ALL ROOM OF HOTEL
-    $sqlR = "SELECT * FROM rooms INNER JOIN hotels ON rooms.hotel_id = hotels.hotel_id";
-    $listRoom = pdo_query($sqlR);
+    $listRoom = roomsHotels($hotelID);
     $dataRoom = "";
     $numberRoom = "";
     $imageRoom = "";

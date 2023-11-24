@@ -1,5 +1,5 @@
 <?php
-$loadHotels = allHotels('',$city = 1,'');
+$loadHotels = allHotels('', $city = 1, '');
 $countRooms = countRooms();
 $dataHotels = "";
 if ($loadHotels) {
@@ -58,6 +58,9 @@ if ($loadHotels) {
                     </div>
                 </div>
             </div>
+            <div class="subtitle">
+                <!-- 20 Result Found -->
+            </div>
             <div class="dashboard-list">
                 <h3>Hotels</h3>
                 <table class="manage-table">
@@ -65,6 +68,13 @@ if ($loadHotels) {
                         <?= $dataHotels ?>
                     </tbody>
                 </table>
+
+            </div>
+            <div class="pagination-box">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                    </ul>
+                </nav>
             </div>
         </div>
         <p class="sub-banner-2 text-center">© 2022 Theme Vessel. Trademarks and brands are the property of their
@@ -74,3 +84,4 @@ if ($loadHotels) {
 </div>
 </div>
 </div>
+<script src="./assets/js/new-js/hotel-admin.js"></script>

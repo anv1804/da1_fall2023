@@ -124,14 +124,6 @@ if ($allHotels) {
                 <div class="pagination-box">
                     <nav aria-label="Page navigation example">
                         <ul class="pagination">
-                            <!-- <li class="page-item"><a class="page-link" href="#"><span aria-hidden="true">«</span></a>
-                            </li>
-                            <li class="page-item"><a class="page-link active" href="tours-list-rightside.html">1</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="tours-list-leftside.html">2</a></li>
-                            <li class="page-item"><a class="page-link" href="tours-list-fullwidth.html">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#"><span aria-hidden="true">»</span></a>
-                            </li> -->
                         </ul>
                     </nav>
                 </div>

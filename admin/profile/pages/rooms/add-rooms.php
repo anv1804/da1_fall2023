@@ -53,7 +53,6 @@ if (isset($_POST['submit'])) {
     $listImages = implode(',', $full);
     // $ccc = explode(',', $listImages);
     // print_r($ccc);
-    print_r($listImages);
     $sql = "INSERT INTO
      `rooms`(`room_number`, `room_price`, `room_image`, `room_desc`, `room_status`, `bed_id`, `room_guest`, `hotel_id`) 
     VALUES 

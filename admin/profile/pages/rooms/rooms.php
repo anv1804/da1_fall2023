@@ -74,6 +74,12 @@ if ($loadRooms) {
                     </tbody>
                 </table>
             </div>
+            <div class="pagination-box">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                    </ul>
+                </nav>
+            </div>
         </div>
         <p class="sub-banner-2 text-center">© 2022 Theme Vessel. Trademarks and brands are the property of their
             respective owners.</p>
@@ -82,3 +88,4 @@ if ($loadRooms) {
 </div>
 </div>
 </div>
+<script src="./assets/js/new-js/room-admin.js"></script>
