@@ -32,9 +32,15 @@ if (isset($_GET['page'])) {
         case 'comments':
             include('./admin/profile/pages/comments/comments.php');
             break;
-            case 'delete-comments':
-                include('./admin/profile/pages/comments/delete-comments.php');
-                break;
+        case 'delete-comments':
+            include('./admin/profile/pages/comments/delete-comments.php');
+            break;
+        case 'users':
+            include('./admin/profile/pages/users/users.php');
+            break;
+        case 'delete-users':
+            include('./admin/profile/pages/users/delete-users.php');
+            break;
         default:
             include('./admin/profile/pages/dashboard.php');
             break;

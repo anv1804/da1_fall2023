@@ -48,9 +48,6 @@ if (isset($_POST['submit'])) {
         } //End khoi cau lenh up file va them vao CSDL;
     }
     $listImages = implode(',', $full);
-    // $ccc = explode(',', $listImages);
-    // print_r($ccc);
-    print_r($listImages);
     $sql = "INSERT INTO `hotels`
             (hotel_id, hotel_name, hotel_desc, hotel_location, hotel_image, hotel_rate, hotel_views, city_id) 
             VALUES 
