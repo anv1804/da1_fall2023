@@ -27,5 +27,17 @@ function loadAllDate($room_id = 0) {
 
     return pdo_query($sql);
 }
-
+function  fullRooms(){
+    $sql = "SELECT * FROM rooms 
+    INNER JOIN hotels ON rooms.hotel_id = hotels.hotel_id 
+    INNER JOIN beds ON rooms.bed_id = beds.bed_id WHERE 1
+    ";
+    $result = pdo_query($sql);
+    return $result;
+}
+function loadBeds(){
+    $sql = "SELECT * FROM beds";
+    $result = pdo_query($sql);
+    return $result;
+}
 ?>
