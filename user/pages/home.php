@@ -51,6 +51,7 @@ if (isset($data)) {
 }
 ?>
 
+<script src="./assets/js/new-js/calendar.js"></script>
 <!-- Form search -->
 <?php 
     if (isset($_POST['submit']) && ($_POST['submit'])) {
@@ -86,43 +87,64 @@ if (isset($data)) {
         }
         if ($dates) {
             if ($listHotels) {
+                $countHotels = [];
+                foreach ($listHotels as $hotel) {
+                    $countHotels[] = countRooms($hotel);
+                }
+                // print_r($countHotels[1][0]);
+                // echo $countHotels[1][0][1];
                 foreach ($listHotels as$key => $hotel) {
                     $listDate = loadAllDate($hotel);
-                    $listDateJson = json_encode($listDate);
+                    if ($listDate) {
+                        $listDateJson = json_encode($listDate);
 
-                    //check day form search home
-                    ?>
-                    <script>
-                        const listDate = JSON.parse('<?php echo addslashes($listDateJson); ?>');
-                        let invalid = false;
-                        let dates = '<?=$dates?>';
-                        dates = dates.split(' - ');
-                        dates.forEach(date => {
-                    
-                            date = date.split('/').map(Number);
-                            let lastDateofLastMonth =  new Date(date[2], date[0], 0).getDate();
+                        //check day form search home
+                        ?>
+                        <script>
+                            const listDate = JSON.parse('<?php echo addslashes($listDateJson); ?>');
+                            let invalid = false;
+                            let dates = '<?=$dates?>';
+                            dates = dates.split(' - ');
+                            dates.forEach(date => {
+                        
+                                date = date.split('/').map(Number);
+                                let lastDateofLastMonth =  new Date(date[2], date[0], 0).getDate();
 
-                            currMonth = date[0]-1;
-                            currYear = date[2];
-                    
-                            let dateAc = validateDay(lastDateofLastMonth , listDate);
-                    
-                            if (dateAc[0].includes(date[1]) || dateAc[1].includes(date[1]) || dateAc[2].includes(date[1])) {
-                                invalid = true;
+                                currMonth = date[0]-1;
+                                currYear = date[2];
+
+                                let dateAc = validateDay(lastDateofLastMonth , listDate);
+                        
+                                if (dateAc[0].includes(date[1]) || dateAc[1].includes(date[1]) || dateAc[2].includes(date[1])) {
+                                    invalid = true;
+                                }
+                                
+                            })
+                        
+                            if (invalid) {
+                                <?php
+                                    // echo $countHotels[$key][0][1];
+                                    // if ($countHotels[$key][0][0] == $hotel) {
+                                    //     $countHotels[$key][0][1] -= 1;
+                                    //     if ($guest[2] > $countHotels[$key][0][1]) {
+                                    //         unset($listHotels[$key]);
+                                    //     }
+                                    // }
+
+                                ?>
                             }
-                            
-                        })
-                    
-                        if (invalid) {
-                            console.log(1);
-                            unset($listHotels[$key]);
-                        }
-                    </script>
-                    <?php
+                        </script>
+                        <?php
+                    }
                 }
             }
         }
-        print_r($listHotels);
+        // print_r($listHotels);
+        $listHotels = array_values($listHotels);
+        $listHotels = json_encode($listHotels);
+        // echo $listHotels;
+        echo "<script type='text/javascript'>window.location.href = './index.php?page=hotels&listHotels=$listHotels';</script>";
+
     }
 ?>
 
@@ -733,4 +755,3 @@ if (isset($data)) {
 </div>
 <!-- intro section end -->
 <script src="./assets/js/new-js/search-guest.js"></script>
-<script src="./assets/js/new-js/calendar.js"></script>
