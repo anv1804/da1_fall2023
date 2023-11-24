@@ -1,9 +1,8 @@
 <?php
 if (isset($_GET['hotelID'])) {
- 
     $hotelID = $_GET['hotelID'];
     // DATA HOTEL
-    $dataHotels = dataHotels($hotelID);
+    $dataHotels = allHotels('','',$hotelID);
     $nameHotel = "";
     $locationHotel = "";
     $descHotel = "";
@@ -13,7 +12,6 @@ if (isset($_GET['hotelID'])) {
         $locationHotel = $dataHotels[0]['hotel_location'];
         $descHotel = $dataHotels[0]['hotel_desc'];
         $imageHotels = explode(',',$dataHotels[0]['hotel_image']);
-        print_r($imageHotels);
     }
     ;
     // ALL ROOM OF HOTEL
@@ -25,12 +23,13 @@ if (isset($_GET['hotelID'])) {
     $typeBed = "";
     if ($listRoom) {
         foreach ($listRoom as $value) {
+        $imageRooms = explode(',',$value['room_image']);
             $dataRoom .= '
                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6" >
                     <div class="agent-2" style="border-radius:10px">
                         <div class="agent-photo">
                             <a href="index.php?page=rooms-details&roomID=' . $value["room_id"] . '">
-                                <img style="border-radius:10px 10px 0 0" src="uploads/rooms/' . $value['room_image'] . '" alt="room"
+                                <img style="border-radius:10px 10px 0 0" src="./uploads/rooms/' . $imageRooms[0] . '" alt="room"
                                     class="img-fluid">
                             </a>
                         </div>
@@ -64,24 +63,28 @@ if (isset($_GET['hotelID'])) {
         }
     }
     // TOP HOTELS
-    $topHotels = topHotels();
+    $topHotels = allHotels('','','',$top5=1);
     $dataTopHotels = "";
     if ($topHotels) {
-        $dataTopHotels = '
+        foreach ($topHotels as $value) {
+        $imageTop = explode(',', $value['hotel_image']);
+        $dataTopHotels .= '
             <div class="media mb-4">
-                <a class="pr-3" href="index.php?page=hotel-detail&hotelId=' . $topHotels[0]['hotel_id'] . '">
-                    <img src="assets/img/sub-tours/sub-tours.jpg" alt="sub-tours">
+                <a class="pr-3" href="index.php?page=hotels-details&hotelID='.$value['hotel_id'].'">
+                    <img src="./uploads/hotels/'.$imageTop[0].'" alt="sub-tours">
                 </a>
                 <div class="media-body align-self-center">
                     <h5>
-                        <a href="tours-details.html">Sonargaon Dhaka Hotel</a>
+                        <a href="index.php?page=hotels-details&hotelID='.$value['hotel_id'].'">'.$value['hotel_name'].'</a>
                     </h5>
                     <div class="listing-post-meta">
-                        Oct 27, 2021 | <a href="#">Hotel</a>
+                    <i class="fa fa-eye"></i> '.$value['hotel_views'].' | <a href="#">Hotel</a>
                     </div>
                 </div>
             </div>
+            <hr>
         ';
+        }
     }
     // TOTAL RATING HOTEL 
     $total = loadComments($hotelID);
