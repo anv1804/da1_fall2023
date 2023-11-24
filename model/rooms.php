@@ -8,13 +8,16 @@ function allRooms($room_id)
     $result = pdo_query($sql);
     return $result;
 }
-function countRooms()
+function countRooms($hotel_id = 0)
 {
     $sql = "SELECT hotels.hotel_id ,  COUNT(room_id) AS count
     FROM hotels
     LEFT JOIN rooms ON hotels.hotel_id = rooms.hotel_id
     GROUP BY hotels.hotel_id ";
-
+    if ($hotel_id != 0) {
+        $sql .= ' HAVING hotels.hotel_id = '.$hotel_id;
+    }
+    
     $count_category_id = pdo_query($sql);
     return $count_category_id;
 }
