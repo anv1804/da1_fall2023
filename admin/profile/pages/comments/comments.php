@@ -6,7 +6,7 @@
             $starRate = $value['comment_rate'];
             $rateCmt = ratingCmt($starRate);
             $dataCmt .='
-                <div class="media dashboard-message">
+                <div class="media dashboard-message" style="width: 155vh;">
                     <div class="pr-4">
                         <img src="assets/img/avatar/'.$value['user_image'].'" alt="avatar">
                     </div>
@@ -55,6 +55,12 @@
                     <?= $dataCmt ?>
                 </div>
             </div>
+            <div class="pagination-box">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                    </ul>
+                </nav>
+            </div>
         </div>
         <p class="sub-banner-2 text-center">© 2022 Theme Vessel. Trademarks and brands are the property of their
             respective owners.</p>
@@ -63,4 +69,5 @@
 </div>
 </div>
 </div>
+<script src="./assets/js/new-js/comment-admin.js"></script>
 <!-- Dashboard end -->

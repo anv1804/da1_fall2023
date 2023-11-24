@@ -8,6 +8,12 @@ function allRooms($room_id)
     $result = pdo_query($sql);
     return $result;
 }
+function roomsHotels($hotelID)
+{
+    $sql = "SELECT * FROM rooms WHERE rooms.hotel_id = $hotelID";
+    $result = pdo_query($sql);
+    return $result;
+}
 function countRooms($hotel_id = 0)
 {
     $sql = "SELECT hotels.hotel_id ,  COUNT(room_id) AS count

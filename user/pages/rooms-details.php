@@ -65,19 +65,19 @@ if (isset($_GET['roomID'])) {
                     <!-- main slider carousel items -->
                     <div class="carousel-inner">
                         <div class="active item carousel-item" data-slide-number="0">
-                            <img src="./uploads/rooms/<?=$imageRoom[0] ?>" class="img-fluid" alt="photo-4">
+                            <img src="./uploads/rooms/<?= $imageRoom[0] ?>" class="img-fluid" alt="photo-4">
                         </div>
                         <div class="item carousel-item" data-slide-number="1">
-                            <img src="./uploads/rooms/<?=$imageRoom[1] ?>" class="img-fluid" alt="photo-4">
+                            <img src="./uploads/rooms/<?= $imageRoom[1] ?>" class="img-fluid" alt="photo-4">
                         </div>
                         <div class="item carousel-item" data-slide-number="2">
-                            <img src="./uploads/rooms/<?=$imageRoom[2] ?>" class="img-fluid" alt="photo-4">
+                            <img src="./uploads/rooms/<?= $imageRoom[2] ?>" class="img-fluid" alt="photo-4">
                         </div>
                         <div class="item carousel-item" data-slide-number="4">
-                            <img src="./uploads/rooms/<?=$imageRoom[3] ?>" class="img-fluid" alt="photo-4">
+                            <img src="./uploads/rooms/<?= $imageRoom[3] ?>" class="img-fluid" alt="photo-4">
                         </div>
                         <div class="item carousel-item" data-slide-number="5">
-                            <img src="./uploads/rooms/<?=$imageRoom[4] ?>" class="img-fluid" alt="photo-4">
+                            <img src="./uploads/rooms/<?= $imageRoom[4] ?>" class="img-fluid" alt="photo-4">
                         </div>
                     </div>
                     <!-- main slider carousel nav controls -->
@@ -85,27 +85,27 @@ if (isset($_GET['roomID'])) {
                         <li class="list-inline-item active">
                             <a id="carousel-selector-0" class="selected" data-slide-to="0"
                                 data-target="#itemDetailsSlider">
-                                <img src="./uploads/rooms/<?=$imageRoom[0] ?>" class="img-fluid" alt="photo-5">
+                                <img src="./uploads/rooms/<?= $imageRoom[0] ?>" class="img-fluid" alt="photo-5">
                             </a>
                         </li>
                         <li class="list-inline-item">
                             <a id="carousel-selector-1" data-slide-to="1" data-target="#itemDetailsSlider">
-                                <img src="./uploads/rooms/<?=$imageRoom[1] ?>" class="img-fluid" alt="photo-5">
+                                <img src="./uploads/rooms/<?= $imageRoom[1] ?>" class="img-fluid" alt="photo-5">
                             </a>
                         </li>
                         <li class="list-inline-item">
                             <a id="carousel-selector-2" data-slide-to="2" data-target="#itemDetailsSlider">
-                                <img src="./uploads/rooms/<?=$imageRoom[2] ?>" class="img-fluid" alt="photo-5">
+                                <img src="./uploads/rooms/<?= $imageRoom[2] ?>" class="img-fluid" alt="photo-5">
                             </a>
                         </li>
                         <li class="list-inline-item">
                             <a id="carousel-selector-3" data-slide-to="3" data-target="#itemDetailsSlider">
-                                <img src="./uploads/rooms/<?=$imageRoom[3] ?>" class="img-fluid" alt="photo-5">
+                                <img src="./uploads/rooms/<?= $imageRoom[3] ?>" class="img-fluid" alt="photo-5">
                             </a>
                         </li>
                         <li class="list-inline-item">
                             <a id="carousel-selector-4" data-slide-to="4" data-target="#itemDetailsSlider">
-                                <img src="./uploads/rooms/<?=$imageRoom[4] ?>" class="img-fluid" alt="photo-5">
+                                <img src="./uploads/rooms/<?= $imageRoom[4] ?>" class="img-fluid" alt="photo-5">
                             </a>
                         </li>
                     </ul>
@@ -196,18 +196,18 @@ if (isset($_GET['roomID'])) {
                     </div>
                 </div>
                 <!-- Room status -->
-                <?php 
-                    $room_id = $_GET['roomID'];
-                    $listDate = loadAllDate($room_id);
-                    $rowDate = '';
-                    if ($listDate) {
-                        foreach ($listDate as $date) {
-                            $rowDate .= '
-                                <li>'.$date['date_start'].' - '.$date['date_end'].'</li>
+                <?php
+                $room_id = $_GET['roomID'];
+                $listDate = loadAllDate($room_id);
+                $rowDate = '';
+                if ($listDate) {
+                    foreach ($listDate as $date) {
+                        $rowDate .= '
+                                <li>' . $date['date_start'] . ' - ' . $date['date_end'] . '</li>
                             ';
-                        }
                     }
-                    $listDateJson = json_encode($listDate);
+                }
+                $listDateJson = json_encode($listDate);
                 ?>
                 <script>
                     const listDate = JSON.parse('<?php echo addslashes($listDateJson); ?>');
@@ -239,30 +239,30 @@ if (isset($_GET['roomID'])) {
                             </div>
                         </div>
                         <div>
-                        <header>
-                            <p class="current-date"></p>
-                            <div class="icons">
-                                <!-- <span id="prev" class="material-symbols-rounded">chevron_left</span> -->
-                                <span id="next" class="material-symbols-rounded">chevron_right</span>
+                            <header>
+                                <p class="current-date"></p>
+                                <div class="icons">
+                                    <!-- <span id="prev" class="material-symbols-rounded">chevron_left</span> -->
+                                    <span id="next" class="material-symbols-rounded">chevron_right</span>
+                                </div>
+                            </header>
+                            <div class="calendar">
+                                <ul class="weeks">
+                                    <li>Sun</li>
+                                    <li>Mon</li>
+                                    <li>Tue</li>
+                                    <li>Wed</li>
+                                    <li>Thu</li>
+                                    <li>Fri</li>
+                                    <li>Sat</li>
+                                </ul>
+                                <ul class="days"></ul>
                             </div>
-                        </header>
-                        <div class="calendar">
-                            <ul class="weeks">
-                                <li>Sun</li>
-                                <li>Mon</li>
-                                <li>Tue</li>
-                                <li>Wed</li>
-                                <li>Thu</li>
-                                <li>Fri</li>
-                                <li>Sat</li>
-                            </ul>
-                            <ul class="days"></ul>
-                        </div>
                         </div>
                     </div>
 
                     <ul class="list-date">
-                        <?=$rowDate;?>
+                        <?= $rowDate; ?>
                     </ul>
                 </div>
             </div>
@@ -272,18 +272,32 @@ if (isset($_GET['roomID'])) {
                     <div class="widget search-area2 d-none d-xl-block d-lg-block">
                         <h5 class="sidebar-title">Book This Room</h5>
 
-                        <?php 
-                            if (isset($_POST['purchase']) && ($_POST['purchase'])) {
+                        <?php
+                        if (isset($_POST['purchase']) && ($_POST['purchase'])) {
+                            $dates = $_POST['dates'];
+                            // print_r($dates);
+                            $day = explode(' - ', $dates);
+                            $date = date('m-d-Y');
+                            $dayStart = explode('/', $day[0]);
+                            $dayEnd = explode('/', $day[1]);
+                            $dateStart = $dayStart[1].'/'.$dayStart[0].'/'.$dayStart[2];
+                            $dateEnd = $dayEnd[1].'/'.$dayEnd[0].'/'.$dayEnd[2];
+                            // print_r($dateStart);
+                            // echo "<br>";
+                            // print_r($dateEnd);
 
-                            }
-                        
+                            booking($date,$dateStart,$dateEnd,$roomID);
+                            header('location: index.php?page=rooms-details&roomID='.$roomID.'');
+                        }
+
                         ?>
 
 
 
-                        <form class="inline-search-area" method="post" action="index.php?page=rooms-details" id="form-purchase">
+                        <form class="inline-search-area" method="post"
+                            action="index.php?page=rooms-details&roomID=<?= $roomID ?>" id="form-purchase">
                             <div class="form-group search-col">
-                                <input type="text" name="dates" placeholder="When..." required
+                                <input type="text" name="dates" placeholder="WHEN... (m-d-y)" required
                                     class="datetimes-left form-control" />
                                 <i class="flaticon-timetable icon-append"></i>
                                 <span class="form-message"></span>
@@ -306,7 +320,8 @@ if (isset($_GET['roomID'])) {
                                 </div>
                             </div>
                             <div class="form-group search-col">
-                                <button type="submit"  style="margin-bottom: 8px;" name="purchase" value="purchase" class="btn-theme btn-md btn-block">Purchase</button>
+                                <button type="submit" style="margin-bottom: 8px;" name="purchase" value="purchase"
+                                    class="btn-theme btn-md btn-block">Purchase</button>
                             </div>
                             <div class="form-group search-col mb-0">
                                 <a href="#" class="btn btn-md-outline btn-block">Add to wishlist</a>

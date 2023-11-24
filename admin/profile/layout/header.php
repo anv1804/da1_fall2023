@@ -136,13 +136,7 @@
                                 <li><a href="admin.php?page=comments"><i class="fa fa-commenting-o"></i>Comments</a>
                                 </li>
                                 <li><a href="admin.php?page=users"><i class="lnr lnr-user"></i>Users</a>
-                                <li><a href="admin.php?page=add"><i class="lnr lnr-user"></i>ADD</a>
                                 </li>
-                            </ul>
-                            <h4>Account</h4>
-                            <ul>
-                                <li><a href="admin.php?page=profile"><i class="flaticon-user"></i>My Profile</a></li>
-                                <li><a href="./user/pages/logout.php"><i class="flaticon-logout"></i>Logout</a></li>
                             </ul>
                         </div>
                     </div>

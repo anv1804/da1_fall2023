@@ -1,4 +1,9 @@
 <?php
+function loadUsers(){
+    $sql ="SELECT * FROM users WHERE user_role = 0";
+    $result = pdo_query($sql);
+    return $result;
+}
 function getID($userEmail)
 {
     $sql = "SELECT user_id FROM users WHERE 1 AND user_email = '$userEmail'";
@@ -38,4 +43,15 @@ function ratingCmt($starRate)
     return $starRate;
 }
 
+function deleteUsers($userID){
+    $sql = "DELETE FROM users WHERE user_id = $userID";
+     pdo_execute($sql);
+}
+function booking($date,$dateStart,$dateEnd,$roomID)
+{
+    $sql = "INSERT INTO `completed`
+    (`completed_id`, `date_booking`, `date_start`, `date_end`, `room_id`) 
+    VALUES (null,'$date','$dateStart','$dateEnd','$roomID')";
+    pdo_execute($sql);
+}
 ?>
