@@ -54,9 +54,75 @@ if (isset($data)) {
 <!-- Form search -->
 <?php 
     if (isset($_POST['submit']) && ($_POST['submit'])) {
-        $hotel = $_POST['hotel'];
-        $dates = $_POST['dates'];
-        $guest = $_POST['guest'];
+        $listHotels = [];
+        $hotel = $_POST['hotel'] ? $_POST['hotel'] : '';
+        $dates = $_POST['dates'] ? $_POST['dates'] : '';
+        $guest = $_POST['guest'] ? $_POST['guest'] : '';
+        if ($hotel) {
+            $hotels = allHotels($hotel);
+            if ($hotels) {
+                foreach ($hotels as $hotel) {
+                    $listHotels[] = $hotel[0];
+                }
+            }
+        }
+        if ($guest) {
+            $guest = explode(',' , $guest);
+            if ($listHotels) {
+                foreach ($listHotels as$key => $hotel) {
+                    $countHotel = countRooms($hotel);
+                    if ($guest[2] > $countHotel[0][1]) {
+                        unset($listHotels[$key]);
+                    }
+                }
+            }else {
+                $countHotels = countRooms();
+                foreach ($countHotels as $countHotel) {
+                    if ($guest[2] <= $countHotel[1]) {
+                        $listHotels[] = $countHotel[0];
+                    }
+                }
+            }
+        }
+        if ($dates) {
+            if ($listHotels) {
+                foreach ($listHotels as$key => $hotel) {
+                    $listDate = loadAllDate($hotel);
+                    $listDateJson = json_encode($listDate);
+
+                    //check day form search home
+                    ?>
+                    <script>
+                        const listDate = JSON.parse('<?php echo addslashes($listDateJson); ?>');
+                        let invalid = false;
+                        let dates = '<?=$dates?>';
+                        dates = dates.split(' - ');
+                        dates.forEach(date => {
+                    
+                            date = date.split('/').map(Number);
+                            let lastDateofLastMonth =  new Date(date[2], date[0], 0).getDate();
+
+                            currMonth = date[0]-1;
+                            currYear = date[2];
+                    
+                            let dateAc = validateDay(lastDateofLastMonth , listDate);
+                    
+                            if (dateAc[0].includes(date[1]) || dateAc[1].includes(date[1]) || dateAc[2].includes(date[1])) {
+                                invalid = true;
+                            }
+                            
+                        })
+                    
+                        if (invalid) {
+                            console.log(1);
+                            unset($listHotels[$key]);
+                        }
+                    </script>
+                    <?php
+                }
+            }
+        }
+        print_r($listHotels);
     }
 ?>
 
@@ -667,3 +733,4 @@ if (isset($data)) {
 </div>
 <!-- intro section end -->
 <script src="./assets/js/new-js/search-guest.js"></script>
+<script src="./assets/js/new-js/calendar.js"></script>
