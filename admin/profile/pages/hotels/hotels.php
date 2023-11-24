@@ -1,10 +1,10 @@
 <?php
-$loadHotels = fullHotels();
+$loadHotels = allHotels('',$city = 1,'');
 $countRooms = countRooms();
 $dataHotels = "";
 if ($loadHotels) {
     foreach ($loadHotels as $key => $value) {
-        $hotelImages = explode(',',$value['hotel_image']);
+        $hotelImages = explode(',', $value['hotel_image']);
         $dataHotels .= '
             <tr class="responsive-table">
                 <td class="listing-photoo">
@@ -19,15 +19,18 @@ if ($loadHotels) {
                 </td>
                 <td class="expire-date"><span style="color: red;font-size:18px;font-weight:550"> ' . $countRooms[$key][1] . '</span> ROOMS</td>
                 <td class="action">
-                    <a href="admin.php?page=edit-hotels"><i class="fa fa-pencil"></i> Edit</a>
-                    <a href="#"><i class="fa  fa-eye-slash"></i> Hide</a>
-                    <a href="#" class="delete"><i class="fa fa-remove"></i> Delete</a>
-                </td>
-            </tr>
+                    <a href="admin.php?page=edit-hotels&hotelID=' . $value['hotel_id'] . '"><i class="fa fa-pencil"></i> Edit</a>        
+                    <a href="admin.php?page=delete-hotels&hotelID=' . $value['hotel_id'] . '"
+                    onclick="return confirm("Are you sure you want to delete?")" class="delete">
+                        <i class="fa fa-remove"></i> 
+                        Delete
+                    </a>
+
         ';
     }
 }
 ?>
+
 <div class="col-lg-9 offset-lg-3 col-md-12 col-sm-12 col-pad">
     <div class="content-area5">
         <div class="dashboard-content">
@@ -47,7 +50,8 @@ if ($loadHotels) {
                                 </li>
                                 <li class="active">Hotels</li>
                                 <li>
-                                    <a class="btn btn-md bomd btn-round" href="admin.php?page=add-hotels">Add New Hotel</a>
+                                    <a class="btn btn-md bomd btn-round" href="admin.php?page=add-hotels">Add New
+                                        Hotel</a>
                                 </li>
                             </ul>
                         </div>

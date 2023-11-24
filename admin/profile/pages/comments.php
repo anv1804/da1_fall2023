@@ -1,3 +1,33 @@
+<?php
+    $loadCmt = loadCmt();
+    $dataCmt ="";
+    if(isset($loadCmt)){
+        foreach ($loadCmt as $value) {
+            // $dataCmt .='
+            //     <div class="media dashboard-message">
+            //         <div class="pr-4">
+            //             <img src="assets/img/avatar/avatar-13.jpg" alt="avatar">
+            //         </div>
+            //         <div class="media-body dashboard-message-text">
+            //             <h5>Daniel Deve - <span>12 March 2022</span> <span class="pull-right new">Reply</span></h5>
+            //             <div class="rating">
+            //                 <i class="fa fa-star"></i>
+            //                 <i class="fa fa-star"></i>
+            //                 <i class="fa fa-star"></i>
+            //                 <i class="fa fa-star"></i>
+            //                 <i class="fa fa-star-o"></i>
+            //             </div>
+            //             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+            //                 has been the industry"s standard dummy text ever since the 1500s, when an unknown
+            //                 printer took a galley of type and scrambled it to make a type specimen book.</p>
+            //             <span class="reply-mail clearfix">Reply : <a
+            //                     href="mailto:info@themevessel.com">info@themevessel.com</a></span>
+            //         </div>
+            //     </div>
+            // ';
+        }
+    }
+?>
 <div class="col-lg-9 offset-lg-3 col-md-12 col-sm-12 col-pad">
     <div class="content-area5">
         <div class="dashboard-content">
@@ -24,86 +54,7 @@
             <div class="dashboard-list">
                 <h3>Reviews List</h3>
                 <div class="dashboard-listd">
-                    <div class="media dashboard-message">
-                        <div class="pr-4">
-                            <img src="assets/img/avatar/avatar-13.jpg" alt="avatar">
-                        </div>
-                        <div class="media-body dashboard-message-text">
-                            <h5>Daniel Deve - <span>12 March 2022</span> <span class="pull-right new">Reply</span></h5>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                            </div>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                                has been the industry's standard dummy text ever since the 1500s, when an unknown
-                                printer took a galley of type and scrambled it to make a type specimen book.</p>
-                            <span class="reply-mail clearfix">Reply : <a
-                                    href="mailto:info@themevessel.com">info@themevessel.com</a></span>
-                        </div>
-                    </div>
-                    <div class="media dashboard-message">
-                        <div class="pr-4">
-                            <img src="assets/img/avatar/avatar-13.jpg" alt="avatar">
-                        </div>
-                        <div class="media-body dashboard-message-text">
-                            <h5>Emma Connor - <span>12 March 2022</span> <span class="pull-right new">Reply</span></h5>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                            </div>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                                has been the industry's standard dummy text ever since the 1500s, when an unknown
-                                printer took a galley of type and scrambled it to make a type specimen book.</p>
-                            <span class="reply-mail clearfix">Reply : <a
-                                    href="mailto:info@themevessel.com">info@themevessel.com</a></span>
-                        </div>
-                    </div>
-                    <div class="media dashboard-message">
-                        <div class="pr-4">
-                            <img src="assets/img/avatar/avatar-13.jpg" alt="avatar">
-                        </div>
-                        <div class="media-body dashboard-message-text">
-                            <h5>John Antony - <span>12 March 2022</span> <span class="pull-right new">Reply</span></h5>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                            </div>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                                has been the industry's standard dummy text ever since the 1500s, when an unknown
-                                printer took a galley of type and scrambled it to make a type specimen book.</p>
-                            <span class="reply-mail clearfix">Reply : <a
-                                    href="mailto:info@themevessel.com">info@themevessel.com</a></span>
-                        </div>
-                    </div>
-                    <div class="media dashboard-message">
-                        <div class="pr-4">
-                            <img src="assets/img/avatar/avatar-13.jpg" alt="avatar">
-                        </div>
-                        <div class="media-body dashboard-message-text">
-                            <h5>Martin Smith - <span>12 March 2022</span> <span class="pull-right new">Reply</span></h5>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                            </div>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                                has been the industry's standard dummy text ever since the 1500s, when an unknown
-                                printer took a galley of type and scrambled it to make a type specimen book.</p>
-                            <span class="reply-mail clearfix">Reply : <a
-                                    href="mailto:info@themevessel.com">info@themevessel.com</a></span>
-                        </div>
-                    </div>
+                    <?= $dataCmt ?>
                 </div>
             </div>
         </div>

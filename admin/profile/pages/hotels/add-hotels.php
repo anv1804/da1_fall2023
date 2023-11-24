@@ -57,15 +57,20 @@ if (isset($_POST['submit'])) {
             (null,'{$title}','{$desc}','{$location}','{$listImages}',0,0,$city)";
     pdo_execute($sql);
     $alert = '
-            <div class="popup" style="position: absolute">
+        <div class="overlay" style="position:fixed;z-index: 9;width: 100%;height: 100vh;background-color: rgba(36, 42, 53, 0.7);overflow-y: hidden;">
+            <div class="popup" style="position: absolute;z-index: 10;top:45%;left: 50%;transform: translate(-50%,-50%);">
                 <p class="cookieHeading">Add Complete!</p>
                 <p class="cookieDescription">We use cookies to ensure that we give you the best experience on our
                     website. <br><a href="#">Read cookies policies</a>.</p>
                 <div class="buttonContainer">
-                    <button class="declineButton"><a href="admin.php?page=add-hotels" style="display:inline-block;">Add</a></button>
-                    <button class="acceptButton"><a href="admin.php?page=hotels" style="color:#fff">Continue</a></button>
+                    <button class="declineButton"><a href="admin.php?page=add-hotels"
+                            style="display:inline-block;">Add</a></button>
+                    <button class="acceptButton">
+                        <a href="admin.php?page=hotels" style="color:#fff">Continue</a>
+                    </button>
                 </div>
             </div>
+        </div>
         ';
 }
 $city = loadCity();
@@ -94,6 +99,11 @@ if ($services) {
     }
 }
 
+?>
+<?php
+if (isset($alert)) {
+    echo $alert;
+}
 ?>
 <div class="col-lg-9 offset-lg-3 col-md-12 col-sm-12 col-pad">
     <div class="content-area5">
@@ -161,74 +171,6 @@ if ($services) {
                                         </div>
                                     </div>
                                     <!-- show image -->
-                                    <div class="row pad-20">
-                                        <div class="col-lg-4 col-md-3 col-sm-3">
-                                            <div class="form-group">
-                                                <label>Image 1</label>
-                                                <input type="text" name="address" class="form-control form-1"
-                                                    placeholder="Address" readonly>
-                                                <div>
-                                                    <img src="./assets/img/property-1.jpg" alt="" class="ui-item"
-                                                        style="border: 1px solid #f8f9fa">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-3 col-sm-3">
-                                            <div class="form-group">
-                                                <label>Image 1</label>
-                                                <input type="text" name="address" class="form-control form-1"
-                                                    placeholder="Address" readonly>
-                                                <div>
-                                                    <img src="./assets/img/property-1.jpg" alt="" class="ui-item"
-                                                        style="border: 1px solid #f8f9fa">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-3 col-sm-3">
-                                            <div class="form-group">
-                                                <label>Image 1</label>
-                                                <input type="text" name="address" class="form-control form-1"
-                                                    placeholder="Address" readonly>
-                                                <div>
-                                                    <img src="./assets/img/property-1.jpg" alt="" class="ui-item"
-                                                        style="border: 1px solid #f8f9fa">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-3 col-sm-3">
-                                            <div class="form-group">
-                                                <label>Image 1</label>
-                                                <input type="text" name="address" class="form-control form-1"
-                                                    placeholder="Address" readonly>
-                                                <div>
-                                                    <img src="./assets/img/property-1.jpg" alt="" class="ui-item"
-                                                        style="border: 1px solid #f8f9fa">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-3 col-sm-3">
-                                            <div class="form-group">
-                                                <label>Image 1</label>
-                                                <input type="text" name="address" class="form-control form-1"
-                                                    placeholder="Address" readonly>
-                                                <div>
-                                                    <img src="./assets/img/property-1.jpg" alt="" class="ui-item"
-                                                        style="border: 1px solid #f8f9fa">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-3 col-sm-3">
-                                            <div class="form-group">
-                                                <label>Image 1</label>
-                                                <input type="text" name="address" class="form-control form-1"
-                                                    placeholder="Address" readonly>
-                                                <div>
-                                                    <img src="./assets/img/property-1.jpg" alt="" class="ui-item"
-                                                        style="border: 1px solid #f8f9fa">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <!-- desc -->
                                     <h4 class="heading bg-grea">Descriptions</h4>
                                     <div class="row pad-20">
@@ -237,12 +179,6 @@ if ($services) {
                                                 <textarea class="form-control" name="desc"
                                                     placeholder="Detailed Information" required></textarea>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <h4 class="heading bg-grea">Amenities</h4>
-                                    <div class="row pad-20">
-                                        <div class="col-lg-3 col-md-3 col-sm-6">
-                                            <?= $checks ?>
                                         </div>
                                     </div>
                                     <h4 class="heading bg-grea">Done</h4>

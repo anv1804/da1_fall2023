@@ -114,11 +114,7 @@
     <!-- main header end -->
     <!-- Dashboard start -->
     <div class="dashboard">
-        <?php 
-            if(isset($alert)){
-                echo $alert;
-            }
-        ?>
+
         <div class="container-fluid">
             <div class="row">
                 <div class="dashboard-sidebar col-lg-3 col-md-12 col-sm-12 col-pad">

@@ -43,4 +43,27 @@ function loadBeds(){
     $result = pdo_query($sql);
     return $result;
 }
+function updateRooms($roomID,$number,$price,$img,$desc,$bed,$guest,$hotelID)
+{
+    $sql = "UPDATE rooms
+     SET room_id='$roomID',
+     room_number='$number',
+     room_price='$price',
+     room_image='$img',
+     room_desc='$desc',
+     room_status='0',
+     bed_id='$bed',
+     service_id=null,
+     room_guest='$guest',
+     comment_id=null,
+     hotel_id='$hotelID'
+    WHERE room_id = $roomID";
+    pdo_execute($sql);
+}
+function deleteRooms($roomID)
+{
+    $sql = "DELETE FROM rooms WHERE room_id = $roomID";
+    pdo_execute($sql);
+}
+
 ?>
