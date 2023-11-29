@@ -300,7 +300,7 @@ if (isset($_GET['roomID'])) {
                                 <input type="text" name="dates" placeholder="WHEN... (m-d-y)" required
                                     class="datetimes-left form-control" />
                                 <i class="flaticon-timetable icon-append"></i>
-                                <span class="form-message"></span>
+                                <span class="form-message text-danger"></span>
                             </div>
                             <div class="form-group search-col">
                                 <select class="selectpicker search-fields btn-block form-control bdr" name="guest">

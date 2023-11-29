@@ -94,47 +94,54 @@ if (isset($data)) {
                 // print_r($countHotels[1][0]);
                 // echo $countHotels[1][0][1];
                 foreach ($listHotels as$key => $hotel) {
-                    $listDate = loadAllDate($hotel);
-                    if ($listDate) {
-                        $listDateJson = json_encode($listDate);
+                    $listRooms = roomsHotels($hotel);
+                    if ($listRooms) {
+                        foreach ($listRooms as $room){
+                            // print_r($room);
 
-                        //check day form search home
-                        ?>
-                        <script>
-                            const listDate = JSON.parse('<?php echo addslashes($listDateJson); ?>');
-                            let invalid = false;
-                            let dates = '<?=$dates?>';
-                            dates = dates.split(' - ');
-                            dates.forEach(date => {
-                        
-                                date = date.split('/').map(Number);
-                                let lastDateofLastMonth =  new Date(date[2], date[0], 0).getDate();
+                            $listDate = loadAllDate($room[0]);
+                            // print_r($listDate);
+                            if ($listDate) {
+                                // print_r($listDate);
 
-                                currMonth = date[0]-1;
-                                currYear = date[2];
+                                $dates = explode(' - ' , $dates);
+                                
+                                foreach ($dates as $date) {
+                                    $invalid = false;
+                                    $date = explode('/' , $date);
 
-                                let dateAc = validateDay(lastDateofLastMonth , listDate);
-                        
-                                if (dateAc[0].includes(date[1]) || dateAc[1].includes(date[1]) || dateAc[2].includes(date[1])) {
-                                    invalid = true;
+                                    $date = array_map(function($value) {
+                                        return (int)$value;
+                                    }, $date);
+
+                                    // var_dump($date);
+
+                                    $lastDateofMonth = date('d', strtotime($date[2] . '-' . $date[0] . '-01 last day of last month'));
+
+                                    $currMonth = $date[0]-1;
+                                    $currYear = $date[2];
+
+                                    $listDateAc = validateDay($lastDateofMonth , $listDate , $currMonth , $currYear);
+                                    // var_dump($listDateAc);
+
+                                    if (in_array($date[1], $listDateAc[0]) || in_array($date[1], $listDateAc[1]) || in_array($date[1], $listDateAc[2])) {
+                                        $invalid = true;
+                                        // echo $date[1];
+                                    }
+                                    
+                                    if ($invalid) {
+                                        if ($countHotels[$key][0][0] == $hotel) {
+                                            $countHotels[$key][0][1] -= 1;
+                                            // echo $countHotels[$key][0][1];
+                                            if ($guest[2] > $countHotels[$key][0][1]) {
+                                                unset($listHotels[$key]);
+                                            }
+                                        }
+                                    }
                                 }
                                 
-                            })
-                        
-                            if (invalid) {
-                                <?php
-                                    // echo $countHotels[$key][0][1];
-                                    // if ($countHotels[$key][0][0] == $hotel) {
-                                    //     $countHotels[$key][0][1] -= 1;
-                                    //     if ($guest[2] > $countHotels[$key][0][1]) {
-                                    //         unset($listHotels[$key]);
-                                    //     }
-                                    // }
-
-                                ?>
                             }
-                        </script>
-                        <?php
+                        }
                     }
                 }
             }
