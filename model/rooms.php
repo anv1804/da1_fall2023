@@ -72,4 +72,62 @@ function deleteRooms($roomID)
     pdo_execute($sql);
 }
 
+function validateDay($lastDateofMonth , $listDate , $currMonth ,$currYear ) {
+    $dateStarts = [];
+    $dateEnds = [];
+    $dateMiddles = [];
+
+   
+    foreach ($listDate as $date) {
+        $dateStart = explode('/' , $date['date_start']);
+        $dateEnd = explode('/' , $date['date_end']);
+        
+        //date Start and date End
+        for ($i = 1; $i <= $lastDateofMonth; $i++) { 
+            if ($i == $dateStart[0] && $currMonth === ($dateStart[1]-1) && $currYear == $dateStart[2]) {
+                $dateStarts[] =  $i;
+            }
+            if ( $i == $dateEnd[0] && $currMonth === ($dateEnd[1]-1) && $currYear == $dateEnd[2] ) {
+                $dateEnds[] =  $i;  
+            }
+        }
+
+        //date Middle
+        if (($dateStart[1]-1) == $currMonth && $dateStart[2] == $currYear && ($dateEnd[1]-1) == $currMonth) {
+            for ($i = 1; $i <= $lastDateofMonth; $i++) { 
+                if ($dateStart[0] - $i < 0 && $i < $dateEnd[0]) {
+                    $dateMiddles[] = $i;
+                }
+            }
+            for ($i = 1; $i <= $lastDateofMonth; $i++) { 
+                if ($dateEnd[0] - $i > 0 && $i > $dateStart[0]) {
+                    $dateMiddles[] = $i;
+                }
+            }
+        }
+        if ($dateEnd[1]-1 > $currMonth && $dateStart[1]-1 < $currMonth && $dateEnd[2] == $currYear  && $dateStart[2] == $currYear) {
+            if ($dateEnd[1] - $currMonth > 0) {
+                for ($i = 1; $i <= $lastDateofMonth; $i++) { 
+                    $dateMiddles[] = $i;
+                }
+            }
+        }
+        if ($dateEnd[2] - $dateStart[2] > 0) {
+            if ($dateEnd[1] - 1 > $currMonth && $dateEnd[2] == $currYear) {
+                for ($i = 1; $i <= $lastDateofMonth; $i++) { 
+                    $dateMiddles[] = $i;
+                }
+            }
+            if ($dateStart[1] - 1 < $currMonth && $dateStart[2] == $currYear) {
+                for ($i = 1; $i <= $lastDateofMonth; $i++) { 
+                    $dateMiddles[] = $i;
+                }
+            }
+        }
+    
+    }
+
+    return [$dateStarts , $dateMiddles , $dateEnds];
+}
+
 ?>

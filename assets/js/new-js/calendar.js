@@ -57,15 +57,11 @@ const validateDay = (lastDateofMonth , listDate) => {
             let dateStart = date.date_start.split('/').map(Number);
             let dateEnd = date.date_end.split('/').map(Number);
             
-            //date Start
+            //date Start and date End
             for (let i = 1; i <= lastDateofMonth; i++) { 
                 if (i == dateStart[0] && currMonth === (dateStart[1]-1) && currYear == dateStart[2]) {
                     dateStarts.push(i);
                 }
-            }
-    
-            //date End
-            for (let i = 1; i <= lastDateofMonth; i++) { 
                 if ( i == dateEnd[0] && currMonth === (dateEnd[1]-1) && currYear == dateEnd[2] ) {
                     dateEnds.push(i);    
                 }
