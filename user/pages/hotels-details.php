@@ -2,19 +2,25 @@
 if (isset($_GET['hotelID'])) {
     $hotelID = $_GET['hotelID'];
     // DATA HOTEL
-    $dataHotels = allHotels('','',$hotelID);
+    $dataHotels = allHotels('', '', $hotelID);
     $nameHotel = "";
     $locationHotel = "";
     $descHotel = "";
     $imageHotels = "";
+    $view = "";
+    // LOAD DATAS HOTELS
     if ($dataHotels) {
         $nameHotel = $dataHotels[0]['hotel_name'];
         $locationHotel = $dataHotels[0]['hotel_location'];
         $descHotel = $dataHotels[0]['hotel_desc'];
-        $imageHotels = explode(',',$dataHotels[0]['hotel_image']);
+        $imageHotels = explode(',', $dataHotels[0]['hotel_image']);
+        $views = $dataHotels[0]['hotel_views'];
     }
     ;
-    // ALL ROOM OF HOTEL
+    // ADD VIEWS
+    $addView = $views + 1;
+    countViews($hotelID, $addView);
+    // ALL ROOMS OF HOTEL
     $listRoom = roomsHotels($hotelID);
     $dataRoom = "";
     $numberRoom = "";
@@ -22,13 +28,13 @@ if (isset($_GET['hotelID'])) {
     $typeBed = "";
     if ($listRoom) {
         foreach ($listRoom as $value) {
-        $imageRooms = explode(',',$value['room_image']);
+            $imageRooms = explode(',', $value['room_image']);
             $dataRoom .= '
                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6" >
                     <div class="agent-2" style="border-radius:10px">
                         <div class="agent-photo">
                             <a href="index.php?page=rooms-details&roomID=' . $value["room_id"] . '">
-                                <img style="border-radius:10px 10px 0 0" src="./uploads/rooms/' . $imageRooms[0] . '" alt="room"
+                                <img style="border-radius:10px 10px 0 0" src="./asset/images/rooms/' . $imageRooms[0] . '" alt="room"
                                     class="img-fluid">
                             </a>
                         </div>
@@ -62,22 +68,22 @@ if (isset($_GET['hotelID'])) {
         }
     }
     // TOP HOTELS
-    $topHotels = allHotels('','','',$top5=1);
+    $topHotels = allHotels('', '', '', $top5 = 5);
     $dataTopHotels = "";
     if ($topHotels) {
         foreach ($topHotels as $value) {
-        $imageTop = explode(',', $value['hotel_image']);
-        $dataTopHotels .= '
+            $imageTop = explode(',', $value['hotel_image']);
+            $dataTopHotels .= '
             <div class="media mb-4">
-                <a class="pr-3" href="index.php?page=hotels-details&hotelID='.$value['hotel_id'].'">
-                    <img src="./uploads/hotels/'.$imageTop[0].'" alt="sub-tours">
+                <a class="pr-3" href="index.php?page=hotels-details&hotelID=' . $value['hotel_id'] . '">
+                    <img src="./assets/images/hotels/' . $imageTop[0] . '" alt="sub-tours">
                 </a>
                 <div class="media-body align-self-center">
                     <h5>
-                        <a href="index.php?page=hotels-details&hotelID='.$value['hotel_id'].'">'.$value['hotel_name'].'</a>
+                        <a href="index.php?page=hotels-details&hotelID=' . $value['hotel_id'] . '">' . $value['hotel_name'] . '</a>
                     </h5>
                     <div class="listing-post-meta">
-                    <i class="fa fa-eye"></i> '.$value['hotel_views'].' | <a href="#">Hotel</a>
+                    <i class="fa fa-eye"></i> ' . $value['hotel_views'] . ' | <a href="#">Hotel</a>
                     </div>
                 </div>
             </div>
@@ -85,12 +91,7 @@ if (isset($_GET['hotelID'])) {
         ';
         }
     }
-    // TOTAL RATING HOTEL 
-    $total = loadComments($hotelID);
-    foreach ($total as $key => $value) {
-        # code...
-    }
-    // LOAD COMMENT
+    // LOAD COMMENTS
     $loadComments = loadComments($hotelID);
     $allComments = "";
     if ($loadComments) {
@@ -133,7 +134,11 @@ if (isset($_GET['hotelID'])) {
             header('location: index.php?page=login');
         }
     }
-    // LIMIT COMMENT
+    // TOTAL RATING HOTEL 
+    $totalRating = totalRating($hotelID, $total =1,'');
+    foreach ($totalRating as $key => $value) {
+        # code...
+    }
 }
 ?>
 <!-- Sub banner start -->
@@ -185,19 +190,24 @@ if (isset($_GET['hotelID'])) {
                     <!-- main slider carousel items -->
                     <div class="carousel-inner">
                         <div class="active item carousel-item" data-slide-number="0">
-                            <img src="./uploads/hotels/<?= $imageHotels[0] ?>" class="img-fluid" alt="photo-4">
+                            <img style="object-fit: width: 100%;height: 100%;;"
+                                src="./assets/images/hotels/<?= $imageHotels[0] ?>" class="img-fluid" alt="photo-4">
                         </div>
                         <div class="item carousel-item" data-slide-number="1">
-                            <img src="./uploads/hotels/<?= $imageHotels[1] ?>" class="img-fluid" alt="photo-4">
+                            <img style="object-fit: width: 100%;height: 100%;;"
+                                src="./assets/images/hotels/<?= $imageHotels[1] ?>" class="img-fluid" alt="photo-4">
                         </div>
                         <div class="item carousel-item" data-slide-number="2">
-                            <img src="./uploads/hotels/<?= $imageHotels[2] ?>" class="img-fluid" alt="photo-4">
+                            <img style="object-fit: width: 100%;height: 100%;;"
+                                src="./assets/images/hotels/<?= $imageHotels[2] ?>" class="img-fluid" alt="photo-4">
                         </div>
                         <div class="item carousel-item" data-slide-number="4">
-                            <img src="./uploads/hotels/<?= $imageHotels[3] ?>" class="img-fluid" alt="photo-4">
+                            <img style="object-fit: width: 100%;height: 100%;;"
+                                src="./assets/images/hotels/<?= $imageHotels[3] ?>" class="img-fluid" alt="photo-4">
                         </div>
                         <div class="item carousel-item" data-slide-number="5">
-                            <img src="./uploads/hotels/<?= $imageHotels[4] ?>" class="img-fluid" alt="photo-4">
+                            <img style="object-fit: width: 100%;height: 100%;;"
+                                src="./assets/images/hotels/<?= $imageHotels[4] ?>" class="img-fluid" alt="photo-4">
                         </div>
                     </div>
                     <!-- main slider carousel nav controls -->
@@ -205,27 +215,32 @@ if (isset($_GET['hotelID'])) {
                         <li class="list-inline-item active">
                             <a id="carousel-selector-0" class="selected" data-slide-to="0"
                                 data-target="#itemDetailsSlider">
-                                <img src="./uploads/hotels/<?= $imageHotels[0] ?>" class="img-fluid" alt="photo-5">
+                                <img style="object-fit: width: 100%;height: 100%;;"
+                                    src="./assets/images/hotels/<?= $imageHotels[0] ?>" class="img-fluid" alt="photo-5">
                             </a>
                         </li>
                         <li class="list-inline-item">
                             <a id="carousel-selector-1" data-slide-to="1" data-target="#itemDetailsSlider">
-                                <img src="./uploads/hotels/<?= $imageHotels[1] ?>" class="img-fluid" alt="photo-5">
+                                <img style="object-fit: width: 100%;height: 100%;;"
+                                    src="./assets/images/hotels/<?= $imageHotels[1] ?>" class="img-fluid" alt="photo-5">
                             </a>
                         </li>
                         <li class="list-inline-item">
                             <a id="carousel-selector-2" data-slide-to="2" data-target="#itemDetailsSlider">
-                                <img src="./uploads/hotels/<?= $imageHotels[2] ?>" class="img-fluid" alt="photo-5">
+                                <img style="object-fit: width: 100%;height: 100%;;"
+                                    src="./assets/images/hotels/<?= $imageHotels[2] ?>" class="img-fluid" alt="photo-5">
                             </a>
                         </li>
                         <li class="list-inline-item">
                             <a id="carousel-selector-3" data-slide-to="3" data-target="#itemDetailsSlider">
-                                <img src="./uploads/hotels/<?= $imageHotels[3] ?>" class="img-fluid" alt="photo-5">
+                                <img style="object-fit: width: 100%;height: 100%;;"
+                                    src="./assets/images/hotels/<?= $imageHotels[3] ?>" class="img-fluid" alt="photo-5">
                             </a>
                         </li>
                         <li class="list-inline-item">
                             <a id="carousel-selector-4" data-slide-to="4" data-target="#itemDetailsSlider">
-                                <img src="./uploads/hotels/<?= $imageHotels[4] ?>" class="img-fluid" alt="photo-5">
+                                <img style="object-fit: width: 100%;height: 100%;;"
+                                    src="./assets/images/hotels/<?= $imageHotels[4] ?>" class="img-fluid" alt="photo-5">
                             </a>
                         </li>
                     </ul>
