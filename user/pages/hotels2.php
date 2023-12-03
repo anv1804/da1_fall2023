@@ -8,6 +8,7 @@ $allHotels = allHotels($hotel_name);
 $dataHotels = "";
 if ($allHotels) {
     foreach ($allHotels as $value) {
+        $hotelImages = explode(',',$value['hotel_image']);
         $dataHotels .= '
             <div class="col-lg-6 col-md-6 col-sm-12">
                 <div class="item-box">
@@ -28,7 +29,7 @@ if ($allHotels) {
                             <div class="love">
                                 <i class="flaticon-heart"></i>
                             </div>
-                            <img src="assets/img/' . $value['hotel_image'] . '" alt="hotel" class="img-fluid">
+                            <img src="assets/images/hotels/' . $hotelImages[0]. '" alt="hotel" class="img-fluid">
                         </a>
                     </div>
                     <div class="detail">
@@ -40,7 +41,6 @@ if ($allHotels) {
                                 <i class="flaticon-localization"></i>' . $value['hotel_location'] . '
                             </a>
                         </div>
-                        <p>' . $value['hotel_desc'] . '</p>
                     </div>
                     <div class="footer clearfix">
                         <div class="pull-left">
