@@ -8,14 +8,13 @@ if ($loadHotels) {
         $dataHotels .= '
             <tr class="responsive-table">
                 <td class="listing-photoo">
-                    <img src="./uploads/hotels/' . $hotelImages[0] . '" alt="listing-photo" class="img-fluid">
+                    <img src="./assets/images/hotels/' . $hotelImages[0] . '" alt="listing-photo" class="img-fluid">
                 </td>
                 <td class="title-container">
                     <h2><a href="#">' . $value['hotel_name'] . '</a></h2>
                     <h5 class="d-none d-xl-block d-lg-block d-md-block"><i class="fa fa-map-marker"></i>
-                    ' . $value['city_name'] . ' / ' . $value['hotel_location'] . '
+                    ' . $value['hotel_location'] . ' / ' . $value['city_name'] . '
                     </h5>
-                    <h6 class="table-property-price">' . $value['hotel_desc'] . '</h6>
                 </td>
                 <td class="expire-date"><span style="color: red;font-size:18px;font-weight:550"> ' . $countRooms[$key][1] . '</span> ROOMS</td>
                 <td class="action">

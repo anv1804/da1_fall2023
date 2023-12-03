@@ -1,5 +1,5 @@
 let thisPage = 1;
-let limit = 2;
+let limit = 5;
 let list = document.querySelectorAll(".dashboard-content .responsive-table");
 function loadItem() {
     let beginGet = limit * (thisPage - 1);

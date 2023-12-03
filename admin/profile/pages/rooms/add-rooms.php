@@ -39,7 +39,7 @@ if (isset($_POST['submit'])) {
         } else {
             $temp = preg_split('/[\/\\\\]+/', $name[$i]);
             $filename = time() . basename($temp[count($temp) - 1]);
-            $upload_dir = "./uploads/rooms/";
+            $upload_dir = "./assets/images/rooms/";
             $upload_file = $upload_dir . ($filename);
             if (file_exists($upload_file)) {
             } else {

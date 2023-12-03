@@ -1,6 +1,7 @@
 <?php
-function loadUsers(){
-    $sql ="SELECT * FROM users WHERE user_role = 0";
+function loadUsers()
+{
+    $sql = "SELECT * FROM users WHERE user_role = 0";
     $result = pdo_query($sql);
     return $result;
 }
@@ -16,6 +17,19 @@ function loadComments($hotelID)
     INNER JOIN users ON comment.user_id = users.user_id 
     INNER JOIN hotels ON comment.hotel_id = hotels.hotel_id 
     WHERE 1 AND comment.hotel_id = $hotelID";
+    $data = pdo_query($sql);
+    return $data;
+}
+function totalRating($hotelID, $total = '' , $avg = '')
+{
+    if ($total != '') {
+        $sql = "SELECT COUNT(comment_rate) AS countRating FROM comment
+    WHERE comment.hotel_id = $hotelID";
+    }
+    if ($avg != '') {
+        $sql = "SELECT comment_rate FROM comment
+        WHERE comment.hotel_id = $hotelID";
+    }
     $data = pdo_query($sql);
     return $data;
 }
@@ -43,11 +57,12 @@ function ratingCmt($starRate)
     return $starRate;
 }
 
-function deleteUsers($userID){
+function deleteUsers($userID)
+{
     $sql = "DELETE FROM users WHERE user_id = $userID";
-     pdo_execute($sql);
+    pdo_execute($sql);
 }
-function booking($date,$dateStart,$dateEnd,$roomID)
+function booking($date, $dateStart, $dateEnd, $roomID)
 {
     $sql = "INSERT INTO `completed`
     (`completed_id`, `date_booking`, `date_start`, `date_end`, `room_id`) 

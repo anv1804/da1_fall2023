@@ -8,7 +8,7 @@ if ($loadRooms) {
         $dataRooms .= '
             <tr class="responsive-table">
                 <td class="listing-photoo">
-                    <img src="./uploads/rooms/' . $roomImages[0] . '" alt="listing-photo" class="img-fluid">
+                    <img src="./assets/images/rooms/' . $roomImages[0] . '" alt="listing-photo" class="img-fluid">
                 </td>
                 <td class="title-container">
                     <h2><a href="#">ROOM NUMBER ' . $value['room_number'] . '</a></h2>
