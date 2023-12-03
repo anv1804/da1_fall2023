@@ -1,5 +1,5 @@
 <?php
-function allHotels($hotel_name = '', $city= '', $hotelID= '',$top5='' ,$listHotel_id = [])
+function allHotels($hotel_name = '', $city = '', $hotelID = '', $top5 = '', $listHotel_id = [])
 {
     $sql = "SELECT * FROM hotels ";
     if ($hotel_name != '') {
@@ -9,10 +9,10 @@ function allHotels($hotel_name = '', $city= '', $hotelID= '',$top5='' ,$listHote
         $sql .= "WHERE hotel_id=$hotelID";
     }
     if ($listHotel_id) {
-        $sql .= 'WHERE hotel_id='.$listHotel_id[0];
-        foreach($listHotel_id as $key => $hotel_id) {
+        $sql .= 'WHERE hotel_id=' . $listHotel_id[0];
+        foreach ($listHotel_id as $key => $hotel_id) {
             if ($key != 0) {
-                $sql .= ' or hotel_id='.$hotel_id;
+                $sql .= ' or hotel_id=' . $hotel_id;
             }
         }
     }
@@ -55,6 +55,11 @@ function updateHotels($hotelID, $nameHotel, $descHotel, $locationHotel, $img, $c
 function deleteHotels($hotelID)
 {
     $sql = "DELETE FROM hotels WHERE hotel_id = $hotelID";
+    pdo_execute($sql);
+}
+function countViews($hotelID, $addView)
+{
+    $sql = "UPDATE hotels SET `hotel_views`='$addView' WHERE hotel_id = $hotelID";
     pdo_execute($sql);
 }
 ?>

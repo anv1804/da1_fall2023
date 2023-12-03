@@ -64,7 +64,7 @@ if (isset($_GET['hotelID'])) {
                 } else {
                     $temp = preg_split('/[\/\\\\]+/', $name[$i]);
                     $filename = time() . basename($temp[count($temp) - 1]);
-                    $upload_dir = "./uploads/hotels/";
+                    $upload_dir = "./uploads/images/hotels/";
                     $upload_file = $upload_dir . ($filename);
                     if (file_exists($upload_file)) {
                     } else {
@@ -84,7 +84,7 @@ if (isset($_GET['hotelID'])) {
             // echo $img;
         }
         if ($isCheck) {
-            echo $hotelID . '/' . $nameHotel . '/' . $descHotel . '/' . $locationHotel . '/' . $img . '/' . $cityHotel;
+            // echo $hotelID . '/' . $nameHotel . '/' . $descHotel . '/' . $locationHotel . '/' . $img . '/' . $cityHotel
             // updateHotels((int)$hotelID, "{$nameHotel}", "{$descHotel}", "{$locationHotel}", "{$img}", (int)$cityHotel);
             updateHotels($hotelID, $nameHotel, $descHotel, $locationHotel, $img, $cityHotel);
             $alert = '
