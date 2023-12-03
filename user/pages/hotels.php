@@ -17,9 +17,7 @@ if (isset($_GET['listHotels']) && ($_GET['listHotels'] != '[]')) {
 $dataHotels = "";
 if ($allHotels) {
     foreach ($allHotels as $value) {
-        // print_r($value['hotel_image']);
         $hotelImages = explode(',',$value['hotel_image']);
-        // print_r($hotelImages);
         $dataHotels .= '
         <div class="item-box-3">
             <div class="row">
@@ -29,7 +27,7 @@ if ($allHotels) {
                             <div class="tag">Historic</div>
                             <div class="price-ratings-box">
                                 <p class="price">
-                                    From <span>$69</span> Per Person
+                                    From <span>$66</span> Per Person
                                 </p>
                                 <div class="ratings">
                                     <i class="fa fa-star"></i>
@@ -43,7 +41,7 @@ if ($allHotels) {
                             <div class="love">
                                 <i class="flaticon-heart"></i>
                             </div>
-                            <img src="uploads/hotels/'.$hotelImages[0].'" alt="hotel-list" class="img-fluid">
+                            <img src="./assets/images/hotels/'.$hotelImages[0].'" alt="hotel-list" class="img-fluid">
                         </a>
                     </div>
                 </div>
@@ -61,16 +59,13 @@ if ($allHotels) {
                         </a>
                     </div>
                     <!-- Paragraph -->
-                    <p>
-                    ' . $value['hotel_desc'] . '
-                    </p>
                     </div>
                     <div class="ftr">
                         <div class="pull-left">
                             <i class="flaticon-user"></i> Jhon Doe
                         </div>
                         <div class="pull-right">
-                            <i class="flaticon-timetable"></i> 6 days
+                        ' . $value['hotel_views'] . ' <i class="fa fa-eye" style="opacity: 0.7;"></i>
                         </div>
                     </div>
                 </div>

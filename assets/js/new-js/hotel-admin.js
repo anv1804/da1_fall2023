@@ -32,7 +32,7 @@ function listPage() {
 
     if (!document.querySelector(".dashboard-content  .pagination li a span")) {
         let prev = document.createElement("li");
-        prev.innerHTML ='<a class="-link prev"><span aria-hidden="true">«</span></a>';
+        prev.innerHTML ='<a class="page-link prev"><span aria-hidden="true" style="">«</span></a>';
             document
             .querySelector(".dashboard-content  .pagination")
             .prepend(prev);
