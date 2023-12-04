@@ -105,6 +105,22 @@ function validateDay($lastDateofMonth , $listDate , $currMonth ,$currYear ) {
                 }
             }
         }
+        if ($dateStart[1] != $dateEnd[1] || $dateEnd[2] - $dateStart[2] > 0) { 
+            if (($dateStart[1]-1) == $currMonth) {
+                for ($i = 1; $i <= $lastDateofMonth; $i++) {
+                    if ($dateStart[0] - $i < 0) {
+                        $dateMiddles[] = $i;
+                    }
+                }
+            }
+            if (($dateEnd[1]-1) == $currMonth) {
+                for ($i = 1; $i <= $lastDateofMonth; $i++) {
+                    if ($dateEnd[0] - $i > 0) {
+                        $dateMiddles[] = $i;
+                    }
+                }
+            }
+        }
         if ($dateEnd[1]-1 > $currMonth && $dateStart[1]-1 < $currMonth && $dateEnd[2] == $currYear  && $dateStart[2] == $currYear) {
             if ($dateEnd[1] - $currMonth > 0) {
                 for ($i = 1; $i <= $lastDateofMonth; $i++) { 

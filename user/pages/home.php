@@ -53,106 +53,106 @@ if (isset($data)) {
 
 <script src="./assets/js/new-js/calendar.js"></script>
 <!-- Form search -->
-<?php 
-    if (isset($_POST['submit']) && ($_POST['submit'])) {
-        $listHotels = [];
-        $hotel = $_POST['hotel'] ? $_POST['hotel'] : '';
-        $dates = $_POST['dates'] ? $_POST['dates'] : '';
-        $guest = $_POST['guest'] ? $_POST['guest'] : '';
-        if ($hotel) {
-            $hotels = allHotels($hotel);
-            if ($hotels) {
-                foreach ($hotels as $hotel) {
-                    $listHotels[] = $hotel[0];
+<?php
+if (isset($_POST['submit']) && ($_POST['submit'])) {
+    $listHotels = [];
+    $hotel = $_POST['hotel'] ? $_POST['hotel'] : '';
+    $dates = $_POST['dates'] ? $_POST['dates'] : '';
+    $guest = $_POST['guest'] ? $_POST['guest'] : '';
+    if ($hotel) {
+        $hotels = allHotels($hotel);
+        if ($hotels) {
+            foreach ($hotels as $hotel) {
+                $listHotels[] = $hotel[0];
+            }
+        }
+    }
+    if ($guest) {
+        $guest = explode(',', $guest);
+        if ($listHotels) {
+            foreach ($listHotels as $key => $hotel) {
+                $countHotel = countRooms($hotel);
+                if ($guest[2] > $countHotel[0][1]) {
+                    unset($listHotels[$key]);
+                }
+            }
+        } else {
+            $countHotels = countRooms();
+            foreach ($countHotels as $countHotel) {
+                if ($guest[2] <= $countHotel[1]) {
+                    $listHotels[] = $countHotel[0];
                 }
             }
         }
-        if ($guest) {
-            $guest = explode(',' , $guest);
-            if ($listHotels) {
-                foreach ($listHotels as$key => $hotel) {
-                    $countHotel = countRooms($hotel);
-                    if ($guest[2] > $countHotel[0][1]) {
-                        unset($listHotels[$key]);
-                    }
-                }
-            }else {
-                $countHotels = countRooms();
-                foreach ($countHotels as $countHotel) {
-                    if ($guest[2] <= $countHotel[1]) {
-                        $listHotels[] = $countHotel[0];
-                    }
-                }
+    }
+    if ($dates) {
+        if ($listHotels) {
+            $countHotels = [];
+            foreach ($listHotels as $hotel) {
+                $countHotels[] = countRooms($hotel);
             }
-        }
-        if ($dates) {
-            if ($listHotels) {
-                $countHotels = [];
-                foreach ($listHotels as $hotel) {
-                    $countHotels[] = countRooms($hotel);
-                }
-                // print_r($countHotels[1][0]);
-                // echo $countHotels[1][0][1];
-                foreach ($listHotels as$key => $hotel) {
-                    $listRooms = roomsHotels($hotel);
-                    if ($listRooms) {
-                        foreach ($listRooms as $room){
-                            // print_r($room);
+            // print_r($countHotels[1][0]);
+            // echo $countHotels[1][0][1];
+            foreach ($listHotels as $key => $hotel) {
+                $listRooms = roomsHotels($hotel);
+                if ($listRooms) {
+                    foreach ($listRooms as $room) {
+                        // print_r($room);
 
-                            $listDate = loadAllDate($room[0]);
+                        $listDate = loadAllDate($room[0]);
+                        // print_r($listDate);
+                        if ($listDate) {
                             // print_r($listDate);
-                            if ($listDate) {
-                                // print_r($listDate);
 
-                                $dates = explode(' - ' , $dates);
-                                
-                                foreach ($dates as $date) {
-                                    $invalid = false;
-                                    $date = explode('/' , $date);
+                            $dates = explode(' - ', $dates);
 
-                                    $date = array_map(function($value) {
-                                        return (int)$value;
-                                    }, $date);
+                            foreach ($dates as $date) {
+                                $invalid = false;
+                                $date = explode('/', $date);
 
-                                    // var_dump($date);
+                                $date = array_map(function ($value) {
+                                    return (int) $value;
+                                }, $date);
 
-                                    $lastDateofMonth = date('d', strtotime($date[2] . '-' . $date[0] . '-01 last day of last month'));
+                                // var_dump($date);
 
-                                    $currMonth = $date[0]-1;
-                                    $currYear = $date[2];
+                                $lastDateofMonth = date('d', strtotime($date[2] . '-' . $date[0] . '-01 last day of last month'));
 
-                                    $listDateAc = validateDay($lastDateofMonth , $listDate , $currMonth , $currYear);
-                                    // var_dump($listDateAc);
+                                $currMonth = $date[0] - 1;
+                                $currYear = $date[2];
 
-                                    if (in_array($date[1], $listDateAc[0]) || in_array($date[1], $listDateAc[1]) || in_array($date[1], $listDateAc[2])) {
-                                        $invalid = true;
-                                        // echo $date[1];
-                                    }
-                                    
-                                    if ($invalid) {
-                                        if ($countHotels[$key][0][0] == $hotel) {
-                                            $countHotels[$key][0][1] -= 1;
-                                            // echo $countHotels[$key][0][1];
-                                            if ($guest[2] > $countHotels[$key][0][1]) {
-                                                unset($listHotels[$key]);
-                                            }
+                                $listDateAc = validateDay($lastDateofMonth, $listDate, $currMonth, $currYear);
+                                // var_dump($listDateAc);
+
+                                if (in_array($date[1], $listDateAc[0]) || in_array($date[1], $listDateAc[1]) || in_array($date[1], $listDateAc[2])) {
+                                    $invalid = true;
+                                    // echo $date[1];
+                                }
+
+                                if ($invalid) {
+                                    if ($countHotels[$key][0][0] == $hotel) {
+                                        $countHotels[$key][0][1] -= 1;
+                                        // echo $countHotels[$key][0][1];
+                                        if ($guest[2] > $countHotels[$key][0][1]) {
+                                            unset($listHotels[$key]);
                                         }
                                     }
                                 }
-                                
                             }
+
                         }
                     }
                 }
             }
         }
-        // print_r($listHotels);
-        $listHotels = array_values($listHotels);
-        $listHotels = json_encode($listHotels);
-        // echo $listHotels;
-        echo "<script type='text/javascript'>window.location.href = './index.php?page=hotels&listHotels=$listHotels';</script>";
-
     }
+    // print_r($listHotels);
+    $listHotels = array_values($listHotels);
+    $listHotels = json_encode($listHotels);
+    // echo $listHotels;
+    echo "<script type='text/javascript'>window.location.href = './index.php?page=hotels&listHotels=$listHotels';</script>";
+
+}
 ?>
 
 
@@ -177,7 +177,8 @@ if (isset($data)) {
                     </p>
                 </div>
             </div>
-            <form class="row inline-search-area search-area" action="index.php?page=home" method="post" id="form-search">
+            <form class="row inline-search-area search-area" action="index.php?page=home" method="post"
+                id="form-search">
                 <div class="col-lg-3 search-col">
                     <input type="text" name="hotel" class="form-control first-input" placeholder="Hotel, City.....">
                     <i class="flaticon-localization icon-append"></i>
@@ -187,11 +188,12 @@ if (isset($data)) {
                     <i class="flaticon-timetable icon-append"></i>
                 </div>
                 <div class="col-lg-4 search-col">
-                    <input type="text" name="guest" placeholder="Guest" class="form-control last-input" hidden/>
+                    <input type="text" name="guest" placeholder="Guest" class="form-control last-input" hidden />
 
                     <div class="form-guest">
-                        <img src="./assets/images/icon-guests.svg" alt="icon guest">
-                        <div class="form-content"><span>2</span> adults, <span>0</span> children, <span>1</span> room</div>
+                        <i class="fa fa-users"></i>
+                        <div class="form-content"><span>2</span> adults, <span>0</span> children, <span>1</span> room
+                        </div>
                         <i class="flaticon-down icon-append icon-search3"></i>
                     </div>
                     <div class="overlay"></div>
@@ -199,7 +201,7 @@ if (isset($data)) {
                         <div class="form-guest-body">
                             <div class="form-guest-choose">
                                 <div class="form-guest-info">
-                                    <img src="./assets/images/icon-guest-choose.svg" alt="">
+                                    <i class="fa fa-user"></i>
                                     <div class="form-guest-text">Adults</div>
                                 </div>
 
@@ -212,7 +214,7 @@ if (isset($data)) {
 
                             <div class="form-guest-choose">
                                 <div class="form-guest-info">
-                                    <img src="./assets/images/icon-guest-choose-children.svg" alt="">
+                                    <i class="fa fa-child"></i>
                                     <div class="form-guest-text">Children</div>
                                 </div>
 
@@ -225,7 +227,7 @@ if (isset($data)) {
 
                             <div class="form-guest-choose">
                                 <div class="form-guest-info">
-                                    <img src="./assets/images/icon-guest-choose-room.svg" alt="">
+                                    <i class="fa fa-bed"></i>
                                     <div class="form-guest-text">Room</div>
                                 </div>
 
@@ -244,7 +246,8 @@ if (isset($data)) {
                     </div>
                 </div>
                 <div class="col-lg-2 search-col">
-                    <button type="submit" value="submit" name="submit" class="btn-theme btn-md btn-block">Search</button>
+                    <button type="submit" value="submit" name="submit"
+                        class="btn-theme btn-md btn-block">Search</button>
                 </div>
             </form>
         </div>
