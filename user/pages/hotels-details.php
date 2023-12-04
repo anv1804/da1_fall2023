@@ -15,8 +15,7 @@ if (isset($_GET['hotelID'])) {
         $descHotel = $dataHotels[0]['hotel_desc'];
         $imageHotels = explode(',', $dataHotels[0]['hotel_image']);
         $views = $dataHotels[0]['hotel_views'];
-    }
-    ;
+    };
     // ADD VIEWS
     $addView = $views + 1;
     countViews($hotelID, $addView);
