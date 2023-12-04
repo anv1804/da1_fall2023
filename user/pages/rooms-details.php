@@ -65,19 +65,19 @@ if (isset($_GET['roomID'])) {
                     <!-- main slider carousel items -->
                     <div class="carousel-inner">
                         <div class="active item carousel-item" data-slide-number="0">
-                            <img src="./uploads/rooms/<?= $imageRoom[0] ?>" class="img-fluid" alt="photo-4">
+                            <img style="width: 100%;height: 100%" src="./assets/images/rooms/<?= $imageRoom[0] ?>" class="img-fluid" alt="photo-4">
                         </div>
                         <div class="item carousel-item" data-slide-number="1">
-                            <img src="./uploads/rooms/<?= $imageRoom[1] ?>" class="img-fluid" alt="photo-4">
+                            <img style="width: 100%;height: 100%" src="./assets/images/rooms/<?= $imageRoom[1] ?>" class="img-fluid" alt="photo-4">
                         </div>
                         <div class="item carousel-item" data-slide-number="2">
-                            <img src="./uploads/rooms/<?= $imageRoom[2] ?>" class="img-fluid" alt="photo-4">
+                            <img style="width: 100%;height: 100%" src="./assets/images/rooms/<?= $imageRoom[2] ?>" class="img-fluid" alt="photo-4">
                         </div>
                         <div class="item carousel-item" data-slide-number="4">
-                            <img src="./uploads/rooms/<?= $imageRoom[3] ?>" class="img-fluid" alt="photo-4">
+                            <img style="width: 100%;height: 100%" src="./assets/images/rooms/<?= $imageRoom[3] ?>" class="img-fluid" alt="photo-4">
                         </div>
                         <div class="item carousel-item" data-slide-number="5">
-                            <img src="./uploads/rooms/<?= $imageRoom[4] ?>" class="img-fluid" alt="photo-4">
+                            <img style="width: 100%;height: 100%" src="./assets/images/rooms/<?= $imageRoom[4] ?>" class="img-fluid" alt="photo-4">
                         </div>
                     </div>
                     <!-- main slider carousel nav controls -->
@@ -85,27 +85,27 @@ if (isset($_GET['roomID'])) {
                         <li class="list-inline-item active">
                             <a id="carousel-selector-0" class="selected" data-slide-to="0"
                                 data-target="#itemDetailsSlider">
-                                <img src="./uploads/rooms/<?= $imageRoom[0] ?>" class="img-fluid" alt="photo-5">
+                                <img style="width: 100%;height: 100%" src="./assets/images/rooms/<?= $imageRoom[0] ?>" class="img-fluid" alt="photo-5">
                             </a>
                         </li>
                         <li class="list-inline-item">
                             <a id="carousel-selector-1" data-slide-to="1" data-target="#itemDetailsSlider">
-                                <img src="./uploads/rooms/<?= $imageRoom[1] ?>" class="img-fluid" alt="photo-5">
+                                <img style="width: 100%;height: 100%" src="./assets/images/rooms/<?= $imageRoom[1] ?>" class="img-fluid" alt="photo-5">
                             </a>
                         </li>
                         <li class="list-inline-item">
                             <a id="carousel-selector-2" data-slide-to="2" data-target="#itemDetailsSlider">
-                                <img src="./uploads/rooms/<?= $imageRoom[2] ?>" class="img-fluid" alt="photo-5">
+                                <img style="width: 100%;height: 100%" src="./assets/images/rooms/<?= $imageRoom[2] ?>" class="img-fluid" alt="photo-5">
                             </a>
                         </li>
                         <li class="list-inline-item">
                             <a id="carousel-selector-3" data-slide-to="3" data-target="#itemDetailsSlider">
-                                <img src="./uploads/rooms/<?= $imageRoom[3] ?>" class="img-fluid" alt="photo-5">
+                                <img style="width: 100%;height: 100%" src="./assets/images/rooms/<?= $imageRoom[3] ?>" class="img-fluid" alt="photo-5">
                             </a>
                         </li>
                         <li class="list-inline-item">
                             <a id="carousel-selector-4" data-slide-to="4" data-target="#itemDetailsSlider">
-                                <img src="./uploads/rooms/<?= $imageRoom[4] ?>" class="img-fluid" alt="photo-5">
+                                <img style="width: 100%;height: 100%" src="./assets/images/rooms/<?= $imageRoom[4] ?>" class="img-fluid" alt="photo-5">
                             </a>
                         </li>
                     </ul>

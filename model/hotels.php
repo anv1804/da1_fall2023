@@ -62,4 +62,14 @@ function countViews($hotelID, $addView)
     $sql = "UPDATE hotels SET `hotel_views`='$addView' WHERE hotel_id = $hotelID";
     pdo_execute($sql);
 }
+function category(){
+    $sql = "SELECT city_name,city.city_id,count(hotels.city_id) as countCity
+    FROM `hotels` 
+    INNER JOIN city 
+    ON hotels.city_id = city.city_id 
+    WHERE 1 
+    GROUP BY hotels.city_id";
+    $result = pdo_query($sql);
+    return $result;
+}
 ?>

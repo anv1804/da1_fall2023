@@ -292,7 +292,6 @@ input[type=checkbox]:checked+label:before {
 
 .form-check label {
     display: inline-block;
-    position: relative;
     padding-left: 10px;
 }
 
@@ -1340,7 +1339,7 @@ a {
 }
 
 .option-bar .search-area {
-    width: 170px;
+    width: 200px;
     margin-top: 10px;
     float: right;
 }

@@ -4,12 +4,13 @@
 <head>
     <!-- Google Tag Manager -->
     <!-- End Google Tag Manager -->
-    <title>Hotel Booking</title>
+    <title>PTravel - BookingHotels</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <!-- External CSS libraries -->
     <!-- Google Font Link for Icons -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
     <link type="text/css" rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link type="text/css" rel="stylesheet" href="assets/css/magnific-popup.css">
     <link type="text/css" rel="stylesheet" href="assets/css/jquery.selectBox.css">
@@ -41,14 +42,14 @@
 
 </head>
 <style>
-@media (min-width: 756px) {
-    #bar {
-        display: flex;
-        padding-left: 10%;
-        margin: auto;
-    }
+    @media (min-width: 756px) {
+        #bar {
+            display: flex;
+            padding-left: 10%;
+            margin: auto;
+        }
 
-}
+    }
 </style>
 
 <body id="top">
@@ -110,19 +111,25 @@
                                     <?php
                                     $user = "";
                                     if (isset($_SESSION['user']) || isset($_COOKIE['user'])) {
-
                                         if (isset($_SESSION['user'])) {
                                             $user = $_SESSION['user'];
+                                            $userEmail = $user['user_email'];
                                         } else {
                                             $user = json_decode($_COOKIE['user'], true);
+                                            $userEmail = $user['user_email'];
                                         }
-                                        // print_r($user);
-                                        // var_dump($user);
+                                        $acc = user($userEmail);
+                                        if ($acc[0]['user_image'] !== '') {
+                                            $avatar = $acc[0]['user_image'];
+                                        } else if($acc[0]['user_image'] === ''){
+                                            $avatar = 'user.png';
+                                        }
                                         if ($user["user_role"] == '0') {
+
                                             $user = '
                                         <li class="nav-item dropdown">
                                             <a href="profile.php" class="nav-link">
-                                                <img style="width: 36px;" src="./assets/images/user.png" alt="">
+                                                <img style="width: 36px;border-radius:50%" src="./assets/img/avatar/' . $avatar . '" alt="">
                                             </a>
                                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="position: absolute;left:-110%;text-align: center;" >
                                                 <li><a class="dropdown-item" href="my-profile.html">My Profile</a></li>
