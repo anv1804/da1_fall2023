@@ -31,7 +31,7 @@ function logout()
 // REGISTER
 function register($name, $email, $password)
 {
-    $sql = "INSERT INTO `users` ( `user_email`, `user_name`, `user_password`) VALUES ( '$email', '$name','$password'); ";
+    $sql = "INSERT INTO `users` ( `user_email`, `user_name`, `user_password`,`user_image`) VALUES ( '$email', '$name','$password','user.png'); ";
     pdo_execute($sql);
 
     return login($email, $password);

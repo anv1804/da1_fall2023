@@ -5,9 +5,14 @@ function loadUsers()
     $result = pdo_query($sql);
     return $result;
 }
+function user($userEmail){
+    $sql = "SELECT * FROM users WHERE user_email = '$userEmail'";
+    $result = pdo_query($sql);
+    return $result;
+} 
 function getID($userEmail)
 {
-    $sql = "SELECT user_id FROM users WHERE 1 AND user_email = '$userEmail'";
+    $sql = "SELECT user_id FROM users WHERE user_email = '$userEmail'";
     $result = pdo_query_one($sql);
     return $result;
 }
@@ -16,26 +21,31 @@ function loadComments($hotelID)
     $sql = "SELECT * FROM comment 
     INNER JOIN users ON comment.user_id = users.user_id 
     INNER JOIN hotels ON comment.hotel_id = hotels.hotel_id 
-    WHERE 1 AND comment.hotel_id = $hotelID";
+    WHERE comment.hotel_id = $hotelID";
     $data = pdo_query($sql);
     return $data;
 }
-function totalRating($hotelID, $total = '' , $avg = '')
+function totalRating($hotelID, $total = '', $avg = '')
 {
     if ($total != '') {
         $sql = "SELECT COUNT(comment_rate) AS countRating FROM comment
     WHERE comment.hotel_id = $hotelID";
+        $data = pdo_query($sql);
+    return $data;
+
     }
     if ($avg != '') {
         $sql = "SELECT comment_rate FROM comment
         WHERE comment.hotel_id = $hotelID";
-    }
-    $data = pdo_query($sql);
+        $data = pdo_query($sql);
     return $data;
+
+    }
+
 }
 function comment($content, $hotelID, $userID, $rating)
 {
-    $date = date('Y-m-d');
+    $date = date('d-m-Y');
     $sql = "INSERT INTO `comment`
     (`comment_id`, `comment_content`, `comment_date`, `hotel_id`, `room_id`, `user_id`, `comment_rate`) 
     VALUES 

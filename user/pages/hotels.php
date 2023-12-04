@@ -1,5 +1,5 @@
 <?php
-$hotel_name =''; 
+$hotel_name = '';
 if (isset($_POST['search']) && ($_POST['search'])) {
     $hotel_name = $_POST['hotel_name'];
 }
@@ -7,10 +7,10 @@ if (isset($_POST['search']) && ($_POST['search'])) {
 $listHotel_id = '';
 if (isset($_GET['listHotels']) && ($_GET['listHotels'] != '[]')) {
     $listHotel_id = $_GET['listHotels'];
-    $listHotel_id = json_decode($listHotel_id , true);
-    $allHotels = allHotels('' , '' ,'' ,'' ,  $listHotel_id);
-}else if(isset($_GET['listHotels']) && ($_GET['listHotels'] == '[]')) {
-    $allHotels = allHotels('' , '' ,0 );
+    $listHotel_id = json_decode($listHotel_id, true);
+    $allHotels = allHotels('', '', '', '', $listHotel_id);
+} else if (isset($_GET['listHotels']) && ($_GET['listHotels'] == '[]')) {
+    $allHotels = allHotels('', '', 0);
 } else {
     $allHotels = allHotels($hotel_name);
 }
@@ -18,7 +18,7 @@ if (isset($_GET['listHotels']) && ($_GET['listHotels'] != '[]')) {
 $dataHotels = "";
 if ($allHotels) {
     foreach ($allHotels as $value) {
-        $hotelImages = explode(',',$value['hotel_image']);
+        $hotelImages = explode(',', $value['hotel_image']);
         $dataHotels .= '
         <div class="item-box-3">
             <div class="row">
@@ -42,7 +42,7 @@ if ($allHotels) {
                             <div class="love">
                                 <i class="flaticon-heart"></i>
                             </div>
-                            <img src="./assets/images/hotels/'.$hotelImages[0].'" alt="hotel-list" class="img-fluid">
+                            <img src="./assets/images/hotels/' . $hotelImages[0] . '" alt="hotel-list" class="img-fluid">
                         </a>
                     </div>
                 </div>
@@ -74,6 +74,19 @@ if ($allHotels) {
         </div>
         ';
     }
+}
+$category = category();
+$dataCategory = "";
+$cityList = "";
+if ($category) {
+    foreach ($category as $value) {
+        $dataCategory .= '
+            <li><a href="#">' . $value['city_name'] . '<span>(' . $value['countCity'] . ')</span></a></li>
+    ';
+
+        $cityList .= '<option value="' . $value['city_id'] . '">' . $value['city_name'] . '</option>';
+    }
+
 }
 ?>
 <!-- Sub banner start -->
@@ -112,20 +125,23 @@ if ($allHotels) {
                                         class="fa fa-th-list"></i></a>
                                 <a href="index.php?page=hotels2?listHotels=<?=$listHotel_id?>" class="change-view-btn"><i
                                         class="fa fa-th-large"></i></a>
+
                             </div>
-                            <div class="search-area">
+                            <form class="search-area" style="display: flex;">
                                 <select class="selectpicker search-fields" name="location">
-                                    <option>High to Low</option>
-                                    <option>Low to High</option>
+                                    <?= $cityList ?>
                                 </select>
-                            </div>
+                                <button class="change-view-btn" type="submit" name="submit1" style="margin-left: 13px;">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
                 <div class="subtitle">
                     <!-- 20 Result Found -->
                 </div>
-                    <?= $dataHotels ?>
+                <?= $dataHotels ?>
                 <div class="pagination-box">
                     <nav aria-label="Page navigation example">
                         <ul class="pagination">
@@ -141,7 +157,8 @@ if ($allHotels) {
                         <h5 class="sidebar-title">Search Hotel</h5>
                         <form class="form-search" action="index.php?page=hotels" method="post">
                             <input type="text" name="hotel_name" class="form-control" placeholder="Search">
-                            <button type="submit" name="search" value="search" class="btn"><i class="fa fa-search"></i></button>
+                            <button type="submit" name="search" value="search" class="btn"><i
+                                    class="fa fa-search"></i></button>
                         </form>
                     </div>
                     <!-- Recent posts start -->
@@ -189,13 +206,9 @@ if ($allHotels) {
                     </div>
                     <!-- Categories start -->
                     <div class="widget categories">
-                        <h5 class="sidebar-title">Categories</h5>
+                        <h5 class="sidebar-title">Hotels of City</h5>
                         <ul>
-                            <li><a href="#">All<span>(12)</span></a></li>
-                            <li><a href="#">Adventure Tour<span>(5)</span></a></li>
-                            <li><a href="#">Historical Tour<span>(63)</span></a></li>
-                            <li><a href="#">Honeymoon<span>(23)</span></a></li>
-                            <li><a href="#">Other<span>(7)</span></a></li>
+                            <?= $dataCategory ?>
                         </ul>
                     </div>
                     <!-- Rating start -->
@@ -206,31 +219,47 @@ if ($allHotels) {
                                 <div class="form-check checkbox-theme">
                                     <input class="form-check-input" type="checkbox" value="" id="instant-book">
                                     <label class="form-check-label" for="instant-book">
-                                        Awesome Tours 10+(20)
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
                                     </label>
                                 </div>
                                 <div class="form-check checkbox-theme">
                                     <input class="form-check-input" type="checkbox" value="" id="superb">
                                     <label class="form-check-label" for="superb">
-                                        Super 15+(20)
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
                                     </label>
                                 </div>
                                 <div class="form-check checkbox-theme">
                                     <input class="form-check-input" type="checkbox" value="" id="travel">
                                     <label class="form-check-label" for="travel">
-                                        Travel & Tour 15+(20)
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
                                     </label>
                                 </div>
                                 <div class="form-check checkbox-theme">
                                     <input class="form-check-input" type="checkbox" value="" id="good">
                                     <label class="form-check-label" for="good">
-                                        Good 12+(20)
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
                                     </label>
                                 </div>
                                 <div class="form-check checkbox-theme">
                                     <input class="form-check-input" type="checkbox" value="" id="pleasant">
                                     <label class="form-check-label" for="pleasant">
-                                        Pleasant 14+(20)
+                                        <i class="fa fa-star"></i>
+                                    </label>
+                                </div>
+                                <div class="form-check checkbox-theme">
+                                    <input class="form-check-input" type="checkbox" value="" id="travel good">
+                                    <label class="form-check-label" for="travel good">
+                                        All
                                     </label>
                                 </div>
                             </div>
