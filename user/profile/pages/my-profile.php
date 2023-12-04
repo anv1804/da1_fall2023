@@ -65,7 +65,7 @@ if (isset($_POST["submit"])) {
                     <div class="row">
                         <div class="col-lg-3 col-md-3">
                             <div class="my-photo">
-                                <img src="./assets/images/<?= $imageUser ?>" alt="avatar" class="img-fluid" >
+                                <img src="./assets/img/avatar/<?= $imageUser ?>" alt="avatar" class="img-fluid" >
                             </div>
                         </div>
                         <div class="col-lg-9 col-md-9">

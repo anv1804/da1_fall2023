@@ -15,7 +15,8 @@ if (isset($_GET['hotelID'])) {
         $descHotel = $dataHotels[0]['hotel_desc'];
         $imageHotels = explode(',', $dataHotels[0]['hotel_image']);
         $views = $dataHotels[0]['hotel_views'];
-    };
+    }
+    ;
     // ADD VIEWS
     $addView = $views + 1;
     countViews($hotelID, $addView);
@@ -33,7 +34,7 @@ if (isset($_GET['hotelID'])) {
                     <div class="agent-2" style="border-radius:10px">
                         <div class="agent-photo">
                             <a href="index.php?page=rooms-details&roomID=' . $value["room_id"] . '">
-                                <img style="border-radius:10px 10px 0 0" src="./asset/images/rooms/' . $imageRooms[0] . '" alt="room"
+                                <img style="border-radius:10px 10px 0 0" src="./assets/images/rooms/' . $imageRooms[0] . '" alt="room"
                                     class="img-fluid">
                             </a>
                         </div>
@@ -124,20 +125,20 @@ if (isset($_GET['hotelID'])) {
     if (isset($_POST['submit'])) {
         $rating = $_POST['rating'];
         $content = $_POST['content'];
+        $userID = '';
         if (isset($_SESSION['user'])) {
             $userEmail = $_SESSION["user"]['user_email'];
-            $userID = (int) getID($userEmail);
+            $usercode = user($userEmail);
+            $userID = (int) $usercode[0]['user_id'];
+            // print_r($usercode[0]['user_id']);
+            // echo $userID;
             comment($content, $hotelID, $userID, $rating);
             header('location: index.php?page=hotels-details&hotelID=' . $hotelID . '');
         } else {
             header('location: index.php?page=login');
         }
     }
-    // TOTAL RATING HOTEL 
-    $totalRating = totalRating($hotelID, $total =1,'');
-    foreach ($totalRating as $key => $value) {
-        # code...
-    }
+
 }
 ?>
 <!-- Sub banner start -->
