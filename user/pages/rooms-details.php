@@ -286,9 +286,7 @@ if (isset($_GET['roomID'])) {
                             // echo "<br>";
                             // print_r($dateEnd);
 
-                            booking($date,$dateStart,$dateEnd,$roomID);
-                            echo "<script type='text/javascript'>window.location.href = './index.php?page=check-in';</script>";
-
+                            echo "<script type='text/javascript'>window.location.href = './user/check-in/check-in.php?room_id=$roomID';</script>";
                         }
 
                         ?>

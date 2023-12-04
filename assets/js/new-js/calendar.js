@@ -29,7 +29,6 @@ const calendar = (currMonth , currYear) => {
 
     let dateAc = validateDay(lastDateofLastMonth , listDate);
 
-
     for (let i = 1; i <= lastDateofMonth; i++) { // creating li of all days of current month
         // adding active class to li if the current day, month, and year matched
         let dateStartAc = dateAc[0].includes(i) ? "active" : "";
@@ -63,20 +62,34 @@ const validateDay = (lastDateofMonth , listDate) => {
                     dateStarts.push(i);
                 }
                 if ( i == dateEnd[0] && currMonth === (dateEnd[1]-1) && currYear == dateEnd[2] ) {
-                    dateEnds.push(i);    
+                    dateEnds.push(i);
                 }
             }
     
             //date Middle
-            if ((dateStart[1]-1) == currMonth && dateStart[2] == currYear && (dateEnd[1]-1) == currMonth) {
-                for (let i = 1; i <= lastDateofMonth; i++) { 
+            if ((dateStart[1]-1) == currMonth && dateStart[2] == dateEnd[2] && (dateEnd[1]-1) == currMonth) {
+                for (let i = 1; i <= lastDateofMonth; i++) {
                     if (dateStart[0] - i < 0 && i < dateEnd[0]) {
                         dateMiddles.push(i);
                     }
-                }
-                for (let i = 1; i <= lastDateofMonth; i++) { 
                     if (dateEnd[0] - i > 0 && i > dateStart[0]) {
                         dateMiddles.push(i);
+                    }
+                }
+            }
+            if (dateStart[1] != dateEnd[1] || dateEnd[2] - dateStart[2] > 0) { 
+                if ((dateStart[1]-1) == currMonth) {
+                    for (let i = 1; i <= lastDateofMonth; i++) {
+                        if (dateStart[0] - i < 0) {
+                            dateMiddles.push(i);
+                        }
+                    }
+                }
+                if ((dateEnd[1]-1) == currMonth) {
+                    for (let i = 1; i <= lastDateofMonth; i++) {
+                        if (dateEnd[0] - i > 0) {
+                            dateMiddles.push(i);
+                        }
                     }
                 }
             }
@@ -167,27 +180,48 @@ if (formPurchase) {
     errorMessage = formPurchase.querySelector('.form-message');
     formPurchase.onsubmit = function() {
         let invalid = false;
+        let invalid1 = false;
         let dates = inputDates.value.split(' - ');
-        dates.forEach(date => {
+
+        date = new Date(),
+        currYear = date.getFullYear(),
+        currMonth = date.getMonth();
+        let currentDay = date.getDate();
+
+        let dateStart = dates[0].split('/').map(Number);
+        if (dateStart[1] <= currentDay && dateStart[0]-1 == currMonth && dateStart[2] == currYear) {
+            invalid1 = true;
+        }
+        if ((dateStart[0]-1 < currMonth && dateStart[2] == currYear) || (dateStart[2] < currYear)) {
+            invalid1 = true;
+        }
+        if (!invalid1) {
+            dates.forEach(date => {
     
-            date = date.split('/').map(Number);
-            let lastDateofLastMonth =  new Date(date[2], date[0], 0).getDate();
+                date = date.split('/').map(Number);
+                let lastDateofLastMonth =  new Date(date[2], date[0], 0).getDate();
     
-            currMonth = date[0]-1;
-            currYear = date[2];
-    
-            let dateAc = validateDay(lastDateofLastMonth , listDate);
-    
-            if (dateAc[0].includes(date[1]) || dateAc[1].includes(date[1]) || dateAc[2].includes(date[1])) {
-                invalid = true;
-            }
-            
-        })
-    
+        
+                currMonth = date[0]-1;
+                currYear = date[2];
+        
+                let dateAc = validateDay(lastDateofLastMonth , listDate);
+        
+                if (dateAc[0].includes(date[1]) || dateAc[1].includes(date[1]) || dateAc[2].includes(date[1])) {
+                    invalid = true;
+                }
+                
+            })
+        }
+        if (invalid1) {
+            errorMessage.innerHTML = 'Cannot be booked before the current date!';
+            return false;
+        }
         if (invalid) {
             errorMessage.innerHTML = 'This calendar already exists!';
             return false;
-        }else {
+        }
+        if(!invalid1 && !invalid) {
             errorMessage.innerHTML = '';
             return true;
         }
