@@ -50,7 +50,6 @@ if (isset($data)) {
     }
 }
 ?>
-
 <script src="./assets/js/new-js/calendar.js"></script>
 <!-- Form search -->
 <?php
@@ -153,6 +152,7 @@ if (isset($_POST['submit']) && ($_POST['submit'])) {
     echo "<script type='text/javascript'>window.location.href = './index.php?page=hotels&listHotels=$listHotels';</script>";
 
 }
+// POPULAR ROOM 
 ?>
 
 
@@ -259,8 +259,8 @@ if (isset($_POST['submit']) && ($_POST['submit'])) {
 <div class="featured-item content-area-2">
     <div class="container">
         <div class="main-title">
-            <h1>Popular Tours</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+            <h1>Popular Rooms</h1>
+            <p>Best Room In This Week</p>
         </div>
         <div class="slick-slider-area">
             <div class="row slick-carousel"
@@ -308,178 +308,7 @@ if (isset($_POST['submit']) && ($_POST['submit'])) {
                         </div>
                     </div>
                 </div>
-                <div class="slick-slide-item col-lg-4 col-sm-4">
-                    <div class="item-box">
-                        <div class="item-thumbnail">
-                            <a href="tours-details.html" class="item-img">
-                                <div class="tag">Historic</div>
-                                <div class="price-ratings-box">
-                                    <p class="price">From <span>$69</span> Per Person</p>
-                                    <div class="ratings">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-o"></i>
-                                        <span>( 7 Reviews )</span>
-                                    </div>
-                                </div>
-                                <div class="love">
-                                    <i class="flaticon-heart"></i>
-                                </div>
-                                <img src="assets/img/property-1.jpg" alt="tours" class="img-fluid">
-                            </a>
-                        </div>
-                        <div class="detail">
-                            <h1 class="title">
-                                <a href="tours-details.html">Paris Temple Tour</a>
-                            </h1>
-                            <div class="location">
-                                <a href="tours-details.html">
-                                    <i class="flaticon-localization"></i>2726 Shinn Street, New York
-                                </a>
-                            </div>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
-                        </div>
-                        <div class="footer clearfix">
-                            <div class="pull-left">
-                                <i class="flaticon-user"></i> Jhon Doe
-                            </div>
-                            <div class="pull-right">
-                                <i class="flaticon-timetable"></i> 6 days
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="slick-slide-item col-lg-4 col-sm-4">
-                    <div class="item-box">
-                        <div class="item-thumbnail">
-                            <a href="tours-details.html" class="item-img">
-                                <div class="tag">Historic</div>
-                                <div class="price-ratings-box">
-                                    <p class="price">From <span>$69</span> Per Person</p>
-                                    <div class="ratings">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-o"></i>
-                                        <span>( 7 Reviews )</span>
-                                    </div>
-                                </div>
-                                <div class="love">
-                                    <i class="flaticon-heart"></i>
-                                </div>
-                                <img src="assets/img/property-4.jpg" alt="tours" class="img-fluid">
-                            </a>
-                        </div>
-                        <div class="detail">
-                            <h1 class="title">
-                                <a href="tours-details.html">Travel To England</a>
-                            </h1>
-                            <div class="location">
-                                <a href="tours-details.html">
-                                    <i class="flaticon-localization"></i>2726 Shinn Street, New York
-                                </a>
-                            </div>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
-                        </div>
-                        <div class="footer clearfix">
-                            <div class="pull-left">
-                                <i class="flaticon-user"></i> Jhon Doe
-                            </div>
-                            <div class="pull-right">
-                                <i class="flaticon-timetable"></i> 6 days
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="slick-slide-item col-lg-4 col-sm-4">
-                    <div class="item-box">
-                        <div class="item-thumbnail">
-                            <a href="tours-details.html" class="item-img">
-                                <div class="tag">Historic</div>
-                                <div class="price-ratings-box">
-                                    <p class="price">From <span>$69</span> Per Person</p>
-                                    <div class="ratings">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-o"></i>
-                                        <span>( 7 Reviews )</span>
-                                    </div>
-                                </div>
-                                <div class="love">
-                                    <i class="flaticon-heart"></i>
-                                </div>
-                                <img src="assets/img/property-4.jpg" alt="tours" class="img-fluid">
-                            </a>
-                        </div>
-                        <div class="detail">
-                            <h1 class="title">
-                                <a href="tours-details.html">Travel To England</a>
-                            </h1>
-                            <div class="location">
-                                <a href="tours-details.html">
-                                    <i class="flaticon-localization"></i>2726 Shinn Street, New York
-                                </a>
-                            </div>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
-                        </div>
-                        <div class="footer clearfix">
-                            <div class="pull-left">
-                                <i class="flaticon-user"></i> Jhon Doe
-                            </div>
-                            <div class="pull-right">
-                                <i class="flaticon-timetable"></i> 6 days
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="slick-slide-item col-lg-4 col-sm-4">
-                    <div class="item-box">
-                        <div class="item-thumbnail">
-                            <a href="tours-details.html" class="item-img">
-                                <div class="tag">Historic</div>
-                                <div class="price-ratings-box">
-                                    <p class="price">From <span>$69</span> Per Person</p>
-                                    <div class="ratings">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-o"></i>
-                                        <span>( 7 Reviews )</span>
-                                    </div>
-                                </div>
-                                <div class="love">
-                                    <i class="flaticon-heart"></i>
-                                </div>
-                                <img src="assets/img/property-4.jpg" alt="tours" class="img-fluid">
-                            </a>
-                        </div>
-                        <div class="detail">
-                            <h1 class="title">
-                                <a href="tours-details.html">Travel To England</a>
-                            </h1>
-                            <div class="location">
-                                <a href="tours-details.html">
-                                    <i class="flaticon-localization"></i>2726 Shinn Street, New York
-                                </a>
-                            </div>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
-                        </div>
-                        <div class="footer clearfix">
-                            <div class="pull-left">
-                                <i class="flaticon-user"></i> Jhon Doe
-                            </div>
-                            <div class="pull-right">
-                                <i class="flaticon-timetable"></i> 6 days
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <!--  -->
             </div>
             <div class="slick-prev slick-arrow-buton">
                 <i class="fa fa-angle-left"></i>

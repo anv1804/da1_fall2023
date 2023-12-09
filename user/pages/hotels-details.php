@@ -126,7 +126,7 @@ if (isset($_GET['hotelID'])) {
         $rating = $_POST['rating'];
         $content = $_POST['content'];
         $userID = '';
-        if (isset($_SESSION['user'])) {
+        if (isset($_SESSION['user'])==0) {
             $userEmail = $_SESSION["user"]['user_email'];
             $usercode = user($userEmail);
             $userID = (int) $usercode[0]['user_id'];
@@ -134,7 +134,16 @@ if (isset($_GET['hotelID'])) {
             // echo $userID;
             comment($content, $hotelID, $userID, $rating);
             header('location: index.php?page=hotels-details&hotelID=' . $hotelID . '');
-        } else {
+        }else if(isset($_COOKIE['user'])==0){
+            $userEmail = $_COOKIE["user"]['user_email'];
+            $usercode = user($userEmail);
+            $userID = (int) $usercode[0]['user_id'];
+            // print_r($usercode[0]['user_id']);
+            // echo $userID;
+            comment($content, $hotelID, $userID, $rating);
+            header('location: index.php?page=hotels-details&hotelID=' . $hotelID . '');
+        }
+         else {
             header('location: index.php?page=login');
         }
     }
