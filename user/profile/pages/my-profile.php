@@ -1,38 +1,44 @@
 <?php
-$userEmail = $_SESSION["user"]['user_email'];
-$dataUser = loadall_user('', $userEmail);
-$nameUser = "";
-$emailUser = "";
-$numberUser = "";
-$imageUser = "";
-$passUser ="";
-if ($dataUser) {
-    // print_r($dataUser);
-    $nameUser = $dataUser[0]["user_name"];
-    $emailUser = $dataUser[0]["user_email"];
-    $numberUser = $dataUser[0]["user_number"];
-    $imageUser = (string)$dataUser[0]["user_image"];
-    $passUser = $dataUser[0]["user_password"];
+if(isset($_SESSION['user'])) {
+    $user = $_SESSION['user'];
+    $userEmail = $_SESSION["user"]['user_email'];
+} else if(isset($_COOKIE['user'])) {
+    $user = json_decode($_COOKIE['user'], true);
+    // print_r($user);
+    $userEmail = $user['user_email'];
+
+
 }
-print_r($imageUser);
-
-// đổi mk
-if (isset($_POST["submit"])) {
-    $currentpassword = $_POST["current-password"];
-    $newPassword = $_POST['new-password'];
-    $confirmPassword = $_POST['confirm-new-password'];
-
-
-    if($currentpassword !== $passUser) {
-        echo "sai";
-    }else{
-        if ($newPassword !== $confirmPassword) {
-            echo "mk không giống";
-    }else{
-        changePassword($newPassword,$emailUser);
-
+if(isset($user) && $user['user_role'] == 0) {
+    
+    $dataUser = loadall_user('', $userEmail);
+    $nameUser = "";
+    $emailUser = "";
+    $numberUser = "";
+    $imageUser = "";
+    $passUser = "";
+    if($dataUser) {
+        $nameUser = $dataUser[0]["user_name"];
+        $emailUser = $dataUser[0]["user_email"];
+        $numberUser = $dataUser[0]["user_number"];
+        $imageUser = (string)$dataUser[0]["user_image"];
+        $passUser = $dataUser[0]["user_password"];
     }
-}
+    if(isset($_POST["submit"])) {
+        $currentpassword = $_POST["current-password"];
+        $newPassword = $_POST['new-password'];
+        $confirmPassword = $_POST['confirm-new-password'];
+        if($currentpassword !== $passUser) {
+            echo "sai";
+        } else {
+            if($newPassword !== $confirmPassword) {
+                echo "mk không giống";
+            } else {
+                changePassword($newPassword, $emailUser);
+
+            }
+        }
+    }
 }
 
 ?>
@@ -65,7 +71,7 @@ if (isset($_POST["submit"])) {
                     <div class="row">
                         <div class="col-lg-3 col-md-3">
                             <div class="my-photo">
-                                <img src="./assets/img/avatar/<?= $imageUser ?>" alt="avatar" class="img-fluid" >
+                                <img src="./assets/img/avatar/<?= $imageUser ?>" alt="avatar" class="img-fluid">
                             </div>
                         </div>
                         <div class="col-lg-9 col-md-9">

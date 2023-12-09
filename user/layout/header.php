@@ -121,7 +121,7 @@
                                         $acc = user($userEmail);
                                         if ($acc[0]['user_image'] !== '') {
                                             $avatar = $acc[0]['user_image'];
-                                        } else if($acc[0]['user_image'] === ''){
+                                        } else if ($acc[0]['user_image'] === '') {
                                             $avatar = 'user.png';
                                         }
                                         if ($user["user_role"] == '0') {
@@ -132,7 +132,7 @@
                                                 <img style="width: 36px;border-radius:50%" src="./assets/img/avatar/' . $avatar . '" alt="">
                                             </a>
                                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="position: absolute;left:-110%;text-align: center;" >
-                                                <li><a class="dropdown-item" href="my-profile.html">My Profile</a></li>
+                                                <li><a class="dropdown-item" href="profile.php?page=profile">My Profile</a></li>
                                                 <li><a class="dropdown-item" href="messages.html">Messages</a></li>
                                                 <li><a class="dropdown-item" href="bookings.html">Bookings</a></li>
                                                 <li><a class="dropdown-item" href="listings.html">Listings</a></li>
@@ -146,10 +146,10 @@
                                             $user = '
                                             <li class="nav-item dropdown">
                                                 <a href="dashboard.html" class="nav-link">
-                                                    <img style="width: 36px;" src="./assets/images/user.png" alt="">
+                                                <img style="width: 36px;border-radius:50%" src="./assets/img/avatar/' . $avatar . '" alt="">
                                                 </a>
                                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="position: absolute;left:-110%;text-align: center;" >
-                                                    <li><a class="dropdown-item" href="dashboard.html">Dashboard</a></li>
+                                                    <li><a class="dropdown-item" href="admin.php">Dashboard</a></li>
                                                     <li><a class="dropdown-item" href="my-profile.html">My Profile</a></li>
                                                     <li><a class="dropdown-item" href="messages.html">Messages</a></li>
                                                     <li><a class="dropdown-item" href="bookings.html">Bookings</a></li>
