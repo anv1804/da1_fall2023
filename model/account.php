@@ -8,10 +8,9 @@ function login($email, $password , $checkRemember = "no")
     $account = pdo_query_one($sql);
     
     if ($account) {
-        $user = [ "user_email" => $email ,"user_password" => $password ,"user_role" => $account["user_role"]];
+        $user = [ "user_email" => $email ,"user_role" => $account["user_role"]];
         if ($checkRemember === 'yes') {
             setcookie("user" , json_encode($user) , time() + (86400) ,"/");
-            $_SESSION["user"] = $user;
         }else {
             $_SESSION["user"] = $user;
         }

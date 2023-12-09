@@ -26,13 +26,10 @@
                         <span>Book</span>
                         <div class="line"></div>
                         <div class="dot-number">2</div>
-                        <span>Review</span>
+                        <span>Confirm</span>
                         <div class="line"></div>
                         <div class="dot-number">3</div>
-                        <span>Pay</span>
-                        <div class="line"></div>
-                        <div class="dot-number">4</div>
-                        <span>Send payment slip</span>
+                        <span>Bill</span>
                     </div>
                 </div>
             </div>
@@ -40,26 +37,67 @@
 
 
         <?php 
+            session_start();
+            ob_start();
             include '../../model/pdo.php';
-            include '../../model/account.php';
             include '../../model/rooms.php';
+            include '../../model/hotels.php';
+            include '../../model/users.php';
 
+            function convertDay($day) {
+                $dateObject = date_create_from_format("d/m/Y", $day);
 
-            
-            if (isset($_GET['room_id']) && ($_GET['room_id'])) {
-                $room_id = $_GET['room_id'];
-                $room = allRooms($room_id);
-                // $user = '';
-                // if (isset($_SESSION['user'])) {
-                //     $user = $_SESSION['user'];
-                // } else {
-                //     $user = json_decode($_COOKIE['user'], true);
-                // }
-                
-                // print_r($room);
-                // $_SESSION['room'] = ['payment' => $room[0][]
-
+                // Kiểm tra xem có lỗi không
+                if (!$dateObject) {
+                    return false;
+                } else {
+                    // Định dạng lại theo yêu cầu
+                    return $dateObject->format("D, j M Y");
+                }
             }
+
+            if (isset($_SESSION['book']) && ($_SESSION['book'])) {
+                $book = $_SESSION['book'];
+
+                $dateCheckInOut = [];
+
+                $dateCheckInOut[] = convertDay($book['date_start']);
+                $dateCheckInOut[] = convertDay($book['date_end']);
+                
+                $user = [];
+                if (isset($_SESSION['user'])) {
+                    $user = $_SESSION['user'];
+                } else {
+                    $user = json_decode($_COOKIE['user'], true);
+                }
+                
+                $user = user($user['user_email']);
+                $room = allRooms($book['room_id']);
+                $hotel = allHotels('' , '' , $room[0]['hotel_id']);
+
+                $imageRoom = explode(',', $room[0]['room_image']);
+
+                $day1 = DateTime::createFromFormat("d/m/Y", $book['date_start']);
+                $day2 = DateTime::createFromFormat("d/m/Y", $book['date_end']);
+
+                $numberOfNight = $day1->diff($day2)->days;
+                $totalPrice = (int)$numberOfNight * (int)$room[0]['room_price'] + 9;
+                $convertTotalPrice = number_format(($totalPrice*24000), 0, ',', '.');
+            }
+
+            if (isset($_POST['next']) && ($_POST['next'])) {
+                
+                $_SESSION['book']['user_id'] = $user[0]['user_id'];
+                $_SESSION['book']['hotel_id'] = $hotel[0]['hotel_id'];
+                $_SESSION['book']['book_name'] = $_POST['user-name'];
+                $_SESSION['book']['book_email'] = $_POST['email'];
+                $_SESSION['book']['book_number'] = $_POST['number-phone'];
+                $_SESSION['book']['book_price-convert'] = $convertTotalPrice;
+                $_SESSION['book']['book_price'] = $totalPrice;
+
+                header('location: ./comfirm.php');
+            }
+
         ?>
 
 
@@ -75,10 +113,10 @@
                     <div class="col-8">
 
                         <div class="user-info">
-                            <div class="img"><img src="../../assets/img/avatar/avatar.png" alt=""></div>
+                            <div class="img"><img src="../../assets/img/avatar/<?=$user[0]['user_image'];?>" alt=""></div>
                             <div class="info">
-                                <div class="user-name">Login with name Le Do</div>
-                                <div class="user-email">lemindo9124@gmail.com (Email)</div>
+                                <div class="user-name">Login with name <?=$user[0]['user_name'];?></div>
+                                <div class="user-email"><?=$user[0]['user_email'];?> (Email)</div>
                             </div>
                         </div>
 
@@ -113,24 +151,24 @@
                             </div>
                         </div>
 
-                        <form action="./pay_now.php" method="post" id="form-check-in">
+                        <form action="./check-in.php" method="post" id="form-check-in">
                             <div class="title">Contact detail</div>
                             <div class="contact-details">
 
                                 <div class="form-group">
                                     <label for="user-name">Name</label>
-                                    <input rules="required" type="text" name="user-name" id="user-name">
+                                    <input rules="required" type="text" name="user-name" id="user-name" value="<?=$user[0]['user_name'];?>">
                                     <div class="form-message"></div>
                                 </div>
                                 <div class="form-number-email">
                                     <div class="form-group">
                                         <label for="number-phone">Number phone</label>
-                                        <input rules="required" type="text" name="number-phone" id="number-phone">
+                                        <input rules="required|number" type="text" name="number-phone" id="number-phone" value="<?=$user[0]['user_number'];?>">
                                         <div class="form-message"></div>
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Email</label>
-                                        <input rules="required|email" type="email" name="email" id="email">
+                                        <input rules="required|email" type="email" name="email" id="email" value="<?=$user[0]['user_email'];?>">
                                         <div class="form-message"></div>
                                     </div>
                                 </div>
@@ -143,7 +181,7 @@
                                     <div class="title">Total amount</div>
                                     <div class="total">
                                         <ion-icon name="chevron-down-outline"></ion-icon>
-                                        <div class="total-amount-number">$1235</div>
+                                        <div class="total-amount-number">$<?=$totalPrice?></div>
                                     </div>
                                 </div>
 
@@ -156,30 +194,51 @@
                                         </div>
                                     </div>
                                 </div>
-                            
+
+                                <div class="price-detail-body">
+                                    <div class="price">
+                                        <div class="price-title">
+                                            (1x) <?=$room[0]['room_number'];?> (<?=$numberOfNight?> night)
+                                        </div>
+                                        <div class="price-number">$<?=$room[0]['room_price']?></div>
+                                    </div>
+                                    <div class="price">
+                                        <div class="price-title">
+                                            Taxes and fees
+                                        </div>
+                                        <div class="price-number">$9</div>
+                                    </div>
+                                    <div class="price convert">
+                                        <div class="price-title">
+                                            Convert to Vietnamese Dong
+                                        </div>
+                                        <div class="price-number">$<?=$totalPrice?> -> <?=$convertTotalPrice;?> VND</div>
+                                    </div>
+                                </div>
+
                             </div>
 
-                            <button class="button" name="payUrl" value="pay" style="vertical-align:middle"><span>Pay</span></button>
+                            <button class="button" type="submit" name="next" value="pay" style="vertical-align:middle"><span>Next</span></button>
                         </form>
                     </div>
                     <div class="col-4">
                         <div class="info-room">
                             <div class="info-hotel">
-                                <ion-icon name="business-outline"></ion-icon>
-                                <div class="hotel-name">Millennium Hanoi Hotel</div>
+                                <ion-icon name="business"></ion-icon>
+                                <div class="hotel-name"><?=$hotel[0]['hotel_name'];?></div>
                             </div>
                             <div class="check-in-out">
                                 <div class="chek">
-                                    <div class="title">Check in</div>
-                                    <div class="check-day">12/12/2004</div>
+                                    <div class="title">Check in:</div>
+                                    <div class="check-day"><?=$dateCheckInOut[0]?></div>
                                 </div>
                                 <div class="chek">
-                                    <div class="title">Check out</div>
-                                    <div class="check-day">14/12/2004</div>
+                                    <div class="title">Check out:</div>
+                                    <div class="check-day"><?=$dateCheckInOut[1]?></div>
                                 </div>
                             </div>
                             <div class="room-detail">
-                                <div class="room-name"><p class="amount-room">(1x)</p> Deluxe Twin Room</div>
+                                <div class="room-name"><p class="amount-room">(1x)</p> <?=$room[0]['room_number'];?></div>
                                 <div class="room-des">
                                     <div class="type-room">
                                         <p>Guest/Room</p>
@@ -191,7 +250,31 @@
                                     </div>
                                 </div>
                                 <div class="img-hotel">
-                                    <img src="" alt="">
+                                    <div class="img">
+                                        <img src="../../assets/images/rooms/<?=$imageRoom[0];?>">
+                                    </div>
+
+                                    <div class="room-sevices">
+                                        <div class="sevice">
+                                            <ion-icon name="restaurant-outline"></ion-icon>
+                                            <p>Breakfast not included</p>
+                                        </div>
+
+                                        <div class="sevice active">
+                                            <ion-icon name="wifi-outline"></ion-icon>
+                                            <p>Free WiFi</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="sevices">
+                                    <div class="sevice active">
+                                        <ion-icon name="newspaper-outline"></ion-icon>
+                                        <p>Free cancellation</p>
+                                    </div>
+                                    <div class="sevice active">
+                                        <ion-icon name="calendar-outline"></ion-icon>   
+                                        <p>Can reschedule</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -204,8 +287,11 @@
 </body>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-<script src="../../assets/js/validator2_0.js"></script>
+<script src="../../assets/js/validate-js/validator2_0.js"></script>
 <script>
     new Validator('#form-check-in');
+</script>
+<script>
+
 </script>
 </html>

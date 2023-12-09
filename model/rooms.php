@@ -146,4 +146,9 @@ function validateDay($lastDateofMonth , $listDate , $currMonth ,$currYear ) {
     return [$dateStarts , $dateMiddles , $dateEnds];
 }
 
+function allBookId() {
+    $sql = "SELECT book_id FROM `book` WHERE 1";
+    return pdo_query($sql);
+}
+
 ?>
