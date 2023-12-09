@@ -85,7 +85,9 @@
             }
         }
 
-        createBookId();
+        if (!isset($_SESSION['book']['book_id'])) {
+            createBookId();
+        }
 
         if(isset($_SESSION['book']) && ($_SESSION['book'])) {
             $book = $_SESSION['book'];
@@ -124,7 +126,6 @@
             }else {
                 $_SESSION['book']['book_price'] = ($totalPrice * 24000)/5;
             }
-
             header('location: ./pay_now.php');
         }
 
