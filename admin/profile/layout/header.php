@@ -53,7 +53,7 @@
                             aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
-                        <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav ml-auto d-lg-none d-xl-none">
                                 <li class="nav-item dropdown active">
                                     <a href="admin.php?page=dashboard" class="nav-link">Dashboard</a>
@@ -96,16 +96,14 @@
                                                 <a class="dropdown-item" href="messages.php">Messages</a>
                                                 <a class="dropdown-item" href="hotels.php">Hotels</a>
                                                 <a class="dropdown-item" href="my-profile.php">My profile</a>
-                                                <a class="dropdown-item" href="index.php">Logout</a>
+                                                <a class="dropdown-item" href="./user/pages/logout.php">Logout</a>
                                             </div>
                                         </div>
                                     </li>
-                                    <li>
-                                        <a class="btn btn-md bomd btn-round" href="add-listing.php">Add Listing</a>
-                                    </li>
+                                
                                 </ul>
                             </div>
-                        </div> -->
+                        </div>
                     </nav>
                 </div>
             </div>
