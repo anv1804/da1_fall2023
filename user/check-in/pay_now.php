@@ -1,5 +1,14 @@
 <?php
-session_start();
+    session_start();
+    include '../../model/pdo.php';
+    include '../../model/rooms.php';
+    include '../../model/hotels.php';
+    include '../../model/users.php';
+
+    $book = $_SESSION['book'];
+    $room = allRooms($book['room_id']);
+    $hotel = allHotels('', '', $book['hotel_id']);
+
     function execPostRequest($url, $data) {
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
@@ -24,16 +33,17 @@ session_start();
     $partnerCode = 'MOMOBKUN20180529';
     $accessKey = 'klm05TvNBzhg7h7j';
     $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
-    $orderInfo = "Thanh toán qua MoMo";
-    $amount = $_SESSION['book']['book_price'];
-    echo $_SESSION['book']['book_id'];
-    $orderId = $_SESSION['book']['book_id'];
-    $redirectUrl = "https://webhook.site/b3088a6a-2d17-4f8d-a383-71389a6c600b";
-    $ipnUrl = "https://webhook.site/b3088a6a-2d17-4f8d-a383-71389a6c600b";
+
+
+    $orderInfo = "Hotel: " . $hotel[0]['hotel_name'] . " - " . "Room number: " . $room[0]['room_number'];
+    $amount = $book['book_price'];
+    $orderId = $book['book_id'];
+    $redirectUrl = "http://localhost/da1_fall2023/user/check-in/bill.php";
+    $ipnUrl = "http://localhost/da1_fall2023/user/check-in/bill.php";
     $extraData = "";
 
     // NGUYEN VAN A
-    // NGUYEN VAN A
+    // 9704 0000 0000 0018
     // 03/07
     // OTP
 
