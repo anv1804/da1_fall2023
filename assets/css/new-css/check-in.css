@@ -215,11 +215,11 @@ body {
 }
 
 #form-check-in .title {
-    font-size: 16px!important;
+    font-size: 16px !important;
 }
 
 #form-check-in .price-detail,
-#form-check-in .contact-details{
+#form-check-in .contact-details {
     box-shadow: rgba(3, 18, 26, 0.2) 0px 1px 2px;
     background-color: rgba(255, 255, 255, 1);
     display: flex;
@@ -242,6 +242,7 @@ body {
     border: 1px solid #ccc;
     line-height: 24px;
     font-size: 16px;
+    outline: none;
 }
 
 #form-check-in .form-group label {
@@ -255,7 +256,7 @@ body {
 
 #form-check-in .form-group .form-message {
     min-height: 21px;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 500;
 }
 
@@ -269,7 +270,7 @@ body {
     margin-right: 16px;
 }
 
-#form-check-in .price-detail .total-amount{
+#form-check-in .price-detail .total-amount {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -318,12 +319,314 @@ body {
     padding-left: 12px;
 }
 
+#form-check-in .price-detail .price-detail-body {
+    /* display: none; */
+    width: 100%;
+    border-top: 1px solid rgb(242, 243, 243);
+}
+
+#form-check-in .price-detail .price-detail-body .price {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0;
+}
+
+#form-check-in .price-detail .price-detail-body .price.convert {
+    border-top: 1px solid rgb(242, 243, 243);
+}
+
+#form-check-in .price-detail .price-detail-body .price-number,
+#form-check-in .price-detail .price-detail-body .price-title {
+    color: rgb(3, 18, 26);
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 500;
+}
+
 #check-in .info-room {
     box-shadow: rgba(3, 18, 26, 0.2) 0px 1px 2px;
     background-color: rgba(255, 255, 255, 1);
     display: flex;
     flex-direction: column;
-    padding: 16px;
     border-radius: 6px;
+    margin-bottom: 16px;
+}
+
+#check-in .info-room .info-hotel {
+    display: flex;
+    padding: 16px 16px 20px;
+}
+
+#check-in .info-room .info-hotel ion-icon {
+    color: #1875ff;
+    font-size: 24px;
+}
+
+#check-in .info-room .info-hotel .hotel-name {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
+    color: rgb(3, 18, 26);
+    margin-left: 8px;
+}
+
+#check-in .info-room .check-in-out {
+    background-color: rgb(247 249 248);
+    padding: 16px;
+    border-top: 1px solid rgb(242, 243, 243);
+    border-bottom: 1px solid rgb(242, 243, 243);
+}
+
+#check-in .info-room .room-detail .type-room,
+#check-in .info-room .room-detail .type-bed,
+#check-in .info-room .check-in-out .chek {
+    display: flex;
+    margin-bottom: 4px;
+}
+
+#check-in .info-room .room-detail .type-room p,
+#check-in .info-room .room-detail .type-bed p,
+#check-in .info-room .check-in-out .title {
+    margin: 0;
+    padding-right: 4px;
+    flex-basis: 40%;
+    color: rgb(104, 113, 118);
+    line-height: 20px;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+#check-in .info-room .room-detail .type-room span,
+#check-in .info-room .room-detail .type-bed span,
+#check-in .info-room .check-in-out .check-day {
+    flex: 1;
+    color: rgb(3, 18, 26);
+    line-height: 20px;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+#check-in .info-room .room-detail {
+    padding: 16px;
+}
+
+#check-in .info-room .room-detail .room-name {
+    display: flex;
+    color: rgb(3, 18, 26);
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+#check-in .info-room .room-detail .room-name p {
+    margin: 0 4px 0 0;
+}
+
+#check-in .info-room .room-detail .img-hotel {
+    margin: 12px 0;
+    display: flex;
+}
+
+#check-in .info-room .room-detail .img-hotel .img {
+    padding-right: 4px;
+    flex-basis: 40%;
+}
+
+#check-in .info-room .room-detail .img-hotel img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    object-position: 50% 50%;
+    border-radius: 6px;
+}
+
+#check-in .info-room .room-detail .img-hotel .room-sevices {
+    flex: 1;
+}
+
+#check-in .info-room .sevices .sevice,
+#check-in .info-room .img-hotel .room-sevices .sevice {
+    display: flex;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+#check-in .info-room .room-sevices .sevice ion-icon {
+    font-size: 20px;
+}
+
+#check-in .info-room .sevices .sevice p,
+#check-in .info-room .room-sevices .sevice p {
+    margin: 0 0 0 4px;
+    color: rgb(104, 113, 118);
+    line-height: 20px;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+#check-in .info-room .sevices .sevice.active p,
+#check-in .info-room .sevices .sevice.active,
+#check-in .info-room .room-sevices .sevice.active p,
+#check-in .info-room .room-sevices .sevice.active {
+    color: rgb(0, 135, 90);
+}
+
+#check-in .info-room .sevices {
+    border-top: 1px solid rgb(242, 243, 243);
+    padding-top: 12px;
+}
+
+#check-in .info-room .sevices .sevice ion-icon {
+    font-size: 16px;
+    margin-right: 4px;
+}
+
+#check-in .body-check-in-body .notification-body {
+    background-color: rgb(236, 248, 255);
+    padding: 12px 16px;
+    margin-bottom: 16px;
+    border: 1px solid rgb(1, 148, 243);
+    border-left: 2px solid rgb(1, 148, 243);
+    border-radius: 6px;
+    display: flex;
+}
+
+#check-in .body-check-in-body .notification-body ion-icon {
+    font-size: 20px;
+    flex-basis: 10%;
+    margin-right: 8px;
+    color: #1875ff;
+}
+
+#check-in .body-check-in-body .notification-body .info-detail {
+    color: rgb(3, 18, 26);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+}
+
+#check-in .info-book .info-book-title {
+    color: rgba(3, 18, 26, 1);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    padding: 16px;
+    border-bottom: 1px solid rgba(242, 243, 243, 1);
+}
+
+#check-in .info-book .info-book-inner {
+    padding: 16px;
+}
+
+#check-in .info-book .info-book-inner .number-phone,
+#check-in .info-book .info-book-inner .book-email,
+#check-in .info-book .info-book-inner .user-name {
+    color: rgba(104, 113, 118, 1);
+    font-size: 16px;
+    line-height: 24px;
+    padding-bottom: 4px;
+}
+
+#check-in .info-book .info-book-inner .number-phone,
+#check-in .info-book .info-book-inner .book-email {
+    font-weight: 500;
+}
+
+#check-in .info-book .info-book-inner .user-name {
+    font-weight: 700;
+}
+
+#check-in .info-room .book-id {
+    margin: 16px 16px 0 16px;
+    padding-bottom: 16px;
+    border-bottom: 2px dashed rgba(205, 208, 209, 1);
+}
+
+#check-in .info-room .book-id p {
+    margin: 0;
+    color: rgba(104, 113, 118, 1);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+}
+
+#check-in .info-room .book-id span {
+    color: rgba(3, 18, 26, 1);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+}
+
+#form-check-in .wapper input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+    margin: 0;
+}
+
+#form-check-in .wapper {
+    position: relative;
+    cursor: pointer;
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 50%;
+    user-select: none;
+    border: 3px solid rgba(242,243,243,1.00);
+}
+
+#form-check-in .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#form-check-in .checkmark:after {
+    content: "";
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    background-color: rgb(1, 148, 243);
+    width: 50%;
+    height: 50%;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: 100ms ease;
+}
+
+#form-check-in .wapper input:checked ~ .checkmark:after {
+    transform: scale(1);
+}
+
+#form-check-in .type-price {
+    box-shadow: rgba(3, 18, 26, 0.2) 0px 1px 2px;
+    background-color: rgba(255, 255, 255, 1);
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    border-radius: 6px;
+    margin-top: 16px;
+}
+
+#form-check-in .type-price .input-type-price {
+    padding: 20px 0 20px 24px;
+    border-left: 2px solid rgba(217,152,0,1.00);
+    border-bottom: 1px solid rgb(242, 243, 243);
+    cursor: pointer;
+    display: flex;
+}
+
+#form-check-in .type-price .input-type-price .type-price-text {
+    color: rgba(3,18,26,1.00);
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+    margin-left: 8px;
+    margin-right: 8px;
 }
 

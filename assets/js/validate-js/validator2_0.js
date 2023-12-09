@@ -160,6 +160,11 @@ function Validator(formSelector) {
             }
             const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
             return allowedTypes.includes(file.type) ? undefined : 'Only JPEG, PNG or GIF image files are accepted!';
+        },
+
+        number: function (number) {
+            const regexNumberPhone = /(84|0[3|5|7|8|9])+([0-9]{8})\b/g;
+            return regexNumberPhone.test(number) ? undefined : 'Phone number is incorrect!';
         }
     };
 

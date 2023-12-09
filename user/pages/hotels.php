@@ -5,12 +5,14 @@ if (isset($_POST['search']) && ($_POST['search'])) {
 }
 
 $listHotel_id = '';
+$listHotel_id_string = '';
 if (isset($_GET['listHotels']) && ($_GET['listHotels'] != '[]')) {
     $listHotel_id = $_GET['listHotels'];
-    $listHotel_id = json_decode($listHotel_id, true);
-    $allHotels = allHotels('', '', '', '', $listHotel_id);
-} else if (isset($_GET['listHotels']) && ($_GET['listHotels'] == '[]')) {
-    $allHotels = allHotels('', '', 0);
+    $listHotel_id_string = $listHotel_id;
+    $listHotel_id = json_decode($listHotel_id , true);
+    $allHotels = allHotels('' , '' ,'' ,'' ,  $listHotel_id);
+}else if(isset($_GET['listHotels']) && ($_GET['listHotels'] == '[]')) {
+    $allHotels = allHotels('' , '' ,0 );
 } else {
     $allHotels = allHotels($hotel_name);
 }
@@ -121,10 +123,17 @@ if ($category) {
                         </div>
                         <div class="col-xl-8 col-lg-7 col-md-7 col-sm-7">
                             <div class="sorting-options clearfix">
+<<<<<<< HEAD
+                                <a href="index.php?page=hotels&listHotels=<?=$listHotel_id_string?>" class="change-view-btn active-view-btn"><i
+                                        class="fa fa-th-list"></i></a>
+                                <a href="index.php?page=hotels2&listHotels=<?=$listHotel_id_string?>" class="change-view-btn"><i
+                                        class="fa fa-th-large"></i></a>
+=======
                                 <a href="index.php?page=hotels?listHotels=<?= $listHotel_id ?>"
                                     class="change-view-btn active-view-btn"><i class="fa fa-th-list"></i></a>
                                 <a href="index.php?page=hotels2?listHotels=<?= $listHotel_id ?>"
                                     class="change-view-btn"><i class="fa fa-th-large"></i></a>
+>>>>>>> ec89b0810c04a8bc88eb92be7afe441d501dcc50
 
                             </div>
                             <form class="search-area" style="display: flex;">

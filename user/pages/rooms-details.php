@@ -285,8 +285,8 @@ if (isset($_GET['roomID'])) {
                             // print_r($dateStart);
                             // echo "<br>";
                             // print_r($dateEnd);
-
-                            echo "<script type='text/javascript'>window.location.href = './user/check-in/check-in.php?room_id=$roomID';</script>";
+                            $_SESSION['book'] = ['room_id' => $room_id , 'date_start' => $dateStart , 'date_end' => $dateEnd];
+                            echo "<script type='text/javascript'>window.location.href = './user/check-in/check-in.php';</script>";
                         }
 
                         ?>
@@ -310,15 +310,15 @@ if (isset($_GET['roomID'])) {
                                 <i class="fa fa-users icon-append"></i>
                             </div>
                             <div class="form-group">
-                                <p>Radius around selected destination</p>
+                                <!-- <p>Radius around selected destination</p>
                                 <div class="range-slider">
                                     <div data-min="0" data-max="100" data-unit="Km" data-min-name="min_price"
                                         data-max-name="max_price" class="range-slider-ui ui-slider"
                                         aria-disabled="false"></div>
                                     <div class="clearfix"></div>
-                                </div>
+                                </div> -->
                             </div>
-                            <div class="form-group search-col">
+                            <div class="form-group search-col" style="margin-top:20px">
                                 <button type="submit" style="margin-bottom: 8px;" name="purchase" value="purchase"
                                     class="btn-theme btn-md btn-block">Purchase</button>
                             </div>
