@@ -215,7 +215,7 @@ if (formPurchase) {
         
                 let dateAc = validateDay(lastDateofLastMonth , listDate);
         
-                if (dateAc[0].includes(date[1]) || dateAc[1].includes(date[1]) || dateAc[2].includes(date[1])) {
+                if ( dateAc[1].includes(date[1]) ) {
                     invalid = true;
                 }
                 
