@@ -301,6 +301,19 @@ if (isset($_GET['roomID'])) {
                                 <i class="flaticon-timetable icon-append"></i>
                                 <span class="form-message text-danger"></span>
                             </div>
+                            <div class="form-group">
+                                <div class="form-group-time d-flex"  style="justify-content:space-between;">
+                                    <div class="form-time check-in" style="flex-basis:48%">
+                                        <label for="check-in" style="font-size:14px;margin:0;">Check in:</label>
+                                        <input type="text" class="time-pickable form-control" id="check-in" value="07:00 am" readonly>
+                                    </div>
+                                    <div class="form-time check-out" style="flex-basis:48%">
+                                        <label for="check-out" style="font-size:14px;margin:0;">Check out:</label>
+                                        <input type="text" class="time-pickable form-control" id="check-out" value="07:00 am" readonly>
+                                    </div>
+                                </div>
+                                <span class="form-message"></span>
+                            </div>
                             <div class="form-group search-col">
                                 <select class="selectpicker search-fields btn-block form-control bdr" name="guest">
                                     <option> Room for
@@ -308,15 +321,6 @@ if (isset($_GET['roomID'])) {
                                     </option>
                                 </select>
                                 <i class="fa fa-users icon-append"></i>
-                            </div>
-                            <div class="form-group">
-                                <!-- <p>Radius around selected destination</p>
-                                <div class="range-slider">
-                                    <div data-min="0" data-max="100" data-unit="Km" data-min-name="min_price"
-                                        data-max-name="max_price" class="range-slider-ui ui-slider"
-                                        aria-disabled="false"></div>
-                                    <div class="clearfix"></div>
-                                </div> -->
                             </div>
                             <div class="form-group search-col" style="margin-top:20px">
                                 <button type="submit" style="margin-bottom: 8px;" name="purchase" value="purchase"
@@ -432,3 +436,4 @@ if (isset($_GET['roomID'])) {
 </div>
 <!-- Item details page start -->
 <script src="./assets/js/new-js/calendar.js"></script>
+<script src="./assets/js/new-js/time-pickable.js"></script>

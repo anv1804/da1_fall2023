@@ -100,9 +100,9 @@ if ($allHotels) {
                         </div>
                         <div class="col-xl-8 col-lg-7 col-md-7 col-sm-7">
                             <div class="sorting-options clearfix">
-                                <a href="index.php?page=hotels&listHotels=<?=$listHotel_id_string?>" class="change-view-btn"><i
+                                <a href='index.php?page=hotels&listHotels=<?=$listHotel_id_string?>' class="change-view-btn"><i
                                         class="fa fa-th-list"></i></a>
-                                <a href="index.php?page=hotels2&listHotels=<?=$listHotel_id_string?>" class="change-view-btn active-view-btn"><i
+                                <a href='index.php?page=hotels2&listHotels=<?=$listHotel_id_string?>' class="change-view-btn active-view-btn"><i
                                         class="fa fa-th-large"></i></a>
                             </div>
                             <div class="search-area">
