@@ -1,15 +1,16 @@
 <?php
-function loadUsers()
+function loadUsers($userID)
 {
-    $sql = "SELECT * FROM users WHERE user_role = 0";
+    $sql = "SELECT * FROM users WHERE user_id != $userID";
     $result = pdo_query($sql);
     return $result;
 }
-function user($userEmail){
+function user($userEmail)
+{
     $sql = "SELECT * FROM users WHERE user_email = '$userEmail'";
     $result = pdo_query($sql);
     return $result;
-} 
+}
 function getID($userEmail)
 {
     $sql = "SELECT user_id FROM users WHERE user_email = '$userEmail'";
@@ -31,14 +32,14 @@ function totalRating($hotelID, $total = '', $avg = '')
         $sql = "SELECT COUNT(comment_rate) AS countRating FROM comment
     WHERE comment.hotel_id = $hotelID";
         $data = pdo_query($sql);
-    return $data;
+        return $data;
 
     }
     if ($avg != '') {
         $sql = "SELECT comment_rate FROM comment
         WHERE comment.hotel_id = $hotelID";
         $data = pdo_query($sql);
-    return $data;
+        return $data;
 
     }
 
@@ -78,5 +79,28 @@ function booking($date, $dateStart, $dateEnd, $roomID)
     (`completed_id`, `date_booking`, `date_start`, `date_end`, `room_id`) 
     VALUES (null,'$date','$dateStart','$dateEnd','$roomID')";
     pdo_execute($sql);
+}
+function dataBooking($userID)
+{
+    $sql = "SELECT 
+    book.room_id,
+    room_image,
+    room_number,
+    hotel_name,
+    hotels.hotel_id,
+    hotel_location,
+    total_price,
+    date_booking,
+    date_start,
+    date_end 
+    FROM `book` 
+    INNER JOIN hotels 
+    ON book.hotel_id = hotels.hotel_id 
+    INNER JOIN rooms 
+    ON book.room_id = rooms.room_id 
+    INNER JOIN completed 
+    ON book.completed_id = completed.completed_id WHERE book.user_id = $userID";
+    $data = pdo_query($sql);
+    return $data;
 }
 ?>

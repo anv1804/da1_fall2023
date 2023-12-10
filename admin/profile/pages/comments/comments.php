@@ -49,9 +49,10 @@
                     </div>
                 </div>
             </div>
-            <div class="dashboard-list">
+            <div class="dashboard-list" style="width: 100%;">
                 <h3>Reviews List</h3>
                 <div class="dashboard-listd">
+                    
                     <?= $dataCmt ?>
                 </div>
             </div>
