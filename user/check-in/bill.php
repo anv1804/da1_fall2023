@@ -37,6 +37,7 @@
 
 
         <?php
+        use Vtiful\Kernel\Format;
         session_start();
         ob_start();
         include '../../model/pdo.php';
@@ -83,10 +84,22 @@
             $day1 = DateTime::createFromFormat("d/m/Y", $book['date_start']);
             $day2 = DateTime::createFromFormat("d/m/Y", $book['date_end']);
 
+            $currDate = new DateTime();
+
             $numberOfNight = $day1->diff($day2)->days;
+
+            $amountOfNight = $day1->diff($currDate)->days;
+            $amountOfNight = floor($amountOfNight/2);
+
+            $cancellationDate = $currDate->add(new DateInterval('P'. $amountOfNight .'D'));
+
+            $cancellationDate = $cancellationDate->format("j M Y");
+
             $totalPrice = (int) $numberOfNight * (int) $room[0]['room_price'] + 9;
             $convertTotalPrice = number_format(($totalPrice * 24000), 0, ',', '.');
             $convertTotalPriceOf20 = number_format((($totalPrice * 24000) / 5), 0, ',', '.');
+            $convertBookPrice = number_format($book['book_price'], 0, ',', '.');
+
         }
 
         ?>
@@ -117,18 +130,24 @@
 
                                     <div class="info-book">
                                         <div class="check-day">
-                                            Check in: 
-                                            <p><?= $dateCheckInOut[0] ?></p>
+                                            Check in:
+                                            <p>
+                                                <?= $dateCheckInOut[0] ?>
+                                            </p>
                                             <span>From 14:00</span>
                                         </div>
                                         <div class="check-day">
-                                            Check out: 
-                                            <p><?= $dateCheckInOut[1] ?></p>
+                                            Check out:
+                                            <p>
+                                                <?= $dateCheckInOut[1] ?>
+                                            </p>
                                             <span>Before 12:00</span>
                                         </div>
                                         <div class="amount-night">
                                             Number of nights stay:
-                                            <p><?= $numberOfNight ?> nights</p>
+                                            <p>
+                                                <?= $numberOfNight ?> nights
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -136,7 +155,7 @@
 
                             <div class="info-bill-body">
                                 <div class="room-name">
-                                     <?=$room[0]['room_number'];?>
+                                    <?= $room[0]['room_number']; ?>
                                 </div>
                                 <div class="room-des-body">
                                     <div class="room-des">
@@ -164,6 +183,59 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="hotel-room-policies">
+                            <div class="title">
+                                Hotel & room policies
+                            </div>
+                            <div class="policies-header">
+                                <div class="policies-title">
+                                    <ion-icon name="receipt-outline"></ion-icon>
+                                    Cancellation & rescheduling policy
+                                </div>
+                                <div class="policies-subtitle">Free cancellation & Can reschedule</div>
+                                <ion-icon name="chevron-up-outline"></ion-icon>
+                            </div>
+
+                            <div class="policies-body">
+                                <div class="cancellation-date">
+                                    <div class="cancellation-date-day before-date">
+                                        <div class="line"></div>
+                                        <div class="cancellation-day">
+                                            <span>Free cancellation in advance</span>
+                                            <p><?= $cancellationDate; ?>, 13:00</p>
+                                        </div>
+                                    </div>
+                                    <div class="cancellation-date-day after-date">
+                                        <div class="line"></div>
+                                        <div class="cancellation-day">
+                                            <span>Cancellation fee is <?= $convertBookPrice; ?> VND. This fee applies
+                                                if canceled later
+                                            </span>
+                                            <p><?= $cancellationDate; ?>, 13:00</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="cancellation-info">
+                                    Can reschedule
+                                    <p>
+                                        This booking can be rescheduled before <?= $cancellationDate; ?> - 13:01, but cancellation
+                                        fees may apply.
+                                    </p>
+                                    <span>
+                                        • Any discount codes or points used on the original booking will not be
+                                        applicable to the new booking.
+                                    </span>
+                                    <span>
+                                        • Rescheduling fees may apply based on the price difference between the old and new booking.
+                                    </span>
+                                    <span>
+                                        The time displayed is the property's local time.
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -219,81 +291,32 @@
                                             <?= $convertTotalPrice; ?> VND
                                         </div>
                                     </div>
+                                    <div class="price">
+                                        <div class="price-title">
+                                            Paid
+                                        </div>
+                                        <div class="price-number">
+                                            <?= $convertBookPrice; ?> VND
+                                        </div>
+                                    </div>
                                 </div>
 
                             </div>
 
                         </form>
+
+                        <div class="notification-body mt-4">
+                            <ion-icon name="information-circle-outline"></ion-icon>
+                            <div class="info-content">
+                                <div class="info-detail">
+                                    Please check your email for more details
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
                     <div class="col-4">
-                        <!-- <div class="info-room">
-                            <div class="book-id">
-                                <p>Reservation code:</p>
-                                <span><?= $_SESSION['book']['book_id'] ?></span>
-                            </div>
-                            <div class="info-hotel">
-                                <ion-icon name="business"></ion-icon>
-                                <div class="hotel-name">
-                                    <?= $hotel[0]['hotel_name']; ?>
-                                </div>
-                            </div>
-                            <div class="check-in-out">
-                                <div class="chek">
-                                    <div class="title">Check in:</div>
-                                    <div class="check-day">
-                                        <?= $dateCheckInOut[0] ?>
-                                    </div>
-                                </div>
-                                <div class="chek">
-                                    <div class="title">Check out:</div>
-                                    <div class="check-day">
-                                        <?= $dateCheckInOut[1] ?>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="room-detail">
-                                <div class="room-name">
-                                    <p class="amount-room">(1x)</p> <?= $room[0]['room_number']; ?>
-                                </div>
-                                <div class="room-des">
-                                    <div class="type-room">
-                                        <p>Guest/Room</p>
-                                        <span>2 guests</span>
-                                    </div>
-                                    <div class="type-bed">
-                                        <p>Type bed</p>
-                                        <span>2 single beds</span>
-                                    </div>
-                                </div>
-                                <div class="img-hotel">
-                                    <div class="img">
-                                        <img src="../../assets/images/rooms/<?= $imageRoom[0]; ?>">
-                                    </div>
-
-                                    <div class="room-sevices">
-                                        <div class="sevice">
-                                            <ion-icon name="restaurant-outline"></ion-icon>
-                                            <p>Breakfast not included</p>
-                                        </div>
-
-                                        <div class="sevice active">
-                                            <ion-icon name="wifi-outline"></ion-icon>
-                                            <p>Free WiFi</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="sevices">
-                                    <div class="sevice active">
-                                        <ion-icon name="newspaper-outline"></ion-icon>
-                                        <p>Free cancellation</p>
-                                    </div>
-                                    <div class="sevice active">
-                                        <ion-icon name="calendar-outline"></ion-icon>
-                                        <p>Can reschedule</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
                         <div class="info-room info-book">
                             <div class="info-book-title">Contact details (for E-Ticket / Confirmation Voucher)</div>
                             <div class="info-book-inner">
