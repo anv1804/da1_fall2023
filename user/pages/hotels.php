@@ -9,7 +9,6 @@ $listHotel_id_string = '';
 if (isset($_GET['listHotels']) && ($_GET['listHotels'] != '[]')) {
     $listHotel_id = $_GET['listHotels'];
     $listHotel_id_string = $listHotel_id;
-    echo $listHotel_id_string;
     $listHotel_id = json_decode($listHotel_id , true);
     $allHotels = allHotels('' , '' ,'' ,'' ,  $listHotel_id);
 }else if(isset($_GET['listHotels']) && ($_GET['listHotels'] == '[]')) {
@@ -22,60 +21,60 @@ $dataHotels = "";
 if ($allHotels) {
     foreach ($allHotels as $value) {
         $hotelImages = explode(',', $value['hotel_image']);
-        $dataHotels .= "
-        <div class='item-box-3'>
-            <div class='row'>
-                <div class='col-xl-5 col-lg-6 col-md-5 col-pad'>
-                    <div class='item-thumbnail'>
-                        <a href='index.php?page=hotels-details&hotelID=" . $value["hotel_id"] . "' class='item-img'>
-                            <div class='tag'>Historic</div>
-                            <div class='price-ratings-box'>
-                                <p class='price'>
+        $dataHotels .= '
+        <div class="item-box-3">
+            <div class="row">
+                <div class="col-xl-5 col-lg-6 col-md-5 col-pad">
+                    <div class="item-thumbnail">
+                        <a href="index.php?page=hotels-details&hotelID=' . $value['hotel_id'] . '" class="item-img">
+                            <div class="tag">Historic</div>
+                            <div class="price-ratings-box">
+                                <p class="price">
                                     From <span>$66</span> Per Person
                                 </p>
-                                <div class='ratings'>
-                                    <i class='fa fa-star'></i>
-                                    <i class='fa fa-star'></i>
-                                    <i class='fa fa-star'></i>
-                                    <i class='fa fa-star'></i>
-                                    <i class='fa fa-star-o'></i>
+                                <div class="ratings">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star-o"></i>
                                     <span>( 7 Reviews )</span>
                                 </div>
                             </div>
-                            <div class='love'>
-                                <i class='flaticon-heart'></i>
+                            <div class="love">
+                                <i class="flaticon-heart"></i>
                             </div>
-                            <img src='./assets/images/hotels/" . $hotelImages[0] . "' alt='hotel-list' class='img-fluid'>
+                            <img src="./assets/images/hotels/' . $hotelImages[0] . '" alt="hotel-list" class="img-fluid">
                         </a>
                     </div>
                 </div>
-            <div class='col-xl-7 col-lg-6 col-md-7 col-pad'>
-            <div class='detail'>
+            <div class="col-xl-7 col-lg-6 col-md-7 col-pad">
+            <div class="detail">
                 <!-- title -->
-                    <h1 class='title'>
-                        <a href=index.php?page=hotels-details&hotelID=" . $value["hotel_id"] . "'>" . $value["hotel_name"] . "</a>
+                    <h1 class="title">
+                        <a href="index.php?page=hotels-details&hotelID=' . $value['hotel_id'] . '">' . $value['hotel_name'] . '</a>
                     </h1>
                     <!-- Location -->
-                    <div class='location'>
-                        <a href='index.php?page=hotels-details&hotelID=" . $value["hotel_id"] . "'>
-                            <i class='flaticon-localization'></i>
-                            " . $value["hotel_location"] . "
+                    <div class="location">
+                        <a href="index.php?page=hotels-details&hotelID=' . $value['hotel_id'] . '">
+                            <i class="flaticon-localization"></i>
+                            ' . $value['hotel_location'] . '
                         </a>
                     </div>
                     <!-- Paragraph -->
                     </div>
-                    <div class='ftr'>
-                        <div class='pull-left'>
-                            <i class='flaticon-user'></i> Jhon Doe
+                    <div class="ftr">
+                        <div class="pull-left">
+                            <i class="flaticon-user"></i> Jhon Doe
                         </div>
-                        <div class='pull-right'>
-                        " . $value["hotel_views"] . " <i class='fa fa-eye' style='opacity: 0.7;'></i>
+                        <div class="pull-right">
+                        ' . $value['hotel_views'] . ' <i class="fa fa-eye" style="opacity: 0.7;"></i>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        ";
+        ';
     }
 }
 $category = category();
