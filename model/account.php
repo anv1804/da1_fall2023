@@ -1,6 +1,6 @@
 <?php
-    session_start();
-    ob_start();
+session_start();
+ob_start();
 // LOGIN
 function login($email, $password , $checkRemember = "no")
 {

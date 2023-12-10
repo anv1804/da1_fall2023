@@ -157,6 +157,3 @@ function allBookId() {
 }
 
 ?>
-
-?>
-

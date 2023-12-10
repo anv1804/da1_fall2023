@@ -63,15 +63,34 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         </div>
         <div class="row">
-            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                 <div class="agent-2">
                     <div class="agent-photo">
                         <a href="#">
-                            <img src="assets/img/avatar/avatar-5.jpg" alt="avatar-5" class="img-fluid">
+                            <img src="assets/img/avatar/an.jpg" alt="avatar-5" class="img-fluid">
                         </a>
                     </div>
                     <div class="agent-details">
-                        <h5><a href="#">Martin Smith</a></h5>
+                        <h5><a href="#">Nguyen Van An</a></h5>
+                        <p>Web Developer</p>
+                        <ul class="social-list clearfix">
+                            <li><a href="www.faceboook.com/anv04" class="facebook"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="www.instagram.com/nguyenan.184" class="instagram"><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                <div class="agent-2">
+                    <div class="agent-photo">
+                        <a href="#">
+                            <img src="assets/img/avatar/do.jpg" alt="avatar-6" class="img-fluid">
+                        </a>
+                    </div>
+                    <div class="agent-details">
+                        <h5><a href="#">Le Minh Do</a></h5>
                         <p>Web Developer</p>
                         <ul class="social-list clearfix">
                             <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
@@ -82,54 +101,16 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                 <div class="agent-2">
                     <div class="agent-photo">
                         <a href="#">
-                            <img src="assets/img/avatar/avatar-6.jpg" alt="avatar-6" class="img-fluid">
+                            <img src="assets/img/avatar/binh.jpg" alt="avatar-7" class="img-fluid">
                         </a>
                     </div>
                     <div class="agent-details">
-                        <h5><a href="#">John Pitarshon</a></h5>
-                        <p>Creative Director</p>
-                        <ul class="social-list clearfix">
-                            <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#" class="instagram"><i class="fa fa-instagram"></i></a></li>
-                            <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
-                <div class="agent-2">
-                    <div class="agent-photo">
-                        <a href="#">
-                            <img src="assets/img/avatar/avatar-7.jpg" alt="avatar-7" class="img-fluid">
-                        </a>
-                    </div>
-                    <div class="agent-details">
-                        <h5><a href="#">Maria Blank</a></h5>
-                        <p>Office Manager</p>
-                        <ul class="social-list clearfix">
-                            <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#" class="instagram"><i class="fa fa-instagram"></i></a></li>
-                            <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
-                <div class="agent-2">
-                    <div class="agent-photo">
-                        <a href="#">
-                            <img src="assets/img/avatar/avatar-11.jpg" alt="avatar-11" class="img-fluid">
-                        </a>
-                    </div>
-                    <div class="agent-details">
-                        <h5><a href="#">Karen Paran</a></h5>
-                        <p>Support Manager</p>
+                        <h5><a href="#">Nguyen Van Binh</a></h5>
+                        <p>Web Developer</p>
                         <ul class="social-list clearfix">
                             <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
                             <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>

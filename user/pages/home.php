@@ -308,6 +308,135 @@ if (isset($_POST['submit']) && ($_POST['submit'])) {
                         </div>
                     </div>
                 </div>
+                <div class="slick-slide-item col-lg-4 col-sm-4">
+                    <div class="item-box">
+                        <div class="item-thumbnail">
+                            <a href="tours-details.html" class="item-img">
+                                <div class="tag">Historic</div>
+                                <div class="price-ratings-box">
+                                    <p class="price">From <span>$69</span> Per Person</p>
+                                    <div class="ratings">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <span>( 7 Reviews )</span>
+                                    </div>
+                                </div>
+                                <div class="love">
+                                    <i class="flaticon-heart"></i>
+                                </div>
+                                <img src="assets/img/property-3.jpg" alt="tours" class="img-fluid">
+                            </a>
+                        </div>
+                        <div class="detail">
+                            <h1 class="title">
+                                <a href="tours-details.html">Australia Sydney City</a>
+                            </h1>
+                            <div class="location">
+                                <a href="tours-details.html">
+                                    <i class="flaticon-localization"></i>2726 Shinn Street, New York
+                                </a>
+                            </div>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
+                        </div>
+                        <div class="footer clearfix">
+                            <div class="pull-left">
+                                <i class="flaticon-user"></i> Jhon Doe
+                            </div>
+                            <div class="pull-right">
+                                <i class="flaticon-timetable"></i> 6 days
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slick-slide-item col-lg-4 col-sm-4">
+                    <div class="item-box">
+                        <div class="item-thumbnail">
+                            <a href="tours-details.html" class="item-img">
+                                <div class="tag">Historic</div>
+                                <div class="price-ratings-box">
+                                    <p class="price">From <span>$69</span> Per Person</p>
+                                    <div class="ratings">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <span>( 7 Reviews )</span>
+                                    </div>
+                                </div>
+                                <div class="love">
+                                    <i class="flaticon-heart"></i>
+                                </div>
+                                <img src="assets/img/property-3.jpg" alt="tours" class="img-fluid">
+                            </a>
+                        </div>
+                        <div class="detail">
+                            <h1 class="title">
+                                <a href="tours-details.html">Australia Sydney City</a>
+                            </h1>
+                            <div class="location">
+                                <a href="tours-details.html">
+                                    <i class="flaticon-localization"></i>2726 Shinn Street, New York
+                                </a>
+                            </div>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
+                        </div>
+                        <div class="footer clearfix">
+                            <div class="pull-left">
+                                <i class="flaticon-user"></i> Jhon Doe
+                            </div>
+                            <div class="pull-right">
+                                <i class="flaticon-timetable"></i> 6 days
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slick-slide-item col-lg-4 col-sm-4">
+                    <div class="item-box">
+                        <div class="item-thumbnail">
+                            <a href="tours-details.html" class="item-img">
+                                <div class="tag">Historic</div>
+                                <div class="price-ratings-box">
+                                    <p class="price">From <span>$69</span> Per Person</p>
+                                    <div class="ratings">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <span>( 7 Reviews )</span>
+                                    </div>
+                                </div>
+                                <div class="love">
+                                    <i class="flaticon-heart"></i>
+                                </div>
+                                <img src="assets/img/property-3.jpg" alt="tours" class="img-fluid">
+                            </a>
+                        </div>
+                        <div class="detail">
+                            <h1 class="title">
+                                <a href="tours-details.html">Australia Sydney City</a>
+                            </h1>
+                            <div class="location">
+                                <a href="tours-details.html">
+                                    <i class="flaticon-localization"></i>2726 Shinn Street, New York
+                                </a>
+                            </div>  
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
+                        </div>
+                        <div class="footer clearfix">
+                            <div class="pull-left">
+                                <i class="flaticon-user"></i> Jhon Doe
+                            </div>
+                            <div class="pull-right">
+                                <i class="flaticon-timetable"></i> 6 days
+                            </div>
+                        </div>
+                    </div>
+                </div   
                 <!--  -->
             </div>
             <div class="slick-prev slick-arrow-buton">

@@ -1,4 +1,45 @@
-
+<?php
+if (isset($_SESSION['user'])) {
+    $user = $_SESSION['user'];
+} else if (isset($_COOKIE['user'])) {
+    $user = json_decode($_COOKIE['user'], true);
+}
+if (isset($user) && $user['user_role'] == 0) {
+    $userEmail = $user['user_email'];
+    $result = user($userEmail);
+    if (isset($result)) {
+        $userID = $result[0]['user_id'];
+    }
+    $dataBook = "";
+    $book = dataBooking($userID);
+    if (isset($book)) {
+        foreach ($book as $value) {
+            $imageRoom = explode(',', $book[0]['room_image']);
+            $dataBook .= '
+                <tr align="center"> 
+                       
+                       <td><span>' . $value['hotel_name'] . ' </span></td>
+                       <td><span>' . $value['room_number'] . ' </span></td>
+                    <td class="product-thumbnail">
+                        <a href="index.php?page=rooms-details&roomID='.$value['room_id'].'">
+                            <img style="width:60%;" src="./assets/images/rooms/' . $imageRoom[0] . '" alt="avatar">
+                        </a>
+                    </td>
+                    <td class="product-name">
+                        <span>Booking Date : ' . $value['date_booking'] . '</span><br>
+                        <span>Start date : ' . $value['date_start'] . '</span><br>
+                        <span>End date :  ' . $value['date_end'] . '</span><br>
+                    </td>
+                    <td>£58.00</td>
+                    <td><input class="qty hdn" type="text" value="+1"></td>
+                    <td class="hdn">£58.00</td>
+                    <td class="product-remove"><a href="#"><i class="fa fa-close"></i></a></td>
+                </tr>
+            ';
+        }
+    }
+}
+?>
 <!-- Sub banner start -->
 <div class="sub-banner overview-bgi">
     <div class="container">
@@ -17,83 +58,28 @@
 <div class="cart content-area-7">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8">
+            <div class="col-lg-12">
                 <table class="shop-table cart">
                     <thead>
-                    <tr>
-                        <th class="product-name">Product</th>
-                        <th class="product-description">Description</th>
-                        <th class="product-price">Price</th>
-                        <th class="product-quantity">Qty</th>
-                        <th class="product-subtotal">Total</th>
-                        <th class="product-remove">&nbsp;</th>
-                    </tr>
+                        <tr align="center">
+                            <th class="product-price">Hotel</th>
+                            <th class="product-price">Room Number</th>
+                            <th class="product-name">Image</th>
+                            <th class="product-description">Infomation</th>
+                            <th class="product-price">Room</th>
+                            <th class="product-quantity">Qty</th>
+                            <th class="product-subtotal">Total</th>
+                            <th class="product-remove">&nbsp;</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td class="product-thumbnail"><img src="assets/img/avatar/avatar-13.jpg" alt="avatar"></td>
-                        <td class="product-name">
-                            <a href="#">Lorem ipsum dolor sit amet</a>
-                        </td>
-                        <td>£58.00</td>
-                        <td><input class="qty hdn" type="text" value="+1"></td>
-                        <td class="hdn">£58.00</td>
-                        <td class="product-remove"><a href="#"><i class="fa fa-close"></i></a></td>
-                    </tr>
-                    <tr>
-                        <td class="product-thumbnail"><img src="assets/img/avatar/avatar-13.jpg" alt="avatar"></td>
-                        <td class="product-name">
-                            <a href="#">Lorem ipsum dolor sit amet</a>
-                        </td>
-                        <td>£58.00</td>
-                        <td><input class="qty hdn" type="text" value="+1"></td>
-                        <td class="hdn">£58.00</td>
-                        <td class="product-remove"><a href="#"><i class="fa fa-close"></i></a></td>
-                    </tr>
-                    <tr>
-                        <td class="product-thumbnail"><img src="assets/img/avatar/avatar-13.jpg" alt="avatar"></td>
-                        <td class="product-name">
-                            <a href="#">Lorem ipsum dolor sit amet</a>
-                        </td>
-                        <td>£58.00</td>
-                        <td><input class="qty hdn" type="text" value="+1"></td>
-                        <td class="hdn">£58.00</td>
-                        <td class="product-remove"><a href="#"><i class="fa fa-close"></i></a></td>
-                    </tr>
-                    <tr>
-                        <td class="product-thumbnail"><img src="assets/img/avatar/avatar-13.jpg" alt="avatar"></td>
-                        <td class="product-name">
-                            <a href="#">Lorem ipsum dolor sit amet</a>
-                        </td>
-                        <td>£58.00</td>
-                        <td><input class="qty hdn" type="text" value="+1"></td>
-                        <td class="hdn">£58.00</td>
-                        <td class="product-remove"><a href="#"><i class="fa fa-close"></i></a></td>
-                    </tr>
-                    <tr>
-                        <td class="product-thumbnail"><img src="assets/img/avatar/avatar-13.jpg" alt="avatar"></td>
-                        <td class="product-name">
-                            <a href="#">Lorem ipsum dolor sit amet</a>
-                        </td>
-                        <td>£58.00</td>
-                        <td><input class="qty hdn" type="text" value="+1"></td>
-                        <td class="hdn">£58.00</td>
-                        <td class="product-remove"><a href="#"><i class="fa fa-close"></i></a></td>
-                    </tr>
-                    <tr>
-                        <td class="product-thumbnail"><img src="assets/img/avatar/avatar-13.jpg" alt="avatar"></td>
-                        <td class="product-name">
-                            <a href="#">Lorem ipsum dolor sit amet</a>
-                        </td>
-                        <td>£58.00</td>
-                        <td><input class="qty hdn" type="text" value="+1"></td>
-                        <td class="hdn">£58.00</td>
-                        <td class="product-remove"><a href="#"><i class="fa fa-close"></i></a></td>
-                    </tr>
+                        <?php if (isset($dataBook)) {
+                            echo $dataBook;
+                        } ?>
                     </tbody>
                 </table>
             </div>
-            <div class="col-lg-4">
+            <!-- <div class="col-lg-4">
                 <div class="cart-total-box ml-20">
                     <h5>Cart Totals</h5>
                     <hr>
@@ -119,7 +105,7 @@
                     <a href="#" class="btn btn-dark btn-block btn-md">Update Cart</a>
                     <a href="cart-2.html" class="btn btn-color btn-block btn-md">Checkout</a>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>
