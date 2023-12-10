@@ -53,60 +53,62 @@ const validateDay = (lastDateofMonth , listDate) => {
     let dateMiddles = [];
     if (listDate) {
         listDate.forEach(date => {
-            let dateStart = date.date_start.split('/').map(Number);
-            let dateEnd = date.date_end.split('/').map(Number);
+            let dateStart = date.date_start.split('|');
+            let dayStart = dateStart[0].split('/').map(Number);
+            let dateEnd = date.date_end.split('|');
+            let dayEnd = dateEnd[0].split('/').map(Number);
             
             //date Start and date End
             for (let i = 1; i <= lastDateofMonth; i++) { 
-                if (i == dateStart[0] && currMonth === (dateStart[1]-1) && currYear == dateStart[2]) {
+                if (i == dayStart[0] && currMonth === (dayStart[1]-1) && currYear == dayStart[2]) {
                     dateStarts.push(i);
                 }
-                if ( i == dateEnd[0] && currMonth === (dateEnd[1]-1) && currYear == dateEnd[2] ) {
+                if ( i == dayEnd[0] && currMonth === (dayEnd[1]-1) && currYear == dayEnd[2] ) {
                     dateEnds.push(i);
                 }
             }
     
             //date Middle
-            if ((dateStart[1]-1) == currMonth && dateStart[2] == dateEnd[2] && (dateEnd[1]-1) == currMonth) {
+            if ((dayStart[1]-1) == currMonth && dayStart[2] == dayEnd[2] && (dayEnd[1]-1) == currMonth) {
                 for (let i = 1; i <= lastDateofMonth; i++) {
-                    if (dateStart[0] - i < 0 && i < dateEnd[0]) {
+                    if (dayStart[0] - i < 0 && i < dayEnd[0]) {
                         dateMiddles.push(i);
                     }
-                    if (dateEnd[0] - i > 0 && i > dateStart[0]) {
+                    if (dayEnd[0] - i > 0 && i > dayStart[0]) {
                         dateMiddles.push(i);
                     }
                 }
             }
-            if (dateStart[1] != dateEnd[1] || dateEnd[2] - dateStart[2] > 0) { 
-                if ((dateStart[1]-1) == currMonth) {
+            if (dayStart[1] != dayEnd[1] || dayEnd[2] - dayStart[2] > 0) { 
+                if ((dayStart[1]-1) == currMonth) {
                     for (let i = 1; i <= lastDateofMonth; i++) {
-                        if (dateStart[0] - i < 0) {
+                        if (dayStart[0] - i < 0) {
                             dateMiddles.push(i);
                         }
                     }
                 }
-                if ((dateEnd[1]-1) == currMonth) {
+                if ((dayEnd[1]-1) == currMonth) {
                     for (let i = 1; i <= lastDateofMonth; i++) {
-                        if (dateEnd[0] - i > 0) {
+                        if (dayEnd[0] - i > 0) {
                             dateMiddles.push(i);
                         }
                     }
                 }
             }
-            if (dateEnd[1]-1 > currMonth && dateStart[1]-1 < currMonth && dateEnd[2] == currYear  && dateStart[2] == currYear) {
-                if (dateEnd[1] - currMonth > 0) {
+            if (dayEnd[1]-1 > currMonth && dayStart[1]-1 < currMonth && dayEnd[2] == currYear  && dayStart[2] == currYear) {
+                if (dayEnd[1] - currMonth > 0) {
                     for (let i = 1; i <= lastDateofMonth; i++) { 
                         dateMiddles.push(i);
                     }
                 }
             }
-            if (dateEnd[2] - dateStart[2] > 0) {
-                if (dateEnd[1] - 1 > currMonth && dateEnd[2] == currYear) {
+            if (dayEnd[2] - dayStart[2] > 0) {
+                if (dayEnd[1] - 1 > currMonth && dayEnd[2] == currYear) {
                     for (let i = 1; i <= lastDateofMonth; i++) { 
                         dateMiddles.push(i);
                     }
                 }
-                if (dateStart[1] - 1 < currMonth && dateStart[2] == currYear) {
+                if (dayStart[1] - 1 < currMonth && dayStart[2] == currYear) {
                     for (let i = 1; i <= lastDateofMonth; i++) { 
                         dateMiddles.push(i);
                     }
@@ -164,6 +166,7 @@ if (listBtnDate) {
         btn.onclick = () => {
             let dateBtn = btn.innerHTML;
             dateBtn = dateBtn.split(' - ');
+            dateBtn = dateBtn[0].split('|');
             let dateBtnStart = dateBtn[0].split('/').map(Number);
             currMonth = dateBtnStart[1];
             currYear = dateBtnStart[2];
@@ -177,11 +180,16 @@ const formPurchase = document.querySelector('#form-purchase');
 
 if (formPurchase) {
     const inputDates = formPurchase.querySelector('input[name="dates"]'),
-    errorMessage = formPurchase.querySelector('.form-message');
+    errorMessage = formPurchase.querySelector('.form-message'),
+    inputTimes = formPurchase.querySelectorAll('.time-pickable.form-control');
+
+    console.log(inputTimes);
+
     formPurchase.onsubmit = function() {
         let invalid = false;
         let invalid1 = false;
         let dates = inputDates.value.split(' - ');
+
 
         date = new Date(),
         currYear = date.getFullYear(),
@@ -223,7 +231,7 @@ if (formPurchase) {
         }
         if(!invalid1 && !invalid) {
             errorMessage.innerHTML = '';
-            return true;
+            return false;
         }
     }
 }

@@ -107,7 +107,8 @@ if (isset($_POST['submit']) && ($_POST['submit'])) {
 
                             foreach ($dates as $date) {
                                 $invalid = false;
-                                $date = explode('/', $date);
+                                $date = explode('|', $date);
+                                $date = explode('/', $date[0]);
 
                                 $date = array_map(function ($value) {
                                     return (int) $value;
@@ -123,7 +124,7 @@ if (isset($_POST['submit']) && ($_POST['submit'])) {
                                 $listDateAc = validateDay($lastDateofMonth, $listDate, $currMonth, $currYear);
                                 // var_dump($listDateAc);
 
-                                if (in_array($date[1], $listDateAc[0]) || in_array($date[1], $listDateAc[1]) || in_array($date[1], $listDateAc[2])) {
+                                if (in_array($date[1], $listDateAc[1])) {
                                     $invalid = true;
                                     // echo $date[1];
                                 }
