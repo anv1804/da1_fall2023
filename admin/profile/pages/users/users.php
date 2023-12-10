@@ -45,7 +45,7 @@ if ($loadUers) {
                     </div>
                 </div>
             </div>
-            <div class="dashboard-list">
+            <div class="dashboard-list" style="width: 100%;">
                 <h3>Bookings List</h3>
                 <div class="dashboard-listd">
                     <?= $dataUsers ?>

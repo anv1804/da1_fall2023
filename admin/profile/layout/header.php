@@ -113,7 +113,7 @@
     <!-- Dashboard start -->
     <div class="dashboard">
 
-        <div class="container-fluid">
+        <div class="container-fluid" style="height: 100%;">
             <div class="row">
                 <div class="dashboard-sidebar col-lg-3 col-md-12 col-sm-12 col-pad">
                     <div class="dashboard-nav d-none d-xl-block d-lg-block">
