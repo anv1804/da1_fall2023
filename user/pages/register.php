@@ -27,7 +27,7 @@ if (isset($_POST["submit"]) && ($_POST["submit"])) {
                 <div class="form-content-box">
                     <!-- Logo -->
                     <a href="index.php">
-                        <img src="./assets/images/logo.png" class="cm-logo" alt="logo">
+                        <img src="./assets/img/logos/logo.png" class="cm-logo" alt="logo">
                     </a>
                     <!-- details -->
                     <div class="details">

@@ -1,31 +1,15 @@
 <?php
+$user ="";
 if (isset($_SESSION['user'])) {
     $user = $_SESSION['user'];
 } else if (isset($_COOKIE['user'])) {
     $user = json_decode($_COOKIE['user'], true);
 }
-if (array_key_exists('button1', $_POST)) {
-    mopup();
-}
-function mopup()
-{
-    echo "This is Button1 that is selected";
-    $noti = '
-                <div class="alert alert-success alert-1" role="alert"
-                    style="visibility: visible; animation-name: fadeInLeft;">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                            aria-hidden="true">×</span></button>
-                    HELLO <strong>ADMIN</strong>, WELCOME TO DASHBOARD!
-                </div>
-            ';
-}
-if (isset($user) && $user['user_role'] == 0) {
-    $userEmail = $user['user_email'];
-    $result = user($userEmail);
-    if (isset($result)) {
-        $userID = $result[0]['user_id'];
-    }
-    $dataBook = "";
+$dataBook = "";
+
+if ($user && $user['user_role']==0) {
+    $userEmail = (string)$user['user_email'];
+    $userID = getID($userEmail);
     $book = dataBooking($userID);
     if (isset($book)) {
         foreach ($book as $value) {

@@ -103,7 +103,7 @@
                                 <div class="" style="display: flex;align-items: center;justify-content: space-around;">
                                     <li class="nav-item" style="position:relative;margin-right: 10px;">
                                         <a href="index.php?page=cart" class="nav-link h-icon">
-                                            <i class="flaticon-supermarket"></i>
+                                            <i class="fa fa-calendar"></i>
                                             <sup style="position: absolute;top:35%;left: 60%;">0</sup>
                                         </a>
                                     </li>
