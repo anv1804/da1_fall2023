@@ -80,6 +80,11 @@ function booking($date, $dateStart, $dateEnd, $roomID)
     VALUES (null,'$date','$dateStart','$dateEnd','$roomID')";
     pdo_execute($sql);
 }
+function loadComplete($room_id, $dateStart)
+{
+    $sql = "SELECT completed_id FROM completed WHERE room_id = $room_id and date_start = '$dateStart'";
+    return pdo_query_one($sql);
+}
 function dataBooking($userID)
 {
     $sql = "SELECT 
@@ -102,5 +107,20 @@ function dataBooking($userID)
     ON book.completed_id = completed.completed_id WHERE book.user_id = $userID";
     $data = pdo_query($sql);
     return $data;
+}
+
+function insertBook($book_id , $user_id , $room_id, $hotel_id , $total_price , $book_status , $completed_id , $cancellation_date)
+{
+    $sql = "INSERT INTO `book`(`book_id`, `user_id`, `room_id`, `hotel_id`, `total_price`, `book_status`, `completed_id`, `cancellation_date`)
+     VALUES ('$book_id','$user_id','$room_id','$hotel_id','$total_price','$book_status','$completed_id','$cancellation_date')";
+    pdo_execute($sql);
+}
+function checkBookIdSql($book_id) {
+    $sql = "SELECT * FROM `book` WHERE book_id = '$book_id'";
+    $result = pdo_query_one($sql);
+    if ($result) {
+        return false;
+    }
+    return true;
 }
 ?>

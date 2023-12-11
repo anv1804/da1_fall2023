@@ -156,4 +156,6 @@ function allBookId() {
     return pdo_query($sql);
 }
 
+
+
 ?>

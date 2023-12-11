@@ -36,67 +36,73 @@
         </header>
 
 
-        <?php 
-            session_start();
-            ob_start();
-            include '../../model/pdo.php';
-            include '../../model/rooms.php';
-            include '../../model/hotels.php';
-            include '../../model/users.php';
+        <?php
+        session_start();
+        ob_start();
+        include '../../model/pdo.php';
+        include '../../model/rooms.php';
+        include '../../model/hotels.php';
+        include '../../model/users.php';
 
-            function convertDay($day) {
-                $dateObject = date_create_from_format("d/m/Y", $day);
+        function convertDay($day)
+        {
+            $dateObject = date_create_from_format("d/m/Y", $day);
 
-                // Kiểm tra xem có lỗi không
-                if (!$dateObject) {
-                    return false;
-                } else {
-                    // Định dạng lại theo yêu cầu
-                    return $dateObject->format("D, j M Y");
-                }
+            // Kiểm tra xem có lỗi không
+            if (!$dateObject) {
+                return false;
+            } else {
+                // Định dạng lại theo yêu cầu
+                return $dateObject->format("D, j M Y");
+            }
+        }
+
+        if (isset($_SESSION['book']) && ($_SESSION['book'])) {
+            $book = $_SESSION['book'];
+
+            $dateCheckInOut = [];
+
+            
+            $book['date_start'] = explode('|' , $book['date_start']);
+            $book['date_end'] = explode('|' , $book['date_end']);
+
+            $dateCheckInOut[] = convertDay($book['date_start'][0]);
+            $dateCheckInOut[] = convertDay($book['date_end'][0]);
+
+            $user = [];
+            if (isset($_SESSION['user'])) {
+                $user = $_SESSION['user'];
+            } else {
+                $user = json_decode($_COOKIE['user'], true);
             }
 
-            if (isset($_SESSION['book']) && ($_SESSION['book'])) {
-                $book = $_SESSION['book'];
+            $user = user($user['user_email']);
+            $room = allRooms($book['room_id']);
+            $hotel = allHotels('', '', $room[0]['hotel_id']);
 
-                $dateCheckInOut = [];
+            $imageRoom = explode(',', $room[0]['room_image']);
 
-                $dateCheckInOut[] = convertDay($book['date_start']);
-                $dateCheckInOut[] = convertDay($book['date_end']);
-                
-                $user = [];
-                if (isset($_SESSION['user'])) {
-                    $user = $_SESSION['user'];
-                } else {
-                    $user = json_decode($_COOKIE['user'], true);
-                }
-                
-                $user = user($user['user_email']);
-                $room = allRooms($book['room_id']);
-                $hotel = allHotels('' , '' , $room[0]['hotel_id']);
 
-                $imageRoom = explode(',', $room[0]['room_image']);
+            $day1 = DateTime::createFromFormat("d/m/Y", $book['date_start'][0]);
+            $day2 = DateTime::createFromFormat("d/m/Y", $book['date_end'][0]);
 
-                $day1 = DateTime::createFromFormat("d/m/Y", $book['date_start']);
-                $day2 = DateTime::createFromFormat("d/m/Y", $book['date_end']);
+            $numberOfNight = $day1->diff($day2)->days;
+            $totalPrice = (int) $numberOfNight * (int) $room[0]['room_price'] + 9;
+            $convertTotalPrice = number_format(($totalPrice * 24000), 0, ',', '.');
+        }
 
-                $numberOfNight = $day1->diff($day2)->days;
-                $totalPrice = (int)$numberOfNight * (int)$room[0]['room_price'] + 9;
-                $convertTotalPrice = number_format(($totalPrice*24000), 0, ',', '.');
-            }
+        if (isset($_POST['next']) && ($_POST['next'])) {
 
-            if (isset($_POST['next']) && ($_POST['next'])) {
-                
-                $_SESSION['book']['user_id'] = $user[0]['user_id'];
-                $_SESSION['book']['hotel_id'] = $hotel[0]['hotel_id'];
-                $_SESSION['book']['book_name'] = $_POST['user-name'];
-                $_SESSION['book']['book_email'] = $_POST['email'];
-                $_SESSION['book']['book_number'] = $_POST['number-phone'];
-                $_SESSION['book']['book_price-convert'] = $convertTotalPrice;
-                $_SESSION['book']['book_price'] = $totalPrice;
+            $_SESSION['book']['user_id'] = $user[0]['user_id'];
+            $_SESSION['book']['hotel_id'] = $hotel[0]['hotel_id'];
+            $_SESSION['book']['book_name'] = $_POST['user-name'];
+            $_SESSION['book']['book_email'] = $_POST['email'];
+            $_SESSION['book']['book_number'] = $_POST['number-phone'];
+            $_SESSION['book']['book_price-convert'] = $convertTotalPrice;
+            $_SESSION['book']['book_price'] = $totalPrice;
 
-                header('location: ./comfirm.php');
-            }
+            header('location: ./comfirm.php');
+        }
 
         ?>
 
@@ -113,10 +119,15 @@
                     <div class="col-8">
 
                         <div class="user-info">
-                            <div class="img"><img src="../../assets/img/avatar/<?=$user[0]['user_image'];?>" alt=""></div>
+                            <div class="img"><img src="../../assets/img/avatar/<?= $user[0]['user_image']; ?>" alt="">
+                            </div>
                             <div class="info">
-                                <div class="user-name">Login with name <?=$user[0]['user_name'];?></div>
-                                <div class="user-email"><?=$user[0]['user_email'];?> (Email)</div>
+                                <div class="user-name">Login with name
+                                    <?= $user[0]['user_name']; ?>
+                                </div>
+                                <div class="user-email">
+                                    <?= $user[0]['user_email']; ?> (Email)
+                                </div>
                             </div>
                         </div>
 
@@ -157,18 +168,21 @@
 
                                 <div class="form-group">
                                     <label for="user-name">Name</label>
-                                    <input rules="required" type="text" name="user-name" id="user-name" value="<?=$user[0]['user_name'];?>">
+                                    <input rules="required" type="text" name="user-name" id="user-name"
+                                        value="<?= $user[0]['user_name']; ?>">
                                     <div class="form-message"></div>
                                 </div>
                                 <div class="form-number-email">
                                     <div class="form-group">
                                         <label for="number-phone">Number phone</label>
-                                        <input rules="required|number" type="text" name="number-phone" id="number-phone" value="<?=$user[0]['user_number'];?>">
+                                        <input rules="required|number" type="text" name="number-phone" id="number-phone"
+                                            value="<?= $user[0]['user_number']; ?>">
                                         <div class="form-message"></div>
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Email</label>
-                                        <input rules="required|email" type="email" name="email" id="email" value="<?=$user[0]['user_email'];?>">
+                                        <input rules="required|email" type="email" name="email" id="email"
+                                            value="<?= $user[0]['user_email']; ?>">
                                         <div class="form-message"></div>
                                     </div>
                                 </div>
@@ -177,13 +191,19 @@
 
                             <div class="title">Price details</div>
                             <div class="price-detail">
-                                <div class="total-amount">
-                                    <div class="title">Total amount</div>
-                                    <div class="total">
-                                        <ion-icon name="chevron-down-outline"></ion-icon>
-                                        <div class="total-amount-number">$<?=$totalPrice?></div>
+                                <a style="width:100%;text-decoration: none;color: rgb(3, 18, 26);"
+                                    data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="true"
+                                    aria-controls="collapseExample" class="collapse-price">
+                                    <div class="total-amount">
+                                        <div class="title">Total amount</div>
+                                        <div class="total">
+                                            <ion-icon name="chevron-down-outline"></ion-icon>
+                                            <div class="total-amount-number">$
+                                                <?= $totalPrice ?>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
 
                                 <div class="notification">
                                     <ion-icon name="information-circle-outline"></ion-icon>
@@ -195,50 +215,95 @@
                                     </div>
                                 </div>
 
-                                <div class="price-detail-body">
-                                    <div class="price">
-                                        <div class="price-title">
-                                            (1x) <?=$room[0]['room_number'];?> (<?=$numberOfNight?> night)
+                                <div class="collapse show w-100" id="collapseExample">
+                                    <div class="price-detail-body">
+                                        <div class="price">
+                                            <div class="price-title">
+                                                (1x)
+                                                <?= $room[0]['room_number']; ?> (
+                                                <?= $numberOfNight ?> night)
+                                            </div>
+                                            <div class="price-number">$
+                                                <?= $room[0]['room_price'] ?>
+                                            </div>
                                         </div>
-                                        <div class="price-number">$<?=$room[0]['room_price']?></div>
-                                    </div>
-                                    <div class="price">
-                                        <div class="price-title">
-                                            Taxes and fees
+                                        <div class="price">
+                                            <div class="price-title">
+                                                Taxes and fees
+                                            </div>
+                                            <div class="price-number">$9</div>
                                         </div>
-                                        <div class="price-number">$9</div>
-                                    </div>
-                                    <div class="price convert">
-                                        <div class="price-title">
-                                            Convert to Vietnamese Dong
+                                        <div class="price convert">
+                                            <div class="price-title">
+                                                Convert to Vietnamese Dong
+                                            </div>
+                                            <div class="price-number">$
+                                                <?= $totalPrice ?> ->
+                                                <?= $convertTotalPrice; ?> VND
+                                            </div>
                                         </div>
-                                        <div class="price-number">$<?=$totalPrice?> -> <?=$convertTotalPrice;?> VND</div>
                                     </div>
                                 </div>
 
                             </div>
 
-                            <button class="button" type="submit" name="next" value="pay" style="vertical-align:middle"><span>Next</span></button>
+
+                            <!-- Modal -->
+                            <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            ...
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+
+                            <button class="button" type="submit" name="next" id="check-in-btn" value="pay" style="vertical-align:middle"
+                                ><span>Next</span>
+                            </button>
                         </form>
                     </div>
                     <div class="col-4">
                         <div class="info-room">
                             <div class="info-hotel">
                                 <ion-icon name="business"></ion-icon>
-                                <div class="hotel-name"><?=$hotel[0]['hotel_name'];?></div>
+                                <div class="hotel-name">
+                                    <?= $hotel[0]['hotel_name']; ?>
+                                </div>
                             </div>
                             <div class="check-in-out">
                                 <div class="chek">
                                     <div class="title">Check in:</div>
-                                    <div class="check-day"><?=$dateCheckInOut[0]?></div>
+                                    <div class="check-day">
+                                        <?= $dateCheckInOut[0] ?> ,
+                                        From <?=$book['date_start'][1] ?>
+                                    </div>
                                 </div>
                                 <div class="chek">
                                     <div class="title">Check out:</div>
-                                    <div class="check-day"><?=$dateCheckInOut[1]?></div>
+                                    <div class="check-day">
+                                        <?= $dateCheckInOut[1] ?> ,
+                                        Before <?=$book['date_end'][1] ?>
+                                    </div>
                                 </div>
                             </div>
                             <div class="room-detail">
-                                <div class="room-name"><p class="amount-room">(1x)</p> <?=$room[0]['room_number'];?></div>
+                                <div class="room-name">
+                                    <p class="amount-room">(1x)</p>
+                                    <?= $room[0]['room_number']; ?>
+                                </div>
                                 <div class="room-des">
                                     <div class="type-room">
                                         <p>Guest/Room</p>
@@ -251,7 +316,7 @@
                                 </div>
                                 <div class="img-hotel">
                                     <div class="img">
-                                        <img src="../../assets/images/rooms/<?=$imageRoom[0];?>">
+                                        <img src="../../assets/images/rooms/<?= $imageRoom[0]; ?>">
                                     </div>
 
                                     <div class="room-sevices">
@@ -272,7 +337,7 @@
                                         <p>Free cancellation</p>
                                     </div>
                                     <div class="sevice active">
-                                        <ion-icon name="calendar-outline"></ion-icon>   
+                                        <ion-icon name="calendar-outline"></ion-icon>
                                         <p>Can reschedule</p>
                                     </div>
                                 </div>
@@ -292,6 +357,17 @@
     new Validator('#form-check-in');
 </script>
 <script>
+    const elementTotalPrice = document.querySelector('#form-check-in .collapse-price');
+    const btnArrowPrice = elementTotalPrice.querySelector('.total-amount .total ion-icon');
+
+    elementTotalPrice.onclick = () => {
+        if (elementTotalPrice.getAttribute('aria-expanded') == 'true') {
+            btnArrowPrice.style.transform = 'rotate(180deg)';
+        } else {
+            btnArrowPrice.style.transform = 'rotate(0deg)';
+        }
+    }
 
 </script>
+
 </html>
