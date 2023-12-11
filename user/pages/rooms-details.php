@@ -72,7 +72,7 @@ if (isset($_GET['roomID'])) {
                                 class="img-fluid" alt="photo-4">
                         </div>
                         <div class="item carousel-item" data-slide-number="2">
-<img style="width: 100%;height: 100%" src="./assets/images/rooms/<?= $imageRoom[2] ?>"
+                            <img style="width: 100%;height: 100%" src="./assets/images/rooms/<?= $imageRoom[2] ?>"
                                 class="img-fluid" alt="photo-4">
                         </div>
                         <div class="item carousel-item" data-slide-number="4">
@@ -114,7 +114,7 @@ if (isset($_GET['roomID'])) {
                         <li class="list-inline-item">
                             <a id="carousel-selector-4" data-slide-to="4" data-target="#itemDetailsSlider">
                                 <img style="width: 100%;height: 100%" src="./assets/images/rooms/<?= $imageRoom[4] ?>"
-class="img-fluid" alt="photo-5">
+                                    class="img-fluid" alt="photo-5">
                             </a>
                         </li>
                     </ul>
@@ -181,7 +181,7 @@ class="img-fluid" alt="photo-5">
                         <div class="col-md-4 col-sm-6">
                             <ul>
                                 <li>
-<i class="flaticon-check"></i>
+                                    <i class="flaticon-check"></i>
                                     Alarm system
                                 </li>
                                 <li>
@@ -246,7 +246,7 @@ class="img-fluid" alt="photo-5">
                                 </ul>
                                 <ul class="days"></ul>
                             </div>
-</div>
+                        </div>
                         <div>
                             <header>
                                 <p class="current-date"></p>
@@ -282,48 +282,39 @@ class="img-fluid" alt="photo-5">
                         <h5 class="sidebar-title">Book This Room</h5>
 
                         <?php
-                        function convertTime($time) {
-                            $time = explode(' ' ,$time);
+                        function convertTime($time)
+                        {
+                            $time = explode(' ', $time);
                             if ($time[1] == "am") {
                                 return $time[0];
-                            }else {
-                                $time = explode(':' , $time[0]);
+                            } else {
+                                $time = explode(':', $time[0]);
                                 $time[0] += 12;
-                                return implode(':' , $time);
+                                return implode(':', $time);
                             }
-                        };
+                        }
+                        ;
 
                         if (isset($_POST['purchase']) && ($_POST['purchase'])) {
 
-                            if (isset($_SESSION['user'])) {
-                                $user = $_SESSION['user'];
-                            } else if (isset($_COOKIE['user'])) {
-                                $user = json_decode($_COOKIE['user'], true);
-                            }
-                            if (isset($user) && $user['user_role'] == 0) {
-                                $dates = $_POST['dates'];
-                                $timeCheckIn = $_POST['time-check-in'];
-                                $timeCheckOut = $_POST['time-check-out'];
-                                
-                                $timeCheckIn = convertTime($timeCheckIn);
-                                $timeCheckOut = convertTime($timeCheckOut);
-echo $timeCheckIn , $timeCheckOut;
-                                // print_r($dates);
-                                $day = explode(' - ', $dates);
-                                $date = date('m-d-Y');
-                                $dayStart = explode('/', $day[0]);
-                                $dayEnd = explode('/', $day[1]);
-                                $dateStart = $dayStart[1].'/'.$dayStart[0].'/'.$dayStart[2].'|'.$timeCheckIn;
-                                $dateEnd = $dayEnd[1].'/'.$dayEnd[0].'/'.$dayEnd[2].'|'.$timeCheckOut;
-                                // print_r($dateStart);
-                                // echo "<br>";
-                                // print_r($dateEnd);
-                                $_SESSION['book'] = ['room_id' => $room_id , 'date_start' => $dateStart , 'date_end' => $dateEnd];
-                                // print_r($_SESSION['book']);
-                                echo "<script type='text/javascript'>window.location.href = './user/check-in/check-in.php';</script>";
-                            } else {
-                                echo "<script type='text/javascript'>window.location.href = 'index.php?page=login';</script>";
-                            }
+
+                            $dates = $_POST['dates'];
+                            $timeCheckIn = $_POST['time-check-in'];
+                            $timeCheckOut = $_POST['time-check-out'];
+
+                            $timeCheckIn = convertTime($timeCheckIn);
+                            $timeCheckOut = convertTime($timeCheckOut);
+                            echo $timeCheckIn, $timeCheckOut;
+                            $day = explode(' - ', $dates);
+                            $date = date('m-d-Y');
+                            $dayStart = explode('/', $day[0]);
+                            $dayEnd = explode('/', $day[1]);
+                            $dateStart = $dayStart[1] . '/' . $dayStart[0] . '/' . $dayStart[2] . '|' . $timeCheckIn;
+                            $dateEnd = $dayEnd[1] . '/' . $dayEnd[0] . '/' . $dayEnd[2] . '|' . $timeCheckOut;
+
+                            $_SESSION['book'] = ['room_id' => $room_id, 'date_start' => $dateStart, 'date_end' => $dateEnd];
+
+                            echo "<script type='text/javascript'>window.location.href = './user/check-in/check-in.php';</script>";
                         }
 
                         ?>
@@ -342,15 +333,17 @@ echo $timeCheckIn , $timeCheckOut;
                                 <div class="form-group-time d-flex" style="justify-content:space-between;">
                                     <div class="form-time check-in" style="flex-basis:48%">
                                         <label for="check-in" style="font-size:14px;margin:0;">Check in:</label>
-                                        <input type="text" class="time-pickable form-control" name="time-check-in" id="check-in" value="07:00 am" readonly>
+                                        <input type="text" class="time-pickable form-control" name="time-check-in"
+                                            id="check-in" value="07:00 am" readonly>
                                     </div>
                                     <div class="form-time check-out" style="flex-basis:48%">
                                         <label for="check-out" style="font-size:14px;margin:0;">Check out:</label>
-                                        <input type="text" class="time-pickable form-control" name="time-check-out" id="check-out" value="07:00 am" readonly>
+                                        <input type="text" class="time-pickable form-control" name="time-check-out"
+                                            id="check-out" value="07:00 am" readonly>
                                     </div>
                                 </div>
                                 <span class="form-message text-danger"></span>
-</div>
+                            </div>
                             <div class="form-group search-col">
                                 <select class="selectpicker search-fields btn-block form-control bdr" name="guest">
                                     <option> Room for
@@ -361,9 +354,30 @@ echo $timeCheckIn , $timeCheckOut;
                             </div>
                             <div class="form-group search-col" style="margin-top:20px">
                                 <button type="submit" style="margin-bottom: 8px;" name="purchase" value="purchase"
-                                    class="btn-theme btn-md btn-block">Purchase</button>
+                                    class="btn-theme btn-md btn-block" data-bs-toggle="modal" data-bs-target="#exampleModal">Purchase</button>
                             </div>
                         </form>
+                        <!-- modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                        <button style="border:none; background-color: transparent;" type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"><i class="fa fa-times"></i></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        ...
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <!-- Recent posts start -->
                     <div class="widget recent-posts">
@@ -402,7 +416,7 @@ echo $timeCheckIn , $timeCheckOut;
                                 <h5>
                                     <a href="tours-details.html">Tour travel Tick</a>
                                 </h5>
-<div class="listing-post-meta">
+                                <div class="listing-post-meta">
                                     Jun 17, 2021 | <a href="#">Travel</a>
                                 </div>
                             </div>
@@ -456,7 +470,7 @@ echo $timeCheckIn , $timeCheckOut;
                         <div class="social-list clearfix">
                             <ul>
                                 <li><a href="#" class="facebook-bg"><i class="fa fa-facebook"></i></a></li>
-<li><a href="#" class="twitter-bg"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#" class="twitter-bg"><i class="fa fa-twitter"></i></a></li>
                                 <li><a href="#" class="google-bg"><i class="fa fa-google-plus"></i></a></li>
                                 <li><a href="#" class="rss-bg"><i class="fa fa-rss"></i></a></li>
                                 <li><a href="#" class="linkedin-bg"><i class="fa fa-linkedin"></i></a></li>
