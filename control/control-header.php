@@ -1,7 +1,6 @@
 <?php
 if (isset($_GET['page'])) {
     $page = $_GET['page'];
-    
     switch ($page) {
         case 'home':
             include('./user/pages/home.php');

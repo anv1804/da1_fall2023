@@ -112,7 +112,7 @@ header .current-date{
 }
 
 #room-status .list-date {
-  overflow-x: auto;
+  width: max-content;
   margin: 12px 0;
   display: flex;
 }
