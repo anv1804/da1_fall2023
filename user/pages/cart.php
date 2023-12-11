@@ -76,6 +76,7 @@ if ($user && $user['user_role'] == 0) {
                             <th class="product-remove">&nbsp;</th>
                         </tr>
                     </thead>
+                    <hr>
                     <tbody>
                         <?php if (isset($dataBook)) {
                             echo $dataBook;

@@ -104,7 +104,30 @@
                                     <li class="nav-item" style="position:relative;margin-right: 10px;">
                                         <a href="index.php?page=cart" class="nav-link h-icon">
                                             <i class="fa fa-calendar"></i>
-                                            <sup style="position: absolute;top:35%;left: 60%;">0</sup>
+                                            <?php
+                                            if (isset($_SESSION['user'])) {
+                                                $user = $_SESSION['user'];
+                                            } else if (isset($_COOKIE['user'])) {
+                                                $user = json_decode($_COOKIE['user'], true);
+                                            }
+                                            if (isset($user) && $user['user_role'] == 0) {
+                                                $userEmail = $user['user_email'];
+                                                $result = user($userEmail);
+                                                $userID = $result[0]['user_id'];
+                                                $counts = countNoti($userID);
+                                                if(isset($counts)){
+                                                    $count = (int)$counts;
+                                                }else{
+                                                    $count = 0;
+                                                }
+                                                
+                                            }else{
+                                                    $count = 0;
+                                                }
+                                            ?>
+                                            <sup style="position: absolute;top:35%;left: 60%;">
+                                                <?= $count ?>
+                                            </sup>
                                         </a>
                                     </li>
                                     <li class="nav-item" style="">

@@ -23,6 +23,12 @@ function countNoti($userID)
     $result = pdo_query_one($sql);
     return $result;
 }
+function countCmt($hotelID)
+{
+    $sql = "SELECT COUNT(comment_id) as count FROM `comment` WHERE hotel_id = $hotelID";
+    $result = pdo_query_one($sql);
+    return $result;
+}
 function loadComments($hotelID)
 {
     $sql = "SELECT user_image,user_name,comment_date,comment_content,user_email,comment_rate FROM comment 
