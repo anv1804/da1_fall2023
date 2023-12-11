@@ -3,24 +3,28 @@ $loadCmt = loadCmt();
 $dataCmt = "";
 if (isset($loadCmt)) {
     foreach ($loadCmt as $value) {
+        $imageHotel = explode(',',$loadCmt[0]['hotel_image']);
         $starRate = $value['comment_rate'];
         $rateCmt = ratingCmt($starRate);
         $dataCmt .= '
             <tr align="center"> 
-                       
+        <td class="product-thumbnail">
+            <a href="#">
+                <img style="width:50%;" src="./assets/img/avatar/' . $value['user_image'] . '" alt="avatar">
+            </a>
+        </td>
             <td><span>' . $value['hotel_name'] . ' </span></td>
          <td class="product-thumbnail">
              <a href="index.php?page=hotels-details&hotelID=' . $value['hotel_id'] . '">
-                 <img style="width:60%;" src="./assets/images/rooms/' . $imageHotel[0] . '" alt="avatar">
+                 <img style="width:60%;" src="./assets/images/hotels/' . $imageHotel[0] . '" alt="avatar">
              </a>
          </td>
          <td class="product-name">
-             <span>Booking Date : ' . $value['date_booking'] . '</span><br>
-             <span>Start date : ' . $value['date_start'] . '</span><br>
-             <span>End date :  ' . $value['date_end'] . '</span><br>
+             <span>Booking Date : ' . $value['comment_content'] . '</span><br>
          </td>
          <td>Booking</td>
-         <td class="hdn"><span>$' . $value['total_price'] . '</span></td>
+         <td class="hdn"><span>$' . $value['comment_date'] . '</span></td>
+         <td class="hdn"><span>$' . $value['comment_rate'] . '</span></td>
          <td></td>
          <td class="product-remove">
              <form method="post">
@@ -64,15 +68,18 @@ if (isset($loadCmt)) {
                             <table class="shop-table cart">
                                 <thead>
                                     <tr align="center">
+                                        <th class="product-subtotal">User</th>
                                         <th class="product-price">Hotel</th>
                                         <th class="product-name">Image</th>
                                         <th class="product-description">Content</th>
+                                        <th class="product-price">Date</th>
                                         <th class="product-price">Rate</th>
-                                        <th class="product-subtotal">User</th>
+
                                         <th class="product-remove">&nbsp;</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?=  $dataCmt ?>
                                 </tbody>
                             </table>
                         </div>
