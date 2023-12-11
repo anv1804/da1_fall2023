@@ -10,7 +10,7 @@ function allRooms($room_id)
 }
 function roomsHotels($hotelID)
 {
-    $sql = "SELECT * FROM rooms WHERE rooms.hotel_id = $hotelID";
+    $sql = "SELECT * FROM rooms INNER JOIN hotels ON rooms.hotel_id = hotels.hotel_id WHERE rooms.hotel_id = $hotelID";
     $result = pdo_query($sql);
     return $result;
 }
