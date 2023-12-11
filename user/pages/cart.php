@@ -4,6 +4,21 @@ if (isset($_SESSION['user'])) {
 } else if (isset($_COOKIE['user'])) {
     $user = json_decode($_COOKIE['user'], true);
 }
+if (array_key_exists('button1', $_POST)) {
+    mopup();
+}
+function mopup()
+{
+    echo "This is Button1 that is selected";
+    $noti = '
+                <div class="alert alert-success alert-1" role="alert"
+                    style="visibility: visible; animation-name: fadeInLeft;">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                            aria-hidden="true">×</span></button>
+                    HELLO <strong>ADMIN</strong>, WELCOME TO DASHBOARD!
+                </div>
+            ';
+}
 if (isset($user) && $user['user_role'] == 0) {
     $userEmail = $user['user_email'];
     $result = user($userEmail);
@@ -21,7 +36,7 @@ if (isset($user) && $user['user_role'] == 0) {
                        <td><span>' . $value['hotel_name'] . ' </span></td>
                        <td><span>' . $value['room_number'] . ' </span></td>
                     <td class="product-thumbnail">
-                        <a href="index.php?page=rooms-details&roomID='.$value['room_id'].'">
+                        <a href="index.php?page=rooms-details&roomID=' . $value['room_id'] . '">
                             <img style="width:60%;" src="./assets/images/rooms/' . $imageRoom[0] . '" alt="avatar">
                         </a>
                     </td>
@@ -30,10 +45,14 @@ if (isset($user) && $user['user_role'] == 0) {
                         <span>Start date : ' . $value['date_start'] . '</span><br>
                         <span>End date :  ' . $value['date_end'] . '</span><br>
                     </td>
-                    <td>£58.00</td>
-                    <td><input class="qty hdn" type="text" value="+1"></td>
-                    <td class="hdn">£58.00</td>
-                    <td class="product-remove"><a href="#"><i class="fa fa-close"></i></a></td>
+                    <td>Booking</td>
+                    <td class="hdn"><span>$' . $value['total_price'] . '</span></td>
+                    <td></td>
+                    <td class="product-remove">
+                        <form method="post">
+                            <button style="border:none;background:transparent" type="submit" name="button1"> <i class="fa fa-remove"></i></button>
+                        </form>
+                    </td>
                 </tr>
             ';
         }
@@ -44,10 +63,10 @@ if (isset($user) && $user['user_role'] == 0) {
 <div class="sub-banner overview-bgi">
     <div class="container">
         <div class="breadcrumb-area">
-            <h1>Cart</h1>
+            <h1>Booking</h1>
             <ul class="breadcrumbs">
                 <li><a href="index.php">Home</a></li>
-                <li class="active">Cart</li>
+                <li class="active">Booking</li>
             </ul>
         </div>
     </div>
@@ -59,6 +78,7 @@ if (isset($user) && $user['user_role'] == 0) {
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
+                
                 <table class="shop-table cart">
                     <thead>
                         <tr align="center">
@@ -66,8 +86,7 @@ if (isset($user) && $user['user_role'] == 0) {
                             <th class="product-price">Room Number</th>
                             <th class="product-name">Image</th>
                             <th class="product-description">Infomation</th>
-                            <th class="product-price">Room</th>
-                            <th class="product-quantity">Qty</th>
+                            <th class="product-price">Status</th>
                             <th class="product-subtotal">Total</th>
                             <th class="product-remove">&nbsp;</th>
                         </tr>
