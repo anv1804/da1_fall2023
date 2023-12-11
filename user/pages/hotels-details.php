@@ -1,4 +1,5 @@
 <?php
+
 if (isset($_GET['hotelID'])) {
     $hotelID = $_GET['hotelID'];
     // DATA HOTEL
@@ -54,12 +55,9 @@ if (isset($_GET['hotelID'])) {
                                 <li><i class="fa fa-star"></i></li>
                                 <li><i class="fa fa-star"></i></li>
                                 <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star-half-o"></i></li>
-                                <li><i class="fa fa-star-o"></i></li>
-                                <br>
-                                <li>
-                                    <span style="font-size:10px;color:gray">(6 Review)</span>
-                                </li>
+                                <li><i class="fa fa-star"></i></li>
+                                <li><i class="fa fa-star"></i></li>
+                                <br>                       
                             </ul>
                         </div>
                     </div>
@@ -125,29 +123,62 @@ if (isset($_GET['hotelID'])) {
     if (isset($_POST['submit'])) {
         $rating = $_POST['rating'];
         $content = $_POST['content'];
-        $userID = '';
-        if (isset($_SESSION['user'])==0) {
-            $userEmail = $_SESSION["user"]['user_email'];
-            $usercode = user($userEmail);
-            $userID = (int) $usercode[0]['user_id'];
-            // print_r($usercode[0]['user_id']);
-            // echo $userID;
-            comment($content, $hotelID, $userID, $rating);
-            header('location: index.php?page=hotels-details&hotelID=' . $hotelID . '');
-        }else if(isset($_COOKIE['user'])==0){
-            $userEmail = $_COOKIE["user"]['user_email'];
-            $usercode = user($userEmail);
-            $userID = (int) $usercode[0]['user_id'];
-            // print_r($usercode[0]['user_id']);
-            // echo $userID;
-            comment($content, $hotelID, $userID, $rating);
-            header('location: index.php?page=hotels-details&hotelID=' . $hotelID . '');
+        if (isset($_SESSION['user'])) {
+            $user = $_SESSION['user'];
+        } else if (isset($_COOKIE['user'])) {
+            $user = json_decode($_COOKIE['user'], true);
         }
-         else {
+        if (isset($user) && $user['user_role'] == 0) {
+            $userEmail = $user['user_email'];
+            $result = user($userEmail);
+            if (isset($result)) {
+                $userID = $result[0]['user_id'];
+                comment($content, $hotelID, $userID, $rating);
+                header('location: index.php?page=hotels-details&hotelID=' . $hotelID . '');
+            }
+
+        } else {
             header('location: index.php?page=login');
         }
     }
 
+}
+$avgStar = totalRating($hotelID);
+if (isset($avgStar)) {
+    $starRate0 = "";
+    $starRate1 = "";
+    $starRate2 = "";
+
+    $star = 5;
+    $sum = (int) $avgStar[0]['sum'];
+    $count = (int) $avgStar[0]['count'];
+    if($sum && $count) {
+    $data = $sum / $count;
+    if (((floor($data) + 0.25) <= $data) && ($data <= (ceil($data) - 0.25)))  {
+        $data = floor($data);
+        $starRate0 .= '<i class="fa fa-star-half-o"></i>';
+        for ($i = 0; $i < $data; $i++) {
+            $starRate1 .= '<i class="fa fa-star"></i>';
+        }
+        for ($i = 1; $i < $star - $data; $i++) {
+            $starRate2 .= '<i class="fa fa-star-o"></i>';
+        }
+        $stars = (string) $starRate1 . (string) $starRate0 . (string) $starRate2;
+    } else {
+        for ($i = 0; $i < $data; $i++) {
+            $starRate1 .= '<i class="fa fa-star"></i>';
+        }
+        for ($i = 0; $i < $star - $data; $i++) {
+            $starRate0 .= '<i class="fa fa-star-o"></i>';
+        }
+        $stars = (string) $starRate1 . (string) $starRate0;
+    }
+}else{
+    for ($i = 0; $i < $star; $i++) {
+        $starRate2 .= '<i class="fa fa-star-o"></i>';
+    }
+    $stars = (string)$starRate2;
+}
 }
 ?>
 <!-- Sub banner start -->
@@ -184,11 +215,7 @@ if (isset($_GET['hotelID'])) {
                                             </i>
                                         </span>
                                         <span class="ratings">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-o"></i>
+                                            <?= $stars ?>
                                             <span>( 7 Reviews )</span>
                                         </span>
                                     </div>
