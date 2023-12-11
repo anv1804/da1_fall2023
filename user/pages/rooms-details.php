@@ -316,11 +316,7 @@ if (isset($_GET['roomID'])) {
                                 $dayEnd = explode('/', $day[1]);
                                 $dateStart = $dayStart[1].'/'.$dayStart[0].'/'.$dayStart[2].'|'.$timeCheckIn;
                                 $dateEnd = $dayEnd[1].'/'.$dayEnd[0].'/'.$dayEnd[2].'|'.$timeCheckOut;
-                                // print_r($dateStart);
-                                // echo "<br>";
-                                // print_r($dateEnd);
                                 $_SESSION['book'] = ['room_id' => $room_id , 'date_start' => $dateStart , 'date_end' => $dateEnd];
-                                // print_r($_SESSION['book']);
                                 echo "<script type='text/javascript'>window.location.href = './user/check-in/check-in.php';</script>";
                             } else {
                                 echo "<script type='text/javascript'>window.location.href = 'index.php?page=login';</script>";
@@ -343,7 +339,6 @@ if (isset($_GET['roomID'])) {
                                 <div class="form-group-time d-flex" style="justify-content:space-between;">
                                     <div class="form-time check-in" style="flex-basis:48%">
                                         <label for="check-in" style="font-size:14px;margin:0;">Check in:</label>
-<<<<<<<<< Temporary merge branch 1
                                         <input type="text" class="time-pickable form-control" id="check-in"
                                             value="07:00 am" readonly>
                                     </div>
@@ -351,13 +346,6 @@ if (isset($_GET['roomID'])) {
                                         <label for="check-out" style="font-size:14px;margin:0;">Check out:</label>
                                         <input type="text" class="time-pickable form-control" id="check-out"
                                             value="07:00 am" readonly>
-=========
-                                        <input type="text" class="time-pickable form-control" name="time-check-in" id="check-in" value="07:00 am" readonly>
-                                    </div>
-                                    <div class="form-time check-out" style="flex-basis:48%">
-                                        <label for="check-out" style="font-size:14px;margin:0;">Check out:</label>
-                                        <input type="text" class="time-pickable form-control" name="time-check-out" id="check-out" value="07:00 am" readonly>
->>>>>>>>> Temporary merge branch 2
                                     </div>
                                 </div>
                                 <span class="form-message text-danger"></span>

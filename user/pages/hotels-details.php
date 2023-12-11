@@ -172,6 +172,7 @@ if (isset($avgStar)) {
             $starRate0 .= '<i class="fa fa-star-o"></i>';
         }
         $stars = (string) $starRate1 . (string) $starRate0;
+
     }
 }else{
     for ($i = 0; $i < $star; $i++) {
