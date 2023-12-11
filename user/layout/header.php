@@ -116,7 +116,7 @@
                                                 $userID = $result[0]['user_id'];
                                                 $counts = countNoti($userID);
                                                 if(isset($counts)){
-                                                    $count = (int)$counts;
+                                                    $count = (int)$counts['count'];
                                                 }else{
                                                     $count = 0;
                                                 }
