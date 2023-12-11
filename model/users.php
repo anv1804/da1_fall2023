@@ -17,36 +17,30 @@ function getID($userEmail)
     $result = pdo_query_one($sql);
     return $result;
 }
+function countNoti($userID)
+{
+    $sql = "SELECT `book_id` FROM `book` WHERE user_id = $userID";
+    $result = pdo_query_one($sql);
+    return $result;
+}
 function loadComments($hotelID)
 {
-    $sql = "SELECT * FROM comment 
+    $sql = "SELECT user_image,user_name,comment_date,comment_content,user_email,comment_rate FROM comment 
     INNER JOIN users ON comment.user_id = users.user_id 
     INNER JOIN hotels ON comment.hotel_id = hotels.hotel_id 
     WHERE comment.hotel_id = $hotelID";
     $data = pdo_query($sql);
     return $data;
 }
-function totalRating($hotelID, $total = '', $avg = '')
+function totalRating($hotelID)
 {
-    if ($total != '') {
-        $sql = "SELECT COUNT(comment_rate) AS countRating FROM comment
-    WHERE comment.hotel_id = $hotelID";
-        $data = pdo_query($sql);
-        return $data;
-
-    }
-    if ($avg != '') {
-        $sql = "SELECT comment_rate FROM comment
-        WHERE comment.hotel_id = $hotelID";
-        $data = pdo_query($sql);
-        return $data;
-
-    }
-
+    $sql = "SELECT count(comment_id) as count, sum(comment_rate) as sum FROM `comment` WHERE hotel_id = $hotelID";
+    $result = pdo_query($sql);
+    return $result;
 }
 function comment($content, $hotelID, $userID, $rating)
 {
-    $date = date('d-m-Y');
+    $date = date('Y-m-d');
     $sql = "INSERT INTO `comment`
     (`comment_id`, `comment_content`, `comment_date`, `hotel_id`, `room_id`, `user_id`, `comment_rate`) 
     VALUES 
@@ -80,11 +74,6 @@ function booking($date, $dateStart, $dateEnd, $roomID)
     VALUES (null,'$date','$dateStart','$dateEnd','$roomID')";
     pdo_execute($sql);
 }
-function loadComplete($room_id, $dateStart)
-{
-    $sql = "SELECT completed_id FROM completed WHERE room_id = $room_id and date_start = '$dateStart'";
-    return pdo_query_one($sql);
-}
 function dataBooking($userID)
 {
     $sql = "SELECT 
@@ -107,20 +96,5 @@ function dataBooking($userID)
     ON book.completed_id = completed.completed_id WHERE book.user_id = $userID";
     $data = pdo_query($sql);
     return $data;
-}
-
-function insertBook($book_id , $user_id , $room_id, $hotel_id , $total_price , $book_status , $completed_id , $cancellation_date)
-{
-    $sql = "INSERT INTO `book`(`book_id`, `user_id`, `room_id`, `hotel_id`, `total_price`, `book_status`, `completed_id`, `cancellation_date`)
-     VALUES ('$book_id','$user_id','$room_id','$hotel_id','$total_price','$book_status','$completed_id','$cancellation_date')";
-    pdo_execute($sql);
-}
-function checkBookIdSql($book_id) {
-    $sql = "SELECT * FROM `book` WHERE book_id = '$book_id'";
-    $result = pdo_query_one($sql);
-    if ($result) {
-        return false;
-    }
-    return true;
 }
 ?>
