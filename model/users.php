@@ -19,7 +19,7 @@ function getID($userEmail)
 }
 function countNoti($userID)
 {
-    $sql = "SELECT `book_id` FROM `book` WHERE user_id = $userID";
+    $sql = "SELECT COUNT(book_id) as count FROM `book` WHERE user_id = $userID";
     $result = pdo_query_one($sql);
     return $result;
 }
