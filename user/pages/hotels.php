@@ -3,23 +3,67 @@ $hotel_name = '';
 if (isset($_POST['search']) && ($_POST['search'])) {
     $hotel_name = $_POST['hotel_name'];
 }
-
 $listHotel_id = '';
 $listHotel_id_string = '';
 if (isset($_GET['listHotels']) && ($_GET['listHotels'] != '[]')) {
     $listHotel_id = $_GET['listHotels'];
     $listHotel_id_string = $listHotel_id;
-    $listHotel_id = json_decode($listHotel_id , true);
-    $allHotels = allHotels('' , '' ,'' ,'' ,  $listHotel_id);
-}else if(isset($_GET['listHotels']) && ($_GET['listHotels'] == '[]')) {
-    $allHotels = allHotels('' , '' ,0 );
+    $listHotel_id = json_decode($listHotel_id, true);
+    $allHotels = allHotels('', '', '', '', $listHotel_id);
+} else if (isset($_GET['listHotels']) && ($_GET['listHotels'] == '[]')) {
+    $allHotels = allHotels('', '', 0);
 } else {
     $allHotels = allHotels($hotel_name);
 }
-
 $dataHotels = "";
 if ($allHotels) {
+
     foreach ($allHotels as $value) {
+        $hotelID = $value['hotel_id'];
+        $avgStar = totalRating($hotelID);
+        $CMT = countCmt($hotelID);
+        if(isset($CMT)){
+            $countCmt = (int)$CMT['count'];
+        }else{
+            $countCmt = 0;
+        }
+        ;
+        if (isset($avgStar)) {
+            $starRate0 = "";
+            $starRate1 = "";
+            $starRate2 = "";
+            $star = 5;
+            $sum = (int) $avgStar[0]['sum'];
+            $count = (int) $avgStar[0]['count'];
+            if ($sum && $count) {
+                $data = $sum / $count;
+                if (((floor($data) + 0.25) <= $data) && ($data <= (ceil($data) - 0.25))) {
+                    $data = floor($data);
+                    $starRate0 .= '<i class="fa fa-star-half-o"></i>';
+                    for ($i = 0; $i < $data; $i++) {
+                        $starRate1 .= '<i class="fa fa-star"></i>';
+                    }
+                    for ($i = 1; $i < $star - $data; $i++) {
+                        $starRate2 .= '<i class="fa fa-star-o"></i>';
+                    }
+                    $stars = (string) $starRate1 . (string) $starRate0 . (string) $starRate2;
+                } else {
+                    for ($i = 0; $i < $data; $i++) {
+                        $starRate1 .= '<i class="fa fa-star"></i>';
+                    }
+                    for ($i = 0; $i < $star - $data; $i++) {
+                        $starRate0 .= '<i class="fa fa-star-o"></i>';
+                    }
+                    $stars = (string) $starRate1 . (string) $starRate0;
+
+                }
+            } else {
+                for ($i = 0; $i < $star; $i++) {
+                    $starRate2 .= '<i class="fa fa-star-o"></i>';
+                }
+                $stars = (string) $starRate2;
+            }
+        }
         $hotelImages = explode(',', $value['hotel_image']);
         $dataHotels .= '
         <div class="item-box-3">
@@ -27,18 +71,14 @@ if ($allHotels) {
                 <div class="col-xl-5 col-lg-6 col-md-5 col-pad">
                     <div class="item-thumbnail">
                         <a href="index.php?page=hotels-details&hotelID=' . $value['hotel_id'] . '" class="item-img">
-                            <div class="tag">Historic</div>
+                            <div class="tag">HOTEL</div>
                             <div class="price-ratings-box">
                                 <p class="price">
                                     From <span>$66</span> Per Person
                                 </p>
                                 <div class="ratings">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star-o"></i>
-                                    <span>( 7 Reviews )</span>
+                                    ' . $stars . '
+                                    <span> ( '. $countCmt .' Review)</span>
                                 </div>
                             </div>
                             <div class="love">
@@ -138,10 +178,10 @@ function mopup()
                         </div>
                         <div class="col-xl-8 col-lg-7 col-md-7 col-sm-7">
                             <div class="sorting-options clearfix">
-                                <a href='index.php?page=hotels&listHotels=<?=$listHotel_id_string?>' class='change-view-btn active-view-btn'><i
-                                        class='fa fa-th-list'></i></a>
-                                <a href='index.php?page=hotels2&listHotels=<?=$listHotel_id_string?>' class='change-view-btn'><i
-                                        class="fa fa-th-large"></i></a>
+                                <a href='index.php?page=hotels&listHotels=<?= $listHotel_id_string ?>'
+                                    class='change-view-btn active-view-btn'><i class='fa fa-th-list'></i></a>
+                                <a href='index.php?page=hotels2&listHotels=<?= $listHotel_id_string ?>'
+                                    class='change-view-btn'><i class="fa fa-th-large"></i></a>
 
                             </div>
                             <form class="search-area" style="display: flex;">
@@ -231,11 +271,12 @@ function mopup()
                     <!-- Rating start -->
                     <div class="widget rating">
                         <h5 class="sidebar-title">Rating</h5>
-                       
+
                         <form class="inline-search-area" method="post">
                             <div class="form-group mb-0">
                                 <div class="form-check checkbox-theme">
-                                    <input class="form-check-input" type="submit" name="button1" value="" id="instant-book">
+                                    <input class="form-check-input" type="submit" name="button1" value=""
+                                        id="instant-book">
                                     <label class="form-check-label" for="instant-book">
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>

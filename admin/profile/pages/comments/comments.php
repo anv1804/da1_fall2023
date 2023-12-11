@@ -1,30 +1,36 @@
 <?php
-    $loadCmt = loadCmt();
-    $dataCmt ="";
-    if(isset($loadCmt)){
-        foreach ($loadCmt as $value) {
-            $starRate = $value['comment_rate'];
-            $rateCmt = ratingCmt($starRate);
-            $dataCmt .='
-                <div class="media dashboard-message" style="width: 155vh;">
-                    <div class="pr-4">
-                        <img src="assets/img/avatar/'.$value['user_image'].'" alt="avatar">
-                    </div>
-                    <div class="media-body dashboard-message-text">
-                        <h5>'.$value['user_name'].' <span>('.$value['comment_date'].')</span> 
-                            <a href="admin.php?page=delete-comments&cmtID='.$value['comment_id'].'"><span class="pull-right new">Delete</span></a>
-                        </h5>
-                        <div class="rating">
-                        ' . $rateCmt . '
-                        </div>
-                        <p>'.$value['comment_content'].'</p>
-                        <span class="reply-mail clearfix">Reply : <a
-                                href="mailto:'.$value['user_email'].'">'.$value['user_email'].'</a></span>
-                    </div>
-                </div>
+$loadCmt = loadCmt();
+$dataCmt = "";
+if (isset($loadCmt)) {
+    foreach ($loadCmt as $value) {
+        $starRate = $value['comment_rate'];
+        $rateCmt = ratingCmt($starRate);
+        $dataCmt .= '
+            <tr align="center"> 
+                       
+            <td><span>' . $value['hotel_name'] . ' </span></td>
+         <td class="product-thumbnail">
+             <a href="index.php?page=hotels-details&hotelID=' . $value['hotel_id'] . '">
+                 <img style="width:60%;" src="./assets/images/rooms/' . $imageHotel[0] . '" alt="avatar">
+             </a>
+         </td>
+         <td class="product-name">
+             <span>Booking Date : ' . $value['date_booking'] . '</span><br>
+             <span>Start date : ' . $value['date_start'] . '</span><br>
+             <span>End date :  ' . $value['date_end'] . '</span><br>
+         </td>
+         <td>Booking</td>
+         <td class="hdn"><span>$' . $value['total_price'] . '</span></td>
+         <td></td>
+         <td class="product-remove">
+             <form method="post">
+                 <button style="border:none;background:transparent" type="submit" name="button1"> <i class="fa fa-remove"></i></button>
+             </form>
+         </td>
+     </tr>
             ';
-        }
     }
+}
 ?>
 <div class="col-lg-9 offset-lg-3 col-md-12 col-sm-12 col-pad">
     <div class="content-area5">
@@ -52,8 +58,25 @@
             <div class="dashboard-list" style="width: 100%;">
                 <h3>Reviews List</h3>
                 <div class="dashboard-listd">
-                    
-                    <?= $dataCmt ?>
+                    <div class="row">
+                        <div class="col-lg-12">
+
+                            <table class="shop-table cart">
+                                <thead>
+                                    <tr align="center">
+                                        <th class="product-price">Hotel</th>
+                                        <th class="product-name">Image</th>
+                                        <th class="product-description">Content</th>
+                                        <th class="product-price">Rate</th>
+                                        <th class="product-subtotal">User</th>
+                                        <th class="product-remove">&nbsp;</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="pagination-box">
