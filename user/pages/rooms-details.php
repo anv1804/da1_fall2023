@@ -270,9 +270,11 @@ if (isset($_GET['roomID'])) {
                         </div>
                     </div>
 
-                    <ul class="list-date">
-                        <?= $rowDate; ?>
-                    </ul>
+                    <div style="overflow-x: auto;">
+                        <ul class="list-date">
+                            <?= $rowDate; ?>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div class="col-lg-4 col-md-12">
