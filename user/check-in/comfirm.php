@@ -94,8 +94,11 @@
 
             $dateCheckInOut = [];
 
-            $dateCheckInOut[] = convertDay($book['date_start']);
-            $dateCheckInOut[] = convertDay($book['date_end']);
+            $book['date_start'] = explode('|' , $book['date_start']);
+            $book['date_end'] = explode('|' , $book['date_end']);
+
+            $dateCheckInOut[] = convertDay($book['date_start'][0]);
+            $dateCheckInOut[] = convertDay($book['date_end'][0]);
 
             $user = [];
             if(isset($_SESSION['user'])) {
@@ -110,8 +113,8 @@
 
             $imageRoom = explode(',', $room[0]['room_image']);
 
-            $day1 = DateTime::createFromFormat("d/m/Y", $book['date_start']);
-            $day2 = DateTime::createFromFormat("d/m/Y", $book['date_end']);
+            $day1 = DateTime::createFromFormat("d/m/Y", $book['date_start'][0]);
+            $day2 = DateTime::createFromFormat("d/m/Y", $book['date_end'][0]);
 
             $numberOfNight = $day1->diff($day2)->days;
             $totalPrice = (int)$numberOfNight * (int)$room[0]['room_price'] + 9;
@@ -195,15 +198,18 @@
                                 </div>
                             </div>
                             <div class="price-detail">
-                                <div class="total-amount">
-                                    <div class="title">Total amount</div>
-                                    <div class="total">
-                                        <ion-icon name="chevron-down-outline"></ion-icon>
-                                        <div class="total-amount-number">$
-                                            <?= $totalPrice ?>
+                                <a style="width:100%;text-decoration: none;color: rgb(3, 18, 26);" data-bs-toggle="collapse" href="#collapseExample"
+                                role="button" aria-expanded="true" aria-controls="collapseExample" class="collapse-price">
+                                    <div class="total-amount">
+                                        <div class="title">Total amount</div>
+                                        <div class="total">
+                                            <ion-icon name="chevron-down-outline"></ion-icon>
+                                            <div class="total-amount-number">$
+                                                <?= $totalPrice ?>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </a>
 
                                 <div class="notification">
                                     <ion-icon name="information-circle-outline"></ion-icon>
@@ -215,30 +221,32 @@
                                     </div>
                                 </div>
 
-                                <div class="price-detail-body">
-                                    <div class="price">
-                                        <div class="price-title">
-                                            (1x)
-                                            <?=$room[0]['room_number'];?> (
-                                            <?= $numberOfNight ?> night)
+                                <div class="collapse show w-100" id="collapseExample">
+                                    <div class="price-detail-body">
+                                        <div class="price">
+                                            <div class="price-title">
+                                                (1x)
+                                                <?= $room[0]['room_number']; ?> (
+                                                <?= $numberOfNight ?> night)
+                                            </div>
+                                            <div class="price-number">$
+                                                <?= $room[0]['room_price'] ?>
+                                            </div>
                                         </div>
-                                        <div class="price-number">$
-                                            <?= $room[0]['room_price'] ?>
+                                        <div class="price">
+                                            <div class="price-title">
+                                                Taxes and fees
+                                            </div>
+                                            <div class="price-number">$9</div>
                                         </div>
-                                    </div>
-                                    <div class="price">
-                                        <div class="price-title">
-                                            Taxes and fees
-                                        </div>
-                                        <div class="price-number">$9</div>
-                                    </div>
-                                    <div class="price convert">
-                                        <div class="price-title">
-                                            Convert to Vietnamese Dong
-                                        </div>
-                                        <div class="price-number">$
-                                            <?= $totalPrice ?> ->
-                                            <?= $convertTotalPrice; ?> VND
+                                        <div class="price convert">
+                                            <div class="price-title">
+                                                Convert to Vietnamese Dong
+                                            </div>
+                                            <div class="price-number">$
+                                                <?= $totalPrice ?> ->
+                                                <?= $convertTotalPrice; ?> VND
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -265,13 +273,15 @@
                                 <div class="chek">
                                     <div class="title">Check in:</div>
                                     <div class="check-day">
-                                        <?= $dateCheckInOut[0] ?>
+                                        <?= $dateCheckInOut[0] ?> ,
+                                        From <?=$book['date_start'][1] ?>
                                     </div>
                                 </div>
                                 <div class="chek">
                                     <div class="title">Check out:</div>
                                     <div class="check-day">
-                                        <?= $dateCheckInOut[1] ?>
+                                        <?= $dateCheckInOut[1] ?> ,
+                                        Before <?=$book['date_end'][1] ?>
                                     </div>
                                 </div>
                             </div>
@@ -337,7 +347,17 @@
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
 <script>
-
+    const elementTotalPrice = document.querySelector('#form-check-in .collapse-price');
+    const btnArrowPrice = elementTotalPrice.querySelector('.total-amount .total ion-icon');
+    
+    elementTotalPrice.onclick = () => {
+        if (elementTotalPrice.getAttribute('aria-expanded') == 'true') {
+            btnArrowPrice.style.transform = 'rotate(180deg)';
+        }else {
+            btnArrowPrice.style.transform = 'rotate(0deg)';
+        }
+    }
+    
 </script>
 
 </html>

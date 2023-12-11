@@ -38,6 +38,7 @@
 
         <?php
         use Vtiful\Kernel\Format;
+
         session_start();
         ob_start();
         include '../../model/pdo.php';
@@ -64,8 +65,11 @@
 
             $dateCheckInOut = [];
 
-            $dateCheckInOut[] = convertDay($book['date_start']);
-            $dateCheckInOut[] = convertDay($book['date_end']);
+            $book['date_start'] = explode('|', $book['date_start']);
+            $book['date_end'] = explode('|', $book['date_end']);
+
+            $dateCheckInOut[] = convertDay($book['date_start'][0]);
+            $dateCheckInOut[] = convertDay($book['date_end'][0]);
 
             $user = [];
             if (isset($_SESSION['user'])) {
@@ -81,25 +85,40 @@
             $imageRoom = explode(',', $room[0]['room_image']);
             $imageHotel = explode(',', $hotel[0]['hotel_image']);
 
-            $day1 = DateTime::createFromFormat("d/m/Y", $book['date_start']);
-            $day2 = DateTime::createFromFormat("d/m/Y", $book['date_end']);
+            $day1 = DateTime::createFromFormat("d/m/Y", $book['date_start'][0]);
+            $day2 = DateTime::createFromFormat("d/m/Y", $book['date_end'][0]);
 
             $currDate = new DateTime();
 
             $numberOfNight = $day1->diff($day2)->days;
 
             $amountOfNight = $day1->diff($currDate)->days;
-            $amountOfNight = floor($amountOfNight/2);
+            $amountOfNight = floor($amountOfNight / 2);
 
-            $cancellationDate = $currDate->add(new DateInterval('P'. $amountOfNight .'D'));
+            $cancellationDate = $currDate->add(new DateInterval('P' . $amountOfNight . 'D'));
 
             $cancellationDate = $cancellationDate->format("j M Y");
+
+            $timestamp = strtotime($book['date_start'][1]);
+            $timeAfterAdd = $timestamp + (1 * 60);
+            $time = date("H:i", $timeAfterAdd);
 
             $totalPrice = (int) $numberOfNight * (int) $room[0]['room_price'] + 9;
             $convertTotalPrice = number_format(($totalPrice * 24000), 0, ',', '.');
             $convertTotalPriceOf20 = number_format((($totalPrice * 24000) / 5), 0, ',', '.');
             $convertBookPrice = number_format($book['book_price'], 0, ',', '.');
 
+            $currDay = date("d/m/Y");
+            $cancellation_date = $cancellationDate . '|' . $book['date_start'][1];
+            // echo $cancellation_date;
+
+            if (checkBookIdSql($book['book_id'])) {
+                booking($currDay, $_SESSION['book']['date_start'], $_SESSION['book']['date_end'], $_SESSION['book']['room_id']);
+                $completed_id = loadComplete($_SESSION['book']['room_id'], $_SESSION['book']['date_start']);
+                extract($completed_id);
+    
+                insertBook($book['book_id'], $book['user_id'], $book['room_id'], $book['hotel_id'], $book['book_price'], $book['book_price'] == ($totalPrice * 24000) ? 0 : 1, $completed_id, $cancellation_date);                
+            }
         }
 
         ?>
@@ -134,14 +153,18 @@
                                             <p>
                                                 <?= $dateCheckInOut[0] ?>
                                             </p>
-                                            <span>From 14:00</span>
+                                            <span>From
+                                                <?= $book['date_start'][1] ?>
+                                            </span>
                                         </div>
                                         <div class="check-day">
                                             Check out:
                                             <p>
                                                 <?= $dateCheckInOut[1] ?>
                                             </p>
-                                            <span>Before 12:00</span>
+                                            <span>Before
+                                                <?= $book['date_end'][1] ?>
+                                            </span>
                                         </div>
                                         <div class="amount-night">
                                             Number of nights stay:
@@ -191,51 +214,66 @@
                             <div class="title">
                                 Hotel & room policies
                             </div>
-                            <div class="policies-header">
-                                <div class="policies-title">
-                                    <ion-icon name="receipt-outline"></ion-icon>
-                                    Cancellation & rescheduling policy
+                            <a style="width:100%;text-decoration: none;color: rgb(3, 18, 26);" data-bs-toggle="collapse"
+                                href="#collapseExample1" role="button" aria-expanded="true"
+                                aria-controls="collapseExample1" class="collapse-policies">
+                                <div class="policies-header">
+                                    <div class="policies-title">
+                                        <ion-icon name="receipt-outline"></ion-icon>
+                                        Cancellation & rescheduling policy
+                                    </div>
+                                    <div class="policies-subtitle">Free cancellation & Can reschedule</div>
+                                    <ion-icon name="chevron-up-outline" class="arrow-policies"></ion-icon>
                                 </div>
-                                <div class="policies-subtitle">Free cancellation & Can reschedule</div>
-                                <ion-icon name="chevron-up-outline"></ion-icon>
-                            </div>
-
-                            <div class="policies-body">
-                                <div class="cancellation-date">
-                                    <div class="cancellation-date-day before-date">
-                                        <div class="line"></div>
-                                        <div class="cancellation-day">
-                                            <span>Free cancellation in advance</span>
-                                            <p><?= $cancellationDate; ?>, 13:00</p>
+                            </a>
+                            <div class="collapse show w-100" id="collapseExample1">
+                                <div class="policies-body">
+                                    <div class="cancellation-date">
+                                        <div class="cancellation-date-day before-date">
+                                            <div class="line"></div>
+                                            <div class="cancellation-day">
+                                                <span>Free cancellation in advance</span>
+                                                <p>
+                                                    <?= $cancellationDate; ?>,
+                                                    <?= $book['date_start'][1] ?>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="cancellation-date-day after-date">
+                                            <div class="line"></div>
+                                            <div class="cancellation-day">
+                                                <span>Cancellation fee is
+                                                    <?= $convertBookPrice; ?> VND. This fee applies
+                                                    if canceled later
+                                                </span>
+                                                <p>
+                                                    <?= $cancellationDate; ?>,
+                                                    <?= $book['date_start'][1] ?>
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="cancellation-date-day after-date">
-                                        <div class="line"></div>
-                                        <div class="cancellation-day">
-                                            <span>Cancellation fee is <?= $convertBookPrice; ?> VND. This fee applies
-                                                if canceled later
-                                            </span>
-                                            <p><?= $cancellationDate; ?>, 13:00</p>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <div class="cancellation-info">
-                                    Can reschedule
-                                    <p>
-                                        This booking can be rescheduled before <?= $cancellationDate; ?> - 13:01, but cancellation
-                                        fees may apply.
-                                    </p>
-                                    <span>
-                                        • Any discount codes or points used on the original booking will not be
-                                        applicable to the new booking.
-                                    </span>
-                                    <span>
-                                        • Rescheduling fees may apply based on the price difference between the old and new booking.
-                                    </span>
-                                    <span>
-                                        The time displayed is the property's local time.
-                                    </span>
+                                    <div class="cancellation-info">
+                                        Can reschedule
+                                        <p>
+                                            This booking can be rescheduled before
+                                            <?= $cancellationDate; ?> -
+                                            <?= $time; ?>, but cancellation
+                                            fees may apply.
+                                        </p>
+                                        <span>
+                                            • Any discount codes or points used on the original booking will not be
+                                            applicable to the new booking.
+                                        </span>
+                                        <span>
+                                            • Rescheduling fees may apply based on the price difference between the old
+                                            and new booking.
+                                        </span>
+                                        <span>
+                                            The time displayed is the property's local time.
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -245,15 +283,19 @@
                             <div class="title">Price details</div>
 
                             <div class="price-detail">
-                                <div class="total-amount">
-                                    <div class="title">Total amount</div>
-                                    <div class="total">
-                                        <ion-icon name="chevron-down-outline"></ion-icon>
-                                        <div class="total-amount-number">$
-                                            <?= $totalPrice ?>
+                                <a style="width:100%;text-decoration: none;color: rgb(3, 18, 26);"
+                                    data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="true"
+                                    aria-controls="collapseExample" class="collapse-price">
+                                    <div class="total-amount">
+                                        <div class="title">Total amount</div>
+                                        <div class="total">
+                                            <ion-icon name="chevron-down-outline"></ion-icon>
+                                            <div class="total-amount-number">$
+                                                <?= $totalPrice ?>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </a>
 
                                 <div class="notification">
                                     <ion-icon name="information-circle-outline"></ion-icon>
@@ -266,22 +308,25 @@
                                 </div>
 
                                 <div class="price-detail-body">
-                                    <div class="price">
-                                        <div class="price-title">
-                                            (1x)
-                                            <?= $room[0]['room_number']; ?> (
-                                            <?= $numberOfNight ?> night)
+                                    <div class="collapse show w-100" id="collapseExample">
+                                        <div class="price">
+                                            <div class="price-title">
+                                                (1x)
+                                                <?= $room[0]['room_number']; ?> (
+                                                <?= $numberOfNight ?> night)
+                                            </div>
+                                            <div class="price-number">$
+                                                <?= $room[0]['room_price'] ?>
+                                            </div>
                                         </div>
-                                        <div class="price-number">$
-                                            <?= $room[0]['room_price'] ?>
+                                        <div class="price">
+                                            <div class="price-title">
+                                                Taxes and fees
+                                            </div>
+                                            <div class="price-number">$9</div>
                                         </div>
                                     </div>
-                                    <div class="price">
-                                        <div class="price-title">
-                                            Taxes and fees
-                                        </div>
-                                        <div class="price-number">$9</div>
-                                    </div>
+
                                     <div class="price convert">
                                         <div class="price-title">
                                             Convert to Vietnamese Dong
@@ -313,7 +358,11 @@
                                 </div>
                             </div>
                         </div>
-
+                        
+                        <div class="btn-routine d-flex justify-content-between" style="width:100%;">
+                            <a href="../../index.php" class="btn btn-warning btn-back-home">Back home</a>
+                            <a href="#" class="btn btn-primary btn-back-home">Book details</a>
+                        </div>
 
                     </div>
                     <div class="col-4">
@@ -342,6 +391,27 @@
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
 <script>
+    const elementTotalPrice = document.querySelector('#form-check-in .collapse-price');
+    const btnArrowPrice = elementTotalPrice.querySelector('.total-amount .total ion-icon');
+
+    elementTotalPrice.onclick = () => {
+        if (elementTotalPrice.getAttribute('aria-expanded') == 'true') {
+            btnArrowPrice.style.transform = 'rotate(180deg)';
+        } else {
+            btnArrowPrice.style.transform = 'rotate(0deg)';
+        }
+    }
+
+    const elementPolicies = document.querySelector('.hotel-room-policies .collapse-policies');
+    const btnArrowPolicies = elementPolicies.querySelector('.policies-header ion-icon.arrow-policies');
+
+    elementPolicies.onclick = () => {
+        if (elementPolicies.getAttribute('aria-expanded') == 'true') {
+            btnArrowPolicies.style.transform = 'rotate(0deg)';
+        } else {
+            btnArrowPolicies.style.transform = 'rotate(180deg)';
+        }
+    }
 
 </script>
 
