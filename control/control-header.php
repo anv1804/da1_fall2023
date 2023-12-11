@@ -29,6 +29,9 @@ if (isset($_GET['page'])) {
         case 'cart':
             include('./user/pages/cart.php');
             break;
+        case 'cart-cancel':
+            include('./user/pages/cart-cancel.php');
+            break;
         case 'login':
             include('./user/pages/login.php');
             break;

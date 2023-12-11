@@ -6,14 +6,16 @@ if (isset($_SESSION['user'])) {
     $user = json_decode($_COOKIE['user'], true);
 }
 $dataBook = "";
+$modals = "";
 
 if ($user && $user['user_role'] == 0) {
     $userEmail = $user['user_email'];
     $result = user($userEmail);
     $userID = $result[0]['user_id'];
     $book = dataBooking($userID);
+
     if (isset($book)) {
-        foreach ($book as $value) {
+        foreach ($book as $key => $value) {
             $imageRoom = explode(',', $book[0]['room_image']);
             $dataBook .= '
                 <tr align="center"> 
@@ -30,21 +32,72 @@ if ($user && $user['user_role'] == 0) {
                         <span>Start date : ' . $value['date_start'] . '</span><br>
                         <span>End date :  ' . $value['date_end'] . '</span><br>
                     </td>
-                    <td>Booking</td>
+                    <td>' . ($value['book_status'] == '0' ? 'Full payment' : 'Pay deposit') . '</td>
                     <td class="hdn"><span>$' . $value['total_price'] . '</span></td>
                     <td></td>
                     <td class="product-remove">
-                        <form method="post">
-                            <button style="border:none;background:transparent" type="submit" name="button1"> <i class="fa fa-remove"></i></button>
-                        </form>
+                        <div class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal' . ($key) . '">Cancel</div>
                     </td>
                 </tr>
+            ';
+
+            $cancellation_date = DateTime::createFromFormat('d M Y\|H:i', $value['cancellation_date']);
+            $modalCancell = '';
+            $modalBody = '';
+
+            if ($cancellation_date) {
+                $currDate = new DateTime();
+
+                $value['cancellation_date'] = explode('|', $value['cancellation_date']);
+
+                if ($cancellation_date > $currDate) {
+                    $modalCancell = '
+                        <div style="color:green;font-size:16px";>' . $value['cancellation_date'][0] . ' , ' . $value['cancellation_date'][1] . '</div>
+                    ';
+                    $modalBody = 'Money will be refunded within the next 24 hours!';
+                } elseif ($cancellation_date <= $currDate) {
+                    $modalCancell = '
+                        <div style="color:red;font-size:16px";>' . $value['cancellation_date'][0] . ' , ' . $value['cancellation_date'][1] . '</div>
+                    ';
+                    $modalBody = 'The free cancellation deadline has expired. If you continue, you will lose your deposit! The remaining amount will be refunded within the next 24 hours! (If any)';
+                }
+            } else {
+                echo "Không thể chuyển đổi ngày giờ từ chuỗi.";
+            }
+
+            $modals .= '
+            <div class="modal fade" id="exampleModal' . ($key) . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog  modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Warning notice</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ' . $modalCancell . '
+                        ' . $modalBody . '
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <a href="index.php?page=cart-cancel&book_id='.$value['book_id'].'&completed_id='.$value['completed_id'].'" class="btn btn-danger" >Cancel</a>
+                    </div>
+                </div>
+                </div>
+            </div>
             ';
         }
     }
 }
 ?>
+
+
+<!-- Modal -->
+<?php if (isset($modals)) {
+    echo $modals;
+} ?>
+
 <!-- Sub banner start -->
+
 <div class="sub-banner overview-bgi">
     <div class="container">
         <div class="breadcrumb-area">
