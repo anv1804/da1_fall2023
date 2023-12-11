@@ -292,6 +292,25 @@ function Validator(formSelector) {
                 isValid = false;
             };
         };
+        
+        // if (isValid == true) {
+        //     const checkInBtn = formElement.querySelector('#check-in-btn');
+        //     if (checkInBtn) {
+        //         const moudal = formElement.querySelector('#exampleModal');
+        //         moudal.classList.add('show');
+        //         moudal.style.display = 'block';
+        //         moudal.setAttribute('aria-modal' , 'true');
+        //         moudal.setAttribute('role' , 'dialog');
+        //         moudal.setAttribute('aria-hidden' , 'false');
+        //         document.querySelector('body').classList.add('modal-open');
+        //         document.querySelector('body').style.overflow = 'hidden';
+        //         document.querySelector('body').style.paddingRight = '17px';
+        //         checkInBtn.setAttribute('data-bs-toggle' , 'modal');
+        //         checkInBtn.setAttribute('data-bs-target' , '#exampleModal');
+        //         event.preventDefault();
+        //         formElement.click();
+        //     }
+        // }
 
         return isValid;
 
