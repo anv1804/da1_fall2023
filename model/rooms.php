@@ -1,7 +1,7 @@
 <?php
 function allRooms($room_id)
 {
-    $sql = "SELECT * FROM rooms WHERE 1";
+    $sql = "SELECT * FROM rooms INNER JOIN hotels ON rooms.hotel_id = hotels.hotel_id";
     if ($room_id != 0) {
         $sql .= " and room_id = '" . $room_id . "'";
     }
