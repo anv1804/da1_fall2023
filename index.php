@@ -9,7 +9,7 @@ if (isset($_SESSION['user'])) {
 } else if (isset($_COOKIE['user'])) {
     $user = json_decode($_COOKIE['user'], true);
 }
-if ($user && $user['user_role'] == 1) {
+if (isset($user) && $user['user_role'] == 1) {
     header('Location: admin.php');
 } else {
     if (isset($user) && $user['user_role'] == 0) {
