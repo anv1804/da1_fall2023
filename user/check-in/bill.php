@@ -359,9 +359,9 @@
                             </div>
                         </div>
                         
-                        <div class="btn-routine d-flex justify-content-between" style="width:100%;">
+                        <div class="btn-routine d-flex justify-content-between mb-5" style="width:100%;">
                             <a href="../../index.php" class="btn btn-warning btn-back-home">Back home</a>
-                            <a href="#" class="btn btn-primary btn-back-home">Book details</a>
+                            <a href="../../index.php?page=cart" class="btn btn-primary btn-back-home">Book details</a>
                         </div>
 
                     </div>

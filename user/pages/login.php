@@ -52,9 +52,9 @@ if (isset($_POST["submit"]) && ($_POST["submit"])) {
                                 <span class="form-message" style="min-height:39px"></span>
                             </div>
                             <div class="checkboxs" style="margin:4px 0 20px">
-                                <div class="form-check checkbox-theme float-left" style="margin-left:20px">
+                                <div class="form-check checkbox-theme float-left" style="margin-left:20px;padding:0px">
                                     <input class="form-check-input" name="remember" type="checkbox" value="yes"
-                                        id="instant-book">
+                                        id="instant-book" hidden>
                                     <label class="form-check-label" for="instant-book">
                                         Remember me
                                     </label>

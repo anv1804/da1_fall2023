@@ -353,31 +353,45 @@ if (isset($_GET['roomID'])) {
                                 <i class="fa fa-users icon-append"></i>
                             </div>
                             <div class="form-group search-col" style="margin-top:20px">
-                                <button type="submit" style="margin-bottom: 8px;" name="purchase" value="purchase"
-                                    class="btn-theme btn-md btn-block" data-bs-toggle="modal" data-bs-target="#exampleModal">Purchase</button>
+                                <?php
+                                if (isset($_SESSION['user']) || isset($_COOKIE['user'])) {
+                                    echo '
+                                            <button type="submit" style="margin-bottom: 8px;" name="purchase" value="purchase"
+                                            class="btn-theme btn-md btn-block">Purchase</button>
+                                        ';
+                                } else {
+                                    echo '
+                                            <a style="margin-bottom: 8px;" name="purchase" value="purchase"
+                                            class="btn-theme btn-md btn-block" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Purchase</a>
+                                        ';
+                                }
+                                ?>
+
                             </div>
-                        </form>
-                        <!-- modal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                                        <button style="border:none; background-color: transparent;" type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"><i class="fa fa-times"></i></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        ...
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Save changes</button>
+
+                            <!-- modal -->
+                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+                                data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Notification</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            You are not logged into your account yet. <br/>
+                                            Please log in to use this function!
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a href="./index.php?page=register" class="btn btn-success">Sign Up</a>
+                                            <a href="./index.php?page=login" class="btn btn-primary">Sign In</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                     <!-- Recent posts start -->
                     <div class="widget recent-posts">
