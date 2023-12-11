@@ -90,6 +90,21 @@ if ($category) {
     }
 
 }
+if (array_key_exists('button1', $_POST)) {
+    mopup();
+}
+function mopup()
+{
+    echo "This is Button1 that is selected";
+    $noti = '
+                <div class="alert alert-success alert-1" role="alert"
+                    style="visibility: visible; animation-name: fadeInLeft;">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                            aria-hidden="true">×</span></button>
+                    HELLO <strong>ADMIN</strong>, WELCOME TO DASHBOARD!
+                </div>
+            ';
+}
 ?>
 <!-- Sub banner start -->
 <div class="sub-banner overview-bgi">
@@ -216,10 +231,11 @@ if ($category) {
                     <!-- Rating start -->
                     <div class="widget rating">
                         <h5 class="sidebar-title">Rating</h5>
-                        <form class="inline-search-area" method="GET">
+                       
+                        <form class="inline-search-area" method="post">
                             <div class="form-group mb-0">
                                 <div class="form-check checkbox-theme">
-                                    <input class="form-check-input" type="checkbox" value="" id="instant-book">
+                                    <input class="form-check-input" type="submit" name="button1" value="" id="instant-book">
                                     <label class="form-check-label" for="instant-book">
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
