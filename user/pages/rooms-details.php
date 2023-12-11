@@ -72,7 +72,7 @@ if (isset($_GET['roomID'])) {
                                 class="img-fluid" alt="photo-4">
                         </div>
                         <div class="item carousel-item" data-slide-number="2">
-                            <img style="width: 100%;height: 100%" src="./assets/images/rooms/<?= $imageRoom[2] ?>"
+<img style="width: 100%;height: 100%" src="./assets/images/rooms/<?= $imageRoom[2] ?>"
                                 class="img-fluid" alt="photo-4">
                         </div>
                         <div class="item carousel-item" data-slide-number="4">
@@ -114,7 +114,7 @@ if (isset($_GET['roomID'])) {
                         <li class="list-inline-item">
                             <a id="carousel-selector-4" data-slide-to="4" data-target="#itemDetailsSlider">
                                 <img style="width: 100%;height: 100%" src="./assets/images/rooms/<?= $imageRoom[4] ?>"
-                                    class="img-fluid" alt="photo-5">
+class="img-fluid" alt="photo-5">
                             </a>
                         </li>
                     </ul>
@@ -181,7 +181,7 @@ if (isset($_GET['roomID'])) {
                         <div class="col-md-4 col-sm-6">
                             <ul>
                                 <li>
-                                    <i class="flaticon-check"></i>
+<i class="flaticon-check"></i>
                                     Alarm system
                                 </li>
                                 <li>
@@ -246,7 +246,7 @@ if (isset($_GET['roomID'])) {
                                 </ul>
                                 <ul class="days"></ul>
                             </div>
-                        </div>
+</div>
                         <div>
                             <header>
                                 <p class="current-date"></p>
@@ -301,14 +301,13 @@ if (isset($_GET['roomID'])) {
                                 $user = json_decode($_COOKIE['user'], true);
                             }
                             if (isset($user) && $user['user_role'] == 0) {
-                                 $dates = $_POST['dates'];
+                                $dates = $_POST['dates'];
                                 $timeCheckIn = $_POST['time-check-in'];
                                 $timeCheckOut = $_POST['time-check-out'];
                                 
                                 $timeCheckIn = convertTime($timeCheckIn);
                                 $timeCheckOut = convertTime($timeCheckOut);
-                                
-                                echo $timeCheckIn , $timeCheckOut;
+echo $timeCheckIn , $timeCheckOut;
                                 // print_r($dates);
                                 $day = explode(' - ', $dates);
                                 $date = date('m-d-Y');
@@ -316,7 +315,11 @@ if (isset($_GET['roomID'])) {
                                 $dayEnd = explode('/', $day[1]);
                                 $dateStart = $dayStart[1].'/'.$dayStart[0].'/'.$dayStart[2].'|'.$timeCheckIn;
                                 $dateEnd = $dayEnd[1].'/'.$dayEnd[0].'/'.$dayEnd[2].'|'.$timeCheckOut;
+                                // print_r($dateStart);
+                                // echo "<br>";
+                                // print_r($dateEnd);
                                 $_SESSION['book'] = ['room_id' => $room_id , 'date_start' => $dateStart , 'date_end' => $dateEnd];
+                                // print_r($_SESSION['book']);
                                 echo "<script type='text/javascript'>window.location.href = './user/check-in/check-in.php';</script>";
                             } else {
                                 echo "<script type='text/javascript'>window.location.href = 'index.php?page=login';</script>";
@@ -339,17 +342,15 @@ if (isset($_GET['roomID'])) {
                                 <div class="form-group-time d-flex" style="justify-content:space-between;">
                                     <div class="form-time check-in" style="flex-basis:48%">
                                         <label for="check-in" style="font-size:14px;margin:0;">Check in:</label>
-                                        <input type="text" class="time-pickable form-control" id="check-in"
-                                            value="07:00 am" readonly>
+                                        <input type="text" class="time-pickable form-control" name="time-check-in" id="check-in" value="07:00 am" readonly>
                                     </div>
                                     <div class="form-time check-out" style="flex-basis:48%">
                                         <label for="check-out" style="font-size:14px;margin:0;">Check out:</label>
-                                        <input type="text" class="time-pickable form-control" id="check-out"
-                                            value="07:00 am" readonly>
+                                        <input type="text" class="time-pickable form-control" name="time-check-out" id="check-out" value="07:00 am" readonly>
                                     </div>
                                 </div>
                                 <span class="form-message text-danger"></span>
-                            </div>
+</div>
                             <div class="form-group search-col">
                                 <select class="selectpicker search-fields btn-block form-control bdr" name="guest">
                                     <option> Room for
@@ -401,7 +402,7 @@ if (isset($_GET['roomID'])) {
                                 <h5>
                                     <a href="tours-details.html">Tour travel Tick</a>
                                 </h5>
-                                <div class="listing-post-meta">
+<div class="listing-post-meta">
                                     Jun 17, 2021 | <a href="#">Travel</a>
                                 </div>
                             </div>
@@ -455,7 +456,7 @@ if (isset($_GET['roomID'])) {
                         <div class="social-list clearfix">
                             <ul>
                                 <li><a href="#" class="facebook-bg"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#" class="twitter-bg"><i class="fa fa-twitter"></i></a></li>
+<li><a href="#" class="twitter-bg"><i class="fa fa-twitter"></i></a></li>
                                 <li><a href="#" class="google-bg"><i class="fa fa-google-plus"></i></a></li>
                                 <li><a href="#" class="rss-bg"><i class="fa fa-rss"></i></a></li>
                                 <li><a href="#" class="linkedin-bg"><i class="fa fa-linkedin"></i></a></li>
