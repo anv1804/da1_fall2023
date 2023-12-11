@@ -282,29 +282,52 @@ if (isset($_GET['roomID'])) {
                         <h5 class="sidebar-title">Book This Room</h5>
 
                         <?php
+                        function convertTime($time) {
+                            $time = explode(' ' ,$time);
+                            if ($time[1] == "am") {
+                                return $time[0];
+                            }else {
+                                $time = explode(':' , $time[0]);
+                                $time[0] += 12;
+                                return implode(':' , $time);
+                            }
+                        };
+
                         if (isset($_POST['purchase']) && ($_POST['purchase'])) {
+
+                          
                             if (isset($_SESSION['user'])) {
                                 $user = $_SESSION['user'];
                             } else if (isset($_COOKIE['user'])) {
                                 $user = json_decode($_COOKIE['user'], true);
                             }
                             if (isset($user) && $user['user_role'] == 0) {
-                                $dates = $_POST['dates'];
-                                // print_r($dates);
-                                $day = explode(' - ', $dates);
-                                $date = date('m-d-Y');
-                                $dayStart = explode('/', $day[0]);
-                                $dayEnd = explode('/', $day[1]);
-                                $dateStart = $dayStart[1] . '/' . $dayStart[0] . '/' . $dayStart[2];
-                                $dateEnd = $dayEnd[1] . '/' . $dayEnd[0] . '/' . $dayEnd[2];
-                                // print_r($dateStart);
-                                // echo "<br>";
-                                // print_r($dateEnd);
-                                $_SESSION['book'] = ['room_id' => $room_id, 'date_start' => $dateStart, 'date_end' => $dateEnd];
-                                echo "<script type='text/javascript'>window.location.href = './user/check-in/check-in.php';</script>";
+                                 $dates = $_POST['dates'];
+                            $timeCheckIn = $_POST['time-check-in'];
+                            $timeCheckOut = $_POST['time-check-out'];
+                            
+                            $timeCheckIn = convertTime($timeCheckIn);
+                            $timeCheckOut = convertTime($timeCheckOut);
+                            
+                            echo $timeCheckIn , $timeCheckOut;
+                            // print_r($dates);
+                            $day = explode(' - ', $dates);
+                            $date = date('m-d-Y');
+                            $dayStart = explode('/', $day[0]);
+                            $dayEnd = explode('/', $day[1]);
+                            $dateStart = $dayStart[1].'/'.$dayStart[0].'/'.$dayStart[2].'|'.$timeCheckIn;
+                            $dateEnd = $dayEnd[1].'/'.$dayEnd[0].'/'.$dayEnd[2].'|'.$timeCheckOut;
+                            // print_r($dateStart);
+                            // echo "<br>";
+                            // print_r($dateEnd);
+                            $_SESSION['book'] = ['room_id' => $room_id , 'date_start' => $dateStart , 'date_end' => $dateEnd];
+                            // print_r($_SESSION['book']);
+                            echo "<script type='text/javascript'>window.location.href = './user/check-in/check-in.php';</script>";
+
                             } else {
                                 echo "<script type='text/javascript'>window.location.href = 'index.php?page=login';</script>";
                             }
+
                         }
 
                         ?>
@@ -323,16 +346,15 @@ if (isset($_GET['roomID'])) {
                                 <div class="form-group-time d-flex" style="justify-content:space-between;">
                                     <div class="form-time check-in" style="flex-basis:48%">
                                         <label for="check-in" style="font-size:14px;margin:0;">Check in:</label>
-                                        <input type="text" class="time-pickable form-control" id="check-in"
-                                            value="07:00 am" readonly>
+                                        <input type="text" class="time-pickable form-control" name="time-check-in" id="check-in" value="07:00 am" readonly>
                                     </div>
                                     <div class="form-time check-out" style="flex-basis:48%">
                                         <label for="check-out" style="font-size:14px;margin:0;">Check out:</label>
-                                        <input type="text" class="time-pickable form-control" id="check-out"
-                                            value="07:00 am" readonly>
+                                        <input type="text" class="time-pickable form-control" name="time-check-out" id="check-out" value="07:00 am" readonly>
+  
                                     </div>
                                 </div>
-                                <span class="form-message"></span>
+                                <span class="form-message text-danger"></span>
                             </div>
                             <div class="form-group search-col">
                                 <select class="selectpicker search-fields btn-block form-control bdr" name="guest">
