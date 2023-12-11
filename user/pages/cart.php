@@ -1,5 +1,5 @@
 <?php
-$user ="";
+$user = "";
 if (isset($_SESSION['user'])) {
     $user = $_SESSION['user'];
 } else if (isset($_COOKIE['user'])) {
@@ -7,9 +7,10 @@ if (isset($_SESSION['user'])) {
 }
 $dataBook = "";
 
-if ($user && $user['user_role']==0) {
-    $userEmail = (string)$user['user_email'];
-    $userID = getID($userEmail);
+if ($user && $user['user_role'] == 0) {
+    $userEmail = $user['user_email'];
+    $result = user($userEmail);
+    $userID = $result[0]['user_id'];
     $book = dataBooking($userID);
     if (isset($book)) {
         foreach ($book as $value) {
@@ -62,7 +63,7 @@ if ($user && $user['user_role']==0) {
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                
+
                 <table class="shop-table cart">
                     <thead>
                         <tr align="center">
