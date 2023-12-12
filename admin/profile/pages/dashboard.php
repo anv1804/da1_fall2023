@@ -1,28 +1,73 @@
 <?php
-
-$dashboard = dashboard('');
+$dashboard = dashboard();
 if ($dashboard) {
     echo "<pre>";
-    print_r($dashboard);   
+    // print_r($dashboard);
     echo "</pre>";
     $curYear = date('Y');
-    $yhc  = array();
+    $curMon = date('m');
+    $listY = array();
+    $listM = array();
+    $listD = array();
+    $list = array();
     foreach ($dashboard as $value) {
         $a1 = explode("/", $value['date_booking']);
         $year = $a1[2];
-        if($year ==  $curYear){
-            array_push($yhc, $value['book_id']);
+        if ($year == $curYear) {
+            array_push($listY, $value['book_id']);
+            array_push($list, $value['hotel_id']);
+            $moneyY = array();
+            $priceY = 0;
+            if ($listY) {
+                foreach ($listY as $value) {
+                    $bookID = (int) $value;
+                    $bkY = checkBook($bookID);
+                    foreach ($bkY as $item) {
+                        $priceY = (int) $item['total_price'];
+                        array_push($moneyY, $priceY);
+                    }
+                }
+            }
+        }
+    }
+    foreach ($dashboard as $value) {
+        $a1 = explode("/", $value['date_booking']);
+        $year = $a1[2];
+        $mon = $a1[1];
+        $moneyM = array();
+        $priceM = 0;
+        if (($mon == $curMon) && ($year == $curYear)) {
+            array_push($listM, $value['book_id']);
+            if ($listM) {
+                foreach ($listM as $value) {
+                    $bookID = (int) $value;
+                    $bkM = checkBook($bookID);
+                    foreach ($bkM as $item) {
+
+                        $priceM = (int) $item['total_price'];
+                        array_push($moneyM, $priceM);
+                    }
+                }
+            }
         }
     }
     echo "<pre>";
-    print_r($yhc);   
+    print_r($list);
     echo "</pre>";
-    $price = 0;
-    if($yhc){
-        foreach ($yhc as $value) {
-            $bk = dashboard($value);
-        }
+    $kkk = array_count_values($list);
+    foreach ($kkk as $key => $value) {
+    echo $key[$value];
     }
+    print_r( max(array_count_values($list)));
+
+    // echo "<pre>";
+    // print_r($moneyM);
+    // echo "</pre>";
+    echo 'tổng tiền theo năm 2023 : ' . array_sum($moneyY) . '</br>';
+    echo 'tổng tiền theo THÁNG : ' . array_sum($moneyM);
+
+
+
 }
 ?>
 <div class="col-lg-9 offset-lg-3 col-md-12 col-sm-12 col-pad">
