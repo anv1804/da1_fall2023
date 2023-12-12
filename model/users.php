@@ -111,7 +111,11 @@ function dataBooking($userID)
     total_price,
     date_booking,
     date_start,
-    date_end 
+    date_end ,
+    book_status,
+    cancellation_date,
+    book_id,
+    book.completed_id
     FROM `book` 
     INNER JOIN hotels 
     ON book.hotel_id = hotels.hotel_id 
@@ -121,5 +125,13 @@ function dataBooking($userID)
     ON book.completed_id = completed.completed_id WHERE book.user_id = $userID";
     $data = pdo_query($sql);
     return $data;
+}
+function cancelBook($book_id){
+    $sql = "DELETE FROM `book` WHERE book_id = $book_id";
+    pdo_execute($sql);
+}
+function cancelCompleted($Completed_id){
+    $sql = "DELETE FROM `completed` WHERE Completed_id = $Completed_id";
+    pdo_execute($sql);
 }
 ?>
