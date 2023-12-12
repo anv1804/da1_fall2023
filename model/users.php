@@ -19,7 +19,7 @@ function getID($userEmail)
 }
 function countNoti($userID)
 {
-    $sql = "SELECT COUNT(book_id) as count FROM `book` WHERE user_id = $userID";
+    $sql = "SELECT COUNT(book_id) as count FROM `book` WHERE user_id = $userID and cancel_hidden = 0";
     $result = pdo_query_one($sql);
     return $result;
 }
@@ -99,7 +99,7 @@ function checkBookIdSql($book_id) {
     }
     return true;
 }
-function dataBooking($userID)
+function dataBooking($userID  , $enable = '')
 {
     $sql = "SELECT 
     book.room_id,
@@ -123,6 +123,9 @@ function dataBooking($userID)
     ON book.room_id = rooms.room_id 
     INNER JOIN completed 
     ON book.completed_id = completed.completed_id WHERE book.user_id = $userID";
+    if ($enable != '') {
+        $sql .= " and cancel_hidden = 0";
+    }
     $data = pdo_query($sql);
     return $data;
 }
@@ -151,15 +154,12 @@ function countH(){
     return $result;
 }
 function cancelBook($book_id){
-    $sql = "DELETE FROM `book` WHERE book_id = $book_id";
+    $sql = "UPDATE `book` SET `cancel_hidden`= 1 WHERE book_id = $book_id";
     pdo_execute($sql);
-    
 }
 function cancelCompleted($Completed_id){
     $sql = "DELETE FROM `completed` WHERE Completed_id = $Completed_id";
     pdo_execute($sql);
 }
-
-
 
 ?>

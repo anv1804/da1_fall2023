@@ -103,7 +103,7 @@
             $timeAfterAdd = $timestamp + (1 * 60);
             $time = date("H:i", $timeAfterAdd);
 
-            $totalPrice = (int) $numberOfNight * (int) $room[0]['room_price'] + 9;
+            $totalPrice = (int) $numberOfNight * (int) $room[0]['room_price'] + 2;
             $convertTotalPrice = number_format(($totalPrice * 24000), 0, ',', '.');
             $convertTotalPriceOf20 = number_format((($totalPrice * 24000) / 5), 0, ',', '.');
             $convertBookPrice = number_format($book['book_price'], 0, ',', '.');
@@ -112,12 +112,14 @@
             $cancellation_date = $cancellationDate . '|' . $book['date_start'][1];
             // echo $cancellation_date;
 
-            if (checkBookIdSql($book['book_id'])) {
+            
+            if (checkBookIdSql($book['book_id']) && (!isset($_SESSION['book']['check_book']) || ($_SESSION['book']['check_book'] != '1'))) {
                 booking($currDay, $_SESSION['book']['date_start'], $_SESSION['book']['date_end'], $_SESSION['book']['room_id']);
                 $completed_id = loadComplete($_SESSION['book']['room_id'], $_SESSION['book']['date_start']);
                 extract($completed_id);
     
-                insertBook($book['book_id'], $book['user_id'], $book['room_id'], $book['hotel_id'], $book['book_price'], $book['book_price'] == ($totalPrice * 24000) ? 0 : 1, $completed_id, $cancellation_date);                
+                insertBook($book['book_id'], $book['user_id'], $book['room_id'], $book['hotel_id'], $book['book_price'], $book['book_price'] == ($totalPrice * 24000) ? 0 : 1, $completed_id, $cancellation_date);
+                $_SESSION['book']['check_book'] = 1;    
             }
         }
 
@@ -323,7 +325,7 @@
                                             <div class="price-title">
                                                 Taxes and fees
                                             </div>
-                                            <div class="price-number">$9</div>
+                                            <div class="price-number">$2</div>
                                         </div>
                                     </div>
 
