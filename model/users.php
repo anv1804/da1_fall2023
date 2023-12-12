@@ -126,20 +126,60 @@ function dataBooking($userID)
     $data = pdo_query($sql);
     return $data;
 }
-function totalPrice(){
-    $sql = "SELECT count(book_id),count(total_price),count(user_id) FROM `book`";
+function dashboard(){
+    $sql = "SELECT *
+    FROM `book` 
+    INNER JOIN completed fro";
+    $result = pdo_query($sql);
+    return $result;
+}
+function countH(){
+    $sql = "SELECT 
+    count(hotels.hotel_id) as total_hotel,
+    count(rooms.room_id) as total_room,
+    sum(hotel_view) as total_view,
+    count(comment.comment_id) as total_comment,
+    sum(comment.comment_rate)/count(comment.comment_id) as avg_rate
+    FROM `hotels` 
+    INNER JOIN `rooms` ON hotel.room_id = rooms.room_id
+    INNER JOIN comment ON hotels.hotel_id = comment.hotel_id
+    INNER JOIN users ON comment.user_id = users.user_id";
     $result = pdo_query_one($sql);
-    if (!empty($result)) {
-        return false;
-    }
-    return true;
+    return $result;
 }
 function cancelBook($book_id){
     $sql = "DELETE FROM `book` WHERE book_id = $book_id";
     pdo_execute($sql);
+    
 }
 function cancelCompleted($Completed_id){
     $sql = "DELETE FROM `completed` WHERE Completed_id = $Completed_id";
     pdo_execute($sql);
+}
+function thisWeek(){
+    $sql = "SELECT * FROM `completed` 
+    INNER JOIN book ON completed.completed_id = book.completed_id
+    ";
+     $result = pdo_query($sql);
+     return $result;
+}
+function getInf($dbk){
+    $sql = "SELECT *
+    FROM `book` 
+	INNER JOIN completed 
+    ON book.completed_id = completed.completed_id
+    WHERE completed.date_booking = '$dbk'";
+    $data = pdo_query($sql);
+    return $data;
+}
+
+function ymd($curYear){
+    $sql = "SELECT *
+    FROM `book` 
+	INNER JOIN completed 
+    ON book.completed_id = completed.completed_id
+    WHERE YEAR(completed.date_booking) = '$curYear'";
+    $data = pdo_query($sql);
+    return $data;
 }
 ?>
