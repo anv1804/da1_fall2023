@@ -57,7 +57,7 @@
         }
 
         function createBookId($long = 10) {
-            $characters = '0123456789';
+            $characters = '123456789';
             $book_id = '';
         
             // Tạo mã đặt phòng ngẫu nhiên

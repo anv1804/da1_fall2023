@@ -42,7 +42,7 @@ const calendar = (currMonth, currYear) => {
         index++;
     }
 
-    let dateAc = validateDay(lastDateofLastMonth, listDate);
+    let dateAc = validateDay(lastDateofMonth , listDate);
 
     for (let i = 1; i <= lastDateofMonth; i++) {
         // creating li of all days of current month
@@ -83,16 +83,14 @@ const validateDay = (lastDateofMonth, listDate) => {
             for (let i = 1; i <= lastDateofMonth; i++) {
                 if (
                     i == dayStart[0] &&
-                    currMonth === dayStart[1] - 1 &&
-                    currYear == dayStart[2]
+                    (currMonth == dayStart[1] - 1)
                 ) {
                     dateStarts.push(i);
                     timeStarts.push(timeStart);
                 }
                 if (
                     i == dayEnd[0] &&
-                    currMonth === dayEnd[1] - 1 &&
-                    currYear == dayEnd[2]
+                    (currMonth == dayEnd[1] - 1)
                 ) {
                     dateEnds.push(i);
                     timeEnds.push(timeEnd);
