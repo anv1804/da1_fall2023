@@ -6,9 +6,7 @@ if (isset($_POST['submit'])) {
     $desc = $_POST['desc'];
     $location = $_POST['location'];
     $alert = "";
-    // validate name
-    // if (empty($title))
-    // upload images
+ 
     $name = array();
     $tmp_name = array();
     $error = array();

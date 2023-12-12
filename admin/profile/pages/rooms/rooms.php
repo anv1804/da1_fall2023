@@ -36,8 +36,8 @@ if ($loadRooms) {
         ';
     }
 }
-$fullHotels = allHotels('',$city=1,'','');
-$hotels="";
+$fullHotels = allHotels('', $city = 1, '', '');
+$hotels = "";
 if ($fullHotels) {
     foreach ($fullHotels as $value) {
         $hotels .= '
@@ -75,7 +75,7 @@ if ($fullHotels) {
                     </div>
                 </div>
                 <hr>
-                <form action="" class="row" style="display:flex;align-items: center;margin-top: 25px;">
+                <form action="" class="row" style="display: flex;align-items: center">
                     <div class="col-lg-3 col-md-4">
                         <div class="form-group">
                             <select class="selectpicker search-fields" name="location">
@@ -84,10 +84,17 @@ if ($fullHotels) {
                             </select>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <input type="submit" style="padding:5px;" class="btn btn-color btn-md btn-message" name="submit"
-                            value="SEARCH">
+                    <div class="col-md-4" style="display: flex;align-items: center">
+                        <div class="form-group">
+                            <input type="text" name="title" class="form-control rei" placeholder="Name Of Hotels"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" style="padding:5px;" class="btn btn-color btn-md btn-message"
+                                name="submit" value="SEARCH">
+                        </div>
                     </div>
+
                 </form>
                 <hr>
             </div>

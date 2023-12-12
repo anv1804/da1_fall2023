@@ -23,7 +23,11 @@
     <link type="text/css" rel="stylesheet" href="assets/fonts/flaticon/font/flaticon.css">
     <link rel="stylesheet" type="text/css" href="assets/fonts/linearicons/style.css">
     <link rel="stylesheet" type="text/css" href="assets/css/new-css/popup.css">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
     <!-- Favicon icon -->
     <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
 
@@ -88,11 +92,24 @@
                                     <li>
                                         <div class="dropdown btns">
                                             <a class="dropdown-toggle" data-toggle="dropdown">
-                                                <img src="assets/img/avatar/avatar.jpg" alt="avatar">
+                                                <?php
+                                                if (isset($_SESSION['user'])) {
+                                                    $user = $_SESSION['user'];
+                                                    $userEmail = $user['user_email'];
+                                                } else {
+                                                    $user = json_decode($_COOKIE['user'], true);
+                                                    $userEmail = $user['user_email'];
+                                                }
+                                                $acc = user($userEmail);
+                                                if ($acc[0]['user_image'] !== '') {
+                                                    $avatar = $acc[0]['user_image'];
+                                                }
+                                                 ?>
+                                                <img src="assets/img/avatar/<?=$avatar?>" alt="avatar">
                                                 My Account
                                             </a>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="dashboard.php">Dashboard</a>
+                                                <a class="dropdown-item" href="admin.php?page=dashboard">Dashboard</a>
                                                 <a class="dropdown-item" href="messages.php">Messages</a>
                                                 <a class="dropdown-item" href="hotels.php">Hotels</a>
                                                 <a class="dropdown-item" href="my-profile.php">My profile</a>
@@ -111,7 +128,7 @@
     </header>
     <!-- main header end -->
     <!-- Dashboard start -->
-    <div class="dashboard">
+    <div class="dashboard" style="height: 100%;">
 
         <div class="container-fluid" style="height: 100%;">
             <div class="row">
