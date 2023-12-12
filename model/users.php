@@ -133,6 +133,7 @@ function totalPrice(){
         return false;
     }
     return true;
+}
 function cancelBook($book_id){
     $sql = "DELETE FROM `book` WHERE book_id = $book_id";
     pdo_execute($sql);
