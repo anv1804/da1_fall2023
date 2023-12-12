@@ -12,7 +12,7 @@ if ($user && $user['user_role'] == 0) {
     $userEmail = $user['user_email'];
     $result = user($userEmail);
     $userID = $result[0]['user_id'];
-    $book = dataBooking($userID);
+    $book = dataBooking($userID , true);
 
     if (isset($book)) {
         foreach ($book as $key => $value) {
@@ -79,7 +79,7 @@ if ($user && $user['user_role'] == 0) {
                     </div>
                     <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <a href="index.php?page=cart-cancel&book_id='.$value['book_id'].'&completed_id='.$value['completed_id'].'" class="btn btn-danger" >Cancel</a>
+                        <a href="index.php?page=cart-cancel&book_id='.$value['book_id'].'" class="btn btn-danger" >Cancel</a>
                     </div>
                 </div>
                 </div>

@@ -313,7 +313,10 @@ if (isset($_GET['roomID'])) {
                             $dayEnd = explode('/', $day[1]);
                             $dateStart = $dayStart[1] . '/' . $dayStart[0] . '/' . $dayStart[2] . '|' . $timeCheckIn;
                             $dateEnd = $dayEnd[1] . '/' . $dayEnd[0] . '/' . $dayEnd[2] . '|' . $timeCheckOut;
-
+                            
+                            if (isset($_SESSION['book'])) {
+                                unset($_SESSION['book']);
+                            }
                             $_SESSION['book'] = ['room_id' => $room_id, 'date_start' => $dateStart, 'date_end' => $dateEnd];
 
                             echo "<script type='text/javascript'>window.location.href = './user/check-in/check-in.php';</script>";

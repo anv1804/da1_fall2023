@@ -105,37 +105,15 @@ if (isset($_POST['submit']) && ($_POST['submit'])) {
 
                             $dates = explode(' - ', $dates);
 
-                            foreach ($dates as $date) {
-                                $invalid = false;
-                                $date = explode('|', $date);
-                                $date = explode('/', $date[0]);
+                            $amountRoom = validateDay($listDate, $dates);
+                            // echo $amountRoom;
 
-                                $date = array_map(function ($value) {
-                                    return (int) $value;
-                                }, $date);
-
-                                // var_dump($date);
-
-                                $lastDateofMonth = date('d', strtotime($date[2] . '-' . $date[0] . '-01 last day of last month'));
-
-                                $currMonth = $date[0] - 1;
-                                $currYear = $date[2];
-
-                                $listDateAc = validateDay($lastDateofMonth, $listDate, $currMonth, $currYear);
-                                // var_dump($listDateAc);
-
-                                if (in_array($date[1], $listDateAc[1])) {
-                                    $invalid = true;
-                                    // echo $date[1];
-                                }
-
-                                if ($invalid) {
-                                    if ($countHotels[$key][0][0] == $hotel) {
-                                        $countHotels[$key][0][1] -= 1;
-                                        // echo $countHotels[$key][0][1];
-                                        if ($guest[2] > $countHotels[$key][0][1]) {
-                                            unset($listHotels[$key]);
-                                        }
+                            if ($amountRoom != 0) {
+                                if ($countHotels[$key][0][0] == $hotel) {
+                                    $countHotels[$key][0][1] -= $amountRoom;
+                                    // echo $countHotels[$key][0][1];
+                                    if ($guest[2] > $countHotels[$key][0][1]) {
+                                        unset($listHotels[$key]);
                                     }
                                 }
                             }
@@ -425,7 +403,7 @@ if (isset($_POST['submit']) && ($_POST['submit'])) {
                                 <a href="tours-details.html">
                                     <i class="flaticon-localization"></i>2726 Shinn Street, New York
                                 </a>
-                            </div>  
+                            </div>
                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
                         </div>
                         <div class="footer clearfix">
@@ -437,8 +415,7 @@ if (isset($_POST['submit']) && ($_POST['submit'])) {
                             </div>
                         </div>
                     </div>
-                </div   
-                <!--  -->
+                </div <!-- -->
             </div>
             <div class="slick-prev slick-arrow-buton">
                 <i class="fa fa-angle-left"></i>
