@@ -43,13 +43,13 @@ if ($city) {
     <div class="content-area5">
         <div class="dashboard-content">
             <div class="dashboard-header clearfix">
-                <div class="row">
+                <div class="row" style="display:flex;align-items: center; justify-content:center;">
                     <div class="col-sm-12 col-md-6">
                         <h4>All Hotels</h4>
                     </div>
                     <div class="col-sm-12 col-md-6">
                         <div class="breadcrumb-nav">
-                            <ul>
+                            <ul style="display:flex;align-items: center;">
                                 <li>
                                     <a href="admin.php">Index</a>
                                 </li>
@@ -66,7 +66,7 @@ if ($city) {
                     </div>
                 </div>
                 <hr>
-                <form action="" class="row" style="display:flex;align-items: center;margin-top: 25px;">
+                <form action="" class="row" style="display: flex;align-items: center">
                     <div class="col-lg-2 col-md-4">
                         <div class="form-group">
                             <select class="selectpicker search-fields" name="location">
@@ -75,16 +75,16 @@ if ($city) {
                             </select>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-4">
+                    <div class="col-lg-3 col-md-4" style="display: flex;align-items: center">
                         <div class="form-group">
                             <input type="text" name="title" class="form-control rei" placeholder="Name Of Hotels"
                                 required>
+                        </div><div class="form-group">
+                            <input type="submit" style="padding:5px;" class="btn btn-color btn-md btn-message"
+                                name="submit" value="SEARCH">
                         </div>
                     </div>
-                    <div class="form-group">
-                        <input type="submit" style="padding:5px;" class="btn btn-color btn-md btn-message" name="submit"
-                            value="SEARCH">
-                    </div>
+                        
                 </form>
                 <hr>
             </div>

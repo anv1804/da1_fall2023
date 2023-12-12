@@ -122,4 +122,12 @@ function dataBooking($userID)
     $data = pdo_query($sql);
     return $data;
 }
+function totalPrice(){
+    $sql = "SELECT count(book_id),count(total_price),count(user_id) FROM `book`";
+    $result = pdo_query_one($sql);
+    if (!empty($result)) {
+        return false;
+    }
+    return true;
+}
 ?>

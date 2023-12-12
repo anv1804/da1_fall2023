@@ -3,7 +3,7 @@ $loadCmt = loadCmt();
 $dataCmt = "";
 if (isset($loadCmt)) {
     foreach ($loadCmt as $value) {
-        $imageHotel = explode(',',$loadCmt[0]['hotel_image']);
+        $imageHotel = explode(',', $loadCmt[0]['hotel_image']);
         $starRate = $value['comment_rate'];
         $rateCmt = ratingCmt($starRate);
         $dataCmt .= '
@@ -20,15 +20,13 @@ if (isset($loadCmt)) {
              </a>
          </td>
          <td class="product-name">
-             <span>Booking Date : ' . $value['comment_content'] . '</span><br>
+             <span>' . $value['comment_content'] . '</span><br>
          </td>
-         <td>Booking</td>
-         <td class="hdn"><span>$' . $value['comment_date'] . '</span></td>
-         <td class="hdn"><span>$' . $value['comment_rate'] . '</span></td>
-         <td></td>
+         <td class="hdn"><span>' . $value['comment_date'] . '</span></td>
+         <td class="hdn"><span>' . $value['comment_rate'] . '</span></td>
          <td class="product-remove">
              <form method="post">
-                 <button style="border:none;background:transparent" type="submit" name="button1"> <i class="fa fa-remove"></i></button>
+             <a href="admin.php?page=delete-comments&cmtID=' . $value['comment_id'] . '"><span class="pull-right new"><i class="fa fa-remove"></i></span></a>
              </form>
          </td>
      </tr>
@@ -64,7 +62,6 @@ if (isset($loadCmt)) {
                 <div class="dashboard-listd">
                     <div class="row">
                         <div class="col-lg-12">
-
                             <table class="shop-table cart">
                                 <thead>
                                     <tr align="center">
@@ -74,16 +71,16 @@ if (isset($loadCmt)) {
                                         <th class="product-description">Content</th>
                                         <th class="product-price">Date</th>
                                         <th class="product-price">Rate</th>
-
-                                        <th class="product-remove">&nbsp;</th>
+                                        <th class="product-remove">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?=  $dataCmt ?>
+                                    <?= $dataCmt ?>
                                 </tbody>
                             </table>
                         </div>
                     </div>
+
                 </div>
             </div>
             <div class="pagination-box">
@@ -92,6 +89,7 @@ if (isset($loadCmt)) {
                     </ul>
                 </nav>
             </div>
+
         </div>
         <p class="sub-banner-2 text-center">© 2022 Theme Vessel. Trademarks and brands are the property of their
             respective owners.</p>

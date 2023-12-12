@@ -120,7 +120,7 @@ function forgotPassword($email)
     return true;
 }
 
-function loadall_user($user_name = '',$user_email='' ,  $user_role = false)
+function loadall_user($user_name = '',$user_email='' ,  $user_role = false,$userID='')
 {
     $sql = "select * from users where 1";
     if ($user_name != '') {
@@ -131,6 +131,10 @@ function loadall_user($user_name = '',$user_email='' ,  $user_role = false)
     }
     if ($user_role) {
         $sql .= " and user_role = 0";
+    }
+    if($userID != '') {
+        $sql .= " and user_id != $userID";
+
     }
     $sql .= " order by user_id asc";
     $listUsers = pdo_query($sql);

@@ -1,6 +1,6 @@
 let thisPage = 1;
 let limit = 4;
-let list = document.querySelectorAll(".dashboard-content .media.dashboard-message");
+let list = document.querySelectorAll(".dashboard-content ");
 function loadItem() {
     let beginGet = limit * (thisPage - 1);
     let endGet = limit * thisPage - 1;
