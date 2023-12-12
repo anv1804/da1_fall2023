@@ -1,5 +1,29 @@
 <?php
 
+$dashboard = dashboard('');
+if ($dashboard) {
+    echo "<pre>";
+    print_r($dashboard);   
+    echo "</pre>";
+    $curYear = date('Y');
+    $yhc  = array();
+    foreach ($dashboard as $value) {
+        $a1 = explode("/", $value['date_booking']);
+        $year = $a1[2];
+        if($year ==  $curYear){
+            array_push($yhc, $value['book_id']);
+        }
+    }
+    echo "<pre>";
+    print_r($yhc);   
+    echo "</pre>";
+    $price = 0;
+    if($yhc){
+        foreach ($yhc as $value) {
+            $bk = dashboard($value);
+        }
+    }
+}
 ?>
 <div class="col-lg-9 offset-lg-3 col-md-12 col-sm-12 col-pad">
     <div class="content-area5">
@@ -28,7 +52,6 @@
                         aria-hidden="true">×</span></button>
                 HELLO <strong>ADMIN</strong>, WELCOME TO DASHBOARD!
             </div>
-
             <hr>
             <div class="row">
                 <!-- prices -->
@@ -65,7 +88,7 @@
                     <div class="ui-item bg-active">
                         <div class="left">
                             <h4>
-                               3
+                                3
                             </h4>
                             <p>Bookeds</p>
                         </div>
@@ -79,7 +102,7 @@
                     <div class="ui-item bg-dark">
                         <div class="left">
                             <h4>
-                               4
+                                4
                             </h4>
                             <p>Reviews</p>
                         </div>
@@ -107,7 +130,7 @@
                     <div class="ui-item bg-info">
                         <div class="left">
                             <h4>
-                               6
+                                6
                             </h4>
                             <p>Rooms</p>
                         </div>

@@ -126,10 +126,13 @@ function dataBooking($userID)
     $data = pdo_query($sql);
     return $data;
 }
-function dashboard(){
+function dashboard($bookID=""){
     $sql = "SELECT *
     FROM `book` 
-    INNER JOIN completed fro";
+    INNER JOIN completed ON book.completed_id = completed.completed_id";
+    if($bookID != ""){
+        $sql.= "WHERE book_id = $bookID";
+    }
     $result = pdo_query($sql);
     return $result;
 }
@@ -156,30 +159,7 @@ function cancelCompleted($Completed_id){
     $sql = "DELETE FROM `completed` WHERE Completed_id = $Completed_id";
     pdo_execute($sql);
 }
-function thisWeek(){
-    $sql = "SELECT * FROM `completed` 
-    INNER JOIN book ON completed.completed_id = book.completed_id
-    ";
-     $result = pdo_query($sql);
-     return $result;
-}
-function getInf($dbk){
-    $sql = "SELECT *
-    FROM `book` 
-	INNER JOIN completed 
-    ON book.completed_id = completed.completed_id
-    WHERE completed.date_booking = '$dbk'";
-    $data = pdo_query($sql);
-    return $data;
-}
 
-function ymd($curYear){
-    $sql = "SELECT *
-    FROM `book` 
-	INNER JOIN completed 
-    ON book.completed_id = completed.completed_id
-    WHERE YEAR(completed.date_booking) = '$curYear'";
-    $data = pdo_query($sql);
-    return $data;
-}
+
+
 ?>
