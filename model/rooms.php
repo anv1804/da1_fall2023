@@ -120,7 +120,14 @@ function validateDay($listDate, $dates)
     return $amountRoom;
 
 }
-
+function topRooms()
+{
+    $sql = "SELECT * FROM rooms
+    INNER JOIN hotels WHERE rooms.hotel_id = hotels.hotel_id
+   ORDER BY hotel_views DESC LIMIT 6 ";
+    $result = pdo_query($sql);
+    return $result;
+}
 
 function allBookId() {
     $sql = "SELECT book_id FROM `book` WHERE cancel_hidden = 0";
