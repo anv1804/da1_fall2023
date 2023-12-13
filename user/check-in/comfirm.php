@@ -117,7 +117,7 @@
             $day2 = DateTime::createFromFormat("d/m/Y", $book['date_end'][0]);
 
             $numberOfNight = $day1->diff($day2)->days;
-            $totalPrice = (int)$numberOfNight * (int)$room[0]['room_price'] + 9;
+            $totalPrice = (int)$numberOfNight * (int)$room[0]['room_price'] + 2;
             $convertTotalPrice = number_format(($totalPrice * 24000), 0, ',', '.');
             $convertTotalPriceOf20 = number_format((($totalPrice * 24000)/5), 0, ',', '.');
         }
@@ -237,7 +237,7 @@
                                             <div class="price-title">
                                                 Taxes and fees
                                             </div>
-                                            <div class="price-number">$9</div>
+                                            <div class="price-number">$2</div>
                                         </div>
                                         <div class="price convert">
                                             <div class="price-title">

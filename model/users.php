@@ -19,7 +19,7 @@ function getID($userEmail)
 }
 function countNoti($userID)
 {
-    $sql = "SELECT COUNT(book_id) as count FROM `book` WHERE user_id = $userID";
+    $sql = "SELECT COUNT(book_id) as count FROM `book` WHERE user_id = $userID and cancel_hidden = 0";
     $result = pdo_query_one($sql);
     return $result;
 }
@@ -106,7 +106,9 @@ function getHotel($hotelID)
     $result = pdo_query($sql);
     return $result;
 }
-function dataBooking($userID)
+
+function dataBooking($userID  , $enable = '')
+
 {
     $sql = "SELECT 
     book.room_id,
@@ -130,6 +132,9 @@ function dataBooking($userID)
     ON book.room_id = rooms.room_id 
     INNER JOIN completed 
     ON book.completed_id = completed.completed_id WHERE book.user_id = $userID";
+    if ($enable != '') {
+        $sql .= " and cancel_hidden = 0";
+    }
     $data = pdo_query($sql);
     return $data;
 }
@@ -168,9 +173,8 @@ function countH()
     $result = pdo_query_one($sql);
     return $result;
 }
-function cancelBook($book_id)
-{
-    $sql = "DELETE FROM `book` WHERE book_id = $book_id";
+function cancelBook($book_id){
+    $sql = "UPDATE `book` SET `cancel_hidden`= 1 WHERE book_id = $book_id";
     pdo_execute($sql);
 
 }
@@ -180,6 +184,41 @@ function cancelCompleted($Completed_id)
     pdo_execute($sql);
 }
 
-
+function sendMailForUser($email , $content) {
+    require '../../PHPMailer-master/src/PHPMailer.php';
+    require "../../PHPMailer-master/src/SMTP.php";
+    require '../../PHPMailer-master/src/Exception.php';
+    $mail = new PHPMailer\PHPMailer\PHPMailer(true); //true:enables exceptions
+    try {
+        $mail->SMTPDebug = 0; //0,1,2: chế độ debug
+        $mail->isSMTP();
+        $mail->CharSet = "utf-8";
+        $mail->Host = 'smtp.gmail.com'; //SMTP servers
+        $mail->SMTPAuth = true; // Enable authentication
+        $mail->Username = 'dolmph42190@fpt.edu.vn'; // SMTP username
+        $mail->Password = 'agcg raqx cnim ushw'; // SMTP password
+        $mail->SMTPSecure = 'ssl'; // encryption TLS/SSL 
+        $mail->Port = 465; // port to connect to                
+        $mail->setFrom('annguyen04@hotmail.com', 'Admin POLY TRAVEL');
+        $mail->addAddress($email);
+        $mail->isHTML(true); // Set email format to HTML
+        $mail->Subject = 'Notification Your book for Ptravel';
+        $noidungthu = $content;
+        $mail->Body = $noidungthu;
+        $mail->smtpConnect(
+            array(
+                "ssl" => array(
+                    "verify_peer"       => false,
+                    "verify_peer_name"  => false,
+                    "allow_self_signed" => true
+                )
+            )
+        );
+        $mail->send();
+        // echo 'Đã gửi mail xong';
+    } catch (Exception $e) {
+        // echo 'Error: ', $mail->ErrorInfo;
+    }
+}
 
 ?>

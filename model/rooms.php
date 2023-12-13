@@ -28,15 +28,27 @@ function countRooms($hotel_id = 0)
     return $count_category_id;
 }
 
-function loadAllDate($room_id = 0)
+function loadAllDate($room_id = 0 , $enable = 'true')
 {
-    $sql = "SELECT * FROM completed WHERE 1";
+    $sql = "SELECT 
+    completed.room_id,
+    date_booking,
+    date_start,
+    date_end ,
+    completed.completed_id
+    FROM `book` 
+    INNER JOIN completed 
+    ON book.completed_id = completed.completed_id WHERE 1";
+    if ($enable != '') {
+        $sql .= " and cancel_hidden = 0";
+    }
     if ($room_id != 0) {
-        $sql .= " and room_id = '" . $room_id . "'";
+        $sql .= " and book.room_id = '" . $room_id . "'";
     }
 
     return pdo_query($sql);
 }
+
 function fullRooms()
 {
     $sql = "SELECT * FROM rooms 
@@ -75,79 +87,38 @@ function deleteRooms($roomID)
     pdo_execute($sql);
 }
 
-function validateDay($lastDateofMonth, $listDate, $currMonth, $currYear)
+function validateDay($listDate, $dates)
 {
-    $dateStarts = [];
-    $dateEnds = [];
-    $dateMiddles = [];
 
+    $amountRoom = 0;
 
-    foreach ($listDate as $date) {
-        $dateStart = explode('/', $date['date_start']);
-        $dateEnd = explode('/', $date['date_end']);
+    $aboutDays1 = array('dayStart' => $dates[0], 'dayEnd' => $dates[1]);
+    $dayStart1_converted = DateTime::createFromFormat('m/d/Y', $aboutDays1['dayStart'])->format('Y-m-d');
+    $dayEnd1_converted = DateTime::createFromFormat('m/d/Y', $aboutDays1['dayEnd'])->format('Y-m-d');
+    // echo $dayStart1_converted .' , '. $dayEnd1_converted;
 
-        //date Start and date End
-        for ($i = 1; $i <= $lastDateofMonth; $i++) {
-            if ($i == $dateStart[0] && $currMonth === ($dateStart[1] - 1) && $currYear == $dateStart[2]) {
-                $dateStarts[] = $i;
-            }
-            if ($i == $dateEnd[0] && $currMonth === ($dateEnd[1] - 1) && $currYear == $dateEnd[2]) {
-                $dateEnds[] = $i;
-            }
-        }
+    foreach ($listDate as $date) { 
+        $date['date_start'] = explode('|' , $date['date_start']);
+        $date['date_end'] = explode('|' , $date['date_end']);
+        $aboutDays2 = array('dayStart' => $date['date_start'][0], 'dayEnd' => $date['date_end'][0]);
+    
+    
+        $dayStart2_converted = DateTime::createFromFormat('d/m/Y', $aboutDays2['dayStart'])->format('Y-m-d');
+        $dayEnd2_converted = DateTime::createFromFormat('d/m/Y', $aboutDays2['dayEnd'])->format('Y-m-d');
 
-        //date Middle
-        if (($dateStart[1] - 1) == $currMonth && $dateStart[2] == $currYear && ($dateEnd[1] - 1) == $currMonth) {
-            for ($i = 1; $i <= $lastDateofMonth; $i++) {
-                if ($dateStart[0] - $i < 0 && $i < $dateEnd[0]) {
-                    $dateMiddles[] = $i;
-                }
-            }
-            for ($i = 1; $i <= $lastDateofMonth; $i++) {
-                if ($dateEnd[0] - $i > 0 && $i > $dateStart[0]) {
-                    $dateMiddles[] = $i;
-                }
-            }
-        }
-        if ($dateStart[1] != $dateEnd[1] || $dateEnd[2] - $dateStart[2] > 0) {
-            if (($dateStart[1] - 1) == $currMonth) {
-                for ($i = 1; $i <= $lastDateofMonth; $i++) {
-                    if ($dateStart[0] - $i < 0) {
-                        $dateMiddles[] = $i;
-                    }
-                }
-            }
-            if (($dateEnd[1] - 1) == $currMonth) {
-                for ($i = 1; $i <= $lastDateofMonth; $i++) {
-                    if ($dateEnd[0] - $i > 0) {
-                        $dateMiddles[] = $i;
-                    }
-                }
-            }
-        }
-        if ($dateEnd[1] - 1 > $currMonth && $dateStart[1] - 1 < $currMonth && $dateEnd[2] == $currYear && $dateStart[2] == $currYear) {
-            if ($dateEnd[1] - $currMonth > 0) {
-                for ($i = 1; $i <= $lastDateofMonth; $i++) {
-                    $dateMiddles[] = $i;
-                }
-            }
-        }
-        if ($dateEnd[2] - $dateStart[2] > 0) {
-            if ($dateEnd[1] - 1 > $currMonth && $dateEnd[2] == $currYear) {
-                for ($i = 1; $i <= $lastDateofMonth; $i++) {
-                    $dateMiddles[] = $i;
-                }
-            }
-            if ($dateStart[1] - 1 < $currMonth && $dateStart[2] == $currYear) {
-                for ($i = 1; $i <= $lastDateofMonth; $i++) {
-                    $dateMiddles[] = $i;
-                }
-            }
-        }
+        // echo $dayStart2_converted .' , '. $dayEnd2_converted;
 
+        if (
+                ($dayStart1_converted < $dayEnd2_converted && $dayStart2_converted < $dayEnd1_converted) || 
+                ($dayStart2_converted < $dayEnd1_converted && $dayEnd2_converted > $dayStart1_converted)
+            ) {
+            $amountRoom += 1;
+            // echo $amountRoom;
+        }
     }
 
-    return [$dateStarts, $dateMiddles, $dateEnds];
+    return $amountRoom;
+
 }
 
 

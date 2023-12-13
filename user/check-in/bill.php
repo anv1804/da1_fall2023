@@ -103,7 +103,7 @@
             $timeAfterAdd = $timestamp + (1 * 60);
             $time = date("H:i", $timeAfterAdd);
 
-            $totalPrice = (int) $numberOfNight * (int) $room[0]['room_price'] + 9;
+            $totalPrice = (int) $numberOfNight * (int) $room[0]['room_price'] + 2;
             $convertTotalPrice = number_format(($totalPrice * 24000), 0, ',', '.');
             $convertTotalPriceOf20 = number_format((($totalPrice * 24000) / 5), 0, ',', '.');
             $convertBookPrice = number_format($book['book_price'], 0, ',', '.');
@@ -111,19 +111,149 @@
             $currDay = date("d/m/Y");
             $cancellation_date = $cancellationDate . '|' . $book['date_start'][1];
             // echo $cancellation_date;
+        
 
-            if (checkBookIdSql($book['book_id'])) {
+            if (checkBookIdSql($book['book_id']) && (!isset($_SESSION['book']['check_book']) || ($_SESSION['book']['check_book'] != '1'))) {
+                $content = '
+                    <div style="width: 500px;height: 500px; margin:0 auto;border-radius: 6px;padding: 16px;box-shadow: rgba(3, 18, 26, 0.2) 0px 1px 2px;
+                    background-color: rgba(255, 255, 255, 1);
+                    ">
+                    <div style="    color: rgb(3, 18, 26);
+                        font-size: 20px;
+                        font-weight: 700;
+                        line-height: 24px;
+                        width:100%;
+                        text-align:center;">
+                        Information for your book
+                    </div>
+        
+                    <div>
+                        <div style="    font-size: 16px;
+                        font-weight: 700;
+                        line-height: 20px;
+                        margin: 16px 0;">
+                            Your contact
+                        </div>
+                        <div>
+                            Name: <span>' . $_SESSION['book']['book_name'] . '</span>
+                        </div>
+                        <div>
+                            Number phone: <span>+84' . $_SESSION['book']['book_number'] . '</span>
+                        </div>
+                        <div>
+                            Name: <span>' . $_SESSION['book']['book_email'] . '</span>
+                        </div>
+                    </div>
+        
+                    <div>
+                        <div
+                        style="    font-size: 16px;
+                        font-weight: 700;
+                        line-height: 20px;
+                        margin: 16px 0;">
+                            Information Hotel and room
+                        </div>
+                        <div>
+                            Name hotel: <span>' . $hotel[0]['hotel_name'] . '</span>
+                        </div>
+                        <div>
+                            Number room: <span>' . $room[0]['room_number'] . '</span>
+                        </div>
+                        <div>
+                            Check in: <span>' . $dateCheckInOut[0] . ' - ' . $book['date_start'][1] . '</span>
+                        </div>
+                        <div>
+                            Check out: <span>' . $dateCheckInOut[1] . ' - ' . $book['date_end'][1] . '</span>
+                        </div>
+                        <div>
+                            Number of nights stay: <span>' . $numberOfNight . ' nights</span>
+                        </div>
+                        <div>
+                            Paid: <span>' . $convertBookPrice . ' VND</span>
+                        </div>
+                    </div>
+
+                    <div style="font-size:20px;margin-top:20px;font-weight: 700;
+                    line-height: 20px;color: rgb(0, 135, 90);">Booking hotel Success!</div>
+        
+                </div>
+                ';
+                sendMailForUser($_SESSION['book']['book_email'], $content);
+                
                 booking($currDay, $_SESSION['book']['date_start'], $_SESSION['book']['date_end'], $_SESSION['book']['room_id']);
                 $completed_id = loadComplete($_SESSION['book']['room_id'], $_SESSION['book']['date_start']);
                 extract($completed_id);
-    
-                insertBook($book['book_id'], $book['user_id'], $book['room_id'], $book['hotel_id'], $book['book_price'], $book['book_price'] == ($totalPrice * 24000) ? 0 : 1, $completed_id, $cancellation_date);                
+
+                insertBook($book['book_id'], $book['user_id'], $book['room_id'], $book['hotel_id'], $book['book_price'], $book['book_price'] == ($totalPrice * 24000) ? 0 : 1, $completed_id, $cancellation_date);
+                $_SESSION['book']['check_book'] = 1;
+
+                
             }
         }
 
         ?>
 
+        <!-- <div style="width: 500px;height: 500px; margin:0 auto;border-radius: 6px;padding: 16px;box-shadow: rgba(3, 18, 26, 0.2) 0px 1px 2px;
+            background-color: rgba(255, 255, 255, 1);
+            display: flex;
+            justify-content: center;
+            flex-direction: column; ">
+            <div style="    color: rgb(3, 18, 26);
+                font-size: 20px;
+                font-weight: 700;
+                line-height: 24px;
+                width:100%;
+                text-align:center;">
+                Information for your book
+            </div>
 
+            <div>
+                <div style="    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
+    margin: 16px 0;">
+                    Your contact
+                </div>
+                <div>
+                    Name: <span><?= $_SESSION['book']['book_name'] ?></span>
+                </div>
+                <div>
+                    Number phone: <span>+84<?= $_SESSION['book']['book_number'] ?></span>
+                </div>
+                <div>
+                    Name: <span><?= $_SESSION['book']['book_email'] ?></span>
+                </div>
+            </div>
+
+            <div>
+                <div
+                style="    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
+    margin: 16px 0;">
+                    Information Hotel and room
+                </div>
+                <div>
+                    Name hotel: <span><?= $hotel[0]['hotel_name']; ?></span>
+                </div>
+                <div>
+                    Number room: <span><?= $room[0]['room_number']; ?></span>
+                </div>
+                <div>
+                    Check in: <span><?= $dateCheckInOut[0] ?> - <?= $book['date_start'][1] ?></span>
+                </div>
+                <div>
+                    Check out: <span><?= $dateCheckInOut[1] ?> - <?= $book['date_end'][1] ?></span>
+                </div>
+                <div>
+                    Number of nights stay: <span><?= $numberOfNight ?> nights</span>
+                </div>
+                <div>
+                    Paid: <span><?= $convertBookPrice; ?> VND</span>
+                </div>
+            </div>
+
+        </div> -->
 
         <div class="body-check-in">
 
@@ -323,7 +453,7 @@
                                             <div class="price-title">
                                                 Taxes and fees
                                             </div>
-                                            <div class="price-number">$9</div>
+                                            <div class="price-number">$2</div>
                                         </div>
                                     </div>
 
@@ -358,7 +488,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="btn-routine d-flex justify-content-between mb-5" style="width:100%;">
                             <a href="../../index.php" class="btn btn-warning btn-back-home">Back home</a>
                             <a href="../../index.php?page=cart" class="btn btn-primary btn-back-home">Book details</a>
