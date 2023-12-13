@@ -102,7 +102,7 @@ function checkBookIdSql($book_id)
 }
 function getHotel($hotelID)
 {
-    $sql = "SELECT city_id,hotel_name,hotel_image,sum(total_price) as price, count(book_id) as count FROM `book` INNER JOIN hotels ON book.hotel_id = hotels.hotel_id WHERE book.hotel_id = '$hotelID'";
+    $sql = "SELECT book.hotel_id,city_id,hotel_name,hotel_image,total_price FROM `book` INNER JOIN hotels ON book.hotel_id = hotels.hotel_id WHERE book.hotel_id = '$hotelID'";
     $result = pdo_query($sql);
     return $result;
 }
@@ -151,8 +151,9 @@ function dashboard($bookID = "")
 }
 function checkBook($bookID)
 {
-    $sql = "SELECT *
-    FROM `book` 
+    $sql = "SELECT 
+    *
+    FROM book
     INNER JOIN completed ON book.completed_id = completed.completed_id
     WHERE book.book_id = $bookID";
     $result = pdo_query($sql);
@@ -220,5 +221,12 @@ function sendMailForUser($email , $content) {
         // echo 'Error: ', $mail->ErrorInfo;
     }
 }
-
+function anv($bookID,$mon){
+    $sql = "SELECT book_id,total_price,book.hotel_id, SUBSTRING(date_booking,4,2) as mon FROM `book`
+    INNER JOIN completed ON book.completed_id = completed.completed_id
+    WHERE book_id = $bookID AND SUBSTRING(date_booking,4,2) = $mon";
+    $result = pdo_query($sql);
+    return $result;
+    
+}
 ?>

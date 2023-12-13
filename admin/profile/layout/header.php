@@ -65,21 +65,14 @@
                                 <li class="nav-item dropdown">
                                     <a href="admin.php?page=comment" class="nav-link">Comment</a>
                                 </li>
-                                <li class="nav-item dropdown">
-                                    <a href="admin.php?page=bookings" class="nav-link">Bookings</a>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a href="admin.php?page=listings" class="nav-link">My Listings</a>
-                                </li>
+                               
                                 <li class="nav-item dropdown">
                                     <a href="reviews.php" class="nav-link">Reviews</a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a href="hotels.php" class="nav-link">Hotels</a>
                                 </li>
-                                <li class="nav-item dropdown">
-                                    <a href="add-listing.php" class="nav-link">Add Listing</a>
-                                </li>
+                                
                                 <li class="nav-item dropdown">
                                     <a href="my-profile.php" class="nav-link">My Profile</a>
                                 </li>
@@ -110,7 +103,6 @@
                                             </a>
                                             <div class="dropdown-menu">
                                                 <a class="dropdown-item" href="admin.php?page=dashboard">Dashboard</a>
-                                                <a class="dropdown-item" href="messages.php">Messages</a>
                                                 <a class="dropdown-item" href="hotels.php">Hotels</a>
                                                 <a class="dropdown-item" href="my-profile.php">My profile</a>
                                                 <a class="dropdown-item" href="./user/pages/logout.php">Logout</a>
@@ -139,10 +131,7 @@
                             <ul>
                                 <li class="active"><a href="admin.php?page=dashboard"><i class="flaticon-dashboard"></i>
                                         Dashboard</a></li>
-                                <li><a href="admin.php?page=messages"><i class="flaticon-mail"></i> Messages <span
-                                            class="nav-tag">2</span></a></li>
-                                <li><a href="admin.php?page=bookings"><i class="flaticon-timetable"></i> Bookings</a>
-                                </li>
+                               
                             </ul>
                             <h4>Listings</h4>
                             <ul>
