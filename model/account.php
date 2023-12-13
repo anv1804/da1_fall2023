@@ -92,8 +92,8 @@ function forgotPassword($email)
         $mail->CharSet = "utf-8";
         $mail->Host = 'smtp.gmail.com'; //SMTP servers
         $mail->SMTPAuth = true; // Enable authentication
-        $mail->Username = 'annvph41556@fpt.edu.vn'; // SMTP username
-        $mail->Password = 'ikxezdanaqzaboka'; // SMTP password
+        $mail->Username = 'dolmph42190@fpt.edu.vn'; // SMTP username
+        $mail->Password = 'agcg raqx cnim ushw'; // SMTP password
         $mail->SMTPSecure = 'ssl'; // encryption TLS/SSL 
         $mail->Port = 465; // port to connect to                
         $mail->setFrom('annguyen04@hotmail.com', 'Admin POLY TRAVEL');
