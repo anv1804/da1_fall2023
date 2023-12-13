@@ -315,7 +315,7 @@ if (isset($_GET['roomID'])) {
                             $dateEnd = $dayEnd[1] . '/' . $dayEnd[0] . '/' . $dayEnd[2] . '|' . $timeCheckOut;
                             
                             if (isset($_SESSION['book'])) {
-                                unset($_SESSION['book']);
+                                $_SESSION['book'] = [];
                             }
                             $_SESSION['book'] = ['room_id' => $room_id, 'date_start' => $dateStart, 'date_end' => $dateEnd];
 

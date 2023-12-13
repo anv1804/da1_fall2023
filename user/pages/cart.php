@@ -13,7 +13,7 @@ if ($user && $user['user_role'] == 0) {
     $result = user($userEmail);
     $userID = $result[0]['user_id'];
     $book = dataBooking($userID , true);
-
+    // print_r($book);
     if (isset($book)) {
         foreach ($book as $key => $value) {
             $imageRoom = explode(',', $book[0]['room_image']);

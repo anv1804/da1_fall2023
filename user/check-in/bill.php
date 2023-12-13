@@ -111,6 +111,7 @@
             $currDay = date("d/m/Y");
             $cancellation_date = $cancellationDate . '|' . $book['date_start'][1];
             // echo $cancellation_date;
+            // echo $book['book_id'];
         
 
             if (checkBookIdSql($book['book_id']) && (!isset($_SESSION['book']['check_book']) || ($_SESSION['book']['check_book'] != '1'))) {
@@ -184,10 +185,10 @@
                 $completed_id = loadComplete($_SESSION['book']['room_id'], $_SESSION['book']['date_start']);
                 extract($completed_id);
 
-                insertBook($book['book_id'], $book['user_id'], $book['room_id'], $book['hotel_id'], $book['book_price'], $book['book_price'] == ($totalPrice * 24000) ? 0 : 1, $completed_id, $cancellation_date);
+                insertBook($_SESSION['book']['book_id'], $book['user_id'], $book['room_id'], $book['hotel_id'], $book['book_price'], $book['book_price'] == ($totalPrice * 24000) ? 0 : 1, $completed_id, $cancellation_date);
                 $_SESSION['book']['check_book'] = 1;
+                // echo $_SESSION['book']['book_id'];
 
-                
             }
         }
 

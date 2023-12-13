@@ -123,7 +123,7 @@ function validateDay($listDate, $dates)
 
 
 function allBookId() {
-    $sql = "SELECT book_id FROM `book` WHERE 1";
+    $sql = "SELECT book_id FROM `book` WHERE cancel_hidden = 0";
     return pdo_query($sql);
 }
 
