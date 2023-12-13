@@ -19,34 +19,17 @@ if ($dashboard) {
         $a1 = explode("/", $value['date_booking']);
         $year = $a1[2];
         $moneyY = array();
-        $list1 = [];
-        $hotelY = '';
-        $hY = array();
         $priceY = 0;
-        $yearY = 0;
-        $cntY = array();
-        if (($year == $curYear)) {
+        if ($year == $curYear) {
             array_push($listY, $value['book_id']);
             array_push($topBookY, $value['hotel_id']);
             if ($listY) {
                 foreach ($listY as $value) {
-                    $bookID = $value;
-                    $bkY = anv($bookID, $year);
+                    $bookID = (int) $value;
+                    $bkY = checkBook($bookID);
                     foreach ($bkY as $item) {
-                        $countY = $item['book_id'];
                         $priceY = (int) $item['total_price'];
-                        $hotelY = $item['hotel_id'];
-                        $monY = $item['mon'];
                         array_push($moneyY, $priceY);
-                        array_push($cntY, $countY);
-                        array_push($list1, $hotelY);
-                        if ($yearY == $year && in_array($hotelY, $list1)) {
-                            if (isset($hY[$hotelY])) {
-                                $hY[$hotelY] += $priceY;
-                            } else {
-                                $hY[$hotelY] = $priceY;
-                            }
-                        }
                     }
                 }
             }
@@ -55,26 +38,22 @@ if ($dashboard) {
             $min_valueY = min($countedY); //số lần đặt ít nhất
             $max_keysY = (int) array_keys($countedY, $max_valueY)[0]; //id khách sạn đc đặ nhiều nhất
             $min_keysY = (int) array_keys($countedY, $min_valueY)[0]; //id khách sạn đc đặ ít nhất
-
-
-
         }
         $costY = array_sum($moneyY);
+
     }
-    var_dump($hY);
-    if (($year == $curYear)) {
-        $trY= '';
-        foreach ($countedY as $key => $value) {
-            $book1 = $key;
+    if ($year == $curYear) {
+        $trY = '';
+        foreach (array_unique($topBookY) as $value) {
             $value1 = $value;
-            $dataY = getHotel($book1);
-            $priceY = $hY[$book1];
-            unset($dataY[1]);
+
+            $dataY = getHotel((int) $value);
             if (isset($dataY)) {
-                foreach ($dataY as $key => $value) {
-                    $price = $value['total_price'];
+                foreach ($dataY as $value) {
                     $hotelImages = explode(',', $value['hotel_image']);
-                    $trY .= '
+
+                    if (isset($dataY)) {
+                        $trY .= '
                 <tr align="center"> 
                 <td class="product-thumbnail">
                     <a href="#">
@@ -85,16 +64,14 @@ if ($dashboard) {
                  <td class="product-name">
                      <span>' . $value['city_id'] . '</span><br>
                  </td>
-                 <td class="hdn"><span>' . $value1 . '</span></td>
-                 <td class="hdn"><span>' . $priceY . '</span></td>                 
+                 <td class="hdn"><span>' . $value1. '</span></td>
+                 <td class="hdn"><span>' . $value['total_price'] . '</span></td>
              </tr>';
+                    }
                 }
             }
-
         }
-
     }
-
     // mon
     foreach ($dashboard as $value) {
         $a1 = explode("/", $value['date_booking']);
@@ -143,7 +120,7 @@ if ($dashboard) {
 
         }
 
-        $costM = array_sum($moneyM) ;
+        $costM = array_sum($moneyM);
 
     }
 
@@ -208,7 +185,7 @@ if ($dashboard) {
             $min_keysD = (int) array_keys($countedD, $min_valueD)[0]; //id khách sạn đc đặ ít nhất
 
         }
-        $costD = array_sum($moneyD) ;
+        $costD = array_sum($moneyD);
         if (($day == $curDay) && ($mon == $curMon) && ($year == $curYear)) {
             $trD = '';
             foreach ($countedD as $key => $value) {
@@ -276,87 +253,16 @@ if ($dashboard) {
             <hr>
             <div class="row">
                 <!-- prices -->
-                <div class="col-lg-5 col-md-3 col-sm-6">
+                <div class="col-lg-12 col-md-3 col-sm-6">
                     <div class="ui-item bg-success">
                         <div class="left">
-                            <h4>$
-                                1
+                            <h4><?= $costY ?>
                             </h4>
                             <p>
                                 Revenue</p>
                         </div>
                         <div class="right">
                             <i class="fa fa-money"></i>
-                        </div>
-                    </div>
-                </div>
-                <!-- views -->
-                <div class="col-lg-4 col-md-3 col-sm-6">
-                    <div class="ui-item bg-warning">
-                        <div class="left">
-                            <h4>
-                                2
-                            </h4>
-                            <p>Views</p>
-                        </div>
-                        <div class="right">
-                            <i class="fa fa-eye"></i>
-                        </div>
-                    </div>
-                </div>
-                <!-- clients -->
-                <div class="col-lg-3 col-md-3 col-sm-6">
-                    <div class="ui-item bg-active">
-                        <div class="left">
-                            <h4>
-                                3
-                            </h4>
-                            <p>Bookeds</p>
-                        </div>
-                        <div class="right">
-                            <i class="fa fa-heart-o"></i>
-                        </div>
-                    </div>
-                </div>
-                <!-- comments -->
-                <div class="col-lg-3 col-md-3 col-sm-6">
-                    <div class="ui-item bg-dark">
-                        <div class="left">
-                            <h4>
-                                4
-                            </h4>
-                            <p>Reviews</p>
-                        </div>
-                        <div class="right">
-                            <i class="lnr lnr-bubble"></i>
-                        </div>
-                    </div>
-                </div>
-                <!-- hotels -->
-                <div class="col-lg-3 col-md-3 col-sm-6">
-                    <div class="ui-item bg-secondary">
-                        <div class="left">
-                            <h4>
-                                5
-                            </h4>
-                            <p>Hotels</p>
-                        </div>
-                        <div class="right">
-                            <i class="lnr lnr-apartment"></i>
-                        </div>
-                    </div>
-                </div>
-                <!-- rooms -->
-                <div class="col-lg-3 col-md-3 col-sm-6">
-                    <div class="ui-item bg-info">
-                        <div class="left">
-                            <h4>
-                                6
-                            </h4>
-                            <p>Rooms</p>
-                        </div>
-                        <div class="right">
-                            <i class="lnr lnr-home"></i>
                         </div>
                     </div>
                 </div>
@@ -392,7 +298,7 @@ if ($dashboard) {
                                     <div class="tab-pane fade" id="pills-year" role="tabpanel"
                                         aria-labelledby="pills-year-tab">
                                         <div class="media coment-2">
-                                            <div class="col-lg-4">
+                                            <div class="col-lg-8">
                                                 <div class="ui-item bg-success">
                                                     <div class="left">
                                                         <h4>$
@@ -420,20 +326,7 @@ if ($dashboard) {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-4">
-                                                <div class="ui-item bg-success">
-                                                    <div class="left">
-                                                        <h4>$
-                                                            1
-                                                        </h4>
-                                                        <p>
-                                                            Revenue</p>
-                                                    </div>
-                                                    <div class="right">
-                                                        <i class="fa fa-money"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                           
                                         </div>
                                         <div class="media coment-2">
                                             <div class="pr-4">
@@ -472,7 +365,7 @@ if ($dashboard) {
                                     <div class="tab-pane fade" id="pills-contact" role="tabpanel"
                                         aria-labelledby="pills-contact-tab">
                                         <div class="media coment-2">
-                                            <div class="col-lg-4">
+                                            <div class="col-lg-8">
                                                 <div class="ui-item bg-success">
                                                     <div class="left">
                                                         <h4>$
@@ -500,20 +393,7 @@ if ($dashboard) {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-4">
-                                                <div class="ui-item bg-success">
-                                                    <div class="left">
-                                                        <h4>$
-                                                            1
-                                                        </h4>
-                                                        <p>
-                                                            Revenue</p>
-                                                    </div>
-                                                    <div class="right">
-                                                        <i class="fa fa-money"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                           
                                         </div>
                                         <div class="media coment-2">
                                             <div class="pr-4">
@@ -552,7 +432,7 @@ if ($dashboard) {
                                     <div class="tab-pane fade active show" id="pills-profile" role="tabpanel"
                                         aria-labelledby="pills-profile-tab">
                                         <div class="media coment-2">
-                                            <div class="col-lg-4">
+                                            <div class="col-lg-8">
                                                 <div class="ui-item bg-success">
                                                     <div class="left">
                                                         <h4>$
@@ -580,20 +460,7 @@ if ($dashboard) {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-4">
-                                                <div class="ui-item bg-success">
-                                                    <div class="left">
-                                                        <h4>$
-                                                            1
-                                                        </h4>
-                                                        <p>
-                                                            Revenue</p>
-                                                    </div>
-                                                    <div class="right">
-                                                        <i class="fa fa-money"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                     
                                         </div>
                                         <div class="media coment-2">
                                             <div class="pr-4">
@@ -739,12 +606,3 @@ if ($dashboard) {
 </div>
 </div>
 </div>
-
-
-
-
-
-
-
-
-<!-- Dashboard end -->
