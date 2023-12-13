@@ -85,13 +85,14 @@ function loadComplete($room_id, $dateStart)
     $sql = "SELECT completed_id FROM completed WHERE room_id = $room_id and date_start = '$dateStart'";
     return pdo_query_one($sql);
 }
-function insertBook($book_id , $user_id , $room_id, $hotel_id , $total_price , $book_status , $completed_id , $cancellation_date)
+function insertBook($book_id, $user_id, $room_id, $hotel_id, $total_price, $book_status, $completed_id, $cancellation_date)
 {
     $sql = "INSERT INTO `book`(`book_id`, `user_id`, `room_id`, `hotel_id`, `total_price`, `book_status`, `completed_id`, `cancellation_date`)
      VALUES ('$book_id','$user_id','$room_id','$hotel_id','$total_price','$book_status','$completed_id','$cancellation_date')";
     pdo_execute($sql);
 }
-function checkBookIdSql($book_id) {
+function checkBookIdSql($book_id)
+{
     $sql = "SELECT * FROM `book` WHERE book_id = '$book_id'";
     $result = pdo_query_one($sql);
     if (!empty($result)) {
@@ -99,7 +100,15 @@ function checkBookIdSql($book_id) {
     }
     return true;
 }
+function getHotel($hotelID)
+{
+    $sql = "SELECT city_id,hotel_name,hotel_image,sum(total_price) as price, count(book_id) as count FROM `book` INNER JOIN hotels ON book.hotel_id = hotels.hotel_id WHERE book.hotel_id = '$hotelID'";
+    $result = pdo_query($sql);
+    return $result;
+}
+
 function dataBooking($userID  , $enable = '')
+
 {
     $sql = "SELECT 
     book.room_id,
@@ -129,17 +138,28 @@ function dataBooking($userID  , $enable = '')
     $data = pdo_query($sql);
     return $data;
 }
-function dashboard($bookID=""){
+function dashboard($bookID = "")
+{
     $sql = "SELECT *
     FROM `book` 
     INNER JOIN completed ON book.completed_id = completed.completed_id";
-    if($bookID != ""){
-        $sql.= "WHERE book_id = $bookID";
+    if ($bookID != "") {
+        $sql .= "WHERE book.book_id = $bookID";
     }
     $result = pdo_query($sql);
     return $result;
 }
-function countH(){
+function checkBook($bookID)
+{
+    $sql = "SELECT *
+    FROM `book` 
+    INNER JOIN completed ON book.completed_id = completed.completed_id
+    WHERE book.book_id = $bookID";
+    $result = pdo_query($sql);
+    return $result;
+}
+function countH()
+{
     $sql = "SELECT 
     count(hotels.hotel_id) as total_hotel,
     count(rooms.room_id) as total_room,
@@ -156,8 +176,10 @@ function countH(){
 function cancelBook($book_id){
     $sql = "UPDATE `book` SET `cancel_hidden`= 1 WHERE book_id = $book_id";
     pdo_execute($sql);
+
 }
-function cancelCompleted($Completed_id){
+function cancelCompleted($Completed_id)
+{
     $sql = "DELETE FROM `completed` WHERE Completed_id = $Completed_id";
     pdo_execute($sql);
 }
