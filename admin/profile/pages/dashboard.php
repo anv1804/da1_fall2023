@@ -14,22 +14,39 @@ if ($dashboard) {
     $topBookY = array();
     $topBookM = array();
     $topBookD = array();
-
+    // year
     foreach ($dashboard as $value) {
         $a1 = explode("/", $value['date_booking']);
         $year = $a1[2];
         $moneyY = array();
+        $list1 = [];
+        $hotelY = '';
+        $hY = array();
         $priceY = 0;
-        if ($year == $curYear) {
+        $yearY = 0;
+        $cntY = array();
+        if (($year == $curYear)) {
             array_push($listY, $value['book_id']);
             array_push($topBookY, $value['hotel_id']);
             if ($listY) {
                 foreach ($listY as $value) {
-                    $bookID = (int) $value;
-                    $bkY = checkBook($bookID);
+                    $bookID = $value;
+                    $bkY = anv($bookID, $year);
                     foreach ($bkY as $item) {
+                        $countY = $item['book_id'];
                         $priceY = (int) $item['total_price'];
+                        $hotelY = $item['hotel_id'];
+                        $monY = $item['mon'];
                         array_push($moneyY, $priceY);
+                        array_push($cntY, $countY);
+                        array_push($list1, $hotelY);
+                        if ($yearY == $year && in_array($hotelY, $list1)) {
+                            if (isset($hY[$hotelY])) {
+                                $hY[$hotelY] += $priceY;
+                            } else {
+                                $hY[$hotelY] = $priceY;
+                            }
+                        }
                     }
                 }
             }
@@ -38,20 +55,26 @@ if ($dashboard) {
             $min_valueY = min($countedY); //số lần đặt ít nhất
             $max_keysY = (int) array_keys($countedY, $max_valueY)[0]; //id khách sạn đc đặ nhiều nhất
             $min_keysY = (int) array_keys($countedY, $min_valueY)[0]; //id khách sạn đc đặ ít nhất
+
+
+
         }
-        $costY = array_sum($moneyY) / 24000;
-
+        $costY = array_sum($moneyY);
     }
-    if ($year == $curYear) {
-    $trY = '';
-    foreach (array_unique($topBookY) as $value) {
-        $dataY = getHotel((int)$value);
-        if(isset($dataY)){
-        foreach ($dataY as $value) {
-            $hotelImages = explode(',', $value['hotel_image']);
-
+    var_dump($hY);
+    if (($year == $curYear)) {
+        $trY= '';
+        foreach ($countedY as $key => $value) {
+            $book1 = $key;
+            $value1 = $value;
+            $dataY = getHotel($book1);
+            $priceY = $hY[$book1];
+            unset($dataY[1]);
             if (isset($dataY)) {
-                $trY .= '
+                foreach ($dataY as $key => $value) {
+                    $price = $value['total_price'];
+                    $hotelImages = explode(',', $value['hotel_image']);
+                    $trY .= '
                 <tr align="center"> 
                 <td class="product-thumbnail">
                     <a href="#">
@@ -62,32 +85,51 @@ if ($dashboard) {
                  <td class="product-name">
                      <span>' . $value['city_id'] . '</span><br>
                  </td>
-                 <td class="hdn"><span>' . $value['count'] . '</span></td>
-                 <td class="hdn"><span>' . $value['price'] . '</span></td>
+                 <td class="hdn"><span>' . $value1 . '</span></td>
+                 <td class="hdn"><span>' . $priceY . '</span></td>                 
              </tr>';
+                }
             }
-        }
-        }
-    }
-}
 
+        }
+
+    }
+
+    // mon
     foreach ($dashboard as $value) {
         $a1 = explode("/", $value['date_booking']);
         $year = $a1[2];
         $mon = $a1[1];
         $moneyM = array();
+        $listO = [];
+        $hotelM = '';
+        $hM = array();
         $priceM = 0;
+        $monM = 0;
+        $cntM = array();
         if (($mon == $curMon) && ($year == $curYear)) {
             array_push($listM, $value['book_id']);
             array_push($topBookM, $value['hotel_id']);
             if ($listM) {
                 foreach ($listM as $value) {
-                    $bookID = (int) $value;
-                    $bkM = checkBook($bookID);
+                    $bookID = $value;
+                    $bkM = anv($bookID, $mon);
                     foreach ($bkM as $item) {
-
+                        $countM = $item['book_id'];
                         $priceM = (int) $item['total_price'];
+                        $hotelM = $item['hotel_id'];
+                        $monM = $item['mon'];
                         array_push($moneyM, $priceM);
+                        array_push($cntM, $countM);
+                        array_push($listO, $hotelM);
+                        if ($monM == $mon && in_array($hotelM, $listO)) {
+                            // $hM[$hotelM] += $priceM;
+                            if (isset($hM[$hotelM])) {
+                                $hM[$hotelM] += $priceM;
+                            } else {
+                                $hM[$hotelM] = $priceM;
+                            }
+                        }
                     }
                 }
             }
@@ -98,20 +140,26 @@ if ($dashboard) {
             $min_keysM = (int) array_keys($countedM, $min_valueM)[0]; //id khách sạn đc đặ ít nhất
 
 
+
         }
-        $costM = array_sum($moneyM) / 24000;
+
+        $costM = array_sum($moneyM) ;
+
     }
+
     if (($mon == $curMon) && ($year == $curYear)) {
-
-    $trM = '';
-    foreach ($topBookM as $value) {
-        $dataM = getHotel((int)$value);
-        if(isset($dataM)){
-        foreach ($dataM as $value) {
-            $hotelImages = explode(',', $value['hotel_image']);
-
+        $trM = '';
+        foreach ($countedM as $key => $value) {
+            $book1 = $key;
+            $value1 = $value;
+            $dataM = getHotel($book1);
+            $priceM = $hM[$book1];
+            unset($dataM[1]);
             if (isset($dataM)) {
-                $trM .= '
+                foreach ($dataM as $key => $value) {
+                    $price = $value['total_price'];
+                    $hotelImages = explode(',', $value['hotel_image']);
+                    $trM .= '
                 <tr align="center"> 
                 <td class="product-thumbnail">
                     <a href="#">
@@ -122,16 +170,17 @@ if ($dashboard) {
                  <td class="product-name">
                      <span>' . $value['city_id'] . '</span><br>
                  </td>
-                 <td class="hdn"><span>' . $value['count'] . '</span></td>
-                 <td class="hdn"><span>' . $value['price'] . '</span></td>
-                 
-                 
+                 <td class="hdn"><span>' . $value1 . '</span></td>
+                 <td class="hdn"><span>' . $priceM . '</span></td>                 
              </tr>';
+                }
             }
+
         }
-        }
+
     }
-}
+
+    // day
     foreach ($dashboard as $value) {
         $a1 = explode("/", $value['date_booking']);
         $year = $a1[2];
@@ -147,7 +196,6 @@ if ($dashboard) {
                     $bookID = (int) $value;
                     $bkD = checkBook($bookID);
                     foreach ($bkD as $item) {
-
                         $priceD = (int) $item['total_price'];
                         array_push($moneyD, $priceD);
                     }
@@ -160,39 +208,43 @@ if ($dashboard) {
             $min_keysD = (int) array_keys($countedD, $min_valueD)[0]; //id khách sạn đc đặ ít nhất
 
         }
-        $costD = array_sum($moneyD) / 24000;
+        $costD = array_sum($moneyD) ;
+        if (($day == $curDay) && ($mon == $curMon) && ($year == $curYear)) {
+            $trD = '';
+            foreach ($countedD as $key => $value) {
+                $book1 = $key;
+                $value1 = $value;
 
-    }
-    $trD = '';
-    foreach ($topBookD as $value) {
-        $dataD = getHotel((int)$value);
-        if(isset($dataD)){
-        foreach ($dataD as $value) {
-            $hotelImages = explode(',', $value['hotel_image']);
-
-            if (isset($dataD)) {
-                $trD .= '
-                <tr align="center"> 
-                <td class="product-thumbnail">
-                    <a href="#">
-                        <img style="width:100%;" src="./assets/images/hotels/' . $hotelImages[0] . '" alt="avatar">
-                    </a>
-                </td>
-                <td><span>' . $value['hotel_name'] . ' </span></td>
-                 <td class="product-name">
-                     <span>' . $value['city_id'] . '</span><br>
-                 </td>
-                 <td class="hdn"><span>' . $value['count'] . '</span></td>
-                 <td class="hdn"><span>' . $value['price'] . '</span></td>
-                 
-                 
-             </tr>';
+                $dataD = getHotel((int) $key);
+                unset($dataD[1]);
+                if (isset($dataD)) {
+                    foreach ($dataD as $value) {
+                        $hotelImages = explode(',', $value['hotel_image']);
+                        if (isset($dataD)) {
+                            $trD .= '
+                    <tr align="center"> 
+                    <td class="product-thumbnail">
+                        <a href="#">
+                            <img style="width:100%;" src="./assets/images/hotels/' . $hotelImages[0] . '" alt="avatar">
+                        </a>
+                    </td>
+                    <td><span>' . $value['hotel_name'] . ' </span></td>
+                     <td class="product-name">
+                         <span>' . $value['city_id'] . '</span><br>
+                     </td>
+                     <td class="hdn"><span>' . $value1 . '</span></td>
+                     <td class="hdn"><span> ' . $value1 . '</span></td>                     
+                 </tr>';
+                        }
+                    }
+                }
             }
         }
-        }
     }
+
     // echo 'tổng tiền theo NGày ' . $min_keysD;
 }
+
 ?>
 <div class="col-lg-9 offset-lg-3 col-md-12 col-sm-12 col-pad">
     <div class="content-area5">
@@ -406,7 +458,6 @@ if ($dashboard) {
                                                         <th class="product-price">City</th>
                                                         <th class="product-subtotal">Booked</th>
                                                         <th class="product-price">Total Price</th>
-                                                        <th class="product-remove">Cancellation Cate</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -487,7 +538,6 @@ if ($dashboard) {
                                                         <th class="product-price">City</th>
                                                         <th class="product-subtotal">Booked</th>
                                                         <th class="product-price">Total Price</th>
-                                                        <th class="product-remove">Cancellation Cate</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -568,7 +618,6 @@ if ($dashboard) {
                                                         <th class="product-price">City</th>
                                                         <th class="product-subtotal">Booked</th>
                                                         <th class="product-price">Total Price</th>
-                                                        <th class="product-remove">Cancellation Cate</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -578,7 +627,7 @@ if ($dashboard) {
 
 
                                         </div>
-                                        
+
 
                                     </div>
                                 </div>
@@ -690,6 +739,12 @@ if ($dashboard) {
 </div>
 </div>
 </div>
+
+
+
+
+
+
 
 
 <!-- Dashboard end -->
